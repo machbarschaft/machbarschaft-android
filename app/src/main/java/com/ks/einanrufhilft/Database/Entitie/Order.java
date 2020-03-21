@@ -2,6 +2,7 @@ package com.ks.einanrufhilft.Database.Entitie;
 
 public class Order {
 
+    private String id;
     private String phone_number;
     private String zip;
     private String street;
@@ -12,9 +13,12 @@ public class Order {
     private String einkaufsZettel;
 
 
-    public Order() {}
-    public Order(String phone_number, String plz, String street, String house_number,
+    public Order() {
+    }
+
+    public Order(String id, String phone_number, String plz, String street, String house_number,
                  String firstName, String lastNamme, String[] category) {
+        this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
         this.street = street;
@@ -23,8 +27,10 @@ public class Order {
         this.last_name = lastNamme;
         this.category = category;
     }
-    public Order(String phone_number, String plz, String street, String house_number,
+
+    public Order(String id,String phone_number, String plz, String street, String house_number,
                  String firstName, String lastNamme, String[] category, String einkaufsliste) {
+        this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
         this.street = street;
@@ -100,5 +106,13 @@ public class Order {
 
     public void setEinkaufsZettel(String einkaufsZettel) {
         this.einkaufsZettel = einkaufsZettel;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
