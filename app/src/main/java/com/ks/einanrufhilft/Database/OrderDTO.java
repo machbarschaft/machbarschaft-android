@@ -8,6 +8,8 @@ public class OrderDTO {
     private String category;
     private String einkaufszettel;
     private String id;
+    private double latitude;
+    private double longitude;
 
     public OrderDTO(String phone_number, String adress, String first_name, String last_name, String category, String einkaufszettel, String id){
         this.phone_number = phone_number;
@@ -27,6 +29,8 @@ public class OrderDTO {
         this.category = "Einkauf";
         this.einkaufszettel = "Nudeln, Soße, Käse";
         this.id = "1";
+        this.latitude = 51.0;
+        this.longitude = 10.0;
     }
 
     public String getPhone_number() {
@@ -83,5 +87,21 @@ public class OrderDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

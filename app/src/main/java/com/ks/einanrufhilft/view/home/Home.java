@@ -19,12 +19,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.OrderDTO;
 import com.ks.einanrufhilft.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "Home";
@@ -37,6 +43,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap map;
     private boolean hasLocationPermission;
     private FusedLocationProviderClient fusedLocationClient;
+    private Map<String, Marker> markerMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        markerMap = new HashMap<>();
     }
 
     private void requestCurrentLocation() {
@@ -117,6 +125,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
+        updateMarkers();
     }
 
     public void initView() {
@@ -124,5 +133,42 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderAdapter = new OrderAdapter(this, (ArrayList<OrderDTO>) orders);
         recyclerView.setAdapter(orderAdapter);
+    }
+
+    private void updateMarkers() {
+        if (map == null) {
+            return;
+        }
+
+        Set<String> oldOrderIds = new HashSet<>(markerMap.keySet());
+        for (OrderDTO order : orders) {
+            Marker marker = markerMap.get(order.getId());
+            if (marker == null) {
+                // Add new marker
+                marker = map.addMarker(new MarkerOptions()
+                                .flat(true)
+                                .draggable(false)
+//                              .icon(null)
+//                              .anchor(0, 0)
+                                .position(new LatLng(order.getLatitude(), order.getLongitude()))
+                );
+                marker.setTag(order.getId());
+                markerMap.put(order.getId(), marker);
+            } else {
+                // Update existing marker
+                marker.setPosition(new LatLng(order.getLatitude(), order.getLongitude()));
+            }
+
+            // Order is not old, no need to remove marker
+            oldOrderIds.remove(order.getId());
+        }
+
+        // Remove old markers
+        for (String id : oldOrderIds) {
+            Marker marker = markerMap.remove(id);
+            if (marker != null) {
+                marker.remove();
+            }
+        }
     }
 }
