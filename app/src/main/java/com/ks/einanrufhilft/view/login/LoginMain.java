@@ -44,6 +44,8 @@ public class LoginMain extends AppCompatActivity {
             onLoginSuccess();
         }
         */
+
+        loginButton.setEnabled(true);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
