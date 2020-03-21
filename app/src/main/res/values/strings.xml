@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Ein Anruf hilft</string>
     <string name="ein_anruf_hilft">ein Anruf hilft</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
