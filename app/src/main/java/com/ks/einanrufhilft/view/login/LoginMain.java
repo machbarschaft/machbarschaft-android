@@ -38,10 +38,12 @@ public class LoginMain extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_login);
         TextView registerButton = findViewById(R.id.link_signup);
 
+
+        /* TODO uncomment if deploy
         if(isLoggedIn()){
             onLoginSuccess();
         }
-
+        */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
