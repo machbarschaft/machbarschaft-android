@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "285249743751",
+    "firebase_url": "https://einanrufhilft-95d29.firebaseio.com",
+    "project_id": "einanrufhilft-95d29",
+    "storage_bucket": "einanrufhilft-95d29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285249743751:android:7ce5a4a8c5fab98bb58122",
+        "android_client_info": {
+          "package_name": "com.ks.einanrufhilft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl5J8tnPtuOEHSdRnIDm19Or1d0kO7QOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
