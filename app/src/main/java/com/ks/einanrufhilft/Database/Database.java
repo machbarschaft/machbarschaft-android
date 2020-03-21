@@ -123,6 +123,7 @@ public class Database {
         return null;
     }
 
+    /*
     public void setOrderStatus(String orderId, Status status) {
 
         db.collection("Order").document(orderId)
@@ -140,5 +141,11 @@ public class Database {
                     }
                 });
     }
-}
+     */
+
+    public void setOrderStatus(String orderId, Status status) {
+
+    }
+
+    }
 
