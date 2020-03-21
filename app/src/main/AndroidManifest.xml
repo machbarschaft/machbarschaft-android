@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".view.blabla.VerifyPhoneActivity" />
         <activity android:name=".view.blabla.RegisterActivity" />
-        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
