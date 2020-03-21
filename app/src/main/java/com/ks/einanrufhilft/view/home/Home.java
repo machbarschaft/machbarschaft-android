@@ -76,6 +76,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
     }
 
+    /**
+     * Request the last known location and zoom the map to that point.
+     */
     private void requestCurrentLocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
@@ -142,6 +145,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         recyclerView.setAdapter(orderAdapter);
     }
 
+    /**
+     * Updates all markers on the map. Call this method when the orders have changed.
+     */
     private void updateMarkers() {
         if (map == null) {
             return;
