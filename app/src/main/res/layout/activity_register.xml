@@ -48,16 +48,6 @@
                 app:layout_constraintTop_toTopOf="@+id/registerTfAddress"
                 app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-            <ImageButton
-                android:id="@+id/registerBtnIdentHelp"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/registerTfIdent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/registerTfIdent"
-                app:layout_constraintTop_toTopOf="@+id/registerTfIdent"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
-
             <Button
                 android:id="@+id/registerBtnSend"
                 android:layout_width="wrap_content"
@@ -120,7 +110,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerTfAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/registerTfPhone" />
 
             <EditText
                 android:id="@+id/registerTfName"
@@ -167,30 +157,43 @@
                 app:layout_constraintTop_toBottomOf="@+id/registerTfSurname" />
 
             <EditText
-                android:id="@+id/registerTfIdent"
+                android:id="@+id/registerTfPhone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
-                android:hint="IDENT-Verfahren"
-                android:inputType="textShortMessage"
+                android:hint="Handynummer"
+                android:inputType="number"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toStartOf="@+id/registerBtnAdress"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerLblSubtitleSecond" />
+                app:layout_constraintTop_toBottomOf="@+id/registerTfAddress" />
+
+            <com.passbase.passbase_sdk.PassbaseButton
+                android:id="@+id/passbaseVerificationButton"
+                android:layout_width="250dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                app:backgroundColor="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registerLblSubtitleSecond"
+                app:textColor="@android:color/black" />
 
             <CheckBox
                 android:id="@+id/registerCheckAGB"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:text="AGB/Datenschutz"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintEnd_toEndOf="@+id/passbaseVerificationButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerTfIdent" />
+                app:layout_constraintTop_toBottomOf="@+id/passbaseVerificationButton" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
