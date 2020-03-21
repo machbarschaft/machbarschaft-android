@@ -11,12 +11,12 @@
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
-
-        <ImageView android:src="@drawable/logo"
+<!--
+        <ImageView android:src=""
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal" />-->
 
         <!--  Email Label -->
         <com.google.android.material.textfield.TextInputLayout

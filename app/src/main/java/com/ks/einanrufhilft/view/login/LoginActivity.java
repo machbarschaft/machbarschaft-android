@@ -1,4 +1,4 @@
-package com.ks.einanrufhilft.view;
+package com.ks.einanrufhilft.view.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
