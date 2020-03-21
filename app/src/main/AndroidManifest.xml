@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ks.einanrufhilft">
-
-    <!--Internet Permission-->
+    <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.login.PhoneAuthstart"></activity>
+        <activity android:name=".view.splash.splash"></activity>
+        <activity android:name=".view.login.PhoneAuthstart" />
         <activity android:name=".view.login.VerifyPhoneActivity" />
         <activity android:name=".view.login.RegisterActivity" />
         <activity android:name=".view.login.LoginActivity" />
@@ -24,15 +24,11 @@
             </intent-filter>
         </activity>
 
-
-        <service
-            android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
     </application>
-
-
 
 </manifest>
