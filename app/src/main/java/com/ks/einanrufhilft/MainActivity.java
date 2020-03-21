@@ -2,13 +2,9 @@ package com.ks.einanrufhilft;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Account;
-import com.ks.einanrufhilft.Database.Entitie.Order;
 
 public class MainActivity extends AppCompatActivity {
 
