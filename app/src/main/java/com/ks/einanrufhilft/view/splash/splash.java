@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ks.einanrufhilft.R;
-import com.ks.einanrufhilft.view.blabla.LoginActivity;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
 public class splash extends AppCompatActivity {
