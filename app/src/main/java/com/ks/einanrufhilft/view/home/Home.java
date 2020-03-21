@@ -2,18 +2,23 @@ package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.persistance.OrderDTO;
 
@@ -22,12 +27,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
+    private static final String LOG_TAG = "Home";
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
 
     private List<OrderDTO> orders;
 
     private GoogleMap map;
     private boolean hasLocationPermission;
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +45,40 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        initalizeData();
+        initializeData();
     }
 
-    private void initalizeData() {
+    private void initializeData() {
         orders = new ArrayList<>();
         orders.add(new OrderDTO());
         orders.add(new OrderDTO());
         orders.add(new OrderDTO());
 
         hasLocationPermission = false;
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+    }
+
+    private void requestCurrentLocation() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        Log.d(LOG_TAG, "Last known location: " + location);
+                        if (location == null || map == null) {
+                            return;
+                        }
+
+                        LatLng llPos = new LatLng(location.getLatitude(), location.getLongitude());
+                        float zoom = 14f;
+                        if (location.getAccuracy() > 10000) {
+                            zoom = 5f;
+                        } else if (location.getAccuracy() > 1000) {
+                            zoom = 10f;
+                        }
+
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(llPos, zoom));
+                    }
+                });
     }
 
     @Override
@@ -73,6 +104,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                 if (map != null) {
                     map.setMyLocationEnabled(true);
                 }
+                requestCurrentLocation();
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -81,8 +113,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        // Center map on Germany
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51, 10), 5));
         map.setMyLocationEnabled(hasLocationPermission);
+        if (hasLocationPermission) {
+            requestCurrentLocation();
+        }
     }
 }

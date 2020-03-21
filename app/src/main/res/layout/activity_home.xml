@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <fragment
+            <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/map_fragment"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
@@ -40,7 +40,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                map:cameraTargetLat="51"
+                map:cameraTargetLng="10"
+                map:cameraZoom="5" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
