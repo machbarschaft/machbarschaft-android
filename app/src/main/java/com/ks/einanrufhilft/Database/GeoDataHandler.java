@@ -37,7 +37,7 @@ public class GeoDataHandler {
 
     public ArrayList<GeoDataPerson> getPersonInDistance(double kmDistance) {
         ArrayList<GeoDataPerson> closePersons = new ArrayList<>();
-        for(GeoDataPerson person: persons) {
+        for(GeoDataPerson person: this.persons) {
             if(this.getDistance(person) < this.closeDistanceSetting) {
                 closePersons.add(person);
             }
@@ -72,8 +72,8 @@ public class GeoDataHandler {
 
 
     enum Type {
-        Lieferant, // Lieferant
-        Besteller   // Besteller
+        Lieferant,
+        Besteller
     }
 
     private class GeoDataPerson {
