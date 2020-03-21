@@ -1,11 +1,7 @@
 package com.ks.einanrufhilft.view.home;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -21,9 +19,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.Database.OrderDTO;
+import com.ks.einanrufhilft.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,24 +63,21 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
     private void requestCurrentLocation() {
         fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        Log.d(LOG_TAG, "Last known location: " + location);
-                        if (location == null || map == null) {
-                            return;
-                        }
-
-                        LatLng llPos = new LatLng(location.getLatitude(), location.getLongitude());
-                        float zoom = 14f;
-                        if (location.getAccuracy() > 10000) {
-                            zoom = 5f;
-                        } else if (location.getAccuracy() > 1000) {
-                            zoom = 10f;
-                        }
-
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(llPos, zoom));
+                .addOnSuccessListener(location -> {
+                    Log.d(LOG_TAG, "Last known location: " + location);
+                    if (location == null || map == null) {
+                        return;
                     }
+
+                    LatLng llPos = new LatLng(location.getLatitude(), location.getLongitude());
+                    float zoom = 14f;
+                    if (location.getAccuracy() > 10000) {
+                        zoom = 5f;
+                    } else if (location.getAccuracy() > 1000) {
+                        zoom = 10f;
+                    }
+
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(llPos, zoom));
                 });
     }
 
