@@ -18,6 +18,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -44,6 +46,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private boolean hasLocationPermission;
     private FusedLocationProviderClient fusedLocationClient;
     private Map<String, Marker> markerMap;
+    private BitmapDescriptor markerIconNormal;
+    private BitmapDescriptor markerIconUrgent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         markerMap = new HashMap<>();
+
+        markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+        markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
     }
 
     private void requestCurrentLocation() {
@@ -146,11 +153,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             if (marker == null) {
                 // Add new marker
                 marker = map.addMarker(new MarkerOptions()
-                                .flat(true)
-                                .draggable(false)
-//                              .icon(null)
-//                              .anchor(0, 0)
-                                .position(new LatLng(order.getLatitude(), order.getLongitude()))
+                        .flat(true)
+                        .draggable(false)
+                        .icon(markerIconNormal)
+                        .position(new LatLng(order.getLatitude(), order.getLongitude()))
                 );
                 marker.setTag(order.getId());
                 markerMap.put(order.getId(), marker);
