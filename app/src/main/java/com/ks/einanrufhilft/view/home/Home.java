@@ -1,5 +1,8 @@
 package com.ks.einanrufhilft.view.home;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,7 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.ks.einanrufhilft.R;
-import com.ks.einanrufhilft.persistance.OrderDTO;
+import com.ks.einanrufhilft.Database.OrderDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
 
     private List<OrderDTO> orders;
+    private RecyclerView recyclerView;
+    private OrderAdapter orderAdapter;
 
     private GoogleMap map;
     private boolean hasLocationPermission;
@@ -46,6 +51,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
         initializeData();
+        initView();
     }
 
     private void initializeData() {
@@ -117,5 +123,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
+    }
+
+    public void initView() {
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        orderAdapter = new OrderAdapter(this, (ArrayList<OrderDTO>) orders);
+        recyclerView.setAdapter(orderAdapter);
     }
 }

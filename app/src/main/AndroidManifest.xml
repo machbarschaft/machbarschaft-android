@@ -31,7 +31,6 @@
         </activity>
         <activity android:name=".view.blabla.VerifyPhoneActivity" />
         <activity android:name=".view.blabla.RegisterActivity" />
-        <activity android:name=".MainActivity" />
 
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
