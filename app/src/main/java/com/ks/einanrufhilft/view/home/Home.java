@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.ks.einanrufhilft.Database.Database;
-import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.Database.OrderDTO;
 
