@@ -1,4 +1,4 @@
-package com.ks.einanrufhilft;
+package com.ks.einanrufhilft.util;
 
 public final class ApplicationConstants {
     //Constants for the Shared Preferences

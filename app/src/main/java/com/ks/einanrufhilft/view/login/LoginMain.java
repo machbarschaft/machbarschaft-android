@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ks.einanrufhilft.ApplicationConstants;
+import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.home.Home;
 
