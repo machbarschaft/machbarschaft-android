@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ks.einanrufhilft.R;
-import com.ks.einanrufhilft.view.login.LoginActivity;
+import com.ks.einanrufhilft.view.blabla.LoginActivity;
+import com.ks.einanrufhilft.view.login.LoginMain;
 
 public class splash extends AppCompatActivity {
 
@@ -34,6 +35,6 @@ public class splash extends AppCompatActivity {
     }
 
     private void startLogin() {
-        this.startActivity(new Intent(this, LoginActivity.class));
+        this.startActivity(new Intent(this, LoginMain.class));
     }
 }
