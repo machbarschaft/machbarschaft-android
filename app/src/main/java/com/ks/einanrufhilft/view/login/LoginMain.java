@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.home.Home;
+import com.ks.einanrufhilft.view.register.*;
 
 public class LoginMain extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class LoginMain extends AppCompatActivity {
 
     private EditText phoneNumber;
     private Button loginButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class LoginMain extends AppCompatActivity {
 
         ViewPager viewPager1 = findViewById(R.id.viewpager);
         viewPager1.setAdapter(new CustomPagerAdapter(this));
+        context = this;
 
         phoneNumber = findViewById(R.id.input_phonenumber);
         loginButton = findViewById(R.id.btn_login);
@@ -54,7 +58,8 @@ public class LoginMain extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Register
+                Intent i = new Intent(context, RegisterActivity.class);
+                startActivity(i);
             }
         });
     }
