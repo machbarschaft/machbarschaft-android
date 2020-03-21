@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "285249743751-b7k27cetdsl7kgofc7drg0i8132mnl3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ks.einanrufhilft",
+            "certificate_hash": "6b85ba2940976455a91d8a3daba1ac9dfa3a4d8c"
+          }
+        },
+        {
           "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
           "client_type": 3
         }
