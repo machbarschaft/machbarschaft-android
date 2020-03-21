@@ -63,8 +63,6 @@ public class Database {
 
     }
 
-    // Funktioniert
-
     public void createAccount(Account a) {
         // Create a new user with a first and last name
 
@@ -84,8 +82,6 @@ public class Database {
                 });
 
     }
-
-    // Funktioniert
 
     public void getOrders() {
 
@@ -114,7 +110,6 @@ public class Database {
                                 }
                             }
                             db.allOrders = order;
-
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -128,8 +123,7 @@ public class Database {
         return null;
     }
 
-    // Funktioniert
-    public void setOrderConfirmed(String orderId, Status status) {
+    public void setOrderStatus(String orderId, Status status) {
 
         db.collection("Order").document(orderId)
                 .update("status", status.toString())
@@ -146,10 +140,5 @@ public class Database {
                     }
                 });
     }
-
-
-
-
-
-    }
+}
 

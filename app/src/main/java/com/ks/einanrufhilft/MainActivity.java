@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Account a = new Account("Max", "maier", "90821389123",7.5f, 30);
 
     db.getOrders();
-    db.setOrderConfirmed("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
+    db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
 
         //db.createAccount(a);
 
