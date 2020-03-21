@@ -1,8 +1,11 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -19,7 +22,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     private Context context;
     private ArrayList<OrderDTO> orders;
 
-    public OrderAdapter(Context context, ArrayList<OrderDTO> orders) {
+    OrderAdapter(Context context, ArrayList<OrderDTO> orders) {
         this.context = context;
         this.orders = orders;
     }
@@ -42,12 +45,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         return orders.size();
     }
 
-    class OrderHolder extends RecyclerView.ViewHolder {
+
+
+    class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+
 
         private TextView orderType, einkaufsliste, distance;
 
         OrderHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             orderType = itemView.findViewById(R.id.textViewTitle);
             einkaufsliste = itemView.findViewById(R.id.textViewShortDesc);
             distance = itemView.findViewById(R.id.textViewDistance);
@@ -59,5 +67,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             distance.setText("200 Meter entfernt..");
             //txtDiameter.setText("test");
         }
+
+
+        @Override
+        public void onClick(View v) {
+            Log.wtf("itemview", String.valueOf(getAdapterPosition()));
+            Log.wtf("ID", String.valueOf(orders.get(getAdapterPosition()).getId()));
+            Context context = v.getContext();
+            //Intent intent = new Intent(context, JobActivty.class);
+            //v.getContext().startActivity(intent);
+        }
     }
+
+
 }

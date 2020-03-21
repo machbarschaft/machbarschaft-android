@@ -30,12 +30,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
 public class Database {
     private FirebaseFirestore db;
-    static Database myDBClass;
+    private static Database myDBClass;
 
     private ArrayList<Order> allOrders; // spaeter closeOrders
 
@@ -63,8 +64,6 @@ public class Database {
 
     }
 
-    // Funktioniert
-
     public void createAccount(Account a) {
         // Create a new user with a first and last name
 
@@ -85,8 +84,6 @@ public class Database {
 
     }
 
-    // Funktioniert
-
     public void getOrders() {
 
         db.collection("Order")
@@ -97,7 +94,7 @@ public class Database {
                         ArrayList<Order> order = new ArrayList<>();
                         Database db = Database.getInstance();
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                                 order.add(new Order((String) document.get("phone_number"),
                                         (String) document.get("plz"),
                                         (String) document.get("street"),
@@ -110,11 +107,10 @@ public class Database {
                                 if (document.get("first_name") == null) {
                                     Log.i("myOrder", "NULL");
                                 } else {
-                                    Log.i("myOrder", (String) document.get("first_name"));
+                                    Log.i("myOrder", (String) Objects.requireNonNull(document.get("first_name")));
                                 }
                             }
                             db.allOrders = order;
-
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -128,8 +124,8 @@ public class Database {
         return null;
     }
 
-    // Funktioniert
-    public void setOrderConfirmed(String orderId, Status status) {
+    /*
+    public void setOrderStatus(String orderId, Status status) {
 
         db.collection("Order").document(orderId)
                 .update("status", status.toString())
@@ -146,10 +142,11 @@ public class Database {
                     }
                 });
     }
+     */
 
+    public void setOrderStatus(String orderId, Status status) {
 
-
-
+    }
 
     }
 
