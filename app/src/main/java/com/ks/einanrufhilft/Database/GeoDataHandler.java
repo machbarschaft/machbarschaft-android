@@ -38,7 +38,7 @@ public class GeoDataHandler {
     public ArrayList<GeoDataPerson> getPersonInDistance(double kmDistance) {
         ArrayList<GeoDataPerson> closePersons = new ArrayList<>();
         for(GeoDataPerson person: this.persons) {
-            if(this.getDistance(person) < this.closeDistanceSetting) {
+            if(this.getDistance(person) < kmDistance) {
                 closePersons.add(person);
             }
         }
@@ -67,8 +67,8 @@ public class GeoDataHandler {
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
         return Math.sqrt(distance);
-    }
 
+    }
 
 
     enum Type {
@@ -76,7 +76,7 @@ public class GeoDataHandler {
         Besteller
     }
 
-    private class GeoDataPerson {
+    public class GeoDataPerson {
         GeoDataPerson(Type type, double lat, double lng) {
             this.type = type;
             this.lat = lat;

@@ -86,6 +86,7 @@ public class Database {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // user_id setzen
                                 conf.setUserId((String) document.get("phone_number"));
+                                //GeoDataHandler.getInstance().add(GeoDataHandler.Type.Lieferant,);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -128,6 +129,7 @@ public class Database {
                     }
                 });
     }
+
 
     public ArrayList<Order> getOrdersNearby(double radius) {
 
