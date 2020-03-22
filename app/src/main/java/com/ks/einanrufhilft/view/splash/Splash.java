@@ -34,26 +34,6 @@ public class Splash extends AppCompatActivity {
 
 
 
-        /* TESTS */
-        /*
-        Database db = Database.getInstance();
-        // String phone_number, String plz, String strasse, String hausnummer, String firstName, String lastNamme, String[] category) {
-        //        this.phone_number = phone_number
-        // Order o = new Order("0981238231", "12212", "myStarsse", "12a","alex",
-        db.login("12345");
-
-
-        db.getOrders();
-        try {
-            db.setOrderStatus("4HjAuNrmEccaterBBWTO", Database.Status.Closed);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
-
-        Database.getInstance().getOrder("4HjAuNrmEccaterBBWTO");
-*/
-        /* TESTS */
     }
 
     @Override

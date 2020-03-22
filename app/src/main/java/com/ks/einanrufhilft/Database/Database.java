@@ -29,8 +29,6 @@ public class Database {
     private FirebaseFirestore db;
     private static Database myDBClass;
 
-    private ArrayList<Order> allOrders; // spaeter closeOrders
-
     public static Database getInstance() {
         if (myDBClass == null) {
             myDBClass = new Database();
@@ -118,9 +116,6 @@ public class Database {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<Order> orders = new ArrayList<>();
-                            OrderHandler geo = OrderHandler.getInstance();
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //if ( (String) document.get("status") == null &&
                                 //      (String) document.get("status") == "open") {
@@ -143,19 +138,12 @@ public class Database {
                                     o.setLng((Double) document.get("lng"));
                                 }
 
-                                orders.add(o);
-                                Log.i("Order read:", o.toString());
+                                OrderHandler.getInstance().addOrder(o);
 
-                                geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
-                                //   }
-                            }
-                            Database db = Database.getInstance();
-                            db.allOrders = orders;
+                                OrderHandler.getInstance().setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
-                            // @Benedikt -> prüfe das nochmal
-                            for (Order order : orders) {
-                                OrderHandler.getInstance().addOrder(order);
                             }
+
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -236,9 +224,6 @@ public class Database {
             //  Adds Entry in Account order
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
-            if (Storage.getInstance().getUserID() != null) {
-                Log.i("orderstatus", Storage.getInstance().getUserID());
-            }
 
             orderAccount.setAccount_id(Storage.getInstance().getUserID());
             orderAccount.setOrder_id(orderId);
