@@ -42,11 +42,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
+                android:backgroundTint="#9F4A6D"
                 app:layout_constraintBottom_toBottomOf="@+id/registerTfAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/registerTfAddress"
                 app:layout_constraintTop_toTopOf="@+id/registerTfAddress"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
+                app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
             <Button
                 android:id="@+id/registerBtnSend"
@@ -54,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:background="#376DD3"
-                android:backgroundTint="#376DD3"
+                android:backgroundTint="#9F4A6D"
                 android:text="@string/registerButtonSend"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#ffffff"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"

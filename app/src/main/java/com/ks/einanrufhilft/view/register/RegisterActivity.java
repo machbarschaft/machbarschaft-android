@@ -1,8 +1,10 @@
 package com.ks.einanrufhilft.view.register;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -107,6 +109,20 @@ public class RegisterActivity extends AppCompatActivity {
         btnAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton(
+                        "Verstanden",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
                 // TODO Open Google Maps and let user select address
             }
         });
