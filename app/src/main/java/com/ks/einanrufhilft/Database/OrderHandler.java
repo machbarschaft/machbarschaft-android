@@ -1,27 +1,34 @@
 package com.ks.einanrufhilft.Database;
 
 
+import com.ks.einanrufhilft.Database.Entitie.Order;
+
 import java.util.ArrayList;
 
-public class GeoDataHandler {
+public class OrderHandler {
 
-    private static GeoDataHandler geoDataHandler;
+    private static OrderHandler orderHandler;
     private GeoDataPerson lieferant;
     private ArrayList<GeoDataPerson> persons;
+    private ArrayList<Order> orders;
+
 
     private double closeDistanceSetting; // radius in dem Personen angezeigt werden sollen
 
-    private GeoDataHandler() {
+    private OrderHandler() {
         this.persons = new ArrayList<>();
     }
 
-    public static GeoDataHandler getInstance() {
-        if (geoDataHandler == null) {
-            geoDataHandler = new GeoDataHandler();
+    public static OrderHandler getInstance() {
+        if (orderHandler == null) {
+            orderHandler = new OrderHandler();
         }
-        return geoDataHandler;
+        return orderHandler;
     }
 
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
 
     public void add(Type type, double lat, double lng) {
         if(type == Type.Besteller) {
@@ -31,24 +38,25 @@ public class GeoDataHandler {
         }
     }
 
-    public ArrayList<GeoDataPerson> getPersonInDistance() {
+    public ArrayList<Order> getPersonInDistance() {
         return getPersonInDistance(this.closeDistanceSetting);
     }
 
-    public ArrayList<GeoDataPerson> getPersonInDistance(double kmDistance) {
-        ArrayList<GeoDataPerson> closePersons = new ArrayList<>();
-        for(GeoDataPerson person: this.persons) {
-            if(this.getDistance(person) < kmDistance) {
-                closePersons.add(person);
+    public ArrayList<Order> getPersonInDistance(double kmDistance) {
+        ArrayList<Order> closeOrders = new ArrayList<>();
+        for(Order order: orders) {
+            if(this.getDistance(order) < kmDistance) {
+                closeOrders.add(order);
             }
         }
-        return closePersons;
+        return closeOrders;
+
     }
 
-    private double getDistance(GeoDataPerson geoData) {
+    private double getDistance(Order order) {
 
-    double lat1 = geoData.lat;
-    double lon1 = geoData.lng;
+    double lat1 = order.getLat();
+    double lon1 = order.getLng();
     double lat2 = this.lieferant.lat;
     double lon2 = this.lieferant.lng;
 

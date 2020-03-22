@@ -105,7 +105,7 @@ public class Database {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             ArrayList<Order> orders = new ArrayList<>();
-                            GeoDataHandler geo = GeoDataHandler.getInstance();
+                            OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -115,16 +115,20 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
+                                Log.i("Order street:",  ""+(String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setLat((Double) document.get("lat"));
-                                o.setLng((Double) document.get("lng"));
+                                if(document.get("lat") != null && document.get("lng") != null) {
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lng"));
+                                }
+
                                 orders.add(o);
                                 Log.i("Order read:", o.toString());
 
-                                geo.add(GeoDataHandler.Type.Besteller, o.getLat(), o.getLng());
+                                geo.add(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
                                 if (document.get("first_name") == null) {
                                     Log.i("myOrder", "NULL");

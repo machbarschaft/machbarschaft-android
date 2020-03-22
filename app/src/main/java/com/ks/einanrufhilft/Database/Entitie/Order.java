@@ -9,6 +9,7 @@ public class Order {
     private String house_number;
     private String name;
     //private String[] category;
+    private String status;
     private String prescription;
     private String carNecessary;
     private String urgency;
@@ -19,7 +20,7 @@ public class Order {
     }
 
     public Order(String id, String phone_number, String plz, String street, String house_number,
-                 String name, String[] category, String urgency) {
+                 String name, String[] category, String urgency, String status) {
         this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
@@ -28,10 +29,11 @@ public class Order {
         this.name = name;
         //this.category = category;
         this.urgency = urgency;
+        this.status = status;
     }
 
     public Order(String id,String phone_number, String plz, String street, String house_number,
-                 String name,  String prescription, String urgency) {
+                 String name,  String prescription, String urgency, String status) {
         this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
@@ -41,6 +43,8 @@ public class Order {
         //this.category = category;
         this.prescription = prescription;
         this.urgency = urgency;
+        this.status = status;
+
     }
 
 
@@ -143,5 +147,31 @@ public class Order {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", zip='" + zip + '\'' +
+                ", street='" + street + '\'' +
+                ", house_number='" + house_number + '\'' +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", prescription='" + prescription + '\'' +
+                ", carNecessary='" + carNecessary + '\'' +
+                ", urgency='" + urgency + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                '}';
     }
 }
