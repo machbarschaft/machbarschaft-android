@@ -273,7 +273,7 @@ public class Database {
 
     }
 
-    public Order getOrder(String orderId) {
+    public void getOrder(String orderId) {
         DocumentReference order = db.collection("Order").document(orderId);
         order.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
