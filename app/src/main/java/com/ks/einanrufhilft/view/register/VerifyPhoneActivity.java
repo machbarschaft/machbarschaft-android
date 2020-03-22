@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,9 +28,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         // Get UI elements
         Button btnSignin = findViewById(R.id.buttonSignIn);
         EditText tfCode = findViewById(R.id.editTextCode);
-        ProgressBar bar = findViewById(R.id.progressbar);
-
-        bar.setVisibility(View.INVISIBLE);
 
         // Button click handlers
         btnSignin.setOnClickListener(new View.OnClickListener() {
