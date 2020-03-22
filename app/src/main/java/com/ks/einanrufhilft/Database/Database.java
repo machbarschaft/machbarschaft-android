@@ -96,38 +96,52 @@ public class Database {
     }
 
     public void getOrders() {
+        Log.i("**", "***************************:");
 
         db.collection("Order")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList<Order> order = new ArrayList<>();
-                        Database db = Database.getInstance();
                         if (task.isSuccessful()) {
+                            ArrayList<Order> orders = new ArrayList<>();
+                            GeoDataHandler geo = GeoDataHandler.getInstance();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                order.add(new Order(document.getId(),
-                                        (String) document.get("phone_number"),
-                                        (String) document.get("plz"),
-                                        (String) document.get("street"),
-                                        (String) document.get("house_number"),
-                                        (String) document.get("firstName"),
-                                        (String) document.get("lastName"),
-                                        (String[]) document.get("category"),
-                                        (String) document.get("einkaufszettel"))
-                                );
+
+                                Order o = new Order();
+                                o.setId(document.getId());
+                                o.setCarNecessary((String) document.get("carNecessary"));
+                                o.setHouse_number((String) document.get("house_number"));
+                                o.setZip((String) document.get("zip"));
+                                o.setStreet((String) document.get("street"));
+                                o.setHouse_number((String) document.get("house_number"));
+                                o.setName((String) document.get("name"));
+                                o.setPrescription((String) document.get("carNecessary"));
+                                o.setCarNecessary((String) document.get("carNecessary"));
+                                o.setLat((Double) document.get("lat"));
+                                o.setLng((Double) document.get("lng"));
+                                orders.add(o);
+                                Log.i("Order read:", o.toString());
+
+                                geo.add(GeoDataHandler.Type.Besteller, o.getLat(), o.getLng());
+
                                 if (document.get("first_name") == null) {
                                     Log.i("myOrder", "NULL");
                                 } else {
                                     Log.i("myOrder", (String) document.get("first_name"));
                                 }
                             }
-                            db.allOrders = order;
+
+
+                            Database db = Database.getInstance();
+                            db.allOrders = orders;
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
     }
 
 

@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
        // Order o = new Order("0981238231", "12212", "myStarsse", "12a","alex",
          //       "maier", new String[]{"Einkauf"});
 
-        Account a = new Account("Max", "maier", "90821389123",7.5f, 30);
-
-    db.getOrders();
-    db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
-
+        //Account a = new Account("Max", "maier", "90821389123",7.5f, 30);
         //db.createAccount(a);
+
+        db.getOrders();
+    //db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
+
 
         /* TESTS */
     }
