@@ -54,6 +54,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         initView();
     }
 
+    /**
+     * Initialize for Demo purposes some Data to display
+     */
     private void initializeData() {
         orders = new ArrayList<>();
         orders.add(new OrderDTO());
