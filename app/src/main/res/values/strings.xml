@@ -7,8 +7,19 @@
     <string name="auth_we_need_your_phone_number">Wir benötigen ihre Nummer</string>
     <string name="hint_phone_number">Handynummer</string>
     <string name="confirm">Bestätigen</string>
-    <string name="verify_wait_for_code">Warte auf den Bestätigungscode</string>
-    <string name="verify_code_hint">Bestätigungscode</string>
+    <string name="verify_wait_for_code">Bestätigungscode eingeben</string>
+    <string name="verify_code_hint">Bestätigungscode per SMS</string>
     <string name="accept_order">Annehmen</string>
     <string name="order_distance">Entfernung: %1$f m</string>
+    <string name="registerTitle">Anmeldung vervollständigen</string>
+    <string name="registerSubtitleFirst">1. Basisinformationen</string>
+    <string name="registerSubtitleSecond">2. Identität verifizieren</string>
+    <string name="registerHintName">Vorname</string>
+    <string name="registerHintSurname">Nachname</string>
+    <string name="registerHintAddress">Anschrift</string>
+    <string name="registerHintPhone">Handynummer</string>
+    <string name="registerCheckAGB">AGB/Datenschutz</string>
+    <string name="registerButtonSend">Abschicken</string>
+    <string name="registerButtonBack">zurück</string>
+    <string name="verifyPhoneButton">Bestätigen</string>
 </resources>
