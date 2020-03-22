@@ -13,13 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
+import com.google.android.material.tabs.TabLayout;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.view.home.Home;
-import com.ks.einanrufhilft.view.register.*;
+import com.ks.einanrufhilft.view.register.RegisterActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import com.ks.einanrufhilft.Database.Database;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class LoginMain extends AppCompatActivity {
 
@@ -30,14 +35,23 @@ public class LoginMain extends AppCompatActivity {
     private Context context;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loginButton.setEnabled(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
         context = getApplicationContext();
         //sets the Custom Pager Adapter to display the different slides in the application
 
-        ViewPager introSlidesPager = findViewById(R.id.viewpager);
+        ViewPager introSlidesPager = findViewById(R.id.intro_slides_pager);
+        TabLayout introSlidesIndicator = findViewById(R.id.intro_slides_indicator);
+
         introSlidesPager.setAdapter(new CustomPagerAdapter(this));
+        introSlidesIndicator.setupWithViewPager(introSlidesPager, true);
 
         phoneNumber = findViewById(R.id.input_phonenumber);
         loginButton = findViewById(R.id.btn_login);
@@ -50,7 +64,6 @@ public class LoginMain extends AppCompatActivity {
         }
         */
 
-        loginButton.setEnabled(true);
         loginButton.setOnClickListener(v -> login());
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +86,8 @@ public class LoginMain extends AppCompatActivity {
             progressDialog.show();
 
             String phoneNumberStr = phoneNumber.getText().toString();
+
+            Database.getInstance().getOrders();
 
             //TODO Firebase Logic here
 

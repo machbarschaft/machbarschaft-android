@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Erledige Besorgungen für Menschen in Not"
+        android:text="@string/intro_4"
         android:textSize="32dip" />
 
 </LinearLayout>

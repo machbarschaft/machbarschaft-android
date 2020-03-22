@@ -6,13 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
@@ -35,6 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "Home";
@@ -55,14 +56,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        initializeData();
+        initView();
+        startOrder();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        initializeData();
-        initView();
-        startOrder();
+
     }
 
     @Override
@@ -75,13 +76,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
      * Initialize for Demo purposes some Data to display
      */
     private void initializeData() {
-        orderList = new ArrayList<>();
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße. 14", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "24", "Andrea", "Mehl, Zucker, Milch", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "12", "Leo", "Gemüse", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Fritz-Fendt-Str.", "2", "Flo", "Apotheke, Rezept", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Albertstrasse", "26", "Daniel", "Milch", "", ""));
+        this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
+        System.out.println("orders: " + this.orderList.size());
 
+//        orders = new ArrayList<>();
+//        orders.add(new OrderDTO());
+//        orders.add(new OrderDTO());
+//        orders.add(new OrderDTO());
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);

@@ -47,6 +47,22 @@ public class Order {
 
     }
 
+    public Order(String id,String phone_number, String plz, String street, String house_number,
+                 String name,  String prescription, String urgency, String status, Double lat, Double lng) {
+        this.id = id;
+        this.phone_number = phone_number;
+        this.zip = plz;
+        this.street = street;
+        this.house_number = house_number;
+        this.name = name;
+        //this.category = category;
+        this.prescription = prescription;
+        this.urgency = urgency;
+        this.status = status;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
 
     public String getPhone_number() {
         return phone_number;

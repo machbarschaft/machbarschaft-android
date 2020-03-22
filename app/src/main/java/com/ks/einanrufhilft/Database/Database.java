@@ -2,15 +2,12 @@ package com.ks.einanrufhilft.Database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -19,6 +16,8 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
 
 import static android.content.ContentValues.TAG;
 
@@ -89,7 +88,6 @@ public class Database {
                                 // user_id setzen
                                 conf.setUserID((String) document.getId());
                                 Log.i("TestLogin", "Userid: " + conf.getUserID() + "username: " + document.get("first_name"));
-                                Log.i("TESREIHNFOLGE", "" + conf.getUserID());
 
                             }
                             if (conf.getUserID() != null) {
@@ -103,6 +101,7 @@ public class Database {
     }
 
     public void getOrders() {
+        Log.i("TestGetOrders", "***************************:");
 
         db.collection("Order")
                 .get()
@@ -143,6 +142,11 @@ public class Database {
                             }
                             Database db = Database.getInstance();
                             db.allOrders = orders;
+
+                            // @Benedikt -> prüfe das nochmal
+                            for (Order order : orders) {
+                                OrderHandler.getInstance().addOrder(order);
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
