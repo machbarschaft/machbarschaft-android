@@ -1,4 +1,3 @@
-package com.ks.einanrufhilft.fcm;
 
 import android.util.Log;
 

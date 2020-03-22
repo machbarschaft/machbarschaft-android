@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.R;
-import com.ks.einanrufhilft.Database.OrderDTO;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,9 @@ import java.util.ArrayList;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
 
     private Context context;
-    private ArrayList<OrderDTO> orders;
+    private ArrayList<Order> orders;
 
-    OrderAdapter(Context context, ArrayList<OrderDTO> orders) {
+    OrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
         this.orders = orders;
     }
@@ -38,7 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     @Override
     public void onBindViewHolder(@NonNull OrderHolder holder, int position) {
-        OrderDTO order = orders.get(position);
+        Order order = orders.get(position);
         holder.setDetails(order);
     }
 
@@ -63,9 +63,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             distance = itemView.findViewById(R.id.textViewDistance);
         }
 
-        void setDetails(OrderDTO order) {
-            orderType.setText(order.getCategory());
-            einkaufsliste.setText(order.getEinkaufszettel());
+        void setDetails(Order order) {
+            //orderType.setText(order.getCategory());
+            orderType.setText("Einkauf");
+            einkaufsliste.setText(order.getPrescription());
             distance.setText("200 Meter entfernt..");
         }
 

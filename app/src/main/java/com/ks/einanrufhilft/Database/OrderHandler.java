@@ -42,7 +42,6 @@ public class OrderHandler {
      */
 
 
-
     public ArrayList<Order> getPersonInDistance() {
         return getPersonInDistance(this.closeDistanceSetting);
     }

@@ -128,11 +128,10 @@ public class Database {
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                String strLat = (String) document.get("lat");
-                                String strLng = (String) document.get("lng");
-                                if (strLat != null && strLng != null) {
-                                    o.setLat(Double.parseDouble(strLat));
-                                    o.setLng(Double.parseDouble(strLng));
+
+                                    if (document.get("lat") != null && document.get("lng") != null) {
+                                        o.setLat((Double) document.get("lat"));
+                                        o.setLng((Double) document.get("lat"));
                                 }
 
                                 orders.add(o);
@@ -171,11 +170,11 @@ public class Database {
                                 Log.i("Order street:", "" + (String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
-                                o.setPrescription((String) document.get("carNecessary"));
+                                o.setPrescription((String) document.get("prescription"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
+                                    o.setLat(Double.valueOf((String) document.get("lat")));
+                                    o.setLng(Double.valueOf((String) document.get("lat")));
                                 }
                                 conf.setCurrentOrder(o);
                             }
