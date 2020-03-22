@@ -1,10 +1,12 @@
 package com.ks.einanrufhilft.Database;
 
+import com.ks.einanrufhilft.Database.Entitie.Order;
+
 public class Storage {
     private static Storage storage;
 
     private String userId;
-    private String currentOrderId;
+    private Order currentOrderId;
     private Storage() {
 
     }
@@ -23,11 +25,11 @@ public class Storage {
         this.userId = userId;
     }
 
-    public String getCurrentOrderId() {
+    public Order getCurrentOrder() {
         return currentOrderId;
     }
 
-    public void setCurrentOrderId(String currentOrderId) {
+    public void setCurrentOrder(Order currentOrderId) {
         this.currentOrderId = currentOrderId;
     }
 }

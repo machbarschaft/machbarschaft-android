@@ -50,6 +50,9 @@ public class splash extends AppCompatActivity {
         //db.createAccount(a);
 
         db.getOrders();
+
+
+        db.login("90821389123");
         //db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
 
 
