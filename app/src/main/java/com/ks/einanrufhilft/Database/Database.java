@@ -73,11 +73,11 @@ public class Database {
     }
 
 
-    public void login(String phone_numer) {
+    public void login(String phone_number) {
         Log.i("TestLogin", "***************************:");
 
         db.collection("Account")
-                .whereEqualTo("phone_number", phone_numer)
+                .whereEqualTo("phone_number", phone_number)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -119,16 +119,20 @@ public class Database {
                                 o.setId(document.getId());
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 o.setHouse_number((String) document.get("house_number"));
+                                o.setPhone_number((String) document.get("phone_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
-                                Log.i("Order street:", "" + (String) document.get("street"));
+                                o.setStatus((String) document.get("status"));
+                                o.setUrgency((String) document.get("urgency"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
+                                String strLat = (String) document.get("lat");
+                                String strLng = (String) document.get("lng");
+                                if (strLat != null && strLng != null) {
+                                    o.setLat(Double.parseDouble(strLat));
+                                    o.setLng(Double.parseDouble(strLng));
                                 }
 
                                 orders.add(o);
@@ -136,14 +140,7 @@ public class Database {
 
                                 geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
-                                if (document.get("first_name") == null) {
-                                    Log.i("myOrder", "NULL");
-                                } else {
-                                    Log.i("myOrder", (String) document.get("first_name"));
-                                }
                             }
-
-
                             Database db = Database.getInstance();
                             db.allOrders = orders;
                         } else {
@@ -180,7 +177,7 @@ public class Database {
                                     o.setLat((Double) document.get("lat"));
                                     o.setLng((Double) document.get("lng"));
                                 }
-                                conf.setCurrentOrderId(o);
+                                conf.setCurrentOrder(o);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -235,7 +232,7 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrderId().getId());
+            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrder().getId());
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {

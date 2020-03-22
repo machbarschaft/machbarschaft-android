@@ -34,11 +34,11 @@ public class Storage {
         this.userID = userID;
     }
 
-    public Order getCurrentOrderId() {
+    public Order getCurrentOrder() {
         return currentOrderId;
     }
 
-    public void setCurrentOrderId(Order currentOrderId) {
+    public void setCurrentOrder(Order currentOrderId) {
         this.currentOrderId = currentOrderId;
     }
 
