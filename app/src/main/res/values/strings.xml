@@ -2,6 +2,7 @@
     <string name="app_name">MACHBARSCHAFT</string>
     <string name="home_bottom_links">FAQ - Kontakt - Problem melden</string>
     <string name="login">Einloggen</string>
+    <string name="register">Registrieren</string>
     <string name="login_create_account">Noch keinen Account? Erstell einen</string>
     <string name="auth_we_need_your_phone_number">Wir benötigen ihre Nummer</string>
     <string name="hint_phone_number">Handynummer</string>
