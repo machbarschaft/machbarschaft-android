@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:hint="Handynummer" />
+                    android:hint="@string/hint_phone_number" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -47,13 +47,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
-                android:text="Einloggen"/>
+                android:text="@string/login"/>
 
             <TextView android:id="@+id/link_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Noch keinen Account? Erstell einen"
+                android:text="@string/login_create_account"
                 android:gravity="center"
                 android:textSize="16dip"/>
 
