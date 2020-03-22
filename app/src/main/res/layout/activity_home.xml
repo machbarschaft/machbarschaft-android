@@ -22,11 +22,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView android:id="@+id/link_signup"
+            <TextView android:id="@+id/bottom_links"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
-                android:text="FAQ - Kontakt - Problem melden"
+                android:text="@string/home_bottom_links"
                 android:gravity="center"
                 android:textSize="16dip"/>
 
