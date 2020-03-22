@@ -122,7 +122,7 @@ public class Database {
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
                                 o.setStatus((String) document.get("status"));
-                                Log.i("Order street:", "" + (String) document.get("street"));
+                                o.setUrgency((String) document.get("urgency"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
@@ -139,14 +139,7 @@ public class Database {
 
                                 geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
-                                if (document.get("first_name") == null) {
-                                    Log.i("myOrder", "NULL");
-                                } else {
-                                    Log.i("myOrder", (String) document.get("first_name"));
-                                }
                             }
-
-
                             Database db = Database.getInstance();
                             db.allOrders = orders;
                         } else {
