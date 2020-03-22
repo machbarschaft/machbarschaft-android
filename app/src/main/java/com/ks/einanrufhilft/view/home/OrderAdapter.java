@@ -67,7 +67,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             //orderType.setText(order.getCategory());
             orderType.setText("Einkauf");
             einkaufsliste.setText(order.getPrescription());
-            distance.setText("200 Meter entfernt..");
+            int zufallszahl = (int)(Math.random() * 200) + 1;
+            distance.setText(String.format("%s Meter entfernt..", Integer.toString(zufallszahl)));
         }
 
 

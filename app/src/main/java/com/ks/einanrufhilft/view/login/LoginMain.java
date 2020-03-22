@@ -30,6 +30,12 @@ public class LoginMain extends AppCompatActivity {
     private Context context;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loginButton.setEnabled(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
@@ -50,7 +56,6 @@ public class LoginMain extends AppCompatActivity {
         }
         */
 
-        loginButton.setEnabled(true);
         loginButton.setOnClickListener(v -> login());
 
         registerButton.setOnClickListener(new View.OnClickListener() {

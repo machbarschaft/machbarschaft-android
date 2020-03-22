@@ -11,4 +11,8 @@
     <string name="verify_code_hint">Bestätigungscode</string>
     <string name="accept_order">Annehmen</string>
     <string name="order_distance">Entfernung: %1$f m</string>
+    <string name="intro1_text">Melde dich als Helfer an</string>
+    <string name="intro_2">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
+    <string name="intro_3">Kläre telefonisch das Anliegen</string>
+    <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
 </resources>
