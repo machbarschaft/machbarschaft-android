@@ -113,8 +113,8 @@ public class Database {
                             OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if ( (String) document.get("status") == null &&
-                                        (String) document.get("status") == "open") {
+                                //if ( (String) document.get("status") == null &&
+                                  //      (String) document.get("status") == "open") {
                                     Order o = new Order();
                                     o.setId(document.getId());
                                     o.setCarNecessary((String) document.get("carNecessary"));
@@ -138,7 +138,7 @@ public class Database {
                                     Log.i("Order read:", o.toString());
 
                                     geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
-                                }
+                             //   }
                             }
                             Database db = Database.getInstance();
                             db.allOrders = orders;
