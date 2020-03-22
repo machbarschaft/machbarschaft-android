@@ -7,38 +7,44 @@ public class Order {
     private String zip;
     private String street;
     private String house_number;
-    private String first_name;
-    private String last_name;
-    private String[] category;
-    private String einkaufsZettel;
-
+    private String name;
+    //private String[] category;
+    private String status;
+    private String prescription;
+    private String carNecessary;
+    private String urgency;
+    private double lat;
+    private double lng;
 
     public Order() {
     }
 
     public Order(String id, String phone_number, String plz, String street, String house_number,
-                 String firstName, String lastNamme, String[] category) {
+                 String name, String[] category, String urgency, String status) {
         this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
         this.street = street;
         this.house_number = house_number;
-        this.first_name = firstName;
-        this.last_name = lastNamme;
-        this.category = category;
+        this.name = name;
+        //this.category = category;
+        this.urgency = urgency;
+        this.status = status;
     }
 
     public Order(String id,String phone_number, String plz, String street, String house_number,
-                 String firstName, String lastNamme, String[] category, String einkaufsliste) {
+                 String name,  String prescription, String urgency, String status) {
         this.id = id;
         this.phone_number = phone_number;
         this.zip = plz;
         this.street = street;
         this.house_number = house_number;
-        this.first_name = firstName;
-        this.last_name = lastNamme;
-        this.category = category;
-        this.einkaufsZettel = einkaufsliste;
+        this.name = name;
+        //this.category = category;
+        this.prescription = prescription;
+        this.urgency = urgency;
+        this.status = status;
+
     }
 
 
@@ -66,7 +72,7 @@ public class Order {
     public void setHouse_number(String house_number) {
         this.house_number = house_number;
     }
-
+/*
     public String[] getCategory() {
         return category;
     }
@@ -75,6 +81,7 @@ public class Order {
         this.category = category;
 
     }
+*/
 
     public String getZip() {
         return zip;
@@ -84,29 +91,23 @@ public class Order {
         this.zip = zip;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getName() {
+        return name;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getCarNecessary() {
+        return carNecessary;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setCarNecessary(String carNecessary) {
+        this.carNecessary = carNecessary;
     }
 
-    public String getEinkaufsZettel() {
-        return einkaufsZettel;
-    }
 
-    public void setEinkaufsZettel(String einkaufsZettel) {
-        this.einkaufsZettel = einkaufsZettel;
-    }
 
     public String getId() {
         return id;
@@ -114,5 +115,63 @@ public class Order {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
+    }
+
+    public String getUrgency() {
+        return urgency;
+    }
+
+    public void setUrgency(String urgency) {
+        this.urgency = urgency;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", zip='" + zip + '\'' +
+                ", street='" + street + '\'' +
+                ", house_number='" + house_number + '\'' +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", prescription='" + prescription + '\'' +
+                ", carNecessary='" + carNecessary + '\'' +
+                ", urgency='" + urgency + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                '}';
     }
 }

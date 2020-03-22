@@ -30,10 +30,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.blabla.VerifyPhoneActivity" />
-        <activity android:name=".view.blabla.RegisterActivity" />
         <activity android:name=".MainActivity" />
 
+<<<<<<< HEAD
+=======
+        <service
+            android:name=".fcm.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".services.OrderInProgressNotification" />
+>>>>>>> master
 
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
@@ -45,6 +54,21 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
+<<<<<<< HEAD
             android:value="@string/google_maps_key" />    </application>
+=======
+            android:value="@string/google_maps_key" />
+
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+    </application>
+>>>>>>> master
 
 </manifest>

@@ -104,4 +104,19 @@ public class OrderDTO {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDTO{" +
+                "phone_number='" + phone_number + '\'' +
+                ", adress='" + adress + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", category='" + category + '\'' +
+                ", einkaufszettel='" + einkaufszettel + '\'' +
+                ", id='" + id + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }
