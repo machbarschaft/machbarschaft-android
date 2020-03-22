@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-
-import com.ks.einanrufhilft.Database.Database;
-import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
@@ -16,6 +12,7 @@ import com.ks.einanrufhilft.view.login.LoginMain;
 /**
  *  Splashscreen which will be displayed shortly when the App is started.
  */
+
 public class Splash extends AppCompatActivity {
 
     private Handler myHandler = new Handler();

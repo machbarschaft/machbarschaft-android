@@ -5,6 +5,9 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the Orders
+ */
 public class OrderHandler {
 
     private static OrderHandler orderHandler;
@@ -40,6 +43,15 @@ public class OrderHandler {
     }
 
      */
+
+    /**
+     * Gets the distance to the order
+     * @param firstPersonLat person Doing Request
+     * @param firstPersonLon person Doing Request
+     * @param secondPersonLat Order Data
+     * @param secondPersonLon Order Data
+     * @return distance in metres
+     */
     public static double getDistance(double firstPersonLat, double firstPersonLon, double secondPersonLat, double secondPersonLon) {
         double lat1 = firstPersonLat;
         double lon1 = firstPersonLon;
@@ -67,6 +79,11 @@ public class OrderHandler {
         return getPersonInDistance(this.closeDistanceSetting);
     }
 
+    /**
+     *  Gives us the Persons within a specific distance.
+     * @param kmDistance in which radius the persons should be
+     * @return persons in specific distance
+     */
     public ArrayList<Order> getPersonInDistance(double kmDistance) {
         ArrayList<Order> closeOrders = new ArrayList<>();
         for(Order order: orders) {

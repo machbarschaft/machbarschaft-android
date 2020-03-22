@@ -23,6 +23,9 @@ import com.ks.einanrufhilft.R;
 
 import java.util.Objects;
 
+/**
+ * Displays the Details of an order, after someone accepts it.
+ */
 public class OrderDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "OrderDetailActivity";
     public static final String EXTRA_ORDER_ID = "orderId";

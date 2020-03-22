@@ -19,8 +19,6 @@ import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 /**

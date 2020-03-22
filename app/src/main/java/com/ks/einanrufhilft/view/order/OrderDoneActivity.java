@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ks.einanrufhilft.R;
 
+/**
+ * Handles what is to do when a Order is finished.
+ */
 public class OrderDoneActivity extends AppCompatActivity {
 
     @Override

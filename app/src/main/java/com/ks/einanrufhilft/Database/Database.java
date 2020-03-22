@@ -22,6 +22,9 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * All database accesses are made here.
+ */
 public class Database {
     private FirebaseFirestore db;
     private static Database myDBClass;
@@ -53,6 +56,10 @@ public class Database {
 
     }
 
+    /**
+     * Creating a new Account in the database.
+     * @param a an Account
+     */
     public void createAccount(Account a) {
         // Create a new user with a first and last name
 
@@ -73,6 +80,10 @@ public class Database {
     }
 
 
+    /**
+     * Helper function to log into the Application via Database access
+     * @param phone_number of the person which wants to login
+     */
     public void login(String phone_number) {
         db.collection("Account")
                 .whereEqualTo("phone_number", phone_number)
@@ -97,6 +108,9 @@ public class Database {
                 });
     }
 
+    /**
+     * Gets all Orders nearby in a specific distance
+     */
     public void getOrders() {
         db.collection("Order")
                 .get()
@@ -151,6 +165,11 @@ public class Database {
     }
 
     // zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
+
+    /**
+     * Pulls the own Order out of the database and saves it into our Storage-Singelton
+     * @param user_id of the person you wanna get the orders
+     */
     public void getMyOrder(String user_id) {
         db.collection("Order_Account")
                 .whereEqualTo("fk_account", user_id)
@@ -187,8 +206,12 @@ public class Database {
 
     }
 
-    // wenn nutzer einen auftrag auswählt ist status = Confirmed
-    // wenn nutzer einen Auftrag abgeschlossen hat, ist der status = Closed
+    /**
+     * To set the Status of a Order. In case a user confirmed to do a task its "confirmed" and in case he finished the task its "closed"
+     * @param orderId where you want to set the Status
+     * @param status confirmed/closed
+     * @throws InterruptedException
+     */
     public void setOrderStatus(String orderId, Status status) throws InterruptedException {
         if (status == Status.Confirmed) {
 
@@ -210,7 +233,7 @@ public class Database {
                         }
                     });
 
-            //  Eintrag in Account_order hinzufügen
+            //  Adds Entry in Account order
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
             if (Storage.getInstance().getUserID() != null) {

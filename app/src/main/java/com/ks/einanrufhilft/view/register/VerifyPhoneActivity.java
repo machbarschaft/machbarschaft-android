@@ -14,6 +14,9 @@ import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
+/**
+ * For verifying via SMS.
+ */
 public class VerifyPhoneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                assert userData != null;
                 if(userData[0].equals(tfCode.getText().toString())) {
                     // Add new account to firebase
                     Account newUser = new Account();

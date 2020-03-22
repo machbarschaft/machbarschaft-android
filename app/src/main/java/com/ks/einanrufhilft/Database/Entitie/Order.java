@@ -1,5 +1,8 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
+/**
+ *  Represents an Order. An order is a help request by a help seeking person.
+ */
 public class Order {
 
     private String id;

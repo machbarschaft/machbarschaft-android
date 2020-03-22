@@ -1,5 +1,8 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
+/**
+ * Class which determines Account Information's
+ */
 public class Account {
     private String id;
     private String first_name;

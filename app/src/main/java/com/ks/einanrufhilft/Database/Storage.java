@@ -39,6 +39,12 @@ public class Storage {
         this.currentOrderId = currentOrderId;
     }
 
+    /**
+     * Saves the Order Progress in the Shared Preferences
+     * @param context of the Application
+     * @param currentOrderID of the Order you want to save
+     * @return
+     */
     public static boolean setOrderInProgress(Context context, String currentOrderID) {
         SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
         Editor editor = pref.edit();

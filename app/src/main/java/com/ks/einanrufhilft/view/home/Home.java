@@ -179,6 +179,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                 });
     }
 
+    /**
+     * Asks for the needed permission on start, otherwise we cant access the location of the user.
+     * Is needed to show nearby orders.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -274,6 +278,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    /**
+     * Handles the Start of Order
+     */
     private void startOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         //todo handle event
@@ -281,6 +288,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
+    /**
+     * Handles the Stop of a Order
+     * Possible reasons for stop is a cancel of finish of order.
+     */
     private void stopOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         stopService(serviceIntent);

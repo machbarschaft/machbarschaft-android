@@ -14,10 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
-import com.ks.einanrufhilft.Database.OrderDTO;
+import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.home.Home;
 
+/**
+ * Creates a notification in the status bar of android to display a order is in progress.
+ */
 public class OrderInProgressNotification extends Service {
 
     private static final String CHANNEL_ID = "NotificationChannel";
@@ -42,7 +45,7 @@ public class OrderInProgressNotification extends Service {
     public int onStartCommand(Intent intent, int flags, int startID) {
 
         SharedPreferences sharedPreferences = getSharedPreferences("oderDetails", 0);
-        OrderDTO orderDTO = new Gson().fromJson(sharedPreferences.getString("orderDetails", null), OrderDTO.class);
+        Order orderDTO = new Gson().fromJson(sharedPreferences.getString("orderDetails", null), Order.class);
         createNotificationChannel();
         Intent notifIntent = new Intent(this, Home.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0);

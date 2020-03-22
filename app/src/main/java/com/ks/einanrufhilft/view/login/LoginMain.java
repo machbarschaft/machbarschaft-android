@@ -23,9 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import com.ks.einanrufhilft.Database.Database;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
+/**
+ * Displays the Login Page. Handles the Input and the Login Success / Login Failed.
+ * Also can redirect to the register Page.
+ */
 public class LoginMain extends AppCompatActivity {
 
     private static final int HANDLER_SIGNUP = 0;

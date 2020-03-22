@@ -14,6 +14,9 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 
+/**
+ * Handles the case when someone accepts a order.
+ */
 public class OrderAcceptActivity extends AppCompatActivity {
     private Order mOrder;
 

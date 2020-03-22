@@ -26,7 +26,9 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-
+/**
+ * Handles the Events to register. Includes the Passbase Video Ident and the registering with mobile number.
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private Context context;
