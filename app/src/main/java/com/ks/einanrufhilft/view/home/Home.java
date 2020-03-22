@@ -1,6 +1,7 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.OrderDTO;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +62,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
         initializeData();
         initView();
+        startOrder();
     }
 
     /**
@@ -192,4 +195,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     }
+
+    private void startOrder(){
+        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        //todo SharedPrefs
+        ContextCompat.startForegroundService(this, serviceIntent);
+        }
 }

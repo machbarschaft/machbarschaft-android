@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -18,7 +19,6 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
@@ -126,12 +126,9 @@ public class Database {
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-
-                                String strLat = (String) document.get("lat");
-                                String strLng = (String) document.get("lng");
-                                if (strLat != null && strLng != null) {
-                                    o.setLat(Double.parseDouble(strLat));
-                                    o.setLng(Double.parseDouble(strLng));
+                                if (document.get("lat") != null && document.get("lng") != null) {
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lng"));
                                 }
 
                                 orders.add(o);
