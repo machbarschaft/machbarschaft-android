@@ -33,4 +33,6 @@
     <string name="order_done">Auftrag erledigt</string>
     <string name="thank_you_text">Vielen Dank!\nDu bist toll!</string>
     <string name="back_to_home">zum Home Screen</string>
+
+    <string name="title_back">Zurück</string>
 </resources>

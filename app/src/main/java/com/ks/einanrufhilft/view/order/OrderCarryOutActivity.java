@@ -1,26 +1,33 @@
 package com.ks.einanrufhilft.view.order;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toolbar;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 
 public class OrderCarryOutActivity extends AppCompatActivity {
+    private Order mOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_carry_out);
 
+        loadOrder();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
         btnStartNow.setOnClickListener(v -> {
-
+            startActivity(new Intent(this, OrderEnRouteActivity.class));
+            finishAfterTransition();
         });
 
         Button btnStartLater = findViewById(R.id.btn_order_execute_later);
@@ -32,5 +39,9 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         btnStartFailed.setOnClickListener(v -> {
 
         });
+    }
+
+    private void loadOrder() {
+        mOrder = Storage.getInstance().getCurrentOrder();
     }
 }

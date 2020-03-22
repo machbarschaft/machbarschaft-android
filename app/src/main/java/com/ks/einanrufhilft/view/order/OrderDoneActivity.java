@@ -14,10 +14,7 @@ public class OrderDoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_done);
 
-
         Button btnHome = findViewById(R.id.btn_back_home);
-        btnHome.setOnClickListener(v -> {
-
-        });
+        btnHome.setOnClickListener(v -> finish());
     }
 }
