@@ -3,15 +3,11 @@ package com.ks.einanrufhilft.view.home;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -25,6 +21,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.Database.OrderHandler;
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
@@ -36,6 +34,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "Home";
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
@@ -43,6 +48,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private List<Order> orderList;
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
+    private TextView footerTextView;
 
     private GoogleMap map;
     private boolean hasLocationPermission;
@@ -50,18 +56,27 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private Map<String, Marker> markerMap;
     private BitmapDescriptor markerIconNormal;
     private BitmapDescriptor markerIconUrgent;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initializeData();
-        initView();
-        startOrder();
+        footerTextView = findViewById(R.id.bottom_links);
+        footerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Alert
+            }
+        });
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
-
+        initializeData();
+        initView();
+        startOrder();
+        updateMarkers();
 
     }
 
@@ -75,13 +90,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
      * Initialize for Demo purposes some Data to display
      */
     private void initializeData() {
-        orderList = new ArrayList<>();
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße. 14", "14", "Kilian", "Nudeln, Soße, Parmesan", "", "", 45.2, 12.0));
-        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "24", "Andrea", "Mehl, Zucker, Milch", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "12", "Leo", "Gemüse", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Fritz-Fendt-Str.", "2", "Flo", "Apotheke, Rezept", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Albertstrasse", "26", "Daniel", "Milch", "", ""));
-
+        this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
+        System.out.println("orders: " + this.orderList.size());
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -97,6 +107,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private void requestCurrentLocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
+                    this.location = location;
+
                     Log.d(LOG_TAG, "Last known location: " + location);
                     if (location == null || map == null) {
                         return;
@@ -162,8 +174,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        orderAdapter = new OrderAdapter(this, (ArrayList<Order>) orderList);
-        recyclerView.setAdapter(orderAdapter);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(location -> {
+                    this.location = location;
+                    orderAdapter = new OrderAdapter(this, (ArrayList<Order>) this.orderList, this.location);
+                    recyclerView.setAdapter(orderAdapter);
+                });
     }
 
     /**
@@ -207,7 +223,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
     private void startOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
-        //todo SharedPrefs
+        //todo handle event
+        //Storage.setOrderInProgress(getApplicationContext(), );
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 

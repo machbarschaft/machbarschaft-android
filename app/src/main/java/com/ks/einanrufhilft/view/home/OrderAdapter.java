@@ -2,6 +2,7 @@ package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -25,10 +30,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     private Context context;
     private ArrayList<Order> orders;
+    private Location location;
 
-    OrderAdapter(Context context, ArrayList<Order> orders) {
+    OrderAdapter(Context context, ArrayList<Order> orders, Location location) {
         this.context = context;
         this.orders = orders;
+        this.location = location;
     }
 
     @NonNull
@@ -41,7 +48,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     @Override
     public void onBindViewHolder(@NonNull OrderHolder holder, int position) {
         Order order = orders.get(position);
-        holder.setDetails(order);
+        double distance = 0;
+        if (this.location != null) {
+            distance = OrderHandler.getDistance(this.location.getLatitude(),
+                    this.location.getLongitude(), order.getLat(), order.getLng()) / 1000;
+        }
+        holder.setDetails(order, distance);
     }
 
     @Override
@@ -55,27 +67,35 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View view;
-        private TextView orderType, einkaufsliste, distance;
+        private TextView urgency, prescription, carNecessary, distance;
 
         OrderHolder(View itemView) {
             super(itemView);
-
             view = itemView;
             view.setOnClickListener(this);
-            orderType = itemView.findViewById(R.id.textViewTitle);
-            einkaufsliste = itemView.findViewById(R.id.textViewShortDesc);
+            urgency = itemView.findViewById(R.id.textViewUrgency);
+            prescription = itemView.findViewById(R.id.textViewPrescription);
+            carNecessary = itemView.findViewById(R.id.textViewCarNecessary);
             distance = itemView.findViewById(R.id.textViewDistance);
         }
 
-        void setDetails(Order order) {
-            //orderType.setText(order.getCategory());
-            view.setTag(order.getId());
-            orderType.setText("Einkauf");
-            einkaufsliste.setText(order.getPrescription());
-            int zufallszahl = (int) (Math.random() * 200) + 1;
-            distance.setText(String.format("%s Meter entfernt..", Integer.toString(zufallszahl)));
-        }
+        void setDetails(Order order, double distance) {
+            StringBuffer urgencyText = new StringBuffer("Dringlichkeit: ")
+                    .append(order.getUrgency());
+            StringBuffer prescriptionText = new StringBuffer("Rezept: ")
+                    .append((order.getPrescription().equals("yes") ? "ja" : "nein"));
+            StringBuffer carNecessaryText = new StringBuffer("Auto erforderlich: " )
+                    .append((order.getCarNecessary().equals("yes") ? "ja" : "nein"));
+            StringBuffer distanceText = new StringBuffer("Entfernung: ")
+                    .append(Math.round(distance)).append(" km");
 
+
+            this.view.setTag(order.getId());
+            this.urgency.setText(urgencyText.toString());
+            this.prescription.setText(prescriptionText.toString());
+            this.carNecessary.setText(carNecessaryText.toString());
+            this.distance.setText(distanceText.toString());
+        }
 
         @Override
         public void onClick(View v) {
@@ -89,6 +109,4 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                     .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
         }
     }
-
-
 }

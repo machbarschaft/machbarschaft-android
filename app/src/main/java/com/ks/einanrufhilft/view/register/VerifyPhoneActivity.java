@@ -4,10 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ks.einanrufhilft.Database.Database;
+import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.view.login.LoginMain;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
     @Override
@@ -17,18 +23,35 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         // Get user data from calling activity
         Intent caller = getIntent();
-        // Data for registration in array order: name, surname, address, phone number
+        // Data for registration in array order: phone code, name, surname, address, phone number
         String[] userData = caller.getStringArrayExtra("registerData");
 
         // Get UI elements
         Button btnSignin = findViewById(R.id.buttonSignIn);
+        EditText tfCode = findViewById(R.id.editTextCode);
+        ProgressBar bar = findViewById(R.id.progressbar);
+
+        bar.setVisibility(View.INVISIBLE);
 
         // Button click handlers
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Check for correct code
-                // TODO Add account to firebase
+                if(userData[0].equals(tfCode.getText().toString())) {
+                    // Add new account to firebase
+                    Account newUser = new Account();
+                    newUser.setFirst_name(userData[1]);
+                    newUser.setLast_name(userData[2]);
+                    newUser.setPhone_number(userData[4]);
+
+                    Database.getInstance().createAccount(newUser);
+
+                    Intent i = new Intent(getApplicationContext(), LoginMain.class);
+                    startActivity(i);
+                } else {
+                    Toast t = Toast.makeText(getApplicationContext(), "Code ungültig", Toast.LENGTH_LONG);
+                    t.show();
+                }
             }
         });
 

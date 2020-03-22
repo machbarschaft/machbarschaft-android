@@ -2,8 +2,6 @@ package com.ks.einanrufhilft.Database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,6 +16,8 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
 
 import static android.content.ContentValues.TAG;
 
@@ -88,7 +88,6 @@ public class Database {
                                 // user_id setzen
                                 conf.setUserID((String) document.getId());
                                 Log.i("TestLogin", "Userid: " + conf.getUserID() + "username: " + document.get("first_name"));
-                                Log.i("TESREIHNFOLGE", "" + conf.getUserID());
 
                             }
                             if (conf.getUserID() != null) {
@@ -102,6 +101,7 @@ public class Database {
     }
 
     public void getOrders() {
+        Log.i("TestGetOrders", "***************************:");
 
         db.collection("Order")
                 .get()
@@ -113,34 +113,40 @@ public class Database {
                             OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                //if ( (String) document.get("status") == null &&
+                                  //      (String) document.get("status") == "open") {
+                                    Order o = new Order();
+                                    o.setId(document.getId());
+                                    o.setCarNecessary((String) document.get("carNecessary"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setPhone_number((String) document.get("phone_number"));
+                                    o.setZip((String) document.get("zip"));
+                                    o.setStreet((String) document.get("street"));
+                                    o.setStatus((String) document.get("status"));
+                                    o.setUrgency((String) document.get("urgency"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setName((String) document.get("name"));
+                                    o.setPrescription((String) document.get("prescription"));
+                                    o.setCarNecessary((String) document.get("carNecessary"));
 
-                                Order o = new Order();
-                                o.setId(document.getId());
-                                o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setPhone_number((String) document.get("phone_number"));
-                                o.setZip((String) document.get("zip"));
-                                o.setStreet((String) document.get("street"));
-                                o.setStatus((String) document.get("status"));
-                                o.setUrgency((String) document.get("urgency"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setName((String) document.get("name"));
-                                o.setPrescription((String) document.get("carNecessary"));
-                                o.setCarNecessary((String) document.get("carNecessary"));
+                                    if (document.get("lat") != null && document.get("lng") != null) {
+                                        o.setLat((Double) document.get("lat"));
+                                        o.setLng((Double) document.get("lng"));
+                                    }
 
-                                if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
-                                }
+                                    orders.add(o);
+                                    Log.i("Order read:", o.toString());
 
-                                orders.add(o);
-                                Log.i("Order read:", o.toString());
-
-                                geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
-
+                                    geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
+                             //   }
                             }
                             Database db = Database.getInstance();
                             db.allOrders = orders;
+
+                            // @Benedikt -> prüfe das nochmal
+                            for (Order order : orders) {
+                                OrderHandler.getInstance().addOrder(order);
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -258,12 +264,12 @@ public class Database {
             // Update Order
 
             DocumentReference order = db.collection("Order").document(orderId);
-            currentOrder
+            order
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Log.d("oderstatus", "Erf!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
