@@ -74,6 +74,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         orders.add(new OrderDTO());
         orders.add(new OrderDTO());
 
+
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         markerMap = new HashMap<>();
