@@ -35,13 +35,9 @@ public class splash extends AppCompatActivity {
         }, 1200);
 
 
-        /*
-
-        Tests
-
-         */
 
         /* TESTS */
+        /*
         Database db = Database.getInstance();
         // String phone_number, String plz, String strasse, String hausnummer, String firstName, String lastNamme, String[] category) {
         //        this.phone_number = phone_number
@@ -55,11 +51,9 @@ public class splash extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
         //db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
 
-
+*/
         /* TESTS */
     }
 

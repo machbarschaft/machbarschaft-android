@@ -13,14 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.view.home.Home;
 import com.ks.einanrufhilft.view.register.RegisterActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import com.ks.einanrufhilft.Database.Database;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class LoginMain extends AppCompatActivity {
 
@@ -82,6 +86,8 @@ public class LoginMain extends AppCompatActivity {
             progressDialog.show();
 
             String phoneNumberStr = phoneNumber.getText().toString();
+
+            Database.getInstance().getOrders();
 
             //TODO Firebase Logic here
 
