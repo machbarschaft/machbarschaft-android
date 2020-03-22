@@ -1,5 +1,5 @@
 # Machbarschaft
-## Firebase/Firestore API
+## Android Application
 
 ![Machbarschaft Logo](logo.jpeg)
 
