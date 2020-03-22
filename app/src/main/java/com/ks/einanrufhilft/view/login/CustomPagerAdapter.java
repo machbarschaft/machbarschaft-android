@@ -40,10 +40,4 @@ public class CustomPagerAdapter extends PagerAdapter {
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        ModelObject customPagerEnum = ModelObject.values()[position];
-        return mContext.getString(customPagerEnum.getTitleResId());
-    }
 }
