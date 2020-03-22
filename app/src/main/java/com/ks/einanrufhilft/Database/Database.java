@@ -298,7 +298,7 @@ public class Database {
                             o.setLat((Double) document.get("lat"));
                             o.setLng((Double) document.get("lat"));
                         }
-                        Log.i("THEorder", o.toString());
+                        // Order Objekt vollständig
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -308,6 +308,5 @@ public class Database {
             }
         });
 
-        return null;
     }
 }
