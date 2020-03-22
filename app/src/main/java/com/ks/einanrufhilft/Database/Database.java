@@ -91,7 +91,7 @@ public class Database {
                                 Log.i("TestLogin", "Userid: " + conf.getUserId() + "username: " + document.get("first_name"));
 
                             }
-                            if(conf.getUserId() != null){
+                            if (conf.getUserId() != null) {
                                 getMyOrder(conf.getUserId());
                             }
                         } else {
@@ -121,12 +121,12 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
-                                Log.i("Order street:",  ""+(String) document.get("street"));
+                                Log.i("Order street:", "" + (String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                if(document.get("lat") != null && document.get("lng") != null) {
+                                if (document.get("lat") != null && document.get("lng") != null) {
                                     o.setLat((Double) document.get("lat"));
                                     o.setLng((Double) document.get("lng"));
                                 }
@@ -134,7 +134,7 @@ public class Database {
                                 orders.add(o);
                                 Log.i("Order read:", o.toString());
 
-                                geo.add(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
+                                geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
                                 if (document.get("first_name") == null) {
                                     Log.i("myOrder", "NULL");
@@ -154,7 +154,7 @@ public class Database {
 
     }
 
-// zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
+    // zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
     public Order getMyOrder(String user_id) {
         db.collection("Order_Account")
                 .whereEqualTo("fk_account", user_id)
@@ -171,12 +171,12 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
-                                Log.i("Order street:",  ""+(String) document.get("street"));
+                                Log.i("Order street:", "" + (String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                if(document.get("lat") != null && document.get("lng") != null) {
+                                if (document.get("lat") != null && document.get("lng") != null) {
                                     o.setLat((Double) document.get("lat"));
                                     o.setLng((Double) document.get("lng"));
                                 }
@@ -195,16 +195,37 @@ public class Database {
     // wenn nutzer einen Auftrag abgeschlossen hat, ist der status = Closed
     public void setOrderStatus(String orderId, Status status) {
         if (status == Status.Confirmed) {
+
+            //Status in Order anpassen:
+
+            DocumentReference currentOrder = db.collection("Order").document(orderId);
+            currentOrder
+                    .update("status", "Confirmed")
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                        }
+                    });
+
+            //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
             orderAccount.setAccount_id(Storage.getInstance().getUserId());
             orderAccount.setOrder_id(orderId);
-            db.collection("Account_Order")
+            db.collection("Order_Account")
                     .add(orderAccount)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            // Order in der app speichern
+                            getMyOrder(Storage.getInstance().getUserId());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -214,7 +235,7 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Account_Order").document(Storage.getInstance().getCurrentOrder().getId());
+            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrder().getId());
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
