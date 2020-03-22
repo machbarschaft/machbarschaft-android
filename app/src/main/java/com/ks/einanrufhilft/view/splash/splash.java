@@ -32,7 +32,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 startLogin();
             }
-        }, 900);
+        }, 1200);
 
 
         /*

@@ -35,7 +35,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ConstraintMap"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="260dp"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -59,7 +60,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ConstraintList"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ConstraintMap">
