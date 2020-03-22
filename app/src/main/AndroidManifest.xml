@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.register.RegisterActivity"></activity>
+        <activity android:name=".view.register.VerifyPhoneActivity"></activity>
 
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />
@@ -32,8 +33,6 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-<<<<<<< HEAD
-=======
         <service
             android:name=".fcm.MessagingService"
             android:exported="false">
@@ -42,7 +41,6 @@
             </intent-filter>
         </service>
         <service android:name=".services.OrderInProgressNotification" />
->>>>>>> master
 
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
@@ -54,9 +52,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-<<<<<<< HEAD
-            android:value="@string/google_maps_key" />    </application>
-=======
+            android:value="@string/google_maps_key" />
             android:value="@string/google_maps_key" />
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
@@ -69,6 +65,5 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
     </application>
->>>>>>> master
 
 </manifest>
