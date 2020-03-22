@@ -15,6 +15,9 @@ import com.ks.einanrufhilft.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 /**
  * Custom Adapter for the Recycler View to display the Orders.
@@ -53,22 +56,27 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView orderType, einkaufsliste, distance;
+        private TextView urgency, prescription, carNecessary;
 
         OrderHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            orderType = itemView.findViewById(R.id.textViewTitle);
-            einkaufsliste = itemView.findViewById(R.id.textViewShortDesc);
-            distance = itemView.findViewById(R.id.textViewDistance);
+            urgency = itemView.findViewById(R.id.textViewUrgency);
+            prescription = itemView.findViewById(R.id.textViewPrescription);
+            carNecessary = itemView.findViewById(R.id.textViewCarNecessary);
         }
 
         void setDetails(Order order) {
-            //orderType.setText(order.getCategory());
-            orderType.setText("Einkauf");
-            einkaufsliste.setText(order.getPrescription());
-            int zufallszahl = (int)(Math.random() * 200) + 1;
-            distance.setText(String.format("%s Meter entfernt..", Integer.toString(zufallszahl)));
+            StringBuffer urgencyText = new StringBuffer("Dringlichkeit: ")
+                    .append(order.getUrgency());
+            StringBuffer prescriptionText = new StringBuffer("Rezept: ")
+                    .append((order.getPrescription().equals("yes") ? "ja" : "nein"));
+            StringBuffer carNecessaryText = new StringBuffer("Auto erforderlich: " )
+                    .append((order.getCarNecessary().equals("yes") ? "ja" : "nein"));
+
+            urgency.setText(urgencyText.toString());
+            prescription.setText(prescriptionText.toString());
+            carNecessary.setText(carNecessaryText.toString());
         }
 
 
