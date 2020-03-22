@@ -14,7 +14,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#9F4A6D"
         android:text="@string/homeLinkFAQ"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/homeBtnContact"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,7 +29,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#9F4A6D"
         android:text="@string/homeLinkContact"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/homeBtnBugReport"
         app:layout_constraintStart_toEndOf="@+id/homeBtnFAQ" />
@@ -40,7 +44,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#9F4A6D"
         android:text="@string/homeLinkBugReport"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homeBtnContact" />
