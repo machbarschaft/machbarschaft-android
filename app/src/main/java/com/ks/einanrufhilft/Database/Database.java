@@ -89,9 +89,10 @@ public class Database {
                                 // user_id setzen
                                 conf.setUserId((String) document.getId());
                                 Log.i("TestLogin", "Userid: " + conf.getUserId() + "username: " + document.get("first_name"));
-                                if(conf.getUserId() != null){
-                                    getMyOrder(conf.getUserId());
-                                }
+
+                            }
+                            if(conf.getUserId() != null){
+                                getMyOrder(conf.getUserId());
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
