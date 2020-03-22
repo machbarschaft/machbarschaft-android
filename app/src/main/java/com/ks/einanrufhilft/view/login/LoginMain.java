@@ -1,12 +1,14 @@
 package com.ks.einanrufhilft.view.login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.view.home.Home;
+import com.ks.einanrufhilft.view.register.*;
 
 public class LoginMain extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class LoginMain extends AppCompatActivity {
 
     private EditText phoneNumber;
     private Button loginButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class LoginMain extends AppCompatActivity {
         setContentView(R.layout.activity_login_main);
 
         //sets the Custom Pager Adapter to display the different slides in the application
+
         ViewPager introSlidesPager = findViewById(R.id.viewpager);
         introSlidesPager.setAdapter(new CustomPagerAdapter(this));
 
@@ -48,8 +53,12 @@ public class LoginMain extends AppCompatActivity {
         loginButton.setEnabled(true);
         loginButton.setOnClickListener(v -> login());
 
-        registerButton.setOnClickListener(v -> {
-            //TODO Register
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, RegisterActivity.class);
+                startActivity(i);
+            }
         });
     }
 

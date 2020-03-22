@@ -22,6 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.register.RegisterActivity"></activity>
+        <activity android:name=".view.register.VerifyPhoneActivity"></activity>
 
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />
@@ -53,6 +55,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
             android:value="@string/google_maps_key" />
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
