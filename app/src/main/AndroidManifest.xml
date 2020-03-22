@@ -25,9 +25,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.register.RegisterActivity"></activity>
-        <activity android:name=".view.register.VerifyPhoneActivity"></activity>
-
+        <activity android:name=".view.order.OrderDetailActivity"></activity>
+        <activity android:name=".view.order.OrderDoneActivity" />
+        <activity android:name=".view.order.OrderEnRouteActivity" />
+        <activity android:name=".view.order.OrderCarryOutActivity" />
+        <activity android:name=".view.order.OrderAcceptActivity" />
+        <activity android:name=".view.register.RegisterActivity" />
+        <activity android:name=".view.register.VerifyPhoneActivity" />
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />
         <activity android:name=".view.splash.splash">

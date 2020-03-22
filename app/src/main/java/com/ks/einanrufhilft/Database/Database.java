@@ -281,4 +281,9 @@ public class Database {
         }
 
     }
+
+    public Order getOrder(String orderId) {
+        // TODO load order with id
+        return null;
+    }
 }
