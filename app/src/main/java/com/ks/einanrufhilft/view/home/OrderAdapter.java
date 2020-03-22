@@ -1,11 +1,9 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -17,6 +15,10 @@ import com.ks.einanrufhilft.Database.OrderDTO;
 
 import java.util.ArrayList;
 
+
+/**
+ * Custom Adapter for the Recycler View to display the Orders.
+ */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
 
     private Context context;
@@ -46,10 +48,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     }
 
 
-
+    /**
+     * Sets the Order specific Text to each item and adds an On Click Listener
+     */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-
 
         private TextView orderType, einkaufsliste, distance;
 
@@ -65,7 +67,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             orderType.setText(order.getCategory());
             einkaufsliste.setText(order.getEinkaufszettel());
             distance.setText("200 Meter entfernt..");
-            //txtDiameter.setText("test");
         }
 
 

@@ -1,11 +1,7 @@
 package com.ks.einanrufhilft.view.home;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -20,14 +18,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.ks.einanrufhilft.R;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.OrderDTO;
+import com.ks.einanrufhilft.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "Home";
@@ -40,6 +45,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap map;
     private boolean hasLocationPermission;
     private FusedLocationProviderClient fusedLocationClient;
+    private Map<String, Marker> markerMap;
+    private BitmapDescriptor markerIconNormal;
+    private BitmapDescriptor markerIconUrgent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         initView();
     }
 
+    /**
+     * Initialize for Demo purposes some Data to display
+     */
     private void initializeData() {
         orders = new ArrayList<>();
         orders.add(new OrderDTO());
@@ -62,35 +73,39 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        markerMap = new HashMap<>();
+
+        markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+        markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
     }
 
+    /**
+     * Request the last known location and zoom the map to that point.
+     */
     private void requestCurrentLocation() {
         fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        Log.d(LOG_TAG, "Last known location: " + location);
-                        if (location == null || map == null) {
-                            return;
-                        }
-
-                        LatLng llPos = new LatLng(location.getLatitude(), location.getLongitude());
-                        float zoom = 14f;
-                        if (location.getAccuracy() > 10000) {
-                            zoom = 5f;
-                        } else if (location.getAccuracy() > 1000) {
-                            zoom = 10f;
-                        }
-
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(llPos, zoom));
+                .addOnSuccessListener(location -> {
+                    Log.d(LOG_TAG, "Last known location: " + location);
+                    if (location == null || map == null) {
+                        return;
                     }
+
+                    LatLng llPos = new LatLng(location.getLatitude(), location.getLongitude());
+                    float zoom = 14f;
+                    if (location.getAccuracy() > 10000) {
+                        zoom = 5f;
+                    } else if (location.getAccuracy() > 1000) {
+                        zoom = 10f;
+                    }
+
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(llPos, zoom));
                 });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
+        //Checks if the App has the needed permission to check the location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             hasLocationPermission = true;
@@ -116,6 +131,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    /**
+     * Once the map is ready, it will jump to the current location.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
@@ -123,12 +141,55 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
+        updateMarkers();
     }
 
+    /**
+     * Displays the Recycler View with the Orders in it.
+     */
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderAdapter = new OrderAdapter(this, (ArrayList<OrderDTO>) orders);
         recyclerView.setAdapter(orderAdapter);
+    }
+
+    /**
+     * Updates all markers on the map. Call this method when the orders have changed.
+     */
+    private void updateMarkers() {
+        if (map == null) {
+            return;
+        }
+
+        Set<String> oldOrderIds = new HashSet<>(markerMap.keySet());
+        for (OrderDTO order : orders) {
+            Marker marker = markerMap.get(order.getId());
+            if (marker == null) {
+                // Add new marker
+                marker = map.addMarker(new MarkerOptions()
+                        .flat(true)
+                        .draggable(false)
+                        .icon(markerIconNormal)
+                        .position(new LatLng(order.getLatitude(), order.getLongitude()))
+                );
+                marker.setTag(order.getId());
+                markerMap.put(order.getId(), marker);
+            } else {
+                // Update existing marker
+                marker.setPosition(new LatLng(order.getLatitude(), order.getLongitude()));
+            }
+
+            // Order is not old, no need to remove marker
+            oldOrderIds.remove(order.getId());
+        }
+
+        // Remove old markers
+        for (String id : oldOrderIds) {
+            Marker marker = markerMap.remove(id);
+            if (marker != null) {
+                marker.remove();
+            }
+        }
     }
 }

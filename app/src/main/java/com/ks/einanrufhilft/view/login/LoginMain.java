@@ -31,6 +31,7 @@ public class LoginMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
 
+        //sets the Custom Pager Adapter to display the different slides in the application
         ViewPager viewPager1 = findViewById(R.id.viewpager);
         viewPager1.setAdapter(new CustomPagerAdapter(this));
 
@@ -40,7 +41,7 @@ public class LoginMain extends AppCompatActivity {
 
 
         /* TODO uncomment if deploy
-        if(isLoggedIn()){
+        if(isLoggedIn()){ //Makes sure, that you just have to login Once
             onLoginSuccess();
         }
         */
@@ -93,7 +94,10 @@ public class LoginMain extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Checks if the Phone Number is actually valid.
+     * @return True if phone number is legit.
+     */
     public boolean validate() {
         boolean valid = true;
 
@@ -109,6 +113,10 @@ public class LoginMain extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Handles what should happen when the Login is successfully.
+     * In this case it will save the status of being loggedIn in the Shared Preferences and start the Home Activity.
+     */
     private void onLoginSuccess() {
             SharedPreferences userData = getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0);
             Editor editor = userData.edit();
@@ -117,10 +125,18 @@ public class LoginMain extends AppCompatActivity {
             this.startActivity(new Intent(this, Home.class));
     }
 
+    /**
+     * Handles the case when the Login didn't work.
+     * Right now we show a small Toast which will show that the Login wasn't successfully.
+     */
     private void onLoginFailed() {
         Toast.makeText(this, "Anmelden fehlgeschlagen", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * To check whether the user is already loggedIn or needs to be loggedIn
+     * @return true if the user is already logged in.
+     */
     private boolean isLoggedIn(){
         return getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0).getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGEDIN, false);
     }
