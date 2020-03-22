@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,6 +46,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private List<Order> orderList;
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
+    private TextView footerTextView;
 
     private GoogleMap map;
     private boolean hasLocationPermission;
@@ -56,6 +59,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        footerTextView = findViewById(R.id.bottom_links);
+        footerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Alert
+            }
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
