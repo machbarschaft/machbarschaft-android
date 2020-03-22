@@ -8,6 +8,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,14 +35,9 @@ public class LoginMain extends AppCompatActivity {
         setContentView(R.layout.activity_login_main);
 
         //sets the Custom Pager Adapter to display the different slides in the application
-<<<<<<< HEAD
-        ViewPager viewPager1 = findViewById(R.id.viewpager);
-        viewPager1.setAdapter(new CustomPagerAdapter(this));
-        context = this;
-=======
+
         ViewPager introSlidesPager = findViewById(R.id.viewpager);
         introSlidesPager.setAdapter(new CustomPagerAdapter(this));
->>>>>>> master
 
         phoneNumber = findViewById(R.id.input_phonenumber);
         loginButton = findViewById(R.id.btn_login);
@@ -57,17 +53,12 @@ public class LoginMain extends AppCompatActivity {
         loginButton.setEnabled(true);
         loginButton.setOnClickListener(v -> login());
 
-<<<<<<< HEAD
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, RegisterActivity.class);
                 startActivity(i);
             }
-=======
-        registerButton.setOnClickListener(v -> {
-            //TODO Register
->>>>>>> master
         });
     }
 
