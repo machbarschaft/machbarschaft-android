@@ -3,6 +3,7 @@ package com.ks.einanrufhilft.view.home;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -51,6 +52,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private Map<String, Marker> markerMap;
     private BitmapDescriptor markerIconNormal;
     private BitmapDescriptor markerIconUrgent;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +81,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
         System.out.println("orders: " + this.orderList.size());
 
-//        orders = new ArrayList<>();
-//        orders.add(new OrderDTO());
-//        orders.add(new OrderDTO());
-//        orders.add(new OrderDTO());
-
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         markerMap = new HashMap<>();
@@ -98,6 +95,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private void requestCurrentLocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
+                    this.location = location;
+
                     Log.d(LOG_TAG, "Last known location: " + location);
                     if (location == null || map == null) {
                         return;
@@ -163,8 +162,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        orderAdapter = new OrderAdapter(this, (ArrayList<Order>) orderList);
-        recyclerView.setAdapter(orderAdapter);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(location -> {
+                    this.location = location;
+                    orderAdapter = new OrderAdapter(this, (ArrayList<Order>) this.orderList, this.location);
+                    recyclerView.setAdapter(orderAdapter);
+                });
     }
 
     /**
