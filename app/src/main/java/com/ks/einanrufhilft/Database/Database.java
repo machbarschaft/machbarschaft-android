@@ -73,11 +73,11 @@ public class Database {
     }
 
 
-    public void login(String phone_numer) {
+    public void login(String phone_number) {
         Log.i("TestLogin", "***************************:");
 
         db.collection("Account")
-                .whereEqualTo("phone_number", phone_numer)
+                .whereEqualTo("phone_number", phone_number)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -126,9 +126,11 @@ public class Database {
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
+                                String strLat = (String) document.get("lat");
+                                String strLng = (String) document.get("lng");
+                                if (strLat != null && strLng != null) {
+                                    o.setLat(Double.parseDouble(strLat));
+                                    o.setLng(Double.parseDouble(strLng));
                                 }
 
                                 orders.add(o);
