@@ -2,6 +2,9 @@ package com.ks.einanrufhilft.view.login;
 
 import com.ks.einanrufhilft.R;
 
+/**
+ * Model Object for the Slideshow during the Login/Register Process to inform new Users about the intention of the app.
+ */
 public enum ModelObject {
 
     intro1(R.string.app_name, R.layout.intro1),

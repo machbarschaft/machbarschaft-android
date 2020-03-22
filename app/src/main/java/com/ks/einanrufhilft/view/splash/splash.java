@@ -9,6 +9,10 @@ import android.os.Handler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
+
+/**
+ *  Splashscreen which will be displayed shortly when the App is started.
+ */
 public class splash extends AppCompatActivity {
 
     private Handler myHandler = new Handler();
