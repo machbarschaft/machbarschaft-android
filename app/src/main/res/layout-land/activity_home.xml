@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.home.Home">
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -44,6 +43,7 @@
 
     <Button
         android:id="@+id/homeLandBtnFAQ"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,6 +56,7 @@
 
     <Button
         android:id="@+id/homeLandBtnContact"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -69,6 +70,7 @@
 
     <Button
         android:id="@+id/homeLandBtnBugReport"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
