@@ -58,13 +58,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initializeData();
-        initView();
-        startOrder();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
-
+        initializeData();
+        initView();
+        startOrder();
+        updateMarkers();
 
     }
 
