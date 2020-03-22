@@ -121,6 +121,7 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
+                                o.setStatus((String) document.get("status"));
                                 Log.i("Order street:", "" + (String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
