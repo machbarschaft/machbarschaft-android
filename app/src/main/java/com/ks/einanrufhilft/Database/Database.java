@@ -19,6 +19,7 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
@@ -127,8 +128,8 @@ public class Database {
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
+                                    o.setLat(Double.parseDouble((String) Objects.requireNonNull(document.get("lat"))));
+                                    o.setLng(Double.parseDouble((String) Objects.requireNonNull(document.get("lat"))));
                                 }
 
                                 orders.add(o);
@@ -136,12 +137,8 @@ public class Database {
 
                                 geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
-                                if (document.get("first_name") == null) {
-                                    Log.i("myOrder", "NULL");
-                                } else {
-                                    Log.i("myOrder", (String) document.get("first_name"));
-                                }
                             }
+                            Log.i("TES read:", "TEST");
 
 
                             Database db = Database.getInstance();
@@ -177,8 +174,8 @@ public class Database {
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lng"));
+                                    o.setLat(Double.parseDouble((String) Objects.requireNonNull(document.get("lat"))));
+                                    o.setLng(Double.parseDouble((String) Objects.requireNonNull(document.get("lat"))));
                                 }
                                 conf.setCurrentOrder(o);
                             }
