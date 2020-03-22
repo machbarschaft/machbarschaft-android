@@ -37,7 +37,7 @@
         <activity android:name=".MainActivity" />
 
         <service
-            android:name=".fcm.MessagingService"
+            android:name="MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -56,7 +56,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        android:value="@string/google_maps_key" />
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
         <meta-data
