@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderDTO;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
@@ -41,6 +42,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
 
     private List<OrderDTO> orders;
+    private List<Order> orderList;
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
 
@@ -61,18 +63,29 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
         initializeData();
+        initData();
         initView();
         startOrder();
     }
 
+    @Override
+    protected void onDestroy () {
+        super.onDestroy();
+        stopOrder();
+    }
     /**
      * Initialize for Demo purposes some Data to display
      */
     private void initializeData() {
-        orders = new ArrayList<>();
-        orders.add(new OrderDTO());
-        orders.add(new OrderDTO());
-        orders.add(new OrderDTO());
+        orderList = new ArrayList<>();
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -80,6 +93,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
         markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
         markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+    }
+
+    private void initData(){
+        orders  = new ArrayList<>();
+        orders.add(new OrderDTO());
+        orders.add(new OrderDTO());
+        orders.add(new OrderDTO());
+        orders.add(new OrderDTO());
     }
 
     /**
@@ -153,7 +174,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        orderAdapter = new OrderAdapter(this, (ArrayList<OrderDTO>) orders);
+        orderAdapter = new OrderAdapter(this, (ArrayList<Order>) orderList);
         recyclerView.setAdapter(orderAdapter);
     }
 
@@ -196,9 +217,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-    private void startOrder(){
+    private void startOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         //todo SharedPrefs
         ContextCompat.startForegroundService(this, serviceIntent);
-        }
+    }
+    private void stopOrder(){
+        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        stopService(serviceIntent);
+    }
 }
+
