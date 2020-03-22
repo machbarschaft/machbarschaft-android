@@ -114,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(true) {
+                if(trusted) {
                     if(agbAcepted) {
                         String code = getCode();
                         sendSMS(tfPhone.getText().toString(), code);
