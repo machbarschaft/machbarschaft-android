@@ -28,6 +28,12 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
     public static final String EXTRA_ORDER_ID = "orderId";
 
     private Order mOrder;
+    private GoogleMap map;
+
+    private TextView mNameView;
+    private TextView mNeedsView;
+    private TextView mUrgencyView;
+    private TextView mAddressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,23 +58,30 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         Button btnAccept = findViewById(R.id.btn_accept_order);
         btnAccept.setOnClickListener(v -> acceptOrder());
 
-        TextView nameView = findViewById(R.id.order_detail_name);
-        TextView needsView = findViewById(R.id.order_detail_needs);
-        TextView urgencyView = findViewById(R.id.order_detail_urgency);
-        TextView addressView = findViewById(R.id.order_detail_address);
+        mNameView = findViewById(R.id.order_detail_name);
+        mNeedsView = findViewById(R.id.order_detail_needs);
+        mUrgencyView = findViewById(R.id.order_detail_urgency);
+        mAddressView = findViewById(R.id.order_detail_address);
+    }
 
-        if (mOrder != null) {
-            nameView.setText(mOrder.getName());
-            needsView.setText(mOrder.getPrescription());
-            urgencyView.setText(mOrder.getUrgency());
-            StringBuilder address = new StringBuilder();
-            address.append(mOrder.getStreet());
-            address.append(" ");
-            address.append(mOrder.getHouse_number());
-            address.append(", ");
-            address.append(mOrder.getZip());
-            addressView.setText(address);
+    /**
+     * Applies the order details to the views.
+     */
+    private void applyOrderToViews() {
+        if (mOrder == null) {
+            return;
         }
+
+        mNameView.setText(mOrder.getName());
+        mNeedsView.setText(mOrder.getPrescription());
+        mUrgencyView.setText(mOrder.getUrgency());
+        StringBuilder address = new StringBuilder();
+        address.append(mOrder.getStreet());
+        address.append(" ");
+        address.append(mOrder.getHouse_number());
+        address.append(", ");
+        address.append(mOrder.getZip());
+        mAddressView.setText(address);
     }
 
     private void acceptOrder() {
@@ -96,22 +109,41 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             final String orderId = intent.getStringExtra(EXTRA_ORDER_ID);
 
             Database database = Database.getInstance();
-            mOrder = database.getOrder(orderId);
+            database.getOrder(orderId, order -> {
+                mOrder = order;
+                applyOrderToViews();
+                if (map != null) {
+                    updateMapWithOrder();
+                }
+            });
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if (mOrder != null) {
-            LatLng orderLocation = new LatLng(mOrder.getLat(), mOrder.getLng());
-            // Add marker
-            googleMap.addMarker(new MarkerOptions()
-                    .flat(true)
-                    .draggable(false)
-                    .position(orderLocation));
+        map = googleMap;
 
-            // Zoom map
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orderLocation, 5f));
+        if (mOrder != null) {
+            updateMapWithOrder();
         }
+    }
+
+    /**
+     * Updates the map with the order details.
+     */
+    private void updateMapWithOrder() {
+        if (map == null || mOrder == null) {
+            return;
+        }
+
+        LatLng orderLocation = new LatLng(mOrder.getLat(), mOrder.getLng());
+        // Add marker
+        map.addMarker(new MarkerOptions()
+                .flat(true)
+                .draggable(false)
+                .position(orderLocation));
+
+        // Zoom map
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(orderLocation, 5f));
     }
 }

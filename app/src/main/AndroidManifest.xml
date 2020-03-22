@@ -34,7 +34,7 @@
         <activity android:name=".view.register.VerifyPhoneActivity" />
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />
-        <activity android:name=".view.splash.splash">
+        <activity android:name=".view.splash.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
