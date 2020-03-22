@@ -2,12 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:layout_gravity="center_horizontal">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_trending_flat_black_24dp"
+            android:layout_gravity="center"/>
             <TextView
             android:id="@+id/intro1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Intro Text 1"
-            android:textSize="16dip" />
+            android:text="Melde dich als Helfer an"
+            android:textSize="32dip" />
 </LinearLayout>
