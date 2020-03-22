@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -22,6 +21,7 @@ import com.ks.einanrufhilft.view.home.Home;
 public class OrderInProgressNotification extends Service {
 
     private static final String CHANNEL_ID = "NotificationChannel";
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -45,12 +45,12 @@ public class OrderInProgressNotification extends Service {
         OrderDTO orderDTO = new Gson().fromJson(sharedPreferences.getString("orderDetails", null), OrderDTO.class);
         createNotificationChannel();
         Intent notifIntent = new Intent(this, Home.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,  0 , notifIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Machbarschaft")
+                .setContentTitle(getString(R.string.app_name))
                 .setContentText("Du erledigst gerade Auftrag: Für Frau Schneider")
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .setSmallIcon(R.drawable.ic_machbarschaft_clear_white)
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(1, notification);
