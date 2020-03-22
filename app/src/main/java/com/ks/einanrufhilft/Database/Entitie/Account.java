@@ -1,6 +1,7 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
 public class Account {
+    private String id;
     private String first_name;
     private String last_name;
     private String phone_number;
@@ -15,6 +16,7 @@ public class Account {
         this.credits = credits;
         this.phone_number = phone_number;
     }
+
 
     public String getFirst_name() {
         return first_name;
@@ -55,4 +57,8 @@ public class Account {
     public void setCredits(int credits) {
         this.credits = credits;
     }
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 }

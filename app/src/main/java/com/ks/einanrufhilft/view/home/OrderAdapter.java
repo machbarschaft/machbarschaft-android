@@ -1,6 +1,7 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 
@@ -61,12 +66,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      * Sets the Order specific Text to each item and adds an On Click Listener
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        private View view;
         private TextView urgency, prescription, carNecessary, distance;
 
         OrderHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            view = itemView;
+            view.setOnClickListener(this);
             urgency = itemView.findViewById(R.id.textViewUrgency);
             prescription = itemView.findViewById(R.id.textViewPrescription);
             carNecessary = itemView.findViewById(R.id.textViewCarNecessary);
@@ -84,12 +90,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                     .append(Math.round(distance)).append(" km");
 
 
+            this.view.setTag(order.getId());
             this.urgency.setText(urgencyText.toString());
             this.prescription.setText(prescriptionText.toString());
             this.carNecessary.setText(carNecessaryText.toString());
             this.distance.setText(distanceText.toString());
         }
-
 
         @Override
         public void onClick(View v) {
@@ -98,9 +104,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             Context context = v.getContext();
             //Intent intent = new Intent(context, JobActivty.class);
             //v.getContext().startActivity(intent);
+            String orderId = (String) v.getTag();
+            context.startActivity(new Intent(context, OrderDetailActivity.class)
+                    .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
         }
     }
-
-
-
 }
