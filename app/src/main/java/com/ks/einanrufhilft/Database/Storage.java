@@ -30,7 +30,7 @@ public class Storage {
         return userID;
     }
 
-    public void setUserID() {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
