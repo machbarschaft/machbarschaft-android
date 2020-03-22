@@ -9,14 +9,14 @@ public class OrderHandler {
 
     private static OrderHandler orderHandler;
     private GeoDataPerson lieferant;
-    private ArrayList<GeoDataPerson> persons;
+    //private ArrayList<GeoDataPerson> persons;
     private ArrayList<Order> orders;
 
 
     private double closeDistanceSetting; // radius in dem Personen angezeigt werden sollen
 
     private OrderHandler() {
-        this.persons = new ArrayList<>();
+        this.orders = new ArrayList<>();
     }
 
     public static OrderHandler getInstance() {
@@ -30,6 +30,7 @@ public class OrderHandler {
         this.orders.add(order);
     }
 
+    /*
     public void add(Type type, double lat, double lng) {
         if(type == Type.Besteller) {
             this.persons.add(new GeoDataPerson(type, lat, lng));
@@ -37,6 +38,10 @@ public class OrderHandler {
             this.lieferant = new GeoDataPerson(type, lat, lng);
         }
     }
+
+     */
+
+
 
     public ArrayList<Order> getPersonInDistance() {
         return getPersonInDistance(this.closeDistanceSetting);
@@ -84,6 +89,7 @@ public class OrderHandler {
         Besteller
     }
 
+    // wird aktuell nur noch für den app nutzer verwendet:
     public class GeoDataPerson {
         GeoDataPerson(Type type, double lat, double lng) {
             this.type = type;
@@ -127,4 +133,11 @@ public class OrderHandler {
         this.closeDistanceSetting = closeDistanceSetting;
     }
 
+    public GeoDataPerson getLieferant() {
+        return lieferant;
+    }
+
+    public void setLieferant(Type type, double lat, double lng) {
+        this.lieferant = new GeoDataPerson(type,lat, lng);
+    }
 }
