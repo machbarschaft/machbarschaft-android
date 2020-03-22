@@ -2,19 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ks.einanrufhilft">
 
-    <!-- Internet Permission -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.register.RegisterActivity"></activity>
-        <activity android:name=".view.register.VerifyPhoneActivity"></activity>
-
+        <activity android:name=".view.order.OrderDoneActivity"></activity>
+        <activity android:name=".view.order.OrderEnRouteActivity" />
+        <activity android:name=".view.order.OrderCarryOutActivity" />
+        <activity android:name=".view.order.OrderAcceptActivity" />
+        <activity android:name=".view.register.RegisterActivity" />
+        <activity android:name=".view.register.VerifyPhoneActivity" />
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />
         <activity android:name=".view.splash.splash">
@@ -36,15 +26,12 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <service
-            android:name=".fcm.MessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".services.OrderInProgressNotification" />
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
             (See the file "res/values/google_maps_api.xml").
@@ -54,19 +41,24 @@
             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-            android:value="@string/google_maps_key" />
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_launcher_foreground" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. -->
-        <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+            android:resource="@color/colorAccent" /> <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+        <service
+            android:name=".fcm.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message.
+        -->
+        <service android:name=".services.OrderInProgressNotification" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

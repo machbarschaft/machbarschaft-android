@@ -2,8 +2,10 @@
 <resources>
     <color name="colorPrimary">#DA6077</color>
     <color name="colorPrimaryDark">#D81B60</color>
-    <color name="colorAccent">#00574B</color>
+    <color name="colorAccent">#004eff</color>
 
     <color name="selectorDotActive">@color/colorAccent</color>
     <color name="selectorDotInactive">#AAAAAAAA</color>
+
+    <color name="order_done_background">#279f14</color>
 </resources>
