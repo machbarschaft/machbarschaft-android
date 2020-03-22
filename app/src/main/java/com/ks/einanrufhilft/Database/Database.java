@@ -87,12 +87,12 @@ public class Database {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // user_id setzen
-                                conf.setUserId((String) document.getId());
-                                Log.i("TestLogin", "Userid: " + conf.getUserId() + "username: " + document.get("first_name"));
+                                conf.setUserID((String) document.getId());
+                                Log.i("TestLogin", "Userid: " + conf.getUserID() + "username: " + document.get("first_name"));
 
                             }
-                            if (conf.getUserId() != null) {
-                                getMyOrder(conf.getUserId());
+                            if (conf.getUserID() != null) {
+                                getMyOrder(conf.getUserID());
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -180,7 +180,7 @@ public class Database {
                                     o.setLat((Double) document.get("lat"));
                                     o.setLng((Double) document.get("lng"));
                                 }
-                                conf.setCurrentOrder(o);
+                                conf.setCurrentOrderId(o);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -217,7 +217,7 @@ public class Database {
             //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
-            orderAccount.setAccount_id(Storage.getInstance().getUserId());
+            orderAccount.setAccount_id(Storage.getInstance().getUserID());
             orderAccount.setOrder_id(orderId);
             db.collection("Order_Account")
                     .add(orderAccount)
@@ -225,7 +225,7 @@ public class Database {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             // Order in der app speichern
-                            getMyOrder(Storage.getInstance().getUserId());
+                            getMyOrder(Storage.getInstance().getUserID());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -235,7 +235,7 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrder().getId());
+            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrderId().getId());
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
