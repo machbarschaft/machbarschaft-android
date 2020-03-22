@@ -14,10 +14,7 @@ public class Storage {
     private String userID;
     private Order currentOrderId;
 
-    private Storage() {
-
-
-    }
+    private Storage() {}
 
     public static Storage getInstance() {
         if (storage == null) {

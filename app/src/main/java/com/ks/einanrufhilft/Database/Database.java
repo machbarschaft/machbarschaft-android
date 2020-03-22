@@ -89,6 +89,7 @@ public class Database {
                                 // user_id setzen
                                 conf.setUserID((String) document.getId());
                                 Log.i("TestLogin", "Userid: " + conf.getUserID() + "username: " + document.get("first_name"));
+                                Log.i("TESREIHNFOLGE", "" + conf.getUserID());
 
                             }
                             if (conf.getUserID() != null) {
@@ -102,7 +103,6 @@ public class Database {
     }
 
     public void getOrders() {
-        Log.i("TestGetOrders", "***************************:");
 
         db.collection("Order")
                 .get()
@@ -131,7 +131,7 @@ public class Database {
 
                                     if (document.get("lat") != null && document.get("lng") != null) {
                                         o.setLat((Double) document.get("lat"));
-                                        o.setLng((Double) document.get("lat"));
+                                        o.setLng((Double) document.get("lng"));
                                 }
 
                                 orders.add(o);
@@ -173,10 +173,12 @@ public class Database {
                                 o.setPrescription((String) document.get("prescription"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat(Double.valueOf((String) document.get("lat")));
-                                    o.setLng(Double.valueOf((String) document.get("lat")));
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double)document.get("lat"));
                                 }
                                 conf.setCurrentOrder(o);
+                                Log.i("TIME", "1" + o.toString());
+
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -189,7 +191,7 @@ public class Database {
 
     // wenn nutzer einen auftrag auswählt ist status = Confirmed
     // wenn nutzer einen Auftrag abgeschlossen hat, ist der status = Closed
-    public void setOrderStatus(String orderId, Status status) {
+    public void setOrderStatus(String orderId, Status status) throws InterruptedException {
         if (status == Status.Confirmed) {
 
             //Status in Order anpassen:
@@ -200,7 +202,7 @@ public class Database {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Log.d("oderstatus", "Erf!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -213,6 +215,10 @@ public class Database {
             //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
+            if(Storage.getInstance().getUserID() != null){
+                Log.i("orderstatus", Storage.getInstance().getUserID());
+            }
+
             orderAccount.setAccount_id(Storage.getInstance().getUserID());
             orderAccount.setOrder_id(orderId);
             db.collection("Order_Account")
@@ -231,7 +237,28 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrder().getId());
+            Log.i("TIME", "2");
+
+            // Update Order_account
+            DocumentReference currentOrder = db.collection("Order_Account").document(orderId);
+            currentOrder
+                    .update("status", "Closed")
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                        }
+                    });
+
+            // Update Order
+
+            DocumentReference order = db.collection("Order").document(orderId);
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
