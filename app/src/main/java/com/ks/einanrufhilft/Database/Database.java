@@ -114,31 +114,32 @@ public class Database {
                             OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                Order o = new Order();
-                                o.setId(document.getId());
-                                o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setPhone_number((String) document.get("phone_number"));
-                                o.setZip((String) document.get("zip"));
-                                o.setStreet((String) document.get("street"));
-                                o.setStatus((String) document.get("status"));
-                                o.setUrgency((String) document.get("urgency"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setName((String) document.get("name"));
-                                o.setPrescription((String) document.get("carNecessary"));
-                                o.setCarNecessary((String) document.get("carNecessary"));
+                                if ( (String) document.get("status") == null &&
+                                        (String) document.get("status") == "open") {
+                                    Order o = new Order();
+                                    o.setId(document.getId());
+                                    o.setCarNecessary((String) document.get("carNecessary"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setPhone_number((String) document.get("phone_number"));
+                                    o.setZip((String) document.get("zip"));
+                                    o.setStreet((String) document.get("street"));
+                                    o.setStatus((String) document.get("status"));
+                                    o.setUrgency((String) document.get("urgency"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setName((String) document.get("name"));
+                                    o.setPrescription((String) document.get("prescription"));
+                                    o.setCarNecessary((String) document.get("carNecessary"));
 
                                     if (document.get("lat") != null && document.get("lng") != null) {
                                         o.setLat((Double) document.get("lat"));
                                         o.setLng((Double) document.get("lng"));
+                                    }
+
+                                    orders.add(o);
+                                    Log.i("Order read:", o.toString());
+
+                                    geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
                                 }
-
-                                orders.add(o);
-                                Log.i("Order read:", o.toString());
-
-                                geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
-
                             }
                             Database db = Database.getInstance();
                             db.allOrders = orders;
@@ -174,7 +175,7 @@ public class Database {
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
                                     o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double)document.get("lat"));
+                                    o.setLng((Double) document.get("lat"));
                                 }
                                 conf.setCurrentOrder(o);
                                 Log.i("TIME", "1" + o.toString());
@@ -215,7 +216,7 @@ public class Database {
             //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
-            if(Storage.getInstance().getUserID() != null){
+            if (Storage.getInstance().getUserID() != null) {
                 Log.i("orderstatus", Storage.getInstance().getUserID());
             }
 
@@ -259,12 +260,12 @@ public class Database {
             // Update Order
 
             DocumentReference order = db.collection("Order").document(orderId);
-            currentOrder
+            order
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Log.d("oderstatus", "Erf!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
