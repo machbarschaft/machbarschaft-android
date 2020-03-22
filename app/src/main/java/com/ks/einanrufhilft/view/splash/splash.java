@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.ks.einanrufhilft.Database.Database;
+import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
@@ -54,6 +55,7 @@ public class splash extends AppCompatActivity {
         //db.setOrderStatus("mofVj419q6fAxj4hLYeW", Database.Status.Confirmed);
 
 */
+        Database.getInstance().getOrder("4HjAuNrmEccaterBBWTO");
         /* TESTS */
     }
 

@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -73,8 +74,6 @@ public class Database {
 
 
     public void login(String phone_number) {
-        Log.i("TestLogin", "***************************:");
-
         db.collection("Account")
                 .whereEqualTo("phone_number", phone_number)
                 .get()
@@ -87,8 +86,6 @@ public class Database {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // user_id setzen
                                 conf.setUserID((String) document.getId());
-                                Log.i("TestLogin", "Userid: " + conf.getUserID() + "username: " + document.get("first_name"));
-
                             }
                             if (conf.getUserID() != null) {
                                 getMyOrder(conf.getUserID());
@@ -101,8 +98,6 @@ public class Database {
     }
 
     public void getOrders() {
-        Log.i("TestGetOrders", "***************************:");
-
         db.collection("Order")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -156,7 +151,7 @@ public class Database {
     }
 
     // zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
-    public Order getMyOrder(String user_id) {
+    public void getMyOrder(String user_id) {
         db.collection("Order_Account")
                 .whereEqualTo("fk_account", user_id)
                 .get()
@@ -172,8 +167,8 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
-                                Log.i("Order street:", "" + (String) document.get("street"));
-                                o.setHouse_number((String) document.get("house_number"));
+                                o.setStatus((String) document.get("status"));
+                                o.setUrgency((String) document.get("urgency"));                                o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("prescription"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
@@ -182,8 +177,6 @@ public class Database {
                                     o.setLng((Double) document.get("lat"));
                                 }
                                 conf.setCurrentOrder(o);
-                                Log.i("TIME", "1" + o.toString());
-
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -191,7 +184,6 @@ public class Database {
                     }
                 });
 
-        return null;
     }
 
     // wenn nutzer einen auftrag auswählt ist status = Confirmed
@@ -242,7 +234,6 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            Log.i("TIME", "2");
 
             // Update Order_account
             DocumentReference currentOrder = db.collection("Order_Account").document(orderId);
@@ -283,7 +274,40 @@ public class Database {
     }
 
     public Order getOrder(String orderId) {
-        // TODO load order with id
+        DocumentReference order = db.collection("Order").document(orderId);
+        order.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        Order o = new Order();
+                        o.setId(document.getId());
+                        o.setCarNecessary((String) document.get("carNecessary"));
+                        o.setHouse_number((String) document.get("house_number"));
+                        o.setZip((String) document.get("zip"));
+                        o.setStreet((String) document.get("street"));
+                        o.setHouse_number((String) document.get("house_number"));
+                        o.setName((String) document.get("name"));
+                        o.setPrescription((String) document.get("prescription"));
+                        o.setCarNecessary((String) document.get("carNecessary"));
+                        o.setStatus((String) document.get("status"));
+                        o.setUrgency((String) document.get("urgency"));
+                        if (document.get("lat") != null && document.get("lng") != null) {
+                            o.setLat((Double) document.get("lat"));
+                            o.setLng((Double) document.get("lat"));
+                        }
+                        Log.i("THEorder", o.toString());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
         return null;
     }
 }
