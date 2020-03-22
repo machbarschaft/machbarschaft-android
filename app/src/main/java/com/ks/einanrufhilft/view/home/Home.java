@@ -76,13 +76,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
      */
     private void initializeData() {
         orderList = new ArrayList<>();
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
-        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Theodor Storm Straße. 14", "14", "Kilian", "Nudeln, Soße, Parmesan", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "24", "Andrea", "Mehl, Zucker, Milch", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Brunhuberstr.", "12", "Leo", "Gemüse", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Fritz-Fendt-Str.", "2", "Flo", "Apotheke, Rezept", "", ""));
+        orderList.add(new Order("5", "017682920320", "93051", "Albertstrasse", "26", "Daniel", "Milch", "", ""));
 
 
         hasLocationPermission = false;
