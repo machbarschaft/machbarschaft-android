@@ -66,13 +66,13 @@ public class Database {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
     }
@@ -93,7 +93,7 @@ public class Database {
                         Storage conf = Storage.getInstance();
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                // user_id setzen
+                                // set user_id
                                 conf.setUserID((String) document.getId());
                             }
                             if (conf.getUserID() != null) {
@@ -117,8 +117,6 @@ public class Database {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //if ( (String) document.get("status") == null &&
-                                //      (String) document.get("status") == "open") {
                                 Order o = new Order();
                                 o.setId(document.getId());
                                 o.setCarNecessary((String) document.get("carNecessary"));
@@ -152,7 +150,6 @@ public class Database {
 
     }
 
-    // zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
 
     /**
      * Pulls the own Order out of the database and saves it into our Storage-Singelton
@@ -203,7 +200,7 @@ public class Database {
     public void setOrderStatus(String orderId, Status status) throws InterruptedException {
         if (status == Status.Confirmed) {
 
-            //Status in Order anpassen:
+            // set Status in Order
 
             DocumentReference currentOrder = db.collection("Order").document(orderId);
             currentOrder
