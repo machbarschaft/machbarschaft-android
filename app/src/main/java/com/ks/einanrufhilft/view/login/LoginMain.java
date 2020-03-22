@@ -33,7 +33,7 @@ public class LoginMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
-
+        context = getApplicationContext();
         //sets the Custom Pager Adapter to display the different slides in the application
 
         ViewPager introSlidesPager = findViewById(R.id.viewpager);

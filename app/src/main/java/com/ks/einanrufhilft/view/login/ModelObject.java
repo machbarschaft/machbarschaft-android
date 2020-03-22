@@ -9,7 +9,8 @@ public enum ModelObject {
 
     intro1(R.string.app_name, R.layout.intro1),
     intro2(R.string.app_name, R.layout.intro2),
-    intro3(R.string.app_name, R.layout.intro3);
+    intro3(R.string.app_name, R.layout.intro3),
+    intro4(R.string.app_name, R.layout.intro4);
 
     private int mTitlteResId;
     private int mLayoutResId;
