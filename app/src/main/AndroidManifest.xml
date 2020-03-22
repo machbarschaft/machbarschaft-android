@@ -29,8 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.blabla.VerifyPhoneActivity" />
-        <activity android:name=".view.blabla.RegisterActivity" />
         <activity android:name=".MainActivity" />
 
         <service
@@ -40,6 +38,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".services.OrderInProgressNotification" />
 
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
