@@ -42,3 +42,11 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 }
+
+repositories {
+    maven { url 'http://maven.facetec.com' }
+}
+
+dependencies {
+    implementation 'com.passbase:passbase_sdk:1.7.5'
+}
