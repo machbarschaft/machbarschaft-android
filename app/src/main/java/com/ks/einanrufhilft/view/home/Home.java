@@ -105,7 +105,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onStart() {
         super.onStart();
-
+        //Checks if the App has the needed permission to check the location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             hasLocationPermission = true;
@@ -131,6 +131,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    /**
+     * Once the map is ready, it will jump to the current location.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
@@ -141,6 +144,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         updateMarkers();
     }
 
+    /**
+     * Displays the Recycler View with the Orders in it.
+     */
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
