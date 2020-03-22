@@ -1,12 +1,16 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,6 +39,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -57,16 +62,64 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private BitmapDescriptor markerIconNormal;
     private BitmapDescriptor markerIconUrgent;
     private Location location;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        footerTextView = findViewById(R.id.bottom_links);
-        footerTextView.setOnClickListener(new View.OnClickListener() {
+
+        // Get UI elements
+        Button btnFAQ = findViewById(R.id.homeBtnFAQ);
+        Button btnContact = findViewById(R.id.homeBtnContact);
+        Button btnReport = findViewById(R.id.homeBtnBugReport);
+
+        // Button action handlers
+        btnFAQ.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //TODO Alert
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Wir arbeiten an einer Lösung, damit du unsere FAQ's hier bald sehen kannst.");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton(
+                        "Verstanden",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
+                startActivity(browserIntent);
+            }
+        });
+
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Wir arbeiten an einer Lösung. Bis dahin, melde dein Problem doch einfach an unsere sozialen Medien");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton(
+                        "Verstanden",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 

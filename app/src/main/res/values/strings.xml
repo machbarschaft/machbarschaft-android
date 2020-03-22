@@ -26,7 +26,9 @@
     <string name="intro_2">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
     <string name="intro_3">Kläre telefonisch das Anliegen</string>
     <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
-
+    <string name="homeLinkFAQ">FAQ</string>
+    <string name="homeLinkContact">Kontakt</string>
+    <string name="homeLinkBugReport">Problem melden</string>
     <string name="order_detail_title">Der Auftrag</string>
     <string name="order_detail_label_needs">benötigt</string>
     <string name="order_detail_label_urgency">Erledigung</string>
