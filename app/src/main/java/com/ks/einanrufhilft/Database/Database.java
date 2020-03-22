@@ -74,6 +74,8 @@ public class Database {
 
 
     public void login(String phone_numer) {
+        Log.i("TestLogin", "***************************:");
+
         db.collection("Account")
                 .whereEqualTo("phone_number", phone_numer)
                 .get()
@@ -85,8 +87,12 @@ public class Database {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // user_id setzen
-                                conf.setUserId((String) document.get("phone_number"));
-                                //GeoDataHandler.getInstance().add(GeoDataHandler.Type.Lieferant,);
+                                conf.setUserId((String) document.getId());
+                                Log.i("TestLogin", "Userid: " + conf.getUserId() + "username: " + document.get("first_name"));
+
+                            }
+                            if(conf.getUserId() != null){
+                                getMyOrder(conf.getUserId());
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -96,7 +102,7 @@ public class Database {
     }
 
     public void getOrders() {
-        Log.i("**", "***************************:");
+        Log.i("TestGetOrders", "***************************:");
 
         db.collection("Order")
                 .get()
@@ -105,7 +111,7 @@ public class Database {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             ArrayList<Order> orders = new ArrayList<>();
-                            GeoDataHandler geo = GeoDataHandler.getInstance();
+                            OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -115,16 +121,20 @@ public class Database {
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
+                                Log.i("Order street:",  ""+(String) document.get("street"));
                                 o.setHouse_number((String) document.get("house_number"));
                                 o.setName((String) document.get("name"));
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setLat((Double) document.get("lat"));
-                                o.setLng((Double) document.get("lng"));
+                                if(document.get("lat") != null && document.get("lng") != null) {
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lng"));
+                                }
+
                                 orders.add(o);
                                 Log.i("Order read:", o.toString());
 
-                                geo.add(GeoDataHandler.Type.Besteller, o.getLat(), o.getLng());
+                                geo.add(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
 
                                 if (document.get("first_name") == null) {
                                     Log.i("myOrder", "NULL");
@@ -144,13 +154,42 @@ public class Database {
 
     }
 
-
-    public ArrayList<Order> getOrdersNearby(double radius) {
-
+// zieht die eigene Order aus der Datenbank und speichert die in dem Storage Singelton
+    public Order getMyOrder(String user_id) {
+        db.collection("Order_Account")
+                .whereEqualTo("fk_account", user_id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Storage conf = Storage.getInstance();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Order o = new Order();
+                                o.setId(document.getId());
+                                o.setCarNecessary((String) document.get("carNecessary"));
+                                o.setHouse_number((String) document.get("house_number"));
+                                o.setZip((String) document.get("zip"));
+                                o.setStreet((String) document.get("street"));
+                                Log.i("Order street:",  ""+(String) document.get("street"));
+                                o.setHouse_number((String) document.get("house_number"));
+                                o.setName((String) document.get("name"));
+                                o.setPrescription((String) document.get("carNecessary"));
+                                o.setCarNecessary((String) document.get("carNecessary"));
+                                if(document.get("lat") != null && document.get("lng") != null) {
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lng"));
+                                }
+                                conf.setCurrentOrder(o);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         return null;
     }
-
 
     // wenn nutzer einen auftrag auswählt ist status = Confirmed
     // wenn nutzer einen Auftrag abgeschlossen hat, ist der status = Closed
@@ -175,7 +214,7 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Account_Order").document(Storage.getInstance().getCurrentOrderId());
+            DocumentReference currentOrder = db.collection("Account_Order").document(Storage.getInstance().getCurrentOrder().getId());
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
