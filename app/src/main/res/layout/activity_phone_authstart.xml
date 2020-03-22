@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="Wir benötigen ihre Nummer"
+            android:text="@string/auth_we_need_your_phone_number"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary" />
 
@@ -55,7 +55,7 @@
             android:digits="0123456789"
             android:drawableLeft="@drawable/ic_phone_black_24dp"
             android:drawablePadding="10dp"
-            android:hint="Handynummer"
+            android:hint="@string/hint_phone_number"
             android:inputType="phone"
             android:maxLength="10" />
 
@@ -67,7 +67,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Bestätigen"
+            android:text="@string/confirm"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
 

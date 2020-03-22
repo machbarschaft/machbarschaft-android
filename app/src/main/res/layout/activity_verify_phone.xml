@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="Warte auf den Bestätigungscode"
+            android:text="@string/verify_wait_for_code"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary" />
 
@@ -64,7 +64,7 @@
             android:layout_marginTop="10dp"
             android:digits="0123456789"
             android:drawablePadding="10dp"
-            android:hint="Bestätigungscode eingeben"
+            android:hint="@string/verify_code_hint"
             android:inputType="phone"
             android:maxLength="10" />
 
@@ -76,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Einloggen"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
 

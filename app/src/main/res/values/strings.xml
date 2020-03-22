@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">Ein Anruf hilft</string>
-    <string name="ein_anruf_hilft">ein Anruf hilft</string>
-    <string name="title_activity_maps">Map</string>
-
+    <string name="app_name">MACHBARSCHAFT</string>
+    <string name="home_bottom_links">FAQ - Kontakt - Problem melden</string>
+    <string name="login">Einloggen</string>
+    <string name="login_create_account">Noch keinen Account? Erstell einen</string>
+    <string name="auth_we_need_your_phone_number">Wir benötigen ihre Nummer</string>
+    <string name="hint_phone_number">Handynummer</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="verify_wait_for_code">Warte auf den Bestätigungscode</string>
+    <string name="verify_code_hint">Bestätigungscode</string>
+    <string name="accept_order">Annehmen</string>
+    <string name="order_distance">Entfernung: %1$f m</string>
 </resources>
