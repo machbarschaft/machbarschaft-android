@@ -16,6 +16,12 @@
     <string name="intro_3">Kläre telefonisch das Anliegen</string>
     <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
 
+    <string name="order_detail_title">Der Auftrag</string>
+    <string name="order_detail_label_needs">benötigt</string>
+    <string name="order_detail_label_urgency">Erledigung</string>
+    <string name="order_detail_label_address">Adresse</string>
+    <string name="order_detail_accept_order">Auftrag annehmen</string>
+
     <string name="order_accept_title">Schritt #1</string>
     <string name="order_accept_text">Bitte beschprich Dich mit %1$s.</string>
     <string name="call_now">Jetzt anrufen</string>

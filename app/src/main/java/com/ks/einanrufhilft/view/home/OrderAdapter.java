@@ -1,6 +1,7 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 
@@ -52,12 +54,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      * Sets the Order specific Text to each item and adds an On Click Listener
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        private View view;
         private TextView orderType, einkaufsliste, distance;
 
         OrderHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+
+            view = itemView;
+            view.setOnClickListener(this);
             orderType = itemView.findViewById(R.id.textViewTitle);
             einkaufsliste = itemView.findViewById(R.id.textViewShortDesc);
             distance = itemView.findViewById(R.id.textViewDistance);
@@ -65,9 +69,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
         void setDetails(Order order) {
             //orderType.setText(order.getCategory());
+            view.setTag(order.getId());
             orderType.setText("Einkauf");
             einkaufsliste.setText(order.getPrescription());
-            int zufallszahl = (int)(Math.random() * 200) + 1;
+            int zufallszahl = (int) (Math.random() * 200) + 1;
             distance.setText(String.format("%s Meter entfernt..", Integer.toString(zufallszahl)));
         }
 
@@ -79,6 +84,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             Context context = v.getContext();
             //Intent intent = new Intent(context, JobActivty.class);
             //v.getContext().startActivity(intent);
+            String orderId = (String) v.getTag();
+            context.startActivity(new Intent(context, OrderDetailActivity.class)
+                    .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
         }
     }
 

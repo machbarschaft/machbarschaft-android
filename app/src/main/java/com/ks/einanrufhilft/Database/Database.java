@@ -10,7 +10,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -129,9 +128,9 @@ public class Database {
                                 o.setPrescription((String) document.get("carNecessary"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
 
-                                    if (document.get("lat") != null && document.get("lng") != null) {
-                                        o.setLat((Double) document.get("lat"));
-                                        o.setLng((Double) document.get("lng"));
+                                if (document.get("lat") != null && document.get("lng") != null) {
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lng"));
                                 }
 
                                 orders.add(o);
@@ -174,7 +173,7 @@ public class Database {
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
                                     o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double)document.get("lat"));
+                                    o.setLng((Double) document.get("lat"));
                                 }
                                 conf.setCurrentOrder(o);
                                 Log.i("TIME", "1" + o.toString());
@@ -215,7 +214,7 @@ public class Database {
             //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
-            if(Storage.getInstance().getUserID() != null){
+            if (Storage.getInstance().getUserID() != null) {
                 Log.i("orderstatus", Storage.getInstance().getUserID());
             }
 
@@ -275,5 +274,10 @@ public class Database {
                     });
         }
 
+    }
+
+    public Order getOrder(String orderId) {
+        // TODO load order with id
+        return null;
     }
 }
