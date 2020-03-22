@@ -2,15 +2,12 @@ package com.ks.einanrufhilft.Database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -19,6 +16,8 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
 
 import static android.content.ContentValues.TAG;
 
@@ -114,34 +113,40 @@ public class Database {
                             OrderHandler geo = OrderHandler.getInstance();
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                Order o = new Order();
-                                o.setId(document.getId());
-                                o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setPhone_number((String) document.get("phone_number"));
-                                o.setZip((String) document.get("zip"));
-                                o.setStreet((String) document.get("street"));
-                                o.setStatus((String) document.get("status"));
-                                o.setUrgency((String) document.get("urgency"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setName((String) document.get("name"));
-                                o.setPrescription((String) document.get("carNecessary"));
-                                o.setCarNecessary((String) document.get("carNecessary"));
+                                //if ( (String) document.get("status") == null &&
+                                  //      (String) document.get("status") == "open") {
+                                    Order o = new Order();
+                                    o.setId(document.getId());
+                                    o.setCarNecessary((String) document.get("carNecessary"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setPhone_number((String) document.get("phone_number"));
+                                    o.setZip((String) document.get("zip"));
+                                    o.setStreet((String) document.get("street"));
+                                    o.setStatus((String) document.get("status"));
+                                    o.setUrgency((String) document.get("urgency"));
+                                    o.setHouse_number((String) document.get("house_number"));
+                                    o.setName((String) document.get("name"));
+                                    o.setPrescription((String) document.get("prescription"));
+                                    o.setCarNecessary((String) document.get("carNecessary"));
 
                                     if (document.get("lat") != null && document.get("lng") != null) {
                                         o.setLat((Double) document.get("lat"));
-                                        o.setLng((Double) document.get("lat"));
-                                }
+                                        o.setLng((Double) document.get("lng"));
+                                    }
 
-                                orders.add(o);
-                                Log.i("Order read:", o.toString());
+                                    orders.add(o);
+                                    Log.i("Order read:", o.toString());
 
-                                geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
-
+                                    geo.setLieferant(OrderHandler.Type.Besteller, o.getLat(), o.getLng());
+                             //   }
                             }
                             Database db = Database.getInstance();
                             db.allOrders = orders;
+
+                            // @Benedikt -> prüfe das nochmal
+                            for (Order order : orders) {
+                                OrderHandler.getInstance().addOrder(order);
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -173,10 +178,12 @@ public class Database {
                                 o.setPrescription((String) document.get("prescription"));
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat(Double.valueOf((String) document.get("lat")));
-                                    o.setLng(Double.valueOf((String) document.get("lat")));
+                                    o.setLat((Double) document.get("lat"));
+                                    o.setLng((Double) document.get("lat"));
                                 }
                                 conf.setCurrentOrder(o);
+                                Log.i("TIME", "1" + o.toString());
+
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -189,7 +196,7 @@ public class Database {
 
     // wenn nutzer einen auftrag auswählt ist status = Confirmed
     // wenn nutzer einen Auftrag abgeschlossen hat, ist der status = Closed
-    public void setOrderStatus(String orderId, Status status) {
+    public void setOrderStatus(String orderId, Status status) throws InterruptedException {
         if (status == Status.Confirmed) {
 
             //Status in Order anpassen:
@@ -200,7 +207,7 @@ public class Database {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Log.d("oderstatus", "Erf!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -213,6 +220,10 @@ public class Database {
             //  Eintrag in Account_order hinzufügen
             Order_Account orderAccount = new Order_Account();
             orderAccount.setStatus(status.toString());
+            if (Storage.getInstance().getUserID() != null) {
+                Log.i("orderstatus", Storage.getInstance().getUserID());
+            }
+
             orderAccount.setAccount_id(Storage.getInstance().getUserID());
             orderAccount.setOrder_id(orderId);
             db.collection("Order_Account")
@@ -231,13 +242,34 @@ public class Database {
                         }
                     });
         } else if (status == Status.Closed) {
-            DocumentReference currentOrder = db.collection("Order_Account").document(Storage.getInstance().getCurrentOrder().getId());
+            Log.i("TIME", "2");
+
+            // Update Order_account
+            DocumentReference currentOrder = db.collection("Order_Account").document(orderId);
             currentOrder
                     .update("status", "Closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                        }
+                    });
+
+            // Update Order
+
+            DocumentReference order = db.collection("Order").document(orderId);
+            order
+                    .update("status", "Closed")
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("oderstatus", "Erf!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

@@ -14,14 +14,14 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_map_black_24dp"
+        android:src="@drawable/search_location"
         android:layout_gravity="center"/>
     <TextView
         android:id="@+id/intro1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst"
+        android:text="@string/intro_2"
         android:textSize="32dip" />
 
 </LinearLayout>

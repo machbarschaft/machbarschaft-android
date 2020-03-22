@@ -14,10 +14,7 @@ public class Storage {
     private String userID;
     private Order currentOrderId;
 
-    private Storage() {
-
-
-    }
+    private Storage() {}
 
     public static Storage getInstance() {
         if (storage == null) {
@@ -42,7 +39,7 @@ public class Storage {
         this.currentOrderId = currentOrderId;
     }
 
-    public boolean setOrderInProgress(Context context, String currentOrderID) {
+    public static boolean setOrderInProgress(Context context, String currentOrderID) {
         SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
         Editor editor = pref.edit();
         editor.putString(ApplicationConstants.SHARED_PREF_ORDERINPRGRESS_KEY, currentOrderID);
