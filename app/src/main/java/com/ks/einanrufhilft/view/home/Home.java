@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
@@ -219,7 +220,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
     private void startOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
-        //todo SharedPrefs
+        //todo handle event
+        //Storage.setOrderInProgress(getApplicationContext(), );
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
