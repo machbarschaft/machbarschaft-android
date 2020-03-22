@@ -119,6 +119,7 @@ public class Database {
                                 o.setId(document.getId());
                                 o.setCarNecessary((String) document.get("carNecessary"));
                                 o.setHouse_number((String) document.get("house_number"));
+                                o.setPhone_number((String) document.get("phone_number"));
                                 o.setZip((String) document.get("zip"));
                                 o.setStreet((String) document.get("street"));
                                 o.setStatus((String) document.get("status"));
