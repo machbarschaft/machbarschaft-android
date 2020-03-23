@@ -16,4 +16,4 @@ This repository contains the Android Application which is meant for the helper, 
 3. Du erhälst dann eine SMS von uns. Gebe den Code aus der SMS auf der geöffneten Seite ein.
 4. Fast fertig! Du hast nun einen Account angelegt. Jetzt kannst du dich mit deine Handynummer anmelden.
 5. Suche einfach einen Auftrag. Du rufst bei der hilfesuchenden Person an, klärst alles und machst dich auf den Weg.
-6. Das war's! Gebe deine Lieferung ab. Achte bei allen Schritten auf die Verhaltensregeln, die du [hier](https://github.com/machbarschaft/machbarschaft) findest.
+6. Das war's! Gebe deine Lieferung ab. Achte bei allen Schritten auf die Verhaltensregeln, die du [hier](https://github.com/machbarschaft/machbarschaft/blob/master/Verhaltensempfehlungen_für_MACHBAR_EINKAUF.pdf) findest.
