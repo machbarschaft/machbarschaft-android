@@ -15,5 +15,5 @@ This repository contains the Android Application which is meant for the helper, 
 2. Klicke auf "Registrieren" und gebe deine Daten ein. Verifiziere dich durch den Button über PassBase.
 3. Du erhälst dann eine SMS von uns. Gebe den Code aus der SMS auf der geöffneten Seite ein.
 4. Fast fertig! Du hast nun einen Account angelegt. Jetzt kannst du dich mit deine Handynummer anmelden.
-5. Suche einfach einen Auftrag. Du ruft bei der hilfesuchenden Person an, klärst alles und machst dich auf den Weg.
-6. Das war's! Gebe deine Lieferung ab. Achte bei allen Schritte auf die Verhaltensregeln, die du [hier](https://github.com/machbarschaft/machbarschaft) findest.
+5. Suche einfach einen Auftrag. Du rufst bei der hilfesuchenden Person an, klärst alles und machst dich auf den Weg.
+6. Das war's! Gebe deine Lieferung ab. Achte bei allen Schritten auf die Verhaltensregeln, die du [hier](https://github.com/machbarschaft/machbarschaft) findest.
