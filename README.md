@@ -64,3 +64,16 @@ This repository contains the Android Application which is meant for the helper, 
 #### Steps:
 * Add database connection to fetch real orders
 * Add homescreen footer button interactions
+* Make design consistent 
+* Add Junit Tests 
+* Reduce APK size 
+* Add Crashlytics 
+* Publish in Play Store 
+* Add further functionallic
+* Implement new features from [here](https://github.com/machbarschaft/machbarschaft)
+
+#### get in touch
+Do not hesitate to get in touch with us. Drop us some nice words by <a href="mailto:hallo@machbarschaft.jetzt?subject=hi">mail</a>. 
+
+made with ❤ by us (machbarschaft).
+
