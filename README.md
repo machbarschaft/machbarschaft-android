@@ -29,18 +29,36 @@ This repository contains the Android Application which is meant for the helper, 
 * Trello (Ticket system)
 * Java
 
+
 ### Phase 2: Build
 #### Steps:
 * Implement pages from wireframe
 * Implement button interaction
 * Implement registration and verification via passbase
 * Implement placeholder orders and google maps API
+* Implement Database interactions 
 * Add designs to app
 
 #### Tech:
 * Java
 * Trello 
 * Github
+* Google API
+* Firebase API
+
+### Android Components:
+* Foregroundservice with Notification 
+* Activity
+* Fused Location Provider for Location Tracking
+* Static User Interface 
+* Dynamic User Interface with Viewpager and Recycler View
+* UI Resources: Drawables and Styles 
+* Order User Interface: Dialogs 
+* Storage: Shared Preferences 
+* Build: Gradle
+* 3rd Party Libaries: Rxjava
+* Firebase: FCM, DB
+* Architecture: MVVM 
 
 ### Phase 3: Future
 #### Steps:
