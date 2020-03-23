@@ -34,8 +34,6 @@ public class Splash extends AppCompatActivity {
             }
         }, 1200);
 
-        Database.getInstance().getMyOrder("0JTWfaKt6faqpqWtOHsR");
-
     }
 
     @Override
