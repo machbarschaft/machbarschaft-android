@@ -35,8 +35,14 @@ This repository contains the Android Application which is meant for the helper, 
 * Implement button interaction
 * Implement registration and verification via passbase
 * Implement placeholder orders and google maps API
+* Add designs to app
 
 #### Tech:
 * Java
 * Trello 
 * Github
+
+### Phase 3: Future
+#### Steps:
+* Add database connection to fetch real orders
+* Add homescreen footer button interactions
