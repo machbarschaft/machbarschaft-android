@@ -46,7 +46,7 @@ This repository contains the Android Application which is meant for the helper, 
 * Google API
 * Firebase API
 
-### Android Components:
+#### Android Components:
 * Foregroundservice with Notification 
 * Activity
 * Fused Location Provider for Location Tracking
