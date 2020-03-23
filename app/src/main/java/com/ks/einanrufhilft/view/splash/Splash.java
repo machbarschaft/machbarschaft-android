@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
@@ -32,7 +34,7 @@ public class Splash extends AppCompatActivity {
             }
         }, 1200);
 
-
+        Database.getInstance().getMyOrder("0JTWfaKt6faqpqWtOHsR");
 
     }
 

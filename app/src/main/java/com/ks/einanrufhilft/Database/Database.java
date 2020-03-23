@@ -56,6 +56,7 @@ public class Database {
 
     /**
      * Creating a new Account in the database.
+     *
      * @param a an Account
      */
     public void createAccount(Account a) {
@@ -80,6 +81,7 @@ public class Database {
 
     /**
      * Helper function to log into the Application via Database access
+     *
      * @param phone_number of the person which wants to login
      */
     public void login(String phone_number) {
@@ -156,32 +158,30 @@ public class Database {
      * @param user_id of the person you wanna get the orders
      */
     public void getMyOrder(String user_id) {
+
+        // 1. get order_id form Order_Account
+
         db.collection("Order_Account")
-                .whereEqualTo("fk_account", user_id)
+                .whereEqualTo("account_id", user_id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        Storage conf = Storage.getInstance();
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Order o = new Order();
-                                o.setId(document.getId());
-                                o.setCarNecessary((String) document.get("carNecessary"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setZip((String) document.get("zip"));
-                                o.setStreet((String) document.get("street"));
-                                o.setStatus((String) document.get("status"));
-                                o.setUrgency((String) document.get("urgency"));
-                                o.setHouse_number((String) document.get("house_number"));
-                                o.setName((String) document.get("name"));
-                                o.setPrescription((String) document.get("prescription"));
-                                o.setCarNecessary((String) document.get("carNecessary"));
-                                if (document.get("lat") != null && document.get("lng") != null) {
-                                    o.setLat((Double) document.get("lat"));
-                                    o.setLng((Double) document.get("lat"));
-                                }
-                                conf.setCurrentOrder(o);
+                            String orderId = "";
+                            for (QueryDocumentSnapshot document1 : task.getResult()) {
+                                orderId = (String) document1.get("order_id");
+                            }
+                            if(orderId != null) {
+                                Log.i("TEST", orderId);
+
+
+                                // 2. get Order and store it in Store
+                                getOrder(orderId, order -> {
+                                    Log.i("TEST", "TEE" + order.toString());
+                                    Storage.getInstance().setCurrentOrder(order);
+
+                                });
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -193,8 +193,9 @@ public class Database {
 
     /**
      * To set the Status of a Order. In case a user confirmed to do a task its "confirmed" and in case he finished the task its "closed"
+     *
      * @param orderId where you want to set the Status
-     * @param status confirmed/closed
+     * @param status  confirmed/closed
      * @throws InterruptedException
      */
     public void setOrderStatus(String orderId, Status status) throws InterruptedException {
