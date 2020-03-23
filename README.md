@@ -72,8 +72,8 @@ This repository contains the Android Application which is meant for the helper, 
 * Add further functionallic
 * Implement new features from [here](https://github.com/machbarschaft/machbarschaft)
 
-#### get in touch
-Do not hesitate to get in touch with us. Drop us some nice words by <a href="mailto:hallo@machbarschaft.jetzt?subject=hi">mail</a>. 
+### Get in touch
+Do not hesitate to get in touch with us. Drop us some nice words, suggestion, ideas or support by <a href="mailto:hallo@machbarschaft.jetzt?subject=hi">mail</a>. 
 
 made with ❤ by us (machbarschaft).
 
