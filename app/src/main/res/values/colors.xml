@@ -8,6 +8,7 @@
     <color name="selectorDotInactive">#AAAAAAAA</color>
 
     <color name="order_done_background">#279f14</color>
+    <color name="content_background">#FFFFFF</color>
 
     <color name="text_black">#000000</color>
     <color name="text_white">#DAFFFFFF</color>
