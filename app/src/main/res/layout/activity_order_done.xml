@@ -40,8 +40,6 @@
         android:text="@string/back_to_home"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/done_text"
-        android:textColor="@color/colorPrimary"
-        android:backgroundTint="#ffffff"/>
+        app:layout_constraintTop_toBottomOf="@id/done_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

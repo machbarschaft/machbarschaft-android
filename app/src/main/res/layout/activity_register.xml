@@ -64,8 +64,9 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerLblBack" />
+                app:layout_constraintTop_toBottomOf="@+id/registerToolbar" />
 
             <TextView
                 android:id="@+id/registerLblSubtitleFirst"
@@ -187,29 +188,16 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="205dp" />
 
-            <ImageButton
-                android:id="@+id/registerBtnBack"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/registerToolbar"
+                android:layout_width="409dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:background="@color/transparent"
-                android:backgroundTint="@color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?attr/homeAsUpIndicator" />
-
-            <TextView
-                android:id="@+id/registerLblBack"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:text="@string/registerButtonBack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintBottom_toBottomOf="@+id/registerBtnBack"
-                app:layout_constraintStart_toEndOf="@+id/registerBtnBack"
-                app:layout_constraintTop_toTopOf="@+id/registerBtnBack" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

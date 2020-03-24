@@ -3,6 +3,7 @@ package com.ks.einanrufhilft.view.order;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.view.home.Home;
+import com.ks.einanrufhilft.view.login.LoginMain;
 
 import java.util.Objects;
 
@@ -53,6 +56,13 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Home.class));
+            }
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
