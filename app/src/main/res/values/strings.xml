@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
     <string name="login">Einloggen</string>
     <string name="register">Registrieren</string>
@@ -33,6 +33,9 @@
     <string name="home_feedback_description">Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.</string>
     <string name="home_feedback_write_mail">Email schreiben</string>
     <string name="home_feedback_later">Später</string>
+    <string name="home_feedback_subject">Problem mit der Android App</string>
+    <string name="home_feedback_body1">Liebes Machbarschaft-Team,\n\nbei der Android App ist mir ein Problem aufgefallen. Die Technischen Informationen sind wie folgt:</string>
+    <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">Mein Problem ist ...</string>
     <string name="home_dialog_understood">Verstanden</string>
 
     <string name="home_order_urgency">Dringlichkeit: %1$s</string>

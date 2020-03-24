@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ks.einanrufhilft.BuildConfig;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
@@ -109,11 +111,18 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                         R.string.home_feedback_write_mail,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent mailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                                mailIntent.setType("plain/text");
-                                mailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"hallo@machbarschaft.jetzt"});
-                                mailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Problem mit der Android App");
-                                startActivity(Intent.createChooser(mailIntent, "Problem melden"));
+                                String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
+                                        "?subject=" + getString(R.string.home_feedback_subject) +
+                                        "&body=" + getString(R.string.home_feedback_body1) +
+                                        "\nVersion-Name: " + BuildConfig.VERSION_NAME +
+                                        "\nVersion-Code: " + BuildConfig.VERSION_CODE +
+                                        "\nAndroid-Version: " + Build.DISPLAY +
+                                        "\nDevice: " + Build.DEVICE +
+                                        "\nManufacturer: " + Build.MANUFACTURER +
+                                        "\nModel: " + Build.MODEL +
+                                        "\n\n" + getString(R.string.home_feedback_body2);
+                                Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
+                                startActivity(mailIntent);
                             }
                         });
                 builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
