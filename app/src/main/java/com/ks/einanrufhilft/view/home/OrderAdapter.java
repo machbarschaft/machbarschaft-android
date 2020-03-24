@@ -48,7 +48,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         double distance = 0;
         if (this.location != null) {
             distance = OrderHandler.getDistance(this.location.getLatitude(),
-                    this.location.getLongitude(), order.getLat(), order.getLng()) / 1000;
+                    this.location.getLongitude(), order.getLatitude(), order.getLongitude()) / 1000;
         }
         holder.setDetails(order, distance);
     }
@@ -82,21 +82,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         void setDetails(Order order, double distance) {
             Context context = view.getContext();
 
-            // TODO use string resource from enum
-            String typeText = "Einkäufe";
-            // TODO use booleans and string resources
+            // Build extras
+            String typeText = context.getString(order.getType().getTitle());
             List<String> extras = new ArrayList<>();
-            if ("yes".equals(order.getPrescription())) {
-                extras.add("Resept abhohlen");
+            if (order.getPrescription()) {
+                extras.add(context.getString(R.string.home_order_extra_prescription));
             }
-            if ("yes".equals(order.getCarNecessary())) {
-                extras.add("Auto erforderlich");
+            if (order.isCarNecessary()) {
+                extras.add(context.getString(R.string.home_order_extra_car));
             }
             String extrasText = joinStrings(", ", extras);
 
             view.setTag(order.getId());
             orderType.setText(typeText);
-            orderClientName.setText(order.getName());
+            orderClientName.setText(order.getClientName());
             orderExtras.setText(extrasText);
             orderDistance.setText(context.getString(R.string.home_order_distance_km, distance));
         }

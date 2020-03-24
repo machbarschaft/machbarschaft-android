@@ -26,6 +26,14 @@
     <string name="intro_3">Kläre telefonisch das Anliegen</string>
     <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
 
+    <string name="order_title_groceries">Einkauf</string>
+    <string name="order_title_medicine">Medikament</string>
+    <string name="order_title_other">Anderes</string>
+    <string name="order_urgency_urgent">Dringend</string>
+    <string name="order_urgency_today">Heute</string>
+    <string name="order_urgency_tomorrow">Morgen</string>
+    <string name="order_urgency_undefined">Irgendwann</string>
+
     <string name="home_link_faq">FAQ</string>
     <string name="home_link_contact">Kontakt</string>
     <string name="home_link_bug_report">Problem melden</string>
@@ -38,9 +46,9 @@
     <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">Mein Problem ist ...</string>
     <string name="home_dialog_understood">Verstanden</string>
 
-    <string name="home_order_urgency">Dringlichkeit: %1$s</string>
     <string name="home_order_distance_km">%1$.1f km</string>
-    <string name="home_order_accept">Annehmen</string>
+    <string name="home_order_extra_prescription">Rezept abhohlen</string>
+    <string name="home_order_extra_car">Auto erforderlich</string>
 
     <string name="order_detail_title">Der Auftrag</string>
     <string name="order_detail_label_needs">benötigt</string>

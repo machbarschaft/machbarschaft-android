@@ -173,11 +173,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             @Override
             public int compare(Order o1, Order o2) {
                 Location location1 = new Location("");
-                location1.setLatitude(o1.getLat());
-                location1.setLongitude(o1.getLng());
+                location1.setLatitude(o1.getLatitude());
+                location1.setLongitude(o1.getLongitude());
                 Location location2 = new Location("");
-                location2.setLatitude(o2.getLat());
-                location2.setLongitude(o2.getLng());
+                location2.setLatitude(o2.getLatitude());
+                location2.setLongitude(o2.getLongitude());
                 LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
                 assert locationManager != null;
                 if (hasLocationPermission) {
@@ -302,13 +302,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                         .flat(true)
                         .draggable(false)
                         .icon(markerIconNormal)
-                        .position(new LatLng(order.getLat(), order.getLng()))
+                        .position(new LatLng(order.getLatitude(), order.getLongitude()))
                 );
                 marker.setTag(order.getId());
                 markerMap.put(order.getId(), marker);
             } else {
                 // Update existing marker
-                marker.setPosition(new LatLng(order.getLat(), order.getLng()));
+                marker.setPosition(new LatLng(order.getLatitude(), order.getLongitude()));
             }
 
             // Order is not old, no need to remove marker

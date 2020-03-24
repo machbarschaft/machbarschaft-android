@@ -93,8 +93,8 @@ public class OrderHandler {
 
     private double getDistance(Order order) {
 
-    double lat1 = order.getLat();
-    double lon1 = order.getLng();
+    double lat1 = order.getLatitude();
+    double lon1 = order.getLongitude();
     double lat2 = this.lieferant.lat;
     double lon2 = this.lieferant.lng;
 

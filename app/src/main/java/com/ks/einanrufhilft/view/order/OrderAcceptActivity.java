@@ -37,7 +37,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
         }
 
         TextView descriptionView = findViewById(R.id.order_accept_text);
-        descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getName()));
+        descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));
 
         Button btnCall = findViewById(R.id.btn_call);
         btnCall.setOnClickListener(v -> {
@@ -48,7 +48,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
     }
 
     private void callUser() {
-        Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhone_number()));
+        Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
         startActivity(new Intent(Intent.ACTION_VIEW, callUri));
     }
 

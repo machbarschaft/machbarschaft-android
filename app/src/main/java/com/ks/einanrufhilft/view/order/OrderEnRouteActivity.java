@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.Database.DataAccess;
@@ -21,8 +20,6 @@ import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
-
-import java.util.Objects;
 
 public class OrderEnRouteActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "OrderEnRouteActivity";
@@ -61,7 +58,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
         @SuppressLint("DefaultLocale")
         Uri locationUri = Uri.parse(String.format("geo:%f,%f?q=%s",
-                mOrder.getLat(), mOrder.getLng(), mOrder.getName()));
+                mOrder.getLatitude(), mOrder.getLongitude(), mOrder.getClientName()));
         startActivity(new Intent(Intent.ACTION_VIEW, locationUri));
     }
 
@@ -72,7 +69,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         if (mOrder != null) {
-            LatLng orderLocation = new LatLng(mOrder.getLat(), mOrder.getLng());
+            LatLng orderLocation = new LatLng(mOrder.getLatitude(), mOrder.getLongitude());
             // Add marker
             googleMap.addMarker(new MarkerOptions()
                     .flat(true)

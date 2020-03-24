@@ -23,7 +23,6 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.home.Home;
-import com.ks.einanrufhilft.view.login.LoginMain;
 
 import java.util.Objects;
 
@@ -86,15 +85,15 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        mNameView.setText(mOrder.getName());
-        mNeedsView.setText(mOrder.getPrescription());
-        mUrgencyView.setText(mOrder.getUrgency());
+        mNameView.setText(mOrder.getClientName());
+        mNeedsView.setText(mOrder.getType().getTitle());
+        mUrgencyView.setText(mOrder.getUrgency().getTitle());
         StringBuilder address = new StringBuilder();
         address.append(mOrder.getStreet());
         address.append(" ");
-        address.append(mOrder.getHouse_number());
+        address.append(mOrder.getHouseNumber());
         address.append(", ");
-        address.append(mOrder.getZip());
+        address.append(mOrder.getZipCode());
         mAddressView.setText(address);
     }
 
@@ -147,7 +146,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        LatLng orderLocation = new LatLng(mOrder.getLat(), mOrder.getLng());
+        LatLng orderLocation = new LatLng(mOrder.getLatitude(), mOrder.getLongitude());
         // Add marker
         map.addMarker(new MarkerOptions()
                 .flat(true)
