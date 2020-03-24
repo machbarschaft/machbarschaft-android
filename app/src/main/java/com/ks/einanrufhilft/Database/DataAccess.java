@@ -1,8 +1,11 @@
 package com.ks.einanrufhilft.Database;
 
+import android.util.Log;
+
 import com.ks.einanrufhilft.Database.Callback.CollectionLoadedCallback;
 import com.ks.einanrufhilft.Database.Callback.DocumentCallback;
 import com.ks.einanrufhilft.Database.Entitie.Account;
+import com.ks.einanrufhilft.Database.Entitie.Collection;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
@@ -63,6 +66,12 @@ public class DataAccess extends Database {
                 Order order = new Order(document);
                 callback.onOrderLoaded(order);
             }
+        });
+    }
+
+    public void getOrders() {
+        super.getCollection(CollectionName.Order, documents -> {
+            OrderHandler.getInstance().addCollection(documents);
         });
     }
 

@@ -1,9 +1,11 @@
 package com.ks.einanrufhilft.Database;
 
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the Orders
@@ -33,6 +35,9 @@ public class OrderHandler {
         this.orders.add(order);
     }
 
+    public void addOrderList(List<DocumentSnapshot> documents) {
+
+    }
     /*
     public void add(Type type, double lat, double lng) {
         if(type == Type.Besteller) {
@@ -109,6 +114,16 @@ public class OrderHandler {
 
         return Math.sqrt(distance);
 
+    }
+
+    public void addCollection(List<DocumentSnapshot> documents) {
+        // reset orders
+        this.orders = null;
+        this.orders = new ArrayList<>();
+
+        for(DocumentSnapshot doc: documents) {
+            this.orders.add(new Order(doc));
+        }
     }
 
 

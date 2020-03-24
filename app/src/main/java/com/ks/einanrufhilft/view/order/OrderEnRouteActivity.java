@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ks.einanrufhilft.Database.DataAccess;
 import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
@@ -89,7 +90,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
     private void notifyOrderDone() {
         Database database = Database.getInstance();
         try {
-            database.setOrderStatus(mOrder.getId(), Database.Status.Closed);
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.Closed);
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Failed to update order status!", exception);
         }

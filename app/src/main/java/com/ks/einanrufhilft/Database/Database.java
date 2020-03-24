@@ -46,7 +46,7 @@ public class Database {
         Order_Account
     }
 
-    protected  Database() {
+    protected Database() {
         db = FirebaseFirestore.getInstance();
 
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -54,7 +54,6 @@ public class Database {
                 .build();
         db.setFirestoreSettings(settings);
     }
-
 
 
     protected void getOneDocumentByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentCallback callback) {
@@ -81,7 +80,7 @@ public class Database {
 
     protected void getOneDocumentByTwoConditions(CollectionName collection, LinkedHashMap<String, Object> condition, final DocumentCallback callback) {
 
-        ArrayList<String> keys= new ArrayList<String>(condition.keySet());
+        ArrayList<String> keys = new ArrayList<String>(condition.keySet());
         ArrayList<Object> values = new ArrayList<Object>(condition.values());
 
         db.collection(collection.toString())
@@ -104,6 +103,7 @@ public class Database {
                     }
                 });
     }
+
     protected void getDocumentsByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentsCallback callback) {
 
         db.collection(collection.toString())
@@ -171,6 +171,23 @@ public class Database {
         docRef.update(updatePair.getKey(), updatePair.getValue());
     }
 
-    protected void updateDocument(CollectionName collection, final DocumentCallback callback, AbstractMap.SimpleEntry<String, Object> condition, HashMap<String, Object> updatePair) {}
+    protected void updateDocument(CollectionName collection, final DocumentCallback callback, AbstractMap.SimpleEntry<String, Object> condition, HashMap<String, Object> updatePair) {
+    }
 
+    protected void getCollection(CollectionName collectionName, final DocumentsCallback callback) {
+
+        db.collection("Order")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            callback.onDocumentsLoad(documents);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 }
