@@ -111,11 +111,22 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Wir arbeiten an einer Lösung. Bis dahin, melde dein Problem doch einfach an unsere sozialen Medien");
+                builder.setMessage("Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.");
                 builder.setCancelable(false);
 
                 builder.setPositiveButton(
-                        "Verstanden",
+                        "Mail schreiben",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent mailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                                mailIntent.setType("plain/text");
+                                mailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"hallo@machbarschaft.jetzt"});
+                                mailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Problem mit der Android App");
+                                startActivity(Intent.createChooser(mailIntent, "Problem melden"));
+                            }
+                        });
+                builder.setNegativeButton(
+                        "Später",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
