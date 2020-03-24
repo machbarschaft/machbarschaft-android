@@ -145,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast t = Toast.makeText(getApplicationContext(), "Bitte fülle alle Felder aus!", Toast.LENGTH_LONG);
                     t.show();
                 } else {
-                    if(true) {
+                    if(trusted) {
                         if(agbAcepted) {
                             String code = getCode();
                             sendSMS(tfPhone.getText().toString(), code);
