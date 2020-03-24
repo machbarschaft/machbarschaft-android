@@ -1,11 +1,13 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,13 +26,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.Task;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -145,13 +149,42 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private void initializeData() {
         this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
         System.out.println("orders: " + this.orderList.size());
-
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        sortData();
         markerMap = new HashMap<>();
-
         markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
         markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+    }
+
+    /**
+     * Sorts List, so that the nearest Orders are on top.
+     */
+    private void sortData() {
+        Collections.sort(this.orderList, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                Location location1 = new Location("");
+                location1.setLatitude(o1.getLat());
+                location1.setLongitude(o1.getLng());
+                Location location2 = new Location("");
+                location2.setLatitude(o2.getLat());
+                location2.setLongitude(o2.getLng());
+                LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+                assert locationManager != null;
+                if (hasLocationPermission) {
+                    @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (myLocation != null) {
+                        double distance1 = myLocation.distanceTo(location1);
+                        double distance2 = myLocation.distanceTo(location2);
+                        if (distance1 == distance2)
+                            return 0;
+                        return distance1 < distance2 ? -1 : 1;
+                    }
+                }
+                return 0; //doesn't compare in case we can't get our own position
+            }
+        });
     }
 
     /**

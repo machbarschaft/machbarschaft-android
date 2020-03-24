@@ -2,9 +2,11 @@ package com.ks.einanrufhilft.view.register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.login.LoginMain;
+
+import java.util.Random;
 
 /**
  * For verifying via SMS.
@@ -30,9 +34,28 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         // Get UI elements
         Button btnSignin = findViewById(R.id.buttonSignIn);
+        Button btnSendCode = findViewById(R.id.verifyPhoneBtnSendCode);
+        ImageButton btnBack = findViewById(R.id.verificationBtnBack);
         EditText tfCode = findViewById(R.id.editTextCode);
 
         // Button click handlers
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnSendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String code = getCode();
+                userData[0] = code;
+                sendSMS(userData[4], code);
+            }
+        });
+
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +77,30 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private String getCode() {
+        Random r = new Random();
+        int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
+        String result = "";
+        for(int i=0; i<4; i++) {
+            result = result + array[r.nextInt(9)];
+        }
+
+        return result;
+    }
+
+    private void sendSMS(String phoneNo, String code) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, code, null, null);
+            Toast.makeText(getApplicationContext(), "SMS gesendet",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
     }
 }

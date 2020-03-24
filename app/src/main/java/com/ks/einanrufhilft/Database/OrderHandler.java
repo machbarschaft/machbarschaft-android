@@ -45,7 +45,7 @@ public class OrderHandler {
      */
 
     /**
-     * Gets the distance to the order
+     * Gets the distance to the order.
      * @param firstPersonLat person Doing Request
      * @param firstPersonLon person Doing Request
      * @param secondPersonLat Order Data
@@ -53,23 +53,15 @@ public class OrderHandler {
      * @return distance in metres
      */
     public static double getDistance(double firstPersonLat, double firstPersonLon, double secondPersonLat, double secondPersonLon) {
-        double lat1 = firstPersonLat;
-        double lon1 = firstPersonLon;
-        double lat2 = secondPersonLat;
-        double lon2 = secondPersonLon;
-
         final int R = 6371; // Radius of the earth
-
-        double latDistance = Math.toRadians(lat2 - lat1);
-        double lonDistance = Math.toRadians(lon2 - lon1);
+        double latDistance = Math.toRadians(secondPersonLat - firstPersonLat);
+        double lonDistance = Math.toRadians(secondPersonLon - firstPersonLon);
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                + Math.cos(Math.toRadians(firstPersonLat)) * Math.cos(Math.toRadians(secondPersonLat))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = R * c * 1000; // convert to meters
-
-        double height = 0;  // höhenunterschiede der Personen werden ignoriert
-
+        double height = 0; //Height differences are currently ignored
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
         return Math.sqrt(distance);

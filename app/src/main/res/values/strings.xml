@@ -20,7 +20,7 @@
     <string name="registerHintPhone">Handynummer</string>
     <string name="registerCheckAGB">AGB/Datenschutz</string>
     <string name="registerButtonSend">Abschicken</string>
-    <string name="registerButtonBack">zurück</string>
+    <string name="registerButtonBack">Zurück</string>
     <string name="verifyPhoneButton">Bestätigen</string>
     <string name="intro1_text">Melde dich als Helfer an</string>
     <string name="intro_2">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
@@ -55,4 +55,5 @@
 
     <string name="title_back">Zurück</string>
     <string name="verifyTitle">Handynummer bestätigen</string>
+    <string name="verifyPhoneBtnSendCode">Code erneut senden</string>
 </resources>

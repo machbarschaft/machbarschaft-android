@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         context = this;
 
         // UI elements
-        Button btnBack = findViewById(R.id.registerBtnBack);
+        ImageButton btnBack = findViewById(R.id.registerBtnBack);
         Button btnSend = findViewById(R.id.registerBtnSend);
         ImageButton btnAddress = findViewById(R.id.registerBtnAdress);
         CheckBox agbBox = findViewById(R.id.registerCheckAGB);
@@ -157,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
+            Toast.makeText(getApplicationContext(), "SMS gesendet",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
