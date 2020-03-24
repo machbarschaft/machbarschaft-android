@@ -1,5 +1,7 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 /**
  * Class which determines Account Information's
  */
@@ -18,6 +20,18 @@ public class Account extends Collection{
         this.last_name = last_name;
         this.credits = credits;
         this.phone_number = phone_number;
+    }
+
+    public Account(DocumentSnapshot document) {
+        this.id = document.getId();
+        this.first_name = (String) document.get("first_name");
+        this.last_name = (String) document.get("last_name");
+        this.phone_number = (String) document.get("phone_number");
+        if(document.get("radius") != null)
+            this.radius = (float) document.get("radius");
+        if(document.get("credits") != null)
+            this.credits = (int) document.get("credits");
+
     }
 
 
