@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Account;
@@ -33,17 +35,22 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         String[] userData = caller.getStringArrayExtra("registerData");
 
         // Get UI elements
+        Toolbar toolbar = findViewById(R.id.verifyPhoneToolbar);
         Button btnSignin = findViewById(R.id.buttonSignIn);
         Button btnSendCode = findViewById(R.id.verifyPhoneBtnSendCode);
-        ImageButton btnBack = findViewById(R.id.verificationBtnBack);
         EditText tfCode = findViewById(R.id.editTextCode);
 
-        // Button click handlers
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_back);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
             }
         });
 

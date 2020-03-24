@@ -1,7 +1,9 @@
 package com.ks.einanrufhilft.view.register;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Context context;
     private boolean trusted = false;
     private boolean agbAcepted = false;
+    private boolean codeSend = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         context = this;
 
         // UI elements
-        ImageButton btnBack = findViewById(R.id.registerBtnBack);
+        Toolbar toolbar = findViewById(R.id.registerToolbar);
         Button btnSend = findViewById(R.id.registerBtnSend);
         ImageButton btnAddress = findViewById(R.id.registerBtnAdress);
         CheckBox agbBox = findViewById(R.id.registerCheckAGB);
@@ -54,6 +57,20 @@ public class RegisterActivity extends AppCompatActivity {
         EditText tfSurname = findViewById(R.id.registerTfSurname);
         EditText tfPhone = findViewById(R.id.registerTfPhone);
         EditText tfAddress = findViewById(R.id.registerTfAddress);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_back);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),LoginMain.class));
+            }
+        });
 
         final Passbase passbaseRef = new Passbase(this);
         passbaseRef.initialize(
@@ -100,14 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, LoginMain.class);
-                startActivity(i);
-            }
-        });
-
         btnAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,22 +141,31 @@ public class RegisterActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(trusted) {
-                    if(agbAcepted) {
-                        String code = getCode();
-                        sendSMS(tfPhone.getText().toString(), code);
-                        // Transfer user data in array: phone code, name, surname, address, phone number
-                        String[] data = {code, tfName.getText().toString(), tfSurname.getText().toString(), tfAddress.getText().toString(), tfPhone.getText().toString()};
-                        Intent i = new Intent(context, VerifyPhoneActivity.class);
-                        i.putExtra("registerData", data);
-                        startActivity(i);
+                if(tfName.getText().toString().isEmpty() || tfSurname.getText().toString().isEmpty() || tfAddress.getText().toString().isEmpty() || tfPhone.getText().toString().isEmpty()) {
+                    Toast t = Toast.makeText(getApplicationContext(), "Bitte fülle alle Felder aus!", Toast.LENGTH_LONG);
+                    t.show();
+                } else {
+                    if(true) {
+                        if(agbAcepted) {
+                            String code = getCode();
+                            sendSMS(tfPhone.getText().toString(), code);
+                            if(codeSend) {
+                                // Transfer user data in array: phone code, name, surname, address, phone number
+                                String[] data = {code, tfName.getText().toString(), tfSurname.getText().toString(), tfAddress.getText().toString(), tfPhone.getText().toString()};
+                                Intent i = new Intent(context, VerifyPhoneActivity.class);
+                                i.putExtra("registerData", data);
+                                startActivity(i);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "SMS konnte nicht gesendet werden", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast t = Toast.makeText(context, "Bitte akzeptiere unsere AGB",  Toast.LENGTH_LONG);
+                            t.show();
+                        }
                     } else {
-                        Toast t = Toast.makeText(context, "Bitte akzeptiere unsere AGB",  Toast.LENGTH_LONG);
+                        Toast t = Toast.makeText(context, "Bitte verifiziere dich",  Toast.LENGTH_LONG);
                         t.show();
                     }
-                } else {
-                    Toast t = Toast.makeText(context, "Bitte verifiziere dich",  Toast.LENGTH_LONG);
-                    t.show();
                 }
             }
         });
@@ -157,12 +175,10 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(getApplicationContext(), "SMS gesendet",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "SMS gesendet", Toast.LENGTH_LONG).show();
+            codeSend = true;
         } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
+            codeSend = false;
         }
     }
 
