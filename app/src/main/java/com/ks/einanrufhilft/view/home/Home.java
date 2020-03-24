@@ -27,10 +27,10 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -39,11 +39,13 @@ import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
+import com.ks.einanrufhilft.util.DrawableUtil;
 import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -64,8 +66,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     private boolean hasLocationPermission;
     private FusedLocationProviderClient fusedLocationClient;
     private Map<String, Marker> markerMap;
-    private BitmapDescriptor markerIconNormal;
-    private BitmapDescriptor markerIconUrgent;
+    private EnumMap<Order.Urgency, BitmapDescriptor> markerIconMap;
     private Location location;
 
     @Override
@@ -140,7 +141,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         initView();
         startOrder();
         updateMarkers();
-
     }
 
     @Override
@@ -164,10 +164,24 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         for (int i = 0; i < orderList.size(); i++) {
             orderList.get(i).setListId(i + 1);
         }
+    }
 
+    /**
+     * Initializes the markers used in the map.
+     * <p>
+     * <b>Do not call this method before the map is ready!</b>
+     *
+     * @see #onMapReady(GoogleMap)
+     */
+    private void initializeMarker() {
+        MapsInitializer.initialize(this);
         markerMap = new HashMap<>();
-        markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-        markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+        markerIconMap = new EnumMap<>(Order.Urgency.class);
+
+        for (Order.Urgency urgency : Order.Urgency.values()) {
+            BitmapDescriptor descriptor = DrawableUtil.getBitmapDescriptor(this, urgency.getIconRes());
+            markerIconMap.put(urgency, descriptor);
+        }
     }
 
     /**
@@ -268,9 +282,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         int paddingTop = getResources().getDimensionPixelSize(R.dimen.status_bar_height);
         map.setPadding(0, paddingTop, 0, 0);
         map.setOnMarkerClickListener(this);
+        initializeMarker();
+
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
+
         updateMarkers();
     }
 
@@ -306,7 +323,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 marker = map.addMarker(new MarkerOptions()
                         .flat(true)
                         .draggable(false)
-                        .icon(markerIconNormal)
+                        .icon(markerIconMap.get(order.getUrgency()))
+                        .anchor(0.171875f, 0.9375f)
+                        .title(String.valueOf(order.getListId()))
                         .position(new LatLng(order.getLatitude(), order.getLongitude()))
                 );
                 marker.setTag(order.getId());
