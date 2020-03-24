@@ -10,7 +10,7 @@ Project Machbarschaft was created in the context of [WirVsVirus Hackathon](https
 This repository contains the Android Application which is meant for the helper, to find nearby help seeking persons. New Users have to verify their Identiy with Passbase(ID - Verfication) and SMS. Afterwards they can help others in need. 
 ## Demo
 
-We have recorded a short video to demonstrate the current state of the app: [Youtube-Video](https://www.youtube.com/watch?v=fREWWjGuxm4)
+We have recorded a short video to demonstrate the current state of the app: [Youtube-Video](https://www.youtube.com/watch?v=Lg5ecVKiLGc)
 
 ## How it works
 
