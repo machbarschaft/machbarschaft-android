@@ -35,19 +35,6 @@ public class OrderHandler {
         this.orders.add(order);
     }
 
-    public void addOrderList(List<DocumentSnapshot> documents) {
-
-    }
-    /*
-    public void add(Type type, double lat, double lng) {
-        if(type == Type.Besteller) {
-            this.persons.add(new GeoDataPerson(type, lat, lng));
-        } else{
-            this.lieferant = new GeoDataPerson(type, lat, lng);
-        }
-    }
-
-     */
 
     /**
      * Gets the distance to the order.
@@ -84,19 +71,23 @@ public class OrderHandler {
     public ArrayList<Order> getPersonInDistance(double kmDistance) {
         ArrayList<Order> closeOrders = new ArrayList<>();
         for(Order order: orders) {
-            if(this.getDistance(order) < kmDistance) {
+            if(this.getDistanceInKm(order) < kmDistance) {
                 closeOrders.add(order);
             }
         }
         return closeOrders;
     }
 
+    private double getDistanceInKm(Order order) {
+        return this.getDistance(order)/1000;
+    }
+
     private double getDistance(Order order) {
 
-    double lat1 = order.getLat();
-    double lon1 = order.getLng();
-    double lat2 = this.lieferant.lat;
-    double lon2 = this.lieferant.lng;
+        double lat1 = order.getLongitude();
+        double lon1 = order.getLatitude();
+        double lat2 = this.lieferant.lat;
+        double lon2 = this.lieferant.lng;
 
         final int R = 6371; // Radius of the earth
 
@@ -183,6 +174,7 @@ public class OrderHandler {
     public void setLieferant(Type type, double lat, double lng) {
         this.lieferant = new GeoDataPerson(type,lat, lng);
     }
+
 
 
     @Override
