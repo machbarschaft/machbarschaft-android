@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -50,14 +49,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public class Home extends AppCompatActivity implements OnMapReadyCallback, OrderAdapter.OrderClickListener {
+public class Home extends AppCompatActivity implements OnMapReadyCallback,
+        OrderAdapter.OrderClickListener, GoogleMap.OnMarkerClickListener {
     private static final String LOG_TAG = "Home";
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
 
     private List<Order> orderList;
     private RecyclerView recyclerView;
     private OrderAdapter orderAdapter;
-    private TextView footerTextView;
 
     private GoogleMap map;
     private boolean hasLocationPermission;
@@ -254,6 +253,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, Order
         map.setMyLocationEnabled(hasLocationPermission);
         int paddingTop = getResources().getDimensionPixelSize(R.dimen.status_bar_height);
         map.setPadding(0, paddingTop, 0, 0);
+        map.setOnMarkerClickListener(this);
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
@@ -338,6 +338,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, Order
     public void onOrderClicked(String orderId) {
         startActivity(new Intent(this, OrderDetailActivity.class)
                 .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        String orderId = (String) marker.getTag();
+        onOrderClicked(orderId);
+        return true;
     }
 }
 
