@@ -1,9 +1,11 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 /**
  *  Represents an Order. An order is a help request by a help seeking person.
  */
-public class Order {
+public class Order extends Collection{
 
     private String id;
     private String phone_number;
@@ -64,6 +66,23 @@ public class Order {
         this.status = status;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public Order(DocumentSnapshot document) {
+        this.setId(document.getId());
+        this.setCarNecessary((String) document.get("carNecessary"));
+        this.setHouse_number((String) document.get("house_number"));
+        this.setZip((String) document.get("zip"));
+        this.setStreet((String) document.get("street"));
+        this.setHouse_number((String) document.get("house_number"));
+        this.setName((String) document.get("name"));
+        this.setPrescription((String) document.get("prescription"));
+        this.setStatus((String) document.get("status"));
+        this.setUrgency((String) document.get("urgency"));
+        if (document.get("lat") != null && document.get("lng") != null) {
+            this.setLat((Double) document.get("lat"));
+            this.setLng((Double) document.get("lat"));
+        }
     }
 
 

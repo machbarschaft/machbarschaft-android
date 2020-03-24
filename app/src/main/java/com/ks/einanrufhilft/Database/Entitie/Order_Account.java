@@ -2,7 +2,7 @@ package com.ks.einanrufhilft.Database.Entitie;
 
 import com.google.firebase.Timestamp;
 
-public class Order_Account {
+public class Order_Account extends Collection{
 
     private String account_id;
     private String order_id;
