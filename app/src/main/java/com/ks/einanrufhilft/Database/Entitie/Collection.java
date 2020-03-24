@@ -1,4 +1,4 @@
 package com.ks.einanrufhilft.Database.Entitie;
 
-public class Collection {
+abstract public class Collection {
 }
