@@ -38,11 +38,11 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+/*
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
-
+*/
         Button btnNavigate = findViewById(R.id.btn_navigate);
         btnNavigate.setOnClickListener(v -> navigateToAddress());
 

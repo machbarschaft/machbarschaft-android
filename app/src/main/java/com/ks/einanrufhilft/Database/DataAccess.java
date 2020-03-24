@@ -33,10 +33,14 @@ public class DataAccess extends Database {
     }
 
     public void createAccount(Account account) {
+        Log.i("TEST", "createAccount: ");
+
         super.addDocument(CollectionName.Account, account);
     }
 
     public void login(String phone_number, CollectionLoadedCallback callback) {
+        Log.i("TEST", "login: ");
+
         super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
                 document -> {
                     Storage.getInstance().setUserID((String) document.getId());
@@ -48,6 +52,8 @@ public class DataAccess extends Database {
     }
 
     public void getMyOrder(String phone_number) {
+        Log.i("TEST", "getMyOrder: ");
+
         LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
         conditions.put("phone_number", phone_number);
         conditions.put("status", "confirmed");
@@ -61,6 +67,8 @@ public class DataAccess extends Database {
     }
 
     public void getOrderById(String orderId, CollectionLoadedCallback callback) {
+        Log.i("TEST", "getOrderById: ");
+
         super.getDocumentById(CollectionName.Order, orderId, document -> {
             if (document != null) {
                 Order order = new Order(document);
@@ -70,12 +78,22 @@ public class DataAccess extends Database {
     }
 
     public void getOrders() {
+        Log.i("TEST", "getOrders: ");
+
         super.getCollection(CollectionName.Order, documents -> {
+            Log.i("TEST", "getOrders: " + documents);
+
             OrderHandler.getInstance().addCollection(documents);
+            //TODO:
+            OrderHandler.getInstance().setLieferant(OrderHandler.Type.Besteller, 50.555809, 9.680845);
+
+            Log.i("TEST", "getOrders: " + OrderHandler.getInstance().toString());
+
         });
     }
 
     public void setOrderStatus(String orderId, Status status) {
+        Log.i("TEST", "setOrderStatus: ");
 
         if (status == Status.Confirmed) {
             // update Status in Collection Order

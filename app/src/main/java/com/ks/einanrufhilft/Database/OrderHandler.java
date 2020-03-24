@@ -183,4 +183,14 @@ public class OrderHandler {
     public void setLieferant(Type type, double lat, double lng) {
         this.lieferant = new GeoDataPerson(type,lat, lng);
     }
+
+
+    @Override
+    public String toString() {
+        return "OrderHandler{" +
+                "lieferant=" + lieferant +
+                ", orders=" + orders +
+                ", closeDistanceSetting=" + closeDistanceSetting +
+                '}';
+    }
 }
