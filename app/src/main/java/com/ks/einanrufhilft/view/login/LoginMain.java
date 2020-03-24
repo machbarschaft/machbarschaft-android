@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.ks.einanrufhilft.Database.DataAccess;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.view.home.Home;
@@ -89,7 +90,7 @@ public class LoginMain extends AppCompatActivity {
 
             String phoneNumberStr = phoneNumber.getText().toString();
 
-            Database.getInstance().getOrders();
+            DataAccess.getInstance().getOrders();
 
             //TODO Firebase Logic here
 

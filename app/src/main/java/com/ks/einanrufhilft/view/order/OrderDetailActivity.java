@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ks.einanrufhilft.Database.DataAccess;
 import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
@@ -93,12 +94,8 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         }
 
         Database database = Database.getInstance();
-        try {
-            database.setOrderStatus(mOrder.getId(), Database.Status.Confirmed);
-        } catch (InterruptedException exception) {
-            Log.e(LOG_TAG, "Failed to accept order!", exception);
-            return;
-        }
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.Confirmed);
+
 
         Storage storage = Storage.getInstance();
         storage.setCurrentOrder(mOrder);
@@ -112,8 +109,8 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             final String orderId = intent.getStringExtra(EXTRA_ORDER_ID);
 
             Database database = Database.getInstance();
-            database.getOrder(orderId, order -> {
-                mOrder = order;
+            DataAccess.getInstance().getOrderById(orderId, order -> {
+                mOrder = (Order)order;
                 applyOrderToViews();
                 if (map != null) {
                     updateMapWithOrder();

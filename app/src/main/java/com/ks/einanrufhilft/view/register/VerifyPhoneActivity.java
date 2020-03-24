@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ks.einanrufhilft.Database.DataAccess;
 import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
@@ -44,7 +45,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     newUser.setLast_name(userData[2]);
                     newUser.setPhone_number(userData[4]);
 
-                    Database.getInstance().createAccount(newUser);
+                    DataAccess.getInstance().createAccount(newUser);
 
                     Intent i = new Intent(getApplicationContext(), LoginMain.class);
                     startActivity(i);
