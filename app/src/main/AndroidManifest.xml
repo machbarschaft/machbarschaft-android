@@ -15,7 +15,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!-- For verification of the User     -->
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
 
     <application
@@ -24,12 +24,43 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.order.OrderDetailActivity"></activity>
-        <activity android:name=".view.order.OrderDoneActivity" />
-        <activity android:name=".view.order.OrderEnRouteActivity" />
-        <activity android:name=".view.order.OrderCarryOutActivity" />
-        <activity android:name=".view.order.OrderAcceptActivity" />
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="">
+        <activity
+            android:name=".view.order.OrderDetailActivity"
+            android:parentActivityName=".view.home.Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.home.Home" />
+        </activity>
+        <activity
+            android:name=".view.order.OrderDoneActivity"
+            android:parentActivityName=".view.order.OrderEnRouteActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.order.OrderEnRouteActivity" />
+        </activity>
+        <activity
+            android:name=".view.order.OrderEnRouteActivity"
+            android:parentActivityName=".view.order.OrderCarryOutActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.order.OrderCarryOutActivity" />
+        </activity>
+        <activity
+            android:name=".view.order.OrderCarryOutActivity"
+            android:parentActivityName=".view.order.OrderAcceptActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.order.OrderAcceptActivity" />
+        </activity>
+        <activity
+            android:name=".view.order.OrderAcceptActivity"
+            android:parentActivityName=".view.order.OrderDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.order.OrderDetailActivity" />
+        </activity>
         <activity android:name=".view.register.RegisterActivity" />
         <activity android:name=".view.register.VerifyPhoneActivity" />
         <activity android:name=".view.home.Home" />
@@ -43,7 +74,7 @@
         </activity>
 
         <service
-            android:name="MessagingService"
+            android:name=".fcm.MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
