@@ -1,9 +1,8 @@
 package com.ks.einanrufhilft.view.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
-import android.util.Log;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,31 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
-import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 /**
  * Custom Adapter for the Recycler View to display the Orders.
  */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
-
     private Context context;
     private ArrayList<Order> orders;
     private Location location;
+    private OrderClickListener listener;
 
-    OrderAdapter(Context context, ArrayList<Order> orders, Location location) {
+    OrderAdapter(Context context, ArrayList<Order> orders, Location location, OrderClickListener listener) {
         this.context = context;
         this.orders = orders;
         this.location = location;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.order_view_item, parent, false);
         return new OrderHolder(view);
     }
 
@@ -65,46 +64,80 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View view;
-        private TextView urgency, prescription, carNecessary, distance;
+        private TextView orderType;
+        private TextView orderClientName;
+        private TextView orderExtras;
+        private TextView orderDistance;
 
         OrderHolder(View itemView) {
             super(itemView);
             view = itemView;
             view.setOnClickListener(this);
-            urgency = itemView.findViewById(R.id.textViewUrgency);
-            prescription = itemView.findViewById(R.id.textViewPrescription);
-            carNecessary = itemView.findViewById(R.id.textViewCarNecessary);
-            distance = itemView.findViewById(R.id.textViewDistance);
+            orderType = itemView.findViewById(R.id.order_type);
+            orderClientName = itemView.findViewById(R.id.order_client_name);
+            orderExtras = itemView.findViewById(R.id.order_extras);
+            orderDistance = itemView.findViewById(R.id.order_distance);
         }
 
         void setDetails(Order order, double distance) {
-            StringBuffer urgencyText = new StringBuffer("Dringlichkeit: ")
-                    .append(order.getUrgency());
-            StringBuffer prescriptionText = new StringBuffer("Rezept: ")
-                    .append((order.getPrescription().equals("yes") ? "ja" : "nein"));
-            StringBuffer carNecessaryText = new StringBuffer("Auto erforderlich: " )
-                    .append((order.getCarNecessary().equals("yes") ? "ja" : "nein"));
-            StringBuffer distanceText = new StringBuffer("Entfernung: ")
-                    .append(Math.round(distance)).append(" km");
+            Context context = view.getContext();
 
+            // TODO use string resource from enum
+            String typeText = "Einkäufe";
+            // TODO use booleans and string resources
+            List<String> extras = new ArrayList<>();
+            if ("yes".equals(order.getPrescription())) {
+                extras.add("Resept abhohlen");
+            }
+            if ("yes".equals(order.getCarNecessary())) {
+                extras.add("Auto erforderlich");
+            }
+            String extrasText = joinStrings(", ", extras);
 
-            this.view.setTag(order.getId());
-            this.urgency.setText(urgencyText.toString());
-            this.prescription.setText(prescriptionText.toString());
-            this.carNecessary.setText(carNecessaryText.toString());
-            this.distance.setText(distanceText.toString());
+            view.setTag(order.getId());
+            orderType.setText(typeText);
+            orderClientName.setText(order.getName());
+            orderExtras.setText(extrasText);
+            orderDistance.setText(context.getString(R.string.home_order_distance_km, distance));
         }
 
         @Override
         public void onClick(View v) {
-            Log.wtf("itemview", String.valueOf(getAdapterPosition()));
-            Log.wtf("ID", String.valueOf(orders.get(getAdapterPosition()).getId()));
-            Context context = v.getContext();
-            //Intent intent = new Intent(context, JobActivty.class);
-            //v.getContext().startActivity(intent);
-            String orderId = (String) v.getTag();
-            context.startActivity(new Intent(context, OrderDetailActivity.class)
-                    .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
+            final String orderId = (String) v.getTag();
+            if (listener != null) {
+                listener.onOrderClicked(orderId);
+            }
         }
+    }
+
+    /**
+     * Joins the strings from the list using the given delimiter.
+     *
+     * @param delimiter The delimiter is placed in between the elements.
+     * @param strings   The elements to join to one string.
+     * @return The joined elements in a single string.
+     */
+    private String joinStrings(String delimiter, List<String> strings) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return String.join(delimiter, strings);
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < strings.size(); i++) {
+                if (i > 0) {
+                    sb.append(", ");
+                }
+                sb.append(strings.get(i));
+            }
+            return sb.toString();
+        }
+    }
+
+    public interface OrderClickListener {
+        /**
+         * Called when the specified order has been clicked.
+         *
+         * @param orderId The id of the order that has been clicked.
+         */
+        void onOrderClicked(String orderId);
     }
 }

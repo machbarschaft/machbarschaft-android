@@ -2,7 +2,6 @@ package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,11 +34,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.Task;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
+import com.ks.einanrufhilft.view.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,15 +50,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class Home extends AppCompatActivity implements OnMapReadyCallback {
+public class Home extends AppCompatActivity implements OnMapReadyCallback, OrderAdapter.OrderClickListener {
     private static final String LOG_TAG = "Home";
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
 
@@ -66,7 +66,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private BitmapDescriptor markerIconNormal;
     private BitmapDescriptor markerIconUrgent;
     private Location location;
-    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +73,18 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_home);
 
         // Get UI elements
-        Button btnFAQ = findViewById(R.id.homeBtnFAQ);
-        Button btnContact = findViewById(R.id.homeBtnContact);
-        Button btnReport = findViewById(R.id.homeBtnBugReport);
+        Button btnFAQ = findViewById(R.id.home_btn_faq);
+        Button btnContact = findViewById(R.id.home_btn_contact);
+        Button btnReport = findViewById(R.id.home_btn_bug_report);
 
         // Button action handlers
         btnFAQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Wir arbeiten an einer Lösung, damit du unsere FAQ's hier bald sehen kannst.");
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                builder.setMessage(R.string.home_faq_description);
                 builder.setCancelable(false);
-
-                builder.setPositiveButton(
-                        "Verstanden",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                builder.setPositiveButton(R.string.home_dialog_understood, (dialog, id) -> dialog.dismiss());
 
                 AlertDialog alert = builder.create();
                 alert.show();
@@ -110,12 +102,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.");
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                builder.setMessage(R.string.home_feedback_description);
                 builder.setCancelable(false);
 
                 builder.setPositiveButton(
-                        "Mail schreiben",
+                        R.string.home_feedback_write_mail,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent mailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -125,13 +117,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                                 startActivity(Intent.createChooser(mailIntent, "Problem melden"));
                             }
                         });
-                builder.setNegativeButton(
-                        "Später",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
 
                 AlertDialog alert = builder.create();
                 alert.show();
@@ -141,6 +127,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
+
         initializeData();
         initView();
         startOrder();
@@ -159,10 +146,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
      */
     private void initializeData() {
         this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
-        System.out.println("orders: " + this.orderList.size());
+        Log.d(LOG_TAG, "Orders: " + this.orderList.size());
+
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         sortData();
+
         markerMap = new HashMap<>();
         markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
         markerIconUrgent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
@@ -263,6 +252,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setMyLocationEnabled(hasLocationPermission);
+        int paddingTop = getResources().getDimensionPixelSize(R.dimen.status_bar_height);
+        map.setPadding(0, paddingTop, 0, 0);
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
@@ -275,10 +266,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     public void initView() {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.divider_horizontal));
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     this.location = location;
-                    orderAdapter = new OrderAdapter(this, (ArrayList<Order>) this.orderList, this.location);
+                    orderAdapter = new OrderAdapter(this, (ArrayList<Order>) this.orderList, this.location, this);
                     recyclerView.setAdapter(orderAdapter);
                 });
     }
@@ -339,6 +332,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     private void stopOrder() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         stopService(serviceIntent);
+    }
+
+    @Override
+    public void onOrderClicked(String orderId) {
+        startActivity(new Intent(this, OrderDetailActivity.class)
+                .putExtra(OrderDetailActivity.EXTRA_ORDER_ID, orderId));
     }
 }
 

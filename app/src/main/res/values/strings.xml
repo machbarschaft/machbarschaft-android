@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MACHBARSCHAFT</string>
-    <string name="home_bottom_links">FAQ - Kontakt - Problem melden</string>
     <string name="login">Einloggen</string>
     <string name="register">Registrieren</string>
     <string name="login_create_account">Noch keinen Account? Erstell einen</string>
@@ -9,8 +8,7 @@
     <string name="confirm">Bestätigen</string>
     <string name="verify_wait_for_code">Bestätigungscode eingeben</string>
     <string name="verify_code_hint">Bestätigungscode per SMS</string>
-    <string name="accept_order">Annehmen</string>
-    <string name="order_distance">Entfernung: %1$f m</string>
+
     <string name="registerTitle">Anmeldung vervollständigen</string>
     <string name="registerSubtitleFirst">1. Basisinformationen</string>
     <string name="registerSubtitleSecond">2. Identität verifizieren</string>
@@ -22,13 +20,25 @@
     <string name="registerButtonSend">Abschicken</string>
     <string name="registerButtonBack">Zurück</string>
     <string name="verifyPhoneButton">Bestätigen</string>
+
     <string name="intro1_text">Melde dich als Helfer an</string>
     <string name="intro_2">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
     <string name="intro_3">Kläre telefonisch das Anliegen</string>
     <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
-    <string name="homeLinkFAQ">FAQ</string>
-    <string name="homeLinkContact">Kontakt</string>
-    <string name="homeLinkBugReport">Problem melden</string>
+
+    <string name="home_link_faq">FAQ</string>
+    <string name="home_link_contact">Kontakt</string>
+    <string name="home_link_bug_report">Problem melden</string>
+    <string name="home_faq_description">Wir arbeiten an einer Lösung, damit du unsere FAQ\'s hier bald sehen kannst.</string>
+    <string name="home_feedback_description">Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.</string>
+    <string name="home_feedback_write_mail">Email schreiben</string>
+    <string name="home_feedback_later">Später</string>
+    <string name="home_dialog_understood">Verstanden</string>
+
+    <string name="home_order_urgency">Dringlichkeit: %1$s</string>
+    <string name="home_order_distance_km">%1$.1f km</string>
+    <string name="home_order_accept">Annehmen</string>
+
     <string name="order_detail_title">Der Auftrag</string>
     <string name="order_detail_label_needs">benötigt</string>
     <string name="order_detail_label_urgency">Erledigung</string>

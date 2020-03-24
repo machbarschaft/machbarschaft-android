@@ -62,7 +62,9 @@
         </activity>
         <activity android:name=".view.register.RegisterActivity" />
         <activity android:name=".view.register.VerifyPhoneActivity" />
-        <activity android:name=".view.home.Home" />
+        <activity
+            android:name=".view.home.Home"
+            android:theme="@style/AppTheme.Translucent" />
         <activity android:name=".view.login.LoginMain" />
         <activity android:name=".view.splash.Splash">
             <intent-filter>

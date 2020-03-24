@@ -23,7 +23,7 @@
         app:layout_constraintLeft_toRightOf="@id/guideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/recyclerview_item" />
+        tools:listitem="@layout/order_view_item" />
 
     <fragment
         android:id="@+id/map_fragment"
@@ -43,26 +43,30 @@
 
     <Button
         android:id="@+id/homeLandBtnFAQ"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/homeLinkFAQ"
+        android:backgroundTint="#9F4A6D"
+        android:text="@string/home_link_faq"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/homeLandBtnContact"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/homeLandBtnContact"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/homeLinkContact"
+        android:backgroundTint="#9F4A6D"
+        android:text="@string/home_link_contact"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/homeLandBtnBugReport"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,13 +74,15 @@
 
     <Button
         android:id="@+id/homeLandBtnBugReport"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/homeLinkBugReport"
+        android:backgroundTint="#9F4A6D"
+        android:text="@string/home_link_bug_report"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homeLandBtnContact" />

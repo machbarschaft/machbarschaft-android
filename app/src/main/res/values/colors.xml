@@ -10,4 +10,7 @@
     <color name="order_done_background">#279f14</color>
 
     <color name="text_black">#000000</color>
+    <color name="text_white">#DAFFFFFF</color>
+
+    <color name="dividers">#1F000000</color>
 </resources>
