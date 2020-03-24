@@ -6,6 +6,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,9 +47,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     public void onBindViewHolder(@NonNull OrderHolder holder, int position) {
         Order order = orders.get(position);
         double distance = 0;
-        if (this.location != null) {
-            distance = OrderHandler.getDistance(this.location.getLatitude(),
-                    this.location.getLongitude(), order.getLatitude(), order.getLongitude()) / 1000;
+        if (location != null) {
+            distance = OrderHandler.getDistance(location.getLatitude(),
+                    location.getLongitude(), order.getLatitude(), order.getLongitude()) / 1000;
         }
         holder.setDetails(order, distance);
     }
@@ -64,6 +65,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View view;
+        private ImageView orderIcon;
+        private TextView orderNumber;
         private TextView orderType;
         private TextView orderClientName;
         private TextView orderExtras;
@@ -73,6 +76,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             super(itemView);
             view = itemView;
             view.setOnClickListener(this);
+
+            orderIcon = itemView.findViewById(R.id.order_urgency_icon);
+            orderNumber = itemView.findViewById(R.id.order_number);
             orderType = itemView.findViewById(R.id.order_type);
             orderClientName = itemView.findViewById(R.id.order_client_name);
             orderExtras = itemView.findViewById(R.id.order_extras);
@@ -94,6 +100,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             String extrasText = joinStrings(", ", extras);
 
             view.setTag(order.getId());
+            orderIcon.setImageResource(order.getUrgency().getIconRes());
+            orderNumber.setText(String.valueOf(order.getListId()));
             orderType.setText(typeText);
             orderClientName.setText(order.getClientName());
             orderExtras.setText(extrasText);

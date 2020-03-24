@@ -153,12 +153,17 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Initialize for Demo purposes some Data to display
      */
     private void initializeData() {
-        this.orderList = OrderHandler.getInstance().getPersonInDistance(42000);
-        Log.d(LOG_TAG, "Orders: " + this.orderList.size());
+        orderList = OrderHandler.getInstance().getPersonInDistance(42000);
+        Log.d(LOG_TAG, "Orders: " + orderList.size());
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         sortData();
+
+        // Add numbers to order entries
+        for (int i = 0; i < orderList.size(); i++) {
+            orderList.get(i).setListId(i + 1);
+        }
 
         markerMap = new HashMap<>();
         markerIconNormal = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);

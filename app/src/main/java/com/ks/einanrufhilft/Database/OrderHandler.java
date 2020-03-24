@@ -51,8 +51,9 @@ public class OrderHandler {
 
     /**
      * Gets the distance to the order.
-     * @param firstPersonLat person Doing Request
-     * @param firstPersonLon person Doing Request
+     *
+     * @param firstPersonLat  person Doing Request
+     * @param firstPersonLon  person Doing Request
      * @param secondPersonLat Order Data
      * @param secondPersonLon Order Data
      * @return distance in metres
@@ -77,14 +78,15 @@ public class OrderHandler {
     }
 
     /**
-     *  Gives us the Persons within a specific distance.
+     * Gives us the Persons within a specific distance.
+     *
      * @param kmDistance in which radius the persons should be
      * @return persons in specific distance
      */
     public ArrayList<Order> getPersonInDistance(double kmDistance) {
         ArrayList<Order> closeOrders = new ArrayList<>();
-        for(Order order: orders) {
-            if(this.getDistance(order) < kmDistance) {
+        for (Order order : orders) {
+            if (getDistance(order) < kmDistance) {
                 closeOrders.add(order);
             }
         }
@@ -93,10 +95,10 @@ public class OrderHandler {
 
     private double getDistance(Order order) {
 
-    double lat1 = order.getLatitude();
-    double lon1 = order.getLongitude();
-    double lat2 = this.lieferant.lat;
-    double lon2 = this.lieferant.lng;
+        double lat1 = order.getLatitude();
+        double lon1 = order.getLongitude();
+        double lat2 = lieferant.lat;
+        double lon2 = lieferant.lng;
 
         final int R = 6371; // Radius of the earth
 
@@ -118,11 +120,11 @@ public class OrderHandler {
 
     public void addCollection(List<DocumentSnapshot> documents) {
         // reset orders
-        this.orders = null;
-        this.orders = new ArrayList<>();
+        orders = null;
+        orders = new ArrayList<>();
 
-        for(DocumentSnapshot doc: documents) {
-            this.orders.add(new Order(doc));
+        for (DocumentSnapshot doc : documents) {
+            orders.add(new Order(doc));
         }
     }
 
@@ -139,6 +141,7 @@ public class OrderHandler {
             this.lat = lat;
             this.lng = lng;
         }
+
         private Type type;
         private double lat;
         private double lng;
@@ -181,7 +184,7 @@ public class OrderHandler {
     }
 
     public void setLieferant(Type type, double lat, double lng) {
-        this.lieferant = new GeoDataPerson(type,lat, lng);
+        this.lieferant = new GeoDataPerson(type, lat, lng);
     }
 
 
