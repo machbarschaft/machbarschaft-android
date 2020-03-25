@@ -67,7 +67,6 @@ public class DataAccess extends Database {
     }
 
     public void getOrderById(String orderId, CollectionLoadedCallback callback) {
-        Log.i("TEST", "getOrderById: ");
 
         super.getDocumentById(CollectionName.Order, orderId, document -> {
             if (document != null) {
@@ -78,16 +77,10 @@ public class DataAccess extends Database {
     }
 
     public void getOrders() {
-        Log.i("TEST", "getOrders: ");
-
         super.getCollection(CollectionName.Order, documents -> {
-            Log.i("TEST", "getOrders: " + documents);
-
             OrderHandler.getInstance().addCollection(documents);
             //TODO:
             OrderHandler.getInstance().setLieferant(OrderHandler.Type.Besteller, 50.555809, 9.680845);
-
-            Log.i("TEST", "getOrders: " + OrderHandler.getInstance().toString());
 
         });
     }

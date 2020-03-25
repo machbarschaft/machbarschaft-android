@@ -118,9 +118,10 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             final String orderId = intent.getStringExtra(EXTRA_ORDER_ID);
 
             Database database = Database.getInstance();
-            Log.i("TEST", "loadOrder->getOrderById");
             DataAccess.getInstance().getOrderById(orderId, order -> {
                 mOrder = (Order)order;
+                Log.i("TEST", "loadOrder->getOrderById" + mOrder.toString());
+
                 applyOrderToViews();
                 if (map != null) {
                     updateMapWithOrder();

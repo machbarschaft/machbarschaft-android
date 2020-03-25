@@ -31,6 +31,8 @@ import static android.content.ContentValues.TAG;
  */
 public class Database {
     private FirebaseFirestore db;
+
+    //TODO: -> Database abstract class
     private static Database myDBClass;
 
     public static Database getInstance() {
@@ -127,7 +129,7 @@ public class Database {
     }
 
     protected void getDocumentById(CollectionName collection, String documentId, final DocumentCallback callback) {
-        DocumentReference docRef = db.collection(collection.toString()).document("documentId");
+        DocumentReference docRef = db.collection(collection.toString()).document(documentId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
