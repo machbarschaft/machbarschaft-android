@@ -158,7 +158,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
 
         hasLocationPermission = false;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        sortData();
 
         // Add numbers to order entries
         for (int i = 0; i < orderList.size(); i++) {
@@ -188,6 +187,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Sorts List, so that the nearest Orders are on top.
      */
     private void sortData() {
+
         Collections.sort(this.orderList, new Comparator<Order>() {
             @Override
             public int compare(Order o1, Order o2) {
@@ -199,15 +199,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 location2.setLongitude(o2.getLongitude());
                 LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
                 assert locationManager != null;
-                if (hasLocationPermission) {
-                    @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    if (myLocation != null) {
-                        double distance1 = myLocation.distanceTo(location1);
-                        double distance2 = myLocation.distanceTo(location2);
-                        if (distance1 == distance2)
-                            return 0;
-                        return distance1 < distance2 ? -1 : 1;
-                    }
+                @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (myLocation != null) {
+                    double distance1 = myLocation.distanceTo(location1);
+                    double distance2 = myLocation.distanceTo(location2);
+                    Log.i("", "compare: " + distance1 + distance2);
+                    if (distance1 == distance2)
+                        return 0;
+                    return distance1 < distance2 ? -1 : 1;
                 }
                 return 0; //doesn't compare in case we can't get our own position
             }
@@ -221,7 +220,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     this.location = location;
-
+                    sortData();
                     Log.d(LOG_TAG, "Last known location: " + location);
                     if (location == null || map == null) {
                         return;
