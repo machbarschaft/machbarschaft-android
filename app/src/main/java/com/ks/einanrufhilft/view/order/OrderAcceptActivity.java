@@ -53,6 +53,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
     }
 
     private void loadOrder() {
-        mOrder = Storage.getInstance().getCurrentOrder();
+        //mOrder = Storage.getInstance().getCurrentOrder();
+        mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
     }
 }

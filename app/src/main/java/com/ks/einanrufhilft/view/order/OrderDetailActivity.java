@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +23,7 @@ import com.ks.einanrufhilft.Database.Database;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.services.OrderInProgressNotification;
 import com.ks.einanrufhilft.view.home.Home;
 
 import java.util.Objects;
@@ -107,7 +109,10 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
 
 
         Storage storage = Storage.getInstance();
-        storage.setCurrentOrder(mOrder);
+        //storage.setCurrentOrder(mOrder);
+        Storage.setOrderInProgress(getApplicationContext(), mOrder);
+        startOrderNotification();
+        storage.setActiveOrder(getApplicationContext(), true);
         startActivity(new Intent(this, OrderAcceptActivity.class));
         finishAfterTransition();
     }
@@ -156,5 +161,10 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
 
         // Zoom map
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(orderLocation, 5f));
+    }
+
+    private void startOrderNotification() {
+        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 }

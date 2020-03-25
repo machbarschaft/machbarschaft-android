@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
@@ -19,6 +20,7 @@ public class OrderDoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_done);
         Button btnHome = findViewById(R.id.btn_back_home);
+        Storage.getInstance().setActiveOrder(getApplicationContext(), false);
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         stopService(serviceIntent); //stops the foregroundservice
         btnHome.setOnClickListener(v -> finish());

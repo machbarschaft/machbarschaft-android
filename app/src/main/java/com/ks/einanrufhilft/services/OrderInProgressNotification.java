@@ -6,15 +6,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.google.gson.Gson;
-import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.view.home.Home;
 
@@ -44,15 +42,13 @@ public class OrderInProgressNotification extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startID) {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("oderDetails", 0);
-        Order orderDTO = new Gson().fromJson(sharedPreferences.getString("orderDetails", null), Order.class);
         createNotificationChannel();
         Intent notifIntent = new Intent(this, Home.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText("Du erledigst gerade Auftrag: Für Frau Schneider")
+                .setContentText("Du erledigst gerade Auftrag für:  " + Storage.getInstance().getOrderInProgress(getApplicationContext()).getClientName() + " Die Adresse lautet: " + Storage.getInstance().getOrderInProgress(getApplicationContext()).getCompleteAddress())
                 .setSmallIcon(R.drawable.ic_machbarschaft_clear_white)
                 .setContentIntent(pendingIntent)
                 .build();

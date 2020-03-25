@@ -42,6 +42,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
     }
 
     private void loadOrder() {
-        mOrder = Storage.getInstance().getCurrentOrder();
+        // mOrder = Storage.getInstance().getCurrentOrder();
+        mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
     }
 }

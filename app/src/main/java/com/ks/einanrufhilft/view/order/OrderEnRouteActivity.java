@@ -63,7 +63,8 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void loadOrder() {
-        mOrder = Storage.getInstance().getCurrentOrder();
+        //mOrder = Storage.getInstance().getCurrentOrder();
+        mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
     }
 
     @Override

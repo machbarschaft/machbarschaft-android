@@ -3,16 +3,16 @@ package com.ks.einanrufhilft.Database;
 import android.util.Log;
 
 import com.ks.einanrufhilft.Database.Callback.CollectionLoadedCallback;
-import com.ks.einanrufhilft.Database.Callback.DocumentCallback;
 import com.ks.einanrufhilft.Database.Entitie.Account;
-import com.ks.einanrufhilft.Database.Entitie.Collection;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.Entitie.Order_Account;
 
 import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+/**
+ * Handles the access to with the database.
+ */
 public class DataAccess extends Database {
 
     private static DataAccess dataAccess;
@@ -26,7 +26,10 @@ public class DataAccess extends Database {
         return dataAccess;
     }
 
-
+    /**
+     * The status of a order. It can be open, which means that help is wanted.
+     * Confirmed means, that a user accepted the order and its closed once the order is finished.
+     */
     public enum Status
     {
         Open, Confirmed, Closed;

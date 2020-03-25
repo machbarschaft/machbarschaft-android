@@ -37,10 +37,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.BuildConfig;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 import com.ks.einanrufhilft.Database.OrderHandler;
+import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 import com.ks.einanrufhilft.util.DrawableUtil;
 import com.ks.einanrufhilft.view.order.OrderDetailActivity;
+import com.ks.einanrufhilft.view.order.OrderEnRouteActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -137,10 +139,19 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        initializeData();
-        initView();
-        startOrder();
-        updateMarkers();
+        /*
+         * Checks if there is already an order in progress. In this case, we directly jump
+         * to the map-navigation of the order and start the order Notification in the status bar.
+         */
+        if (Storage.getInstance().gotActiveOrder(getApplicationContext())) {
+            startOrderNotification();
+            startActivity(new Intent(this, OrderEnRouteActivity.class));
+            finishAfterTransition();
+        }
+
+        initializeData(); //loads the Data from the Database.
+        initView(); //initializes the Map and Recycler View
+        updateMarkers(); //deletes unnecessary Markers and adds new
     }
 
     @Override
@@ -221,6 +232,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 .addOnSuccessListener(location -> {
                     this.location = location;
                     sortData();
+                    orderAdapter.notifyDataSetChanged();
                     Log.d(LOG_TAG, "Last known location: " + location);
                     if (location == null || map == null) {
                         return;
@@ -348,12 +360,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     /**
-     * Handles the Start of Order
+     * Handles the Start of Order Notification
      */
-    private void startOrder() {
+    private void startOrderNotification() {
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
-        //todo handle event
-        //Storage.setOrderInProgress(getApplicationContext(), );
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 

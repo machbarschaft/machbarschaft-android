@@ -11,4 +11,5 @@ public final class ApplicationConstants {
 
     public static final String SHARED_PREF_ORDERINPROGRESS = "OrderInProgress";
     public static final String SHARED_PREF_ORDERINPRGRESS_KEY = "orderIDin";
+    public static final String SHARED_PREF_ORDERINPROGRESS_BOOL = "activeOrderIDbool";
 }

@@ -4,6 +4,8 @@ package com.ks.einanrufhilft.Database;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.ks.einanrufhilft.Database.Entitie.Order;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,6 +179,7 @@ public class OrderHandler {
 
 
 
+    @NotNull
     @Override
     public String toString() {
         return "OrderHandler{" +

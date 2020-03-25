@@ -2,6 +2,11 @@ package com.ks.einanrufhilft.Database.Entitie;
 
 import com.google.firebase.Timestamp;
 
+/**
+ * Give information about which account accepted which order and at which timestamp.
+ * The timestamp will help to determine, if a person, doesn't complete a accepted order,
+ * so we can give it to another helper.
+ */
 public class Order_Account extends Collection{
 
     private String account_id;
