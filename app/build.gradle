@@ -53,4 +53,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.passbase:passbase_sdk:1.7.7'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.3.2"
+    androidTestImplementation 'org.testng:testng:6.9.6'
 }
