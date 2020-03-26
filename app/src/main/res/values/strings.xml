@@ -9,22 +9,22 @@
     <string name="verify_wait_for_code">Bestätigungscode eingeben</string>
     <string name="verify_code_hint">Bestätigungscode per SMS</string>
 
-    <string name="registerTitle">Anmeldung vervollständigen</string>
-    <string name="registerSubtitleFirst">1. Basisinformationen</string>
-    <string name="registerSubtitleSecond">2. Identität verifizieren</string>
-    <string name="registerHintName">Vorname</string>
-    <string name="registerHintSurname">Nachname</string>
-    <string name="registerHintAddress">Anschrift</string>
-    <string name="registerHintPhone">Handynummer</string>
-    <string name="registerCheckAGB">AGB/Datenschutz</string>
-    <string name="registerButtonSend">Abschicken</string>
-    <string name="registerButtonBack">Zurück</string>
-    <string name="verifyPhoneButton">Bestätigen</string>
+    <string name="register_title">Anmeldung vervollständigen</string>
+    <string name="register_subtitle_first">1. Basisinformationen</string>
+    <string name="register_subtitle_second">2. Identität verifizieren</string>
+    <string name="register_hint_name">Vorname</string>
+    <string name="register_hint_surname">Nachname</string>
+    <string name="register_hint_address">Anschrift</string>
+    <string name="register_hint_phone">Handynummer</string>
+    <string name="register_check_agb">AGB/Datenschutz</string>
+    <string name="register_button_send">Abschicken</string>
+    <string name="register_button_back">Zurück</string>
+    <string name="verify_phone_button">Bestätigen</string>
 
-    <string name="intro1_text">Melde dich als Helfer an</string>
-    <string name="intro_2">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
-    <string name="intro_3">Kläre telefonisch das Anliegen</string>
-    <string name="intro_4">Erledige Besorgungen für Menschen in Not</string>
+    <string name="intro_1_text">Melde dich als Helfer an</string>
+    <string name="intro_2_text">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
+    <string name="intro_3_text">Kläre telefonisch das Anliegen</string>
+    <string name="intro_4_text">Erledige Besorgungen für Menschen in Not</string>
 
     <string name="order_title_groceries">Einkauf</string>
     <string name="order_title_medicine">Medikament</string>
@@ -75,6 +75,6 @@
     <string name="back_to_home">zum Home Screen</string>
 
     <string name="title_back">Zurück</string>
-    <string name="verifyTitle">Handynummer bestätigen</string>
-    <string name="verifyPhoneBtnSendCode">Code erneut senden</string>
+    <string name="verify_title">Handynummer bestätigen</string>
+    <string name="verify_phone_btn_send_code">Code erneut senden</string>
 </resources>
