@@ -28,7 +28,7 @@ public class Splash extends AppCompatActivity {
         myHandler.postDelayed(this::startLogin, 1200);
 
         // TESTS
-        DataAccessTest.getInstance().runTests();
+        // DataAccessTest.getInstance().runTests();
         //TESTS
     }
 
