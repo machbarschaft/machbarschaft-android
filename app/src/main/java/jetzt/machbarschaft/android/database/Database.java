@@ -20,9 +20,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.security.auth.callback.Callback;
+
 import jetzt.machbarschaft.android.database.callback.DocumentCallback;
 import jetzt.machbarschaft.android.database.callback.DocumentsCallback;
+import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Collection;
+import jetzt.machbarschaft.android.view.login.LoginMain;
 
 import static android.content.ContentValues.TAG;
 
@@ -59,20 +63,23 @@ public class Database {
 
 
     protected void getOneDocumentByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentCallback callback) {
-
+        Log.i("TEST" , "IDENT" + collection.toString() + condition.getKey() + condition.getValue().toString());
         db.collection(collection.toString())
                 .whereEqualTo(condition.getKey(), condition.getValue())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
-                            if (document.exists()) {
-                                callback.onDocumentLoad(document);
-                            } else {
-                                callback.onDocumentLoad(null);
-                            }
+                        if (task.isSuccessful() && task.getResult().getDocuments().get(0) != null) {
+
+                                DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                                Log.i("TEST", task.getResult().getDocuments().toString());
+                                if (document.exists()) {
+                                    callback.onDocumentLoad(document);
+                                } else {
+                                    callback.onDocumentLoad(null);
+                                }
+
                         } else {
                             Log.d(TAG, "Error getting document: ", task.getException());
                         }
@@ -148,29 +155,59 @@ public class Database {
         });
     }
 
-    public void addDocument(CollectionName collectionName, Collection document) {
+    public void addDocument(CollectionName collectionName, Collection document, WasSuccessfullCallback callback) {
         db.collection(collectionName.toString())
                 .add(document)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        if (callback != null) {
+                            callback.wasSuccessful(true);
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        if (callback != null) {
+                            callback.wasSuccessful(false);
+                        }
                     }
                 });
     }
 
+    public void addDocument(CollectionName collectionName, Collection document) {
+        addDocument(collectionName, document, null);
+    }
+
     protected void updateDocument(CollectionName collection, String documentId, AbstractMap.SimpleEntry<String, Object> updatePair) {
-        updateDocument(collection, documentId, null, updatePair);
+        updateDocument(collection, documentId, updatePair, null);
     }
 
     // callback can be added
-    protected void updateDocument(CollectionName collection, String documentId, final DocumentCallback callback, AbstractMap.SimpleEntry<String, Object> updatePair) {
-        DocumentReference docRef = db.collection(collection.toString()).document("documentId");
-        docRef.update(updatePair.getKey(), updatePair.getValue());
+    protected void updateDocument(CollectionName collection, String documentId, AbstractMap.SimpleEntry<String, Object> updatePair, final WasSuccessfullCallback callback) {
+
+        DocumentReference docRef = db.collection(collection.toString()).document(documentId);
+        //Log.i(docRef.getId());
+        docRef.update(updatePair.getKey(), updatePair.getValue()).
+                addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        if (callback != null) {
+
+                            callback.wasSuccessful(true);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (callback != null) {
+                            callback.wasSuccessful(false);
+                        }
+                    }
+                });
+
     }
 
     protected void updateDocument(CollectionName collection, final DocumentCallback callback, AbstractMap.SimpleEntry<String, Object> condition, HashMap<String, Object> updatePair) {

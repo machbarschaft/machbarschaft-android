@@ -7,62 +7,62 @@ import com.google.firebase.firestore.DocumentSnapshot;
  */
 public class Account extends Collection {
     private String id;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private float radius;
+    private String first_name;
+    private String last_name;
+    private String phone_number;
+    private double radius;
     private int credits;
 
     public Account() {
     }
 
-    public Account(String firstName, String lastName, String phoneNumber, int credits) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Account(String first_name, String last_name, String phone_number, int credits) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.credits = credits;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
     }
 
     public Account(DocumentSnapshot document) {
         this.id = document.getId();
-        this.firstName = (String) document.get("first_name");
-        this.lastName = (String) document.get("last_name");
-        this.phoneNumber = (String) document.get("phone_number");
+        this.first_name = (String) document.get("first_name");
+        this.last_name = (String) document.get("last_name");
+        this.phone_number = (String) document.get("phone_number");
         if (document.get("radius") != null)
-            this.radius = (float) document.get("radius");
+            this.radius = (double) document.get("radius");
         if (document.get("credits") != null)
-            this.credits = (int) document.get("credits");
+            this.credits =  Long.valueOf((long)document.get("credits")).intValue();
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String firstName) {
+        this.first_name = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String lastName) {
+        this.last_name = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone_number(String phoneNumber) {
+        this.phone_number = phoneNumber;
     }
 
-    public float getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public void setRadius(float radius) {
+    public void setRadius(double radius) {
         this.radius = radius;
     }
 
@@ -80,5 +80,18 @@ public class Account extends Collection {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", radius=" + radius +
+                ", credits=" + credits +
+                '}';
     }
 }

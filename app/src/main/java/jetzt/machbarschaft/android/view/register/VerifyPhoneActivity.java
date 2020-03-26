@@ -59,9 +59,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             if (userData[0].equals(tfCode.getText().toString())) {
                 // Add new account to firebase
                 Account newUser = new Account();
-                newUser.setFirstName(userData[1]);
-                newUser.setLastName(userData[2]);
-                newUser.setPhoneNumber(userData[4]);
+                newUser.setFirst_name(userData[1]);
+                newUser.setLast_name(userData[2]);
+                newUser.setPhone_number(userData[4]);
 
                 DataAccess.getInstance().createAccount(newUser);
 

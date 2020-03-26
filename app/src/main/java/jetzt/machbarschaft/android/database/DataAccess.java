@@ -5,7 +5,10 @@ import android.util.Log;
 import java.util.AbstractMap;
 import java.util.LinkedHashMap;
 
+import javax.security.auth.callback.Callback;
+
 import jetzt.machbarschaft.android.database.callback.CollectionLoadedCallback;
+import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderAccount;
@@ -31,7 +34,7 @@ public class DataAccess extends Database {
      * The status of a order. It can be open, which means that help is wanted.
      * Confirmed means, that a user accepted the order and its closed once the order is finished.
      * <p>
-     *     Use {@link Order.Status} instead.
+     * Use {@link Order.Status} instead.
      */
     @Deprecated
     public enum Status {
@@ -39,13 +42,14 @@ public class DataAccess extends Database {
     }
 
     public void createAccount(Account account) {
-        Log.i("TEST", "createAccount: ");
+        createAccount(account, null);
+    }
 
-        super.addDocument(CollectionName.Account, account);
+    public void createAccount(Account account, WasSuccessfullCallback callback) {
+        super.addDocument(CollectionName.Account, account, callback);
     }
 
     public void login(String phone_number, CollectionLoadedCallback callback) {
-        Log.i("TEST", "login: ");
 
         super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
                 document -> {
@@ -58,7 +62,7 @@ public class DataAccess extends Database {
     }
 
     public void getMyOrder(String phone_number) {
-        Log.i("TEST", "getMyOrder: ");
+
 
         LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
         conditions.put("phone_number", phone_number);
@@ -83,16 +87,25 @@ public class DataAccess extends Database {
     }
 
     public void getOrders() {
+        getOrders(null);
+    }
+
+    public void getOrders(WasSuccessfullCallback callback) {
         super.getCollection(CollectionName.Order, documents -> {
             OrderHandler.getInstance().addCollection(documents);
             //TODO:
             OrderHandler.getInstance().setUserPosition(OrderHandler.Type.Besteller, 50.555809, 9.680845);
-
+            if (callback != null) {
+                if (documents != null) {
+                    callback.wasSuccessful(true);
+                } else {
+                    callback.wasSuccessful(false);
+                }
+            }
         });
     }
 
     public void setOrderStatus(String orderId, Status status) {
-        Log.i("TEST", "setOrderStatus: ");
 
         if (status == Status.CONFIRMED) {
             // update Status in Collection Order
@@ -113,5 +126,54 @@ public class DataAccess extends Database {
         }
     }
 
+    public void setOrderStatus(String orderId, Status status, WasSuccessfullCallback callback) {
+        if (status == Status.CONFIRMED) {
+            // update Status in Collection Order
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
+                if (successful) {
+                    //  Adds Entry in Account order
+                    OrderAccount orderAccount = new OrderAccount();
+                    orderAccount.setStatus(status.toString());
+                    orderAccount.setAccountId(Storage.getInstance().getUserID());
+                    orderAccount.setOrderId(orderId);
+                    super.addDocument(CollectionName.Order_Account, orderAccount, innerSuccessful -> {
+                        if (innerSuccessful) {
+                            callback.wasSuccessful(true);
+                        } else {
+                            callback.wasSuccessful(false);
+                        }
+                    });
+                } else {
+                    callback.wasSuccessful(false);
+                }
+            });
+        } else if (status == Status.CLOSED) {
+            // update status in Collection Order
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
+                if (successful) {
+
+                    super.getOneDocumentByCondition(CollectionName.Order_Account, new AbstractMap.SimpleEntry<String, Object>("order_id", (Object)orderId),
+                            document -> {
+                                if (document.getId() != null) {
+                                    // update Status in Order_Account
+                                    super.updateDocument(CollectionName.Order_Account, document.getId(), new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), innerSuccessful -> {
+                                        if (innerSuccessful) {
+                                            callback.wasSuccessful(true);
+                                        } else {
+                                            callback.wasSuccessful(false);
+                                        }
+                                    });
+                                } else {
+                                    callback.wasSuccessful(false);
+                                }
+                            });
+                } else {
+                    callback.wasSuccessful(false);
+                }
+            });
+
+
+        }
+    }
 
 }

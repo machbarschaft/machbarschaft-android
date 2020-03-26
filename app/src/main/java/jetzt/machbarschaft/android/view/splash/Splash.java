@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.test.DataAccessTest;
 import jetzt.machbarschaft.android.view.login.LoginMain;
 
 
@@ -26,6 +27,9 @@ public class Splash extends AppCompatActivity {
 
         myHandler.postDelayed(this::startLogin, 1200);
 
+        // TESTS
+        DataAccessTest.getInstance().runTests();
+        //TESTS
     }
 
     @Override
