@@ -8,7 +8,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -66,12 +65,9 @@ public class LoginMain extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> login());
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, RegisterActivity.class);
-                startActivity(i);
-            }
+        registerButton.setOnClickListener(v -> {
+            Intent i = new Intent(context, RegisterActivity.class);
+            startActivity(i);
         });
     }
 
@@ -80,9 +76,9 @@ public class LoginMain extends AppCompatActivity {
         if (validate()) {
             loginButton.setEnabled(false);
 
-            final ProgressDialog progressDialog = new ProgressDialog(LoginMain.this);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Anmeldung...");
+            progressDialog.setMessage(getString(R.string.login_in_progress));
             progressDialog.show();
 
             String phoneNumberStr = phoneNumber.getText().toString();
@@ -112,10 +108,10 @@ public class LoginMain extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String phoneNumberStr = this.phoneNumber.getText().toString();
+        String phoneNumberStr = phoneNumber.getText().toString();
 
         if (phoneNumberStr.isEmpty() || !Patterns.PHONE.matcher(phoneNumberStr).matches()) {
-            phoneNumber.setError("Geben Sie eine valide Telefonnummer ein!");
+            phoneNumber.setError(getString(R.string.login_error_invalid_phone_number));
             valid = false;
         } else {
             phoneNumber.setError(null);
@@ -141,7 +137,7 @@ public class LoginMain extends AppCompatActivity {
      * Right now we show a small Toast which will show that the Login wasn't successfully.
      */
     private void onLoginFailed() {
-        Toast.makeText(this, "Anmelden fehlgeschlagen", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.login_error_generic, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -150,6 +146,7 @@ public class LoginMain extends AppCompatActivity {
      * @return true if the user is already logged in.
      */
     private boolean isLoggedIn() {
-        return getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0).getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, false);
+        return getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0)
+                .getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, false);
     }
 }

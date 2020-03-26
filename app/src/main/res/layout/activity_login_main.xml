@@ -42,7 +42,7 @@
                 android:id="@+id/input_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_phone_number"
+                android:hint="@string/login_hint_phone_number"
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="12dp"
-                android:text="@string/register" />
+                android:text="@string/login_action_register" />
 
             <Button
                 android:id="@+id/btn_login"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="12dp"
-                android:text="@string/login" />
+                android:text="@string/login_action_login" />
         </LinearLayout>
 
     </LinearLayout>

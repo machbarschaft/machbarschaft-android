@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#BF688B</color>
-    <color name="colorPrimaryDark">#D81B60</color>
-    <color name="colorAccent">#004eff</color>
+    <color name="color_primary">#BF688B</color>
+    <color name="color_primary_dark">#D81B60</color>
+    <color name="color_accent">#004eff</color>
 
-    <color name="selectorDotActive">@color/colorAccent</color>
+    <color name="selectorDotActive">@color/color_accent</color>
     <color name="selectorDotInactive">#AAAAAAAA</color>
 
     <color name="order_done_background">#279f14</color>
@@ -14,4 +14,6 @@
     <color name="text_white">#DAFFFFFF</color>
 
     <color name="dividers">#1F000000</color>
+
+    <color name="launcher_background">#DA6077</color>
 </resources>

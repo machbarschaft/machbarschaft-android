@@ -1,6 +1,5 @@
 package jetzt.machbarschaft.android.view.register;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -28,8 +27,6 @@ import kotlin.Pair;
  * Handles the Events to register. Includes the Passbase Video Ident and the registering with mobile number.
  */
 public class RegisterActivity extends AppCompatActivity {
-
-    private Context context;
     private boolean trusted = false;
     private boolean agbAccepted = false;
     private boolean codeSend = false;
@@ -38,8 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        context = this;
 
         // UI elements
         Toolbar toolbar = findViewById(R.id.register_toolbar);
@@ -67,21 +62,19 @@ public class RegisterActivity extends AppCompatActivity {
                 "",
                 new Pair[]{}
         );
-        PassbaseButton verificationButton = this.findViewById(R.id.passbase_verification_button);
+        PassbaseButton verificationButton = findViewById(R.id.passbase_verification_button);
         verificationButton.setOnClickListener(view -> passbaseRef.startVerification());
         // Callbacks for verification
         // Add here the callbacks
         passbaseRef.onCancelPassbaseVerification(() -> {
-            Toast t = Toast.makeText(context, "Verifikation fehlgeschlagen!", Toast.LENGTH_LONG);
-            t.show();
+            Toast.makeText(this, R.string.verify_error_generic, Toast.LENGTH_LONG).show();
             trusted = false;
 
             return null;
         });
 
         passbaseRef.onCompletePassbaseVerification(authKey -> {
-            Toast t1 = Toast.makeText(context, "Verifikation erfolgreich!", Toast.LENGTH_LONG);
-            t1.show();
+            Toast.makeText(this, R.string.verify_success, Toast.LENGTH_LONG).show();
             trusted = true;
 
             return null;
@@ -91,12 +84,12 @@ public class RegisterActivity extends AppCompatActivity {
         agbBox.setOnClickListener(view -> agbAccepted = ((CheckBox) view).isChecked());
 
         btnAddress.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.verify_address_dialog_message);
             builder.setCancelable(false);
 
             builder.setPositiveButton(
-                    "Verstanden",
+                    R.string.verify_address_dialog_understood,
                     (dialog, id) -> dialog.cancel());
 
             AlertDialog alert = builder.create();
@@ -106,8 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnSend.setOnClickListener(view -> {
             if (tfName.getText().toString().isEmpty() || tfSurname.getText().toString().isEmpty() || tfAddress.getText().toString().isEmpty() || tfPhone.getText().toString().isEmpty()) {
-                Toast t = Toast.makeText(getApplicationContext(), "Bitte fülle alle Felder aus!", Toast.LENGTH_LONG);
-                t.show();
+                Toast.makeText(getApplicationContext(), R.string.verify_error_fill_all_fields, Toast.LENGTH_LONG).show();
             } else {
                 if (trusted) {
                     if (agbAccepted) {
@@ -116,19 +108,17 @@ public class RegisterActivity extends AppCompatActivity {
                         if (codeSend) {
                             // Transfer user data in array: phone code, name, surname, address, phone number
                             String[] data = {code, tfName.getText().toString(), tfSurname.getText().toString(), tfAddress.getText().toString(), tfPhone.getText().toString()};
-                            Intent i = new Intent(context, VerifyPhoneActivity.class);
+                            Intent i = new Intent(this, VerifyPhoneActivity.class);
                             i.putExtra("registerData", data);
                             startActivity(i);
                         } else {
-                            Toast.makeText(getApplicationContext(), "SMS konnte nicht gesendet werden", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, R.string.verify_error_sms_send_failed, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast t = Toast.makeText(context, "Bitte akzeptiere unsere AGB", Toast.LENGTH_LONG);
-                        t.show();
+                        Toast.makeText(this, R.string.verify_error_no_agb, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast t = Toast.makeText(context, "Bitte verifiziere dich", Toast.LENGTH_LONG);
-                    t.show();
+                    Toast.makeText(this, R.string.verify_error_verify, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -138,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(getApplicationContext(), "SMS gesendet", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.verify_sms_sent, Toast.LENGTH_LONG).show();
             codeSend = true;
         } catch (Exception ex) {
             codeSend = false;

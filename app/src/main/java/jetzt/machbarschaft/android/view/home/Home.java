@@ -185,7 +185,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Sorts List, so that the nearest Orders are on top.
      */
     private void sortData() {
-
         Collections.sort(this.orderList, (o1, o2) -> {
             Location location1 = new Location("");
             location1.setLatitude(o1.getLatitude());
