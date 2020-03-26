@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context=".view.home.Home">
+    tools:context="jetzt.machbarschaft.android.view.home.Home">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_bar"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.register.VerifyPhoneActivity">
+    tools:context="jetzt.machbarschaft.android.view.register.VerifyPhoneActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,14 +15,13 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/verifyPhoneLblTitle"
+                android:id="@+id/verify_phone_lbl_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:clickable="false"
-                android:editable="false"
                 android:gravity="center"
                 android:text="@string/verifyTitle"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -32,10 +31,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verifyPhoneToolbar" />
+                app:layout_constraintTop_toBottomOf="@+id/verify_phone_toolbar" />
 
             <EditText
-                android:id="@+id/editTextCode"
+                android:id="@+id/edit_text_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -49,10 +48,10 @@
                 android:maxLength="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verifyPhoneLblTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <Button
-                android:id="@+id/buttonSignIn"
+                android:id="@+id/button_sign_in"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,10 +63,10 @@
                 android:text="@string/verifyPhoneButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextCode" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_code" />
 
             <Button
-                android:id="@+id/verifyPhoneBtnSendCode"
+                android:id="@+id/verify_phone_btn_send_code"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,10 +78,10 @@
                 android:text="@string/verifyPhoneBtnSendCode"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+                app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/verifyPhoneToolbar"
+                android:id="@+id/verify_phone_toolbar"
                 android:layout_width="409dp"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
