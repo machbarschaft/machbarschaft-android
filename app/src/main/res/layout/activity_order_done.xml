@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/order_done_background"
-    tools:context=".view.order.OrderDoneActivity">
+    tools:context="jetzt.machbarschaft.android.view.order.OrderDoneActivity">
 
     <ImageView
         android:id="@+id/done_icon"

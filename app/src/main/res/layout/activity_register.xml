@@ -5,7 +5,7 @@
     android:id="@+id/registerPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.register.RegisterActivity">
+    tools:context="jetzt.machbarschaft.android.view.register.RegisterActivity">
 
     <ScrollView
         android:id="@+id/register_layout"
