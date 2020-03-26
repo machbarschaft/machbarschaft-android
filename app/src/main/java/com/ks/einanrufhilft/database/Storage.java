@@ -1,18 +1,17 @@
-package com.ks.einanrufhilft.Database;
+package com.ks.einanrufhilft.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
-import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.database.entitie.Order;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 
 /**
  * This class saves the information about the user account and orders locally.
  */
 public class Storage {
-
     private static Storage storage;
 
     private String userID;
@@ -52,43 +51,46 @@ public class Storage {
      * @return
      */
     public static boolean setOrderInProgress(Context context, Order currentOrderID) {
-        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS, 0);
         Editor editor = pref.edit();
-        editor.putString(ApplicationConstants.SHARED_PREF_ORDERINPRGRESS_KEY, new Gson().toJson(currentOrderID));
+        editor.putString(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS_KEY, new Gson().toJson(currentOrderID));
         return editor.commit();
     }
 
     /**
      * Loads the order which is currently in progress.
+     *
      * @param context of the application
      * @return Order
      */
     public Order getOrderInProgress(Context context) {
-        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
-        return new Gson().fromJson(pref.getString(ApplicationConstants.SHARED_PREF_ORDERINPRGRESS_KEY, null), Order.class);
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS, 0);
+        return new Gson().fromJson(pref.getString(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS_KEY, null), Order.class);
     }
 
     /**
      * Checks if there is already an active order.
+     *
      * @param context of application
      * @return boolean true if there is an active order, otherwise false.
      */
     public boolean gotActiveOrder(Context context) {
-        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
-        return pref.getBoolean(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS_BOOL, false);
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS, 0);
+        return pref.getBoolean(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS_BOOL, false);
     }
 
     /**
      * Updates the boolean, if there is a active order. If active order is set to true, it means, that there
      * is currently an active order.
-     * @param context of application
+     *
+     * @param context        of application
      * @param gotActiveOrder boolean true if there is an active order
      * @return boolean true if the setting of the active order bool worked.
      */
     public boolean setActiveOrder(Context context, Boolean gotActiveOrder) {
-        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS, 0);
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS, 0);
         Editor editor = pref.edit();
-        editor.putBoolean(ApplicationConstants.SHARED_PREF_ORDERINPROGRESS_BOOL, gotActiveOrder);
+        editor.putBoolean(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS_BOOL, gotActiveOrder);
         return editor.commit();
     }
 }

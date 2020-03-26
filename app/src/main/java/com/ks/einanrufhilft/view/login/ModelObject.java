@@ -6,22 +6,21 @@ import com.ks.einanrufhilft.R;
  * Model Object for the Slideshow during the Login/Register Process to inform new Users about the intention of the app.
  */
 public enum ModelObject {
+    INTRO_1(R.string.app_name, R.layout.intro1),
+    INTRO_2(R.string.app_name, R.layout.intro2),
+    INTRO_3(R.string.app_name, R.layout.intro3),
+    INTRO_4(R.string.app_name, R.layout.intro4);
 
-    intro1(R.string.app_name, R.layout.intro1),
-    intro2(R.string.app_name, R.layout.intro2),
-    intro3(R.string.app_name, R.layout.intro3),
-    intro4(R.string.app_name, R.layout.intro4);
-
-    private int mTitlteResId;
+    private int mTitleResId;
     private int mLayoutResId;
 
     ModelObject(int titleResId, int layoutResId) {
-        mTitlteResId = titleResId;
+        mTitleResId = titleResId;
         mLayoutResId = layoutResId;
     }
 
     public int getTitleResId() {
-        return mTitlteResId;
+        return mTitleResId;
     }
 
     public int getLayoutResId() {

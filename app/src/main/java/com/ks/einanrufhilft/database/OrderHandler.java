@@ -1,8 +1,8 @@
-package com.ks.einanrufhilft.Database;
+package com.ks.einanrufhilft.database;
 
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.ks.einanrufhilft.Database.Entitie.Order;
+import com.ks.einanrufhilft.database.entitie.Order;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderHandler {
 
     private static OrderHandler orderHandler;
-    private GeoDataPerson lieferant;
+    private GeoDataPerson userPosition;
     //private ArrayList<GeoDataPerson> persons;
     private ArrayList<Order> orders;
 
@@ -40,8 +40,9 @@ public class OrderHandler {
 
     /**
      * Gets the distance to the order.
-     * @param firstPersonLat person Doing Request
-     * @param firstPersonLon person Doing Request
+     *
+     * @param firstPersonLat  person Doing Request
+     * @param firstPersonLon  person Doing Request
      * @param secondPersonLat Order Data
      * @param secondPersonLon Order Data
      * @return distance in metres
@@ -66,14 +67,15 @@ public class OrderHandler {
     }
 
     /**
-     *  Gives us the Persons within a specific distance.
+     * Gives us the Persons within a specific distance.
+     *
      * @param kmDistance in which radius the persons should be
      * @return persons in specific distance
      */
     public ArrayList<Order> getPersonInDistance(double kmDistance) {
         ArrayList<Order> closeOrders = new ArrayList<>();
-        for(Order order: orders) {
-            if(this.getDistanceInKm(order) < kmDistance) {
+        for (Order order : orders) {
+            if (this.getDistanceInKm(order) < kmDistance) {
                 closeOrders.add(order);
             }
         }
@@ -81,15 +83,15 @@ public class OrderHandler {
     }
 
     private double getDistanceInKm(Order order) {
-        return this.getDistance(order)/1000;
+        return this.getDistance(order) / 1000;
     }
 
     private double getDistance(Order order) {
 
         double lat1 = order.getLongitude();
         double lon1 = order.getLatitude();
-        double lat2 = this.lieferant.lat;
-        double lon2 = this.lieferant.lng;
+        double lat2 = this.userPosition.lat;
+        double lon2 = this.userPosition.lng;
 
         final int R = 6371; // Radius of the earth
 
@@ -114,7 +116,7 @@ public class OrderHandler {
         this.orders = null;
         this.orders = new ArrayList<>();
 
-        for(DocumentSnapshot doc: documents) {
+        for (DocumentSnapshot doc : documents) {
             this.orders.add(new Order(doc));
         }
     }
@@ -132,6 +134,7 @@ public class OrderHandler {
             this.lat = lat;
             this.lng = lng;
         }
+
         private Type type;
         private double lat;
         private double lng;
@@ -169,21 +172,20 @@ public class OrderHandler {
         this.closeDistanceSetting = closeDistanceSetting;
     }
 
-    public GeoDataPerson getLieferant() {
-        return lieferant;
+    public GeoDataPerson getUserPosition() {
+        return userPosition;
     }
 
-    public void setLieferant(Type type, double lat, double lng) {
-        this.lieferant = new GeoDataPerson(type,lat, lng);
+    public void setUserPosition(Type type, double lat, double lng) {
+        this.userPosition = new GeoDataPerson(type, lat, lng);
     }
-
 
 
     @NotNull
     @Override
     public String toString() {
         return "OrderHandler{" +
-                "lieferant=" + lieferant +
+                "lieferant=" + userPosition +
                 ", orders=" + orders +
                 ", closeDistanceSetting=" + closeDistanceSetting +
                 '}';

@@ -12,15 +12,14 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.Storage;
 import com.ks.einanrufhilft.view.home.Home;
 
 /**
  * Creates a notification in the status bar of android to display a order is in progress.
  */
 public class OrderInProgressNotification extends Service {
-
     private static final String CHANNEL_ID = "NotificationChannel";
 
     @Nullable

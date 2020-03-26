@@ -13,16 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
-import com.ks.einanrufhilft.Database.DataAccess;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.DataAccess;
 import com.ks.einanrufhilft.util.ApplicationConstants;
 import com.ks.einanrufhilft.view.home.Home;
 import com.ks.einanrufhilft.view.register.RegisterActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-import com.ks.einanrufhilft.Database.Database;
 
 
 /**
@@ -30,9 +29,6 @@ import com.ks.einanrufhilft.Database.Database;
  * Also can redirect to the register Page.
  */
 public class LoginMain extends AppCompatActivity {
-
-    private static final int HANDLER_SIGNUP = 0;
-
     private EditText phoneNumber;
     private Button loginButton;
     private Context context;
@@ -56,7 +52,7 @@ public class LoginMain extends AppCompatActivity {
         introSlidesPager.setAdapter(new CustomPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(introSlidesPager, true);
 
-        phoneNumber = findViewById(R.id.input_phonenumber);
+        phoneNumber = findViewById(R.id.input_phone_number);
         loginButton = findViewById(R.id.btn_login);
         Button registerButton = findViewById(R.id.btn_register);
 
@@ -134,7 +130,7 @@ public class LoginMain extends AppCompatActivity {
     private void onLoginSuccess() {
         SharedPreferences userData = getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0);
         Editor editor = userData.edit();
-        editor.putBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGEDIN, true);
+        editor.putBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, true);
         editor.apply();
         this.startActivity(new Intent(this, Home.class));
     }
@@ -153,6 +149,6 @@ public class LoginMain extends AppCompatActivity {
      * @return true if the user is already logged in.
      */
     private boolean isLoggedIn() {
-        return getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0).getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGEDIN, false);
+        return getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0).getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, false);
     }
 }

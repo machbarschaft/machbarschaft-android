@@ -12,7 +12,6 @@ import androidx.viewpager.widget.PagerAdapter;
  * Displays the Slideshow on the Login Page
  */
 public class CustomPagerAdapter extends PagerAdapter {
-
     private Context mContext;
 
     CustomPagerAdapter(Context context) {

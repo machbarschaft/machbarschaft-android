@@ -12,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.OrderHandler;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.OrderHandler;
+import com.ks.einanrufhilft.database.entitie.Order;
 
 import java.util.ArrayList;
 import java.util.List;

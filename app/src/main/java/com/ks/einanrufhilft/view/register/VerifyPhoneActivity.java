@@ -3,20 +3,17 @@ package com.ks.einanrufhilft.view.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.ks.einanrufhilft.Database.DataAccess;
-import com.ks.einanrufhilft.Database.Database;
-import com.ks.einanrufhilft.Database.Entitie.Account;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.DataAccess;
+import com.ks.einanrufhilft.database.entitie.Account;
 import com.ks.einanrufhilft.view.login.LoginMain;
 
 import java.util.Random;
@@ -25,6 +22,8 @@ import java.util.Random;
  * For verifying via SMS.
  */
 public class VerifyPhoneActivity extends AppCompatActivity {
+    private String[] userData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +32,13 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         // Get user data from calling activity
         Intent caller = getIntent();
         // Data for registration in array order: phone code, name, surname, address, phone number
-        String[] userData = caller.getStringArrayExtra("registerData");
+        userData = caller.getStringArrayExtra("registerData");
 
         // Get UI elements
-        Toolbar toolbar = findViewById(R.id.verifyPhoneToolbar);
-        Button btnSignin = findViewById(R.id.buttonSignIn);
-        Button btnSendCode = findViewById(R.id.verifyPhoneBtnSendCode);
-        EditText tfCode = findViewById(R.id.editTextCode);
+        Toolbar toolbar = findViewById(R.id.verify_phone_toolbar);
+        Button btnSignin = findViewById(R.id.button_sign_in);
+        Button btnSendCode = findViewById(R.id.verify_phone_btn_send_code);
+        EditText tfCode = findViewById(R.id.edit_text_code);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -48,41 +47,29 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
-            }
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
+
+        btnSendCode.setOnClickListener(view -> {
+            String code = getCode();
+            userData[0] = code;
+            sendSMS(userData[4], code);
         });
 
-        btnSendCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String code = getCode();
-                userData[0] = code;
-                sendSMS(userData[4], code);
-            }
-        });
+        btnSignin.setOnClickListener(view -> {
+            if (userData[0].equals(tfCode.getText().toString())) {
+                // Add new account to firebase
+                Account newUser = new Account();
+                newUser.setFirstName(userData[1]);
+                newUser.setLastName(userData[2]);
+                newUser.setPhoneNumber(userData[4]);
 
-        btnSignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                assert userData != null;
-                if(userData[0].equals(tfCode.getText().toString())) {
-                    // Add new account to firebase
-                    Account newUser = new Account();
-                    newUser.setFirst_name(userData[1]);
-                    newUser.setLast_name(userData[2]);
-                    newUser.setPhone_number(userData[4]);
+                DataAccess.getInstance().createAccount(newUser);
 
-                    DataAccess.getInstance().createAccount(newUser);
-
-                    Intent i = new Intent(getApplicationContext(), LoginMain.class);
-                    startActivity(i);
-                } else {
-                    Toast t = Toast.makeText(getApplicationContext(), "Code ungültig", Toast.LENGTH_LONG);
-                    t.show();
-                }
+                Intent i = new Intent(getApplicationContext(), LoginMain.class);
+                startActivity(i);
+            } else {
+                Toast t = Toast.makeText(getApplicationContext(), "Code ungültig", Toast.LENGTH_LONG);
+                t.show();
             }
         });
     }
@@ -91,12 +78,12 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         Random r = new Random();
         int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        String result = "";
-        for(int i=0; i<4; i++) {
-            result = result + array[r.nextInt(9)];
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            result.append(array[r.nextInt(9)]);
         }
 
-        return result;
+        return result.toString();
     }
 
     private void sendSMS(String phoneNo, String code) {
@@ -106,7 +93,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "SMS gesendet",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+            Toast.makeText(getApplicationContext(), ex.getMessage(),
                     Toast.LENGTH_LONG).show();
             ex.printStackTrace();
         }

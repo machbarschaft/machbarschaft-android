@@ -1,11 +1,11 @@
-package com.ks.einanrufhilft.Database;
+package com.ks.einanrufhilft.database;
 
 import android.util.Log;
 
-import com.ks.einanrufhilft.Database.Callback.CollectionLoadedCallback;
-import com.ks.einanrufhilft.Database.Entitie.Account;
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.Entitie.Order_Account;
+import com.ks.einanrufhilft.database.callback.CollectionLoadedCallback;
+import com.ks.einanrufhilft.database.entitie.Account;
+import com.ks.einanrufhilft.database.entitie.Order;
+import com.ks.einanrufhilft.database.entitie.OrderAccount;
 
 import java.util.AbstractMap;
 import java.util.LinkedHashMap;
@@ -17,7 +17,8 @@ public class DataAccess extends Database {
 
     private static DataAccess dataAccess;
 
-    private DataAccess() {}
+    private DataAccess() {
+    }
 
     public static DataAccess getInstance() {
         if (dataAccess == null) {
@@ -29,10 +30,12 @@ public class DataAccess extends Database {
     /**
      * The status of a order. It can be open, which means that help is wanted.
      * Confirmed means, that a user accepted the order and its closed once the order is finished.
+     * <p>
+     *     Use {@link Order.Status} instead.
      */
-    public enum Status
-    {
-        Open, Confirmed, Closed;
+    @Deprecated
+    public enum Status {
+        OPEN, CONFIRMED, CLOSED;
     }
 
     public void createAccount(Account account) {
@@ -47,7 +50,7 @@ public class DataAccess extends Database {
         super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
                 document -> {
                     Storage.getInstance().setUserID((String) document.getId());
-                    if(callback != null) {
+                    if (callback != null) {
                         Account account = new Account(document);
                         callback.onOrderLoaded(account);
                     }
@@ -62,7 +65,7 @@ public class DataAccess extends Database {
         conditions.put("status", "confirmed");
         super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
                 document -> {
-                    super.getDocumentById(CollectionName.Order ,document.getId(),
+                    super.getDocumentById(CollectionName.Order, document.getId(),
                             document2 -> {
                                 Storage.getInstance().setCurrentOrder(new Order(document2));
                             });
@@ -83,7 +86,7 @@ public class DataAccess extends Database {
         super.getCollection(CollectionName.Order, documents -> {
             OrderHandler.getInstance().addCollection(documents);
             //TODO:
-            OrderHandler.getInstance().setLieferant(OrderHandler.Type.Besteller, 50.555809, 9.680845);
+            OrderHandler.getInstance().setUserPosition(OrderHandler.Type.Besteller, 50.555809, 9.680845);
 
         });
     }
@@ -91,17 +94,17 @@ public class DataAccess extends Database {
     public void setOrderStatus(String orderId, Status status) {
         Log.i("TEST", "setOrderStatus: ");
 
-        if (status == Status.Confirmed) {
+        if (status == Status.CONFIRMED) {
             // update Status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
 
             //  Adds Entry in Account order
-            Order_Account orderAccount = new Order_Account();
+            OrderAccount orderAccount = new OrderAccount();
             orderAccount.setStatus(status.toString());
-            orderAccount.setAccount_id(Storage.getInstance().getUserID());
-            orderAccount.setOrder_id(orderId);
+            orderAccount.setAccountId(Storage.getInstance().getUserID());
+            orderAccount.setOrderId(orderId);
             super.addDocument(CollectionName.Order_Account, orderAccount);
-        } else if(status == Status.Closed) {
+        } else if (status == Status.CLOSED) {
             // update status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
 
@@ -109,8 +112,6 @@ public class DataAccess extends Database {
             super.updateDocument(CollectionName.Order_Account, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
         }
     }
-
-
 
 
 }

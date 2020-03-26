@@ -1,4 +1,4 @@
-package com.ks.einanrufhilft.Database.Entitie;
+package com.ks.einanrufhilft.database.entitie;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;

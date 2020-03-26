@@ -1,4 +1,4 @@
-package com.ks.einanrufhilft.Database;
+package com.ks.einanrufhilft.database;
 
 import android.util.Log;
 
@@ -12,11 +12,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.ks.einanrufhilft.Database.Callback.DocumentCallback;
-import com.ks.einanrufhilft.Database.Callback.DocumentsCallback;
-import com.ks.einanrufhilft.Database.Entitie.Collection;
+import com.ks.einanrufhilft.database.callback.DocumentCallback;
+import com.ks.einanrufhilft.database.callback.DocumentsCallback;
+import com.ks.einanrufhilft.database.entitie.Collection;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;

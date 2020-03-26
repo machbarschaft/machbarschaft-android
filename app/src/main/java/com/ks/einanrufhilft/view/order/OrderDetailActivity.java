@@ -18,11 +18,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ks.einanrufhilft.Database.DataAccess;
-import com.ks.einanrufhilft.Database.Database;
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.DataAccess;
+import com.ks.einanrufhilft.database.Database;
+import com.ks.einanrufhilft.database.Storage;
+import com.ks.einanrufhilft.database.entitie.Order;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 import com.ks.einanrufhilft.view.home.Home;
 
@@ -105,7 +105,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         }
 
         Database database = Database.getInstance();
-            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.Confirmed);
+        DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.CONFIRMED);
 
 
         Storage storage = Storage.getInstance();
@@ -124,7 +124,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
 
             Database database = Database.getInstance();
             DataAccess.getInstance().getOrderById(orderId, order -> {
-                mOrder = (Order)order;
+                mOrder = (Order) order;
                 Log.i("TEST", "loadOrder->getOrderById" + mOrder.toString());
 
                 applyOrderToViews();

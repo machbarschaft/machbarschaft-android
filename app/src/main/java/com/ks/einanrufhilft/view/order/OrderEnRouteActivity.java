@@ -13,13 +13,16 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ks.einanrufhilft.Database.DataAccess;
-import com.ks.einanrufhilft.Database.Database;
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.DataAccess;
+import com.ks.einanrufhilft.database.Database;
+import com.ks.einanrufhilft.database.Storage;
+import com.ks.einanrufhilft.database.entitie.Order;
+
+import java.util.Objects;
 
 public class OrderEnRouteActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "OrderEnRouteActivity";
@@ -35,11 +38,11 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-/*
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
-*/
+
         Button btnNavigate = findViewById(R.id.btn_navigate);
         btnNavigate.setOnClickListener(v -> navigateToAddress());
 
@@ -88,7 +91,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
     private void notifyOrderDone() {
         Database database = Database.getInstance();
         try {
-            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.Closed);
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.CLOSED);
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Failed to update order status!", exception);
         }

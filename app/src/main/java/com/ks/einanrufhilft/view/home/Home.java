@@ -2,7 +2,6 @@ package com.ks.einanrufhilft.view.home;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -11,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -35,10 +33,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ks.einanrufhilft.BuildConfig;
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.OrderHandler;
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.OrderHandler;
+import com.ks.einanrufhilft.database.Storage;
+import com.ks.einanrufhilft.database.entitie.Order;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 import com.ks.einanrufhilft.util.DrawableUtil;
 import com.ks.einanrufhilft.view.order.OrderDetailActivity;
@@ -46,7 +44,6 @@ import com.ks.einanrufhilft.view.order.OrderEnRouteActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -82,57 +79,46 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Button btnReport = findViewById(R.id.home_btn_bug_report);
 
         // Button action handlers
-        btnFAQ.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(R.string.home_faq_description);
-                builder.setCancelable(false);
-                builder.setPositiveButton(R.string.home_dialog_understood, (dialog, id) -> dialog.dismiss());
+        btnFAQ.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.home_faq_description);
+            builder.setCancelable(false);
+            builder.setPositiveButton(R.string.home_dialog_understood, (dialog, id) -> dialog.dismiss());
 
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
-        btnContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
-                startActivity(browserIntent);
-            }
+        btnContact.setOnClickListener(view -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
+            startActivity(browserIntent);
         });
 
-        btnReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(R.string.home_feedback_description);
-                builder.setCancelable(false);
+        btnReport.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.home_feedback_description);
+            builder.setCancelable(false);
 
-                builder.setPositiveButton(
-                        R.string.home_feedback_write_mail,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
-                                        "?subject=" + getString(R.string.home_feedback_subject) +
-                                        "&body=" + getString(R.string.home_feedback_body1) +
-                                        "\nVersion-Name: " + BuildConfig.VERSION_NAME +
-                                        "\nVersion-Code: " + BuildConfig.VERSION_CODE +
-                                        "\nAndroid-Version: " + Build.DISPLAY +
-                                        "\nDevice: " + Build.DEVICE +
-                                        "\nManufacturer: " + Build.MANUFACTURER +
-                                        "\nModel: " + Build.MODEL +
-                                        "\n\n" + getString(R.string.home_feedback_body2);
-                                Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
-                                startActivity(mailIntent);
-                            }
-                        });
-                builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
+            builder.setPositiveButton(
+                    R.string.home_feedback_write_mail,
+                    (dialog, id) -> {
+                        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
+                                "?subject=" + getString(R.string.home_feedback_subject) +
+                                "&body=" + getString(R.string.home_feedback_body1) +
+                                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
+                                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
+                                "\nAndroid-Version: " + Build.DISPLAY +
+                                "\nDevice: " + Build.DEVICE +
+                                "\nManufacturer: " + Build.MANUFACTURER +
+                                "\nModel: " + Build.MODEL +
+                                "\n\n" + getString(R.string.home_feedback_body2);
+                        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
+                        startActivity(mailIntent);
+                    });
+            builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
 
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -199,28 +185,25 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      */
     private void sortData() {
 
-        Collections.sort(this.orderList, new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                Location location1 = new Location("");
-                location1.setLatitude(o1.getLatitude());
-                location1.setLongitude(o1.getLongitude());
-                Location location2 = new Location("");
-                location2.setLatitude(o2.getLatitude());
-                location2.setLongitude(o2.getLongitude());
-                LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-                assert locationManager != null;
-                @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (myLocation != null) {
-                    double distance1 = myLocation.distanceTo(location1);
-                    double distance2 = myLocation.distanceTo(location2);
-                    Log.i("", "compare: " + distance1 + distance2);
-                    if (distance1 == distance2)
-                        return 0;
-                    return distance1 < distance2 ? -1 : 1;
-                }
-                return 0; //doesn't compare in case we can't get our own position
+        Collections.sort(this.orderList, (o1, o2) -> {
+            Location location1 = new Location("");
+            location1.setLatitude(o1.getLatitude());
+            location1.setLongitude(o1.getLongitude());
+            Location location2 = new Location("");
+            location2.setLatitude(o2.getLatitude());
+            location2.setLongitude(o2.getLongitude());
+            LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+            assert locationManager != null;
+            @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (myLocation != null) {
+                double distance1 = myLocation.distanceTo(location1);
+                double distance2 = myLocation.distanceTo(location2);
+                Log.i("", "compare: " + distance1 + distance2);
+                if (distance1 == distance2)
+                    return 0;
+                return distance1 < distance2 ? -1 : 1;
             }
+            return 0; //doesn't compare in case we can't get our own position
         });
     }
 

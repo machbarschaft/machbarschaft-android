@@ -10,9 +10,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.ks.einanrufhilft.Database.Entitie.Order;
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.Storage;
+import com.ks.einanrufhilft.database.entitie.Order;
 
 /**
  * Handles the case when someone accepts a order.

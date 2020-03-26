@@ -6,8 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ks.einanrufhilft.Database.Storage;
 import com.ks.einanrufhilft.R;
+import com.ks.einanrufhilft.database.Storage;
 import com.ks.einanrufhilft.services.OrderInProgressNotification;
 
 /**
