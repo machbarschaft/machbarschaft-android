@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:285249743751:android:7ce5a4a8c5fab98bb58122",
         "android_client_info": {
-          "package_name": "jetzt.machbarschaft.android"
+          "package_name": "com.ks.einanrufhilft"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "285249743751-b7k27cetdsl7kgofc7drg0i8132mnl3d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "jetzt.machbarschaft.android",
+            "package_name": "com.ks.einanrufhilft",
             "certificate_hash": "6b85ba2940976455a91d8a3daba1ac9dfa3a4d8c"
           }
         },
@@ -38,6 +38,49 @@
             {
               "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "285249743751-nlrh1klj49euqmobdcr6cbldarvbl8sb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.machbarschaft-ios.Machbarschaft"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285249743751:android:f9b2980a665b4cf5b58122",
+        "android_client_info": {
+          "package_name": "jetzt.machbarschaft.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl5J8tnPtuOEHSdRnIDm19Or1d0kO7QOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "285249743751-nlrh1klj49euqmobdcr6cbldarvbl8sb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.machbarschaft-ios.Machbarschaft"
+              }
             }
           ]
         }
