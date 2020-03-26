@@ -1,97 +1,96 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+    <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
-    <string name="confirm">Bestätigen</string>
-    <string name="title_back">Zurück</string>
+    <string name="confirm">Submit</string>
+    <string name="title_back">Back</string>
 
-    <string name="login_action_login">Anmelden</string>
-    <string name="login_action_register">Registrieren</string>
-    <string name="login_hint_phone_number">Handynummer</string>
-    <string name="login_in_progress">Anmeldung…</string>
-    <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
-    <string name="login_error_generic">Anmelden fehlgeschlagen</string>
+    <string name="login_action_login">Login</string>
+    <string name="login_action_register">Register</string>
+    <string name="login_hint_phone_number">Phonenumber</string>
+    <string name="login_in_progress">Login…</string>
+    <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
+    <string name="login_error_generic">Login failed</string>
 
-    <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>
-    <string name="verify_phone_code_hint">Bestätigungscode per SMS</string>
-    <string name="verify_phone_title">Handynummer bestätigen</string>
-    <string name="verify_phone_btn_send_code">Code erneut senden</string>
-    <string name="verify_phone_button">Bestätigen</string>
-    <string name="verify_phone_error_invalid_code">Code ungültig</string>
+    <string name="verify_phone_wait_for_code">Enter confirm-code</string>
+    <string name="verify_phone_code_hint">Confirmcode per sms</string>
+    <string name="verify_phone_title">Submit phonenumber</string>
+    <string name="verify_phone_btn_send_code">Resend code</string>
+    <string name="verify_phone_button">Submit</string>
+    <string name="verify_phone_error_invalid_code">Code invalid</string>
+    <string name="verify_address_dialog_message">We work on, finding your address with Maps.</string>
+    <string name="verify_address_dialog_understood">Gotcha</string>
+    <string name="verify_success">Verification successful</string>
+    <string name="verify_sms_sent">SMS sent </string>
+    <string name="verify_error_generic">Verification unsuccessful</string>
+    <string name="verify_error_fill_all_fields">Please fill all fields</string>
+    <string name="verify_error_sms_send_failed">SMS couldn\'t be send</string>
+    <string name="verify_error_no_agb">Please accept the conditions</string>
+    <string name="verify_error_verify">Please verify yourself.</string>
 
-    <string name="verify_address_dialog_message">Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.</string>
-    <string name="verify_address_dialog_understood">Verstanden</string>
-    <string name="verify_success">Verification erfolgreich</string>
-    <string name="verify_sms_sent">SMS gesendet</string>
-    <string name="verify_error_generic">Verifikation fehlgeschlagen</string>
-    <string name="verify_error_fill_all_fields">Bitte fülle alle Felder aus</string>
-    <string name="verify_error_sms_send_failed">SMS konnte nicht gesendet werden</string>
-    <string name="verify_error_no_agb">Bitte akzeptiere unsere AGB</string>
-    <string name="verify_error_verify">Bitte verifiziere dich</string>
+    <string name="register_title">Complete registration</string>
+    <string name="register_subtitle_first">1. Basic information</string>
+    <string name="register_subtitle_second">2. Verify identity</string>
+    <string name="register_hint_name">First name</string>
+    <string name="register_hint_surname">Surname</string>
+    <string name="register_hint_address">Address</string>
+    <string name="register_hint_phone">Mobile number</string>
+    <string name="register_check_agb">Conditions</string>
+    <string name="register_button_send">Submit</string>
+    <string name="register_button_back">Back</string>
 
-    <string name="register_title">Anmeldung vervollständigen</string>
-    <string name="register_subtitle_first">1. Basisinformationen</string>
-    <string name="register_subtitle_second">2. Identität verifizieren</string>
-    <string name="register_hint_name">Vorname</string>
-    <string name="register_hint_surname">Nachname</string>
-    <string name="register_hint_address">Anschrift</string>
-    <string name="register_hint_phone">Handynummer</string>
-    <string name="register_check_agb">AGB/Datenschutz</string>
-    <string name="register_button_send">Abschicken</string>
-    <string name="register_button_back">Zurück</string>
+    <string name="intro_1_text">Register as helper</string>
+    <string name="intro_2_text">Find people in your circle to whom you can do something good</string>
+    <string name="intro_3_text">Clear up the matter by phone</string>
+    <string name="intro_4_text">Supplies for people in need</string>
 
-    <string name="intro_1_text">Melde dich als Helfer an</string>
-    <string name="intro_2_text">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
-    <string name="intro_3_text">Kläre telefonisch das Anliegen</string>
-    <string name="intro_4_text">Erledige Besorgungen für Menschen in Not</string>
-
-    <string name="order_title_groceries">Einkauf</string>
-    <string name="order_title_medicine">Medikament</string>
-    <string name="order_title_other">Anderes</string>
-    <string name="order_urgency_urgent">Dringend</string>
-    <string name="order_urgency_today">Heute</string>
-    <string name="order_urgency_tomorrow">Morgen</string>
-    <string name="order_urgency_undefined">Irgendwann</string>
+    <string name="order_title_groceries">Purchase</string>
+    <string name="order_title_medicine">Medicine</string>
+    <string name="order_title_other">Other</string>
+    <string name="order_urgency_urgent">Urgent</string>
+    <string name="order_urgency_today">Today</string>
+    <string name="order_urgency_tomorrow">Tomorrow</string>
+    <string name="order_urgency_undefined">At some point</string>
 
     <string name="home_link_faq">FAQ</string>
-    <string name="home_link_contact">Kontakt</string>
-    <string name="home_link_bug_report">Problem melden</string>
-    <string name="home_faq_description">Wir arbeiten an einer Lösung, damit du unsere FAQ\'s hier bald sehen kannst.</string>
-    <string name="home_feedback_description">Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.</string>
-    <string name="home_feedback_write_mail">Email schreiben</string>
-    <string name="home_feedback_later">Später</string>
-    <string name="home_feedback_subject">Problem mit der Android App</string>
-    <string name="home_feedback_body1">Liebes Machbarschaft-Team,\n\nbei der Android App ist mir ein Problem aufgefallen. Die Technischen Informationen sind wie folgt:</string>
-    <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">Mein Problem ist ...</string>
-    <string name="home_dialog_understood">Verstanden</string>
+    <string name="home_link_contact">Contact</string>
+    <string name="home_link_bug_report">Report problem</string>
+    <string name="home_faq_description">We work on a soluation, so you can see our FAQ here.</string>
+    <string name="home_feedback_description">If you have a problem with our service, just send us a mail. We will take care of your request as soon as possible.</string>
+    <string name="home_feedback_write_mail">Send email</string>
+    <string name="home_feedback_later">Later</string>
+    <string name="home_feedback_subject">Problem with the Android App</string>
+    <string name="home_feedback_body1">Dear Feasibility Team, you know, I noticed a problem with the Android app. The technical information is as follows:</string>
+    <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">My problem is ...</string>
+    <string name="home_dialog_understood">Understood</string>
 
     <string name="home_order_distance_km">%1$.1f km</string>
-    <string name="home_order_extra_prescription">Rezept abhohlen</string>
-    <string name="home_order_extra_car">Auto erforderlich</string>
+    <string name="home_order_extra_prescription">Get recipe</string>
+    <string name="home_order_extra_car">Car needed</string>
 
-    <string name="order_detail_title">Der Auftrag</string>
-    <string name="order_detail_label_needs">benötigt</string>
-    <string name="order_detail_label_urgency">Erledigung</string>
-    <string name="order_detail_label_address">Adresse</string>
-    <string name="order_detail_accept_order">Auftrag annehmen</string>
+    <string name="order_detail_title">The order</string>
+    <string name="order_detail_label_needs">required</string>
+    <string name="order_detail_label_urgency">Discharge</string>
+    <string name="order_detail_label_address">Address</string>
+    <string name="order_detail_accept_order">Accept order</string>
 
-    <string name="order_accept_title">Schritt #1</string>
-    <string name="order_accept_text">Bitte beschprich Dich mit %1$s.</string>
-    <string name="call_now">Jetzt anrufen</string>
+    <string name="order_accept_title">Step #1</string>
+    <string name="order_accept_text">Please describe yourself with %1$s.</string>
+    <string name="call_now">Call now</string>
 
-    <string name="order_carry_out_title">Schritt #2</string>
-    <string name="order_carry_out_text">Sag uns bescheid, wenn Du unterwegs bist.</string>
-    <string name="start_to_execute_now">Ich gehe jetzt los</string>
-    <string name="start_to_execute_later">Ich gehe später los</string>
-    <string name="start_to_execute_failed">Ich konnte niemanden erreichen</string>
+    <string name="order_carry_out_title">Step #2</string>
+    <string name="order_carry_out_text">Tell us, when you are on your way.</string>
+    <string name="start_to_execute_now">I\'m leaving now</string>
+    <string name="start_to_execute_later">I will go later</string>
+    <string name="start_to_execute_failed">I could not reach anybody</string>
 
-    <string name="order_en_route_title">Schritt #3</string>
-    <string name="order_en_route_text">Auftrag erledigen.</string>
-    <string name="target_address">Ziel-Adresse</string>
-    <string name="calculate_route">Route berechnen</string>
-    <string name="order_done">Auftrag erledigt</string>
-    <string name="thank_you_text">Vielen Dank!\nDu bist toll!</string>
-    <string name="back_to_home">zum Home Screen</string>
+    <string name="order_en_route_title">Step #3</string>
+    <string name="order_en_route_text">Order completed.</string>
+    <string name="target_address">Target address</string>
+    <string name="calculate_route">Calculate route</string>
+    <string name="order_done">Order completed</string>
+    <string name="thank_you_text">Thank you!\n You are great!</string>
+    <string name="back_to_home">back to Home Screen</string>
 
-    <string name="order_notification_title">Aktiver Auftrag</string>
-    <string name="order_notification_message">Du erledigst gerade einen Auftrag für %1$s\nDie Adresse lautet %2$s</string>
-    <string name="notification_channel_current_order">Aktive Aufträge</string>
+    <string name="order_notification_title">Active Order</string>
+    <string name="order_notification_message">You are currently doing a order for %1$s\nThe address is  %2$s</string>
+    <string name="notification_channel_current_order">Active Orders</string>
 </resources>
