@@ -3,7 +3,6 @@ package jetzt.machbarschaft.android.view.order;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,7 +26,6 @@ import jetzt.machbarschaft.android.database.Database;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
-import jetzt.machbarschaft.android.view.home.Home;
 
 /**
  * Displays the Details of an order, after someone accepts it.
@@ -59,13 +57,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
-            }
-        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);

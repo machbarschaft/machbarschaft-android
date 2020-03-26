@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
+import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.view.home.Home;
 
 /**
@@ -40,30 +41,26 @@ public class OrderInProgressNotification extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startID) {
-
         createNotificationChannel();
-        Intent notifIntent = new Intent(this, Home.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, 0);
+        Intent notificationIntent = new Intent(this, Home.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
+        Order order = Storage.getInstance().getOrderInProgress(this);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText("Du erledigst gerade Auftrag für:  " + Storage.getInstance().getOrderInProgress(getApplicationContext()).getClientName() + " Die Adresse lautet: " + Storage.getInstance().getOrderInProgress(getApplicationContext()).getCompleteAddress())
+                .setContentTitle(getString(R.string.order_notification_title))
+                .setContentText(getString(R.string.order_notification_message, order.getClientName(), order.getCompleteAddress()))
                 .setSmallIcon(R.drawable.ic_machbarschaft_clear_white)
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(1, notification);
-
 
         return START_NOT_STICKY;
     }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Foreground Service Channel",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
+            NotificationChannel serviceChannel = new NotificationChannel(CHANNEL_ID,
+                    getString(R.string.notification_channel_current_order), NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             assert manager != null;
             manager.createNotificationChannel(serviceChannel);

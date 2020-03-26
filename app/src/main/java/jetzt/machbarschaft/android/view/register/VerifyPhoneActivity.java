@@ -36,7 +36,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         // Get UI elements
         Toolbar toolbar = findViewById(R.id.verify_phone_toolbar);
-        Button btnSignin = findViewById(R.id.button_sign_in);
+        Button btnSignIn = findViewById(R.id.button_sign_in);
         Button btnSendCode = findViewById(R.id.verify_phone_btn_send_code);
         EditText tfCode = findViewById(R.id.edit_text_code);
 
@@ -55,7 +55,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             sendSMS(userData[4], code);
         });
 
-        btnSignin.setOnClickListener(view -> {
+        btnSignIn.setOnClickListener(view -> {
             if (userData[0].equals(tfCode.getText().toString())) {
                 // Add new account to firebase
                 Account newUser = new Account();
@@ -68,8 +68,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), LoginMain.class);
                 startActivity(i);
             } else {
-                Toast t = Toast.makeText(getApplicationContext(), "Code ungültig", Toast.LENGTH_LONG);
-                t.show();
+                Toast.makeText(getApplicationContext(), R.string.verify_phone_error_invalid_code, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -90,7 +89,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(getApplicationContext(), "SMS gesendet",
+            Toast.makeText(getApplicationContext(), R.string.verify_sms_sent,
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.getMessage(),

@@ -1,13 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
-    <string name="login">Einloggen</string>
-    <string name="register">Registrieren</string>
-    <string name="login_create_account">Noch keinen Account? Erstell einen</string>
-    <string name="auth_we_need_your_phone_number">Wir benötigen ihre Nummer</string>
-    <string name="hint_phone_number">Handynummer</string>
     <string name="confirm">Bestätigen</string>
-    <string name="verify_wait_for_code">Bestätigungscode eingeben</string>
-    <string name="verify_code_hint">Bestätigungscode per SMS</string>
+    <string name="title_back">Zurück</string>
+
+    <string name="login_action_login">Anmelden</string>
+    <string name="login_action_register">Registrieren</string>
+    <string name="login_hint_phone_number">Handynummer</string>
+    <string name="login_in_progress">Anmeldung…</string>
+    <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
+    <string name="login_error_generic">Anmelden fehlgeschlagen</string>
+
+    <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>
+    <string name="verify_phone_code_hint">Bestätigungscode per SMS</string>
+    <string name="verify_phone_title">Handynummer bestätigen</string>
+    <string name="verify_phone_btn_send_code">Code erneut senden</string>
+    <string name="verify_phone_button">Bestätigen</string>
+    <string name="verify_phone_error_invalid_code">Code ungültig</string>
+
+    <string name="verify_address_dialog_message">Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.</string>
+    <string name="verify_address_dialog_understood">Verstanden</string>
+    <string name="verify_success">Verification erfolgreich</string>
+    <string name="verify_sms_sent">SMS gesendet</string>
+    <string name="verify_error_generic">Verifikation fehlgeschlagen</string>
+    <string name="verify_error_fill_all_fields">Bitte fülle alle Felder aus</string>
+    <string name="verify_error_sms_send_failed">SMS konnte nicht gesendet werden</string>
+    <string name="verify_error_no_agb">Bitte akzeptiere unsere AGB</string>
+    <string name="verify_error_verify">Bitte verifiziere dich</string>
 
     <string name="register_title">Anmeldung vervollständigen</string>
     <string name="register_subtitle_first">1. Basisinformationen</string>
@@ -19,7 +37,6 @@
     <string name="register_check_agb">AGB/Datenschutz</string>
     <string name="register_button_send">Abschicken</string>
     <string name="register_button_back">Zurück</string>
-    <string name="verify_phone_button">Bestätigen</string>
 
     <string name="intro_1_text">Melde dich als Helfer an</string>
     <string name="intro_2_text">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
@@ -74,7 +91,7 @@
     <string name="thank_you_text">Vielen Dank!\nDu bist toll!</string>
     <string name="back_to_home">zum Home Screen</string>
 
-    <string name="title_back">Zurück</string>
-    <string name="verify_title">Handynummer bestätigen</string>
-    <string name="verify_phone_btn_send_code">Code erneut senden</string>
+    <string name="order_notification_title">Aktiver Auftrag</string>
+    <string name="order_notification_message">Du erledigst gerade einen Auftrag für %1$s\nDie Adresse lautet %2$s</string>
+    <string name="notification_channel_current_order">Aktive Aufträge</string>
 </resources>
