@@ -14,8 +14,4 @@ public final class ApplicationConstants {
     public static final String SHARED_PREF_ORDER_IN_PROGRESS_KEY = "orderIDin";
     public static final String SHARED_PREF_ORDER_IN_PROGRESS_BOOL = "activeOrderIDbool";
     public static final String SHARED_PREF_ORDER_IN_STEP = "activeOrderStep";
-    public static final String STEP_1 = "step1";
-    public static final String STEP_2 = "step2";
-    public static final String STEP_3 = "step3";
-    public static final String STEP_4 = "step4";
 }

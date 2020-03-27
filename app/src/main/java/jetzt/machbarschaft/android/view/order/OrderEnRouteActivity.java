@@ -25,6 +25,7 @@ import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Database;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 
 public class OrderEnRouteActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOG_TAG = "OrderEnRouteActivity";
@@ -37,7 +38,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         setContentView(R.layout.activity_order_en_route);
 
         loadOrder();
-
+        Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP3_EnRoute);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

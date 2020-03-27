@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
+import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 
 /**
@@ -20,6 +21,7 @@ public class OrderDoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_done);
         Button btnHome = findViewById(R.id.btn_back_home);
+        Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP0_NONE);
         Storage.getInstance().setActiveOrder(getApplicationContext(), false);
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         stopService(serviceIntent); //stops the foregroundservice

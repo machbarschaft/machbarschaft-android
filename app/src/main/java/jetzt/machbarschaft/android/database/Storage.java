@@ -6,7 +6,9 @@ import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
 
+import io.sentry.core.protocol.App;
 import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.util.ApplicationConstants;
 
 /**
@@ -93,5 +95,17 @@ public class Storage {
         Editor editor = pref.edit();
         editor.putBoolean(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS_BOOL, gotActiveOrder);
         return editor.commit();
+    }
+
+    public boolean setCurrentStep(Context context, OrderSteps orderStep){
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS, 0);
+        Editor editor = pref.edit();
+        editor.putString(ApplicationConstants.SHARED_PREF_ORDER_IN_STEP, new Gson().toJson(orderStep));
+        return editor.commit();
+    }
+
+    public OrderSteps getCurrentStep(Context context){
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS,0 );
+        return new Gson().fromJson(pref.getString(ApplicationConstants.SHARED_PREF_ORDER_IN_STEP, null), OrderSteps.class);
     }
 }

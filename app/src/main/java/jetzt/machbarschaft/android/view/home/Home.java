@@ -48,8 +48,11 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 import jetzt.machbarschaft.android.util.DrawableUtil;
+import jetzt.machbarschaft.android.view.order.OrderAcceptActivity;
+import jetzt.machbarschaft.android.view.order.OrderCarryOutActivity;
 import jetzt.machbarschaft.android.view.order.OrderDetailActivity;
 import jetzt.machbarschaft.android.view.order.OrderEnRouteActivity;
 
@@ -132,8 +135,25 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
          */
         if (Storage.getInstance().gotActiveOrder(getApplicationContext())) {
             startOrderNotification();
-            startActivity(new Intent(this, OrderEnRouteActivity.class));
-            finishAfterTransition();
+            switch (Storage.getInstance().getCurrentStep(getApplicationContext())){
+                case STEP0_NONE:
+                    break;
+                case STEP1_PHONE:
+                    startActivity(new Intent(this, OrderAcceptActivity.class));
+                    finishAfterTransition();
+                    break;
+                case STEP2_CarryOut:
+                    startActivity(new Intent(this, OrderCarryOutActivity.class));
+                    finishAfterTransition();
+                    break;
+                case STEP3_EnRoute:
+                    startActivity(new Intent(this, OrderEnRouteActivity.class));
+                    finishAfterTransition();
+                    break;
+            }
+
+
+
         }
 
         initializeData(); //loads the Data from the Database.

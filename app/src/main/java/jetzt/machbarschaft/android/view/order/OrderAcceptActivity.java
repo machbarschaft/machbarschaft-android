@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 
 /**
  * Handles the case when someone accepts a order.
@@ -26,7 +27,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_accept);
 
         loadOrder();
-
+        Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP1_PHONE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
