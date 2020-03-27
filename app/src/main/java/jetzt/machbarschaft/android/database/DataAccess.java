@@ -10,6 +10,7 @@ import javax.security.auth.callback.Callback;
 import jetzt.machbarschaft.android.database.callback.CollectionLoadedCallback;
 import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Account;
+import jetzt.machbarschaft.android.database.entitie.Collection;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderAccount;
 
@@ -61,9 +62,8 @@ public class DataAccess extends Database {
                 });
     }
 
+    @Deprecated
     public void getMyOrder(String phone_number) {
-
-
         LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
         conditions.put("phone_number", phone_number);
         conditions.put("status", "confirmed");
@@ -76,12 +76,39 @@ public class DataAccess extends Database {
                 });
     }
 
+    public void getMyOrder(String phone_number, CollectionLoadedCallback callback) {
+
+
+        super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
+                document -> {
+                    Account account = new Account(document);
+                    if (account != null) {
+                        LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
+                        conditions.put("account_id", (Object) account.getId());
+                        conditions.put("status", "Confirmed");
+                        super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
+                                document2 -> {
+                                    if(document2.get("order_id") != null) {
+                                        this.getOrderById((String) document2.get("order_id"), callback);
+                                    } else {
+                                        Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
+                                    }
+                                });
+                    } else {
+                        Log.w("DataAccess", "No Account exists with this phone number");
+                    }
+                });
+    }
+
     public void getOrderById(String orderId, CollectionLoadedCallback callback) {
 
         super.getDocumentById(CollectionName.Order, orderId, document -> {
             if (document != null) {
                 Order order = new Order(document);
                 callback.onOrderLoaded(order);
+            } else {
+                Log.w("DataAccess", "getOrderById() : document was not found");
+                callback.onOrderLoaded(null);
             }
         });
     }
@@ -152,7 +179,7 @@ public class DataAccess extends Database {
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
                 if (successful) {
 
-                    super.getOneDocumentByCondition(CollectionName.Order_Account, new AbstractMap.SimpleEntry<String, Object>("order_id", (Object)orderId),
+                    super.getOneDocumentByCondition(CollectionName.Order_Account, new AbstractMap.SimpleEntry<String, Object>("order_id", (Object) orderId),
                             document -> {
                                 if (document.getId() != null) {
                                     // update Status in Order_Account

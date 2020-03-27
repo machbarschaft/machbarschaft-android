@@ -63,17 +63,16 @@ public class Database {
 
 
     protected void getOneDocumentByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentCallback callback) {
-        Log.i("TEST" , "IDENT" + collection.toString() + condition.getKey() + condition.getValue().toString());
+        Log.i("DataAccessTest",condition.toString());
         db.collection(collection.toString())
                 .whereEqualTo(condition.getKey(), condition.getValue())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && task.getResult().getDocuments().get(0) != null) {
-
+                        if (task.isSuccessful() && !task.getResult().getDocuments().isEmpty()) {
+                            Log.i("DataAccessTest", task.getResult().getDocuments().toString());
                                 DocumentSnapshot document = task.getResult().getDocuments().get(0);
-                                Log.i("TEST", task.getResult().getDocuments().toString());
                                 if (document.exists()) {
                                     callback.onDocumentLoad(document);
                                 } else {
@@ -91,7 +90,6 @@ public class Database {
 
         ArrayList<String> keys = new ArrayList<String>(condition.keySet());
         ArrayList<Object> values = new ArrayList<Object>(condition.values());
-
         db.collection(collection.toString())
                 .whereEqualTo(keys.get(0), values.get(0))
                 .whereEqualTo(keys.get(1), values.get(1))
@@ -99,7 +97,7 @@ public class Database {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()&& !task.getResult().getDocuments().isEmpty()) {
                             DocumentSnapshot document = task.getResult().getDocuments().get(0);
                             if (document.exists()) {
                                 callback.onDocumentLoad(document);

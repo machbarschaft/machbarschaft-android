@@ -24,9 +24,11 @@ public class DataAccessTest {
         Log.i("DataAccessTest", "Tests start:");
 
         //createAccount(); //passed
-        // login(); // passed
+        login(); // passed
         // getOrders(); // passed
         // setOrderStatus(); // passed
+        // getOrderById(); // passed
+        // getMyOrder(); // passed
     }
 
     private void createAccount() {
@@ -57,9 +59,36 @@ public class DataAccessTest {
         });
     }
 
+    private void getOrderById() {
+        DataAccess.getInstance().getOrderById("3Bh8isxyUHQ1Gny3G0Nn", order -> {
+            if (order != null) {
+                Log.i("DataAccessTest", "getOrderById: Success");
+                Log.i("DataAccessTest", order.toString());
+
+            } else {
+                Log.i("DataAccessTest", "getOrderById: Failure");
+            }
+        });
+    }
+
+    private void getMyOrder() {
+        Log.i("DataAccessTest", "getMyOrder: started");
+
+        DataAccess.getInstance().getMyOrder("0157 12345678", order -> {
+            if (order != null) {
+                Log.i("DataAccessTest", "getMyOrder: Success");
+                Log.i("DataAccessTest", order.toString());
+
+            } else {
+                Log.i("DataAccessTest", "getMyOrder: Failure");
+            }
+        });
+
+    }
+
     private void getOrders() {
         DataAccess.getInstance().getOrders(successful -> {
-            if(successful) {
+            if (successful) {
                 Log.i("DataAccessTest", "getOrders: Success");
             } else {
                 Log.i("DataAccessTest", "getOrders: Failure");
@@ -69,7 +98,7 @@ public class DataAccessTest {
 
     private void setOrderStatus() {
         // Confirmed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn",DataAccess.Status.CONFIRMED, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.CONFIRMED, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CONFIRMED:Success");
                 return;
@@ -79,7 +108,7 @@ public class DataAccessTest {
         });
 
         // Closed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn",DataAccess.Status.CLOSED, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.CLOSED, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CLOSED:Success");
                 return;
