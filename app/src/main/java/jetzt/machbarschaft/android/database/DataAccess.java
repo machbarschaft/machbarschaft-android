@@ -82,21 +82,17 @@ public class DataAccess extends Database {
         super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
                 document -> {
                     Account account = new Account(document);
-                    if (account != null) {
-                        LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
-                        conditions.put("account_id", (Object) account.getId());
-                        conditions.put("status", "Confirmed");
-                        super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
-                                document2 -> {
-                                    if(document2.get("order_id") != null) {
-                                        this.getOrderById((String) document2.get("order_id"), callback);
-                                    } else {
-                                        Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
-                                    }
-                                });
-                    } else {
-                        Log.w("DataAccess", "No Account exists with this phone number");
-                    }
+                    LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
+                    conditions.put("account_id", (Object) account.getId());
+                    conditions.put("status", "Confirmed");
+                    super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
+                            document2 -> {
+                                if(document2.get("order_id") != null) {
+                                    this.getOrderById((String) document2.get("order_id"), callback);
+                                } else {
+                                    Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
+                                }
+                            });
                 });
     }
 

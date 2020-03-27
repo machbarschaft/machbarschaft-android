@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -95,6 +96,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
             DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.CLOSED);
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Failed to update order status!", exception);
+            Crashlytics.logException(exception);
         }
     }
 }

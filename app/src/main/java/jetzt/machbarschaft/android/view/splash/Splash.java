@@ -7,6 +7,8 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
+
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.test.DataAccessTest;
 import jetzt.machbarschaft.android.view.login.LoginMain;

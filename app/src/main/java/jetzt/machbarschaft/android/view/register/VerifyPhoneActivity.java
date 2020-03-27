@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.util.Random;
 
 import jetzt.machbarschaft.android.R;
@@ -95,6 +97,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), ex.getMessage(),
                     Toast.LENGTH_LONG).show();
             ex.printStackTrace();
+            Crashlytics.logException(ex);
         }
     }
 }
