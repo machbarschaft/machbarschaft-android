@@ -7,12 +7,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import jetzt.machbarschaft.android.database.callback.CollectionLoadedCallback;
 import jetzt.machbarschaft.android.database.callback.CollectionsLoadedCallback;
 import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Account;
+import jetzt.machbarschaft.android.database.entitie.Collection;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderAccount;
 
