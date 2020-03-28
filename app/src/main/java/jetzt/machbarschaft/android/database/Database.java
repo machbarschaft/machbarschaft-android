@@ -110,7 +110,30 @@ public class Database {
                     }
                 });
     }
+    protected void getDocumentsByTwoConditions(CollectionName collection, LinkedHashMap<String, Object> condition, final DocumentsCallback callback) {
 
+        ArrayList<String> keys = new ArrayList<String>(condition.keySet());
+        ArrayList<Object> values = new ArrayList<Object>(condition.values());
+        db.collection(collection.toString())
+                .whereEqualTo(keys.get(0), values.get(0))
+                .whereEqualTo(keys.get(1), values.get(1))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()&& !task.getResult().getDocuments().isEmpty()) {
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            if (documents.size() > 0) {
+                                callback.onDocumentsLoad(documents);
+                            } else {
+                                callback.onDocumentsLoad(null);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting document: ", task.getException());
+                        }
+                    }
+                });
+    }
     protected void getDocumentsByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentsCallback callback) {
 
         db.collection(collection.toString())
