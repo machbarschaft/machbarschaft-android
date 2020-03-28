@@ -23,7 +23,7 @@ public class Order extends Collection {
      */
     private int listId;
     @NotNull
-    private Type type;
+    private Type type_of_help;
     private Status status;
     @NotNull
     private Urgency urgency;
@@ -39,7 +39,7 @@ public class Order extends Collection {
     private double longitude;
 
     public Order() {
-        type = Type.OTHER;
+        type_of_help = Type.OTHER;
         urgency = Urgency.UNDEFINED;
     }
 
@@ -47,7 +47,7 @@ public class Order extends Collection {
                  String houseNumber, String zipCode, String city, Status status, @NotNull Urgency urgency,
                  boolean getPrescription, boolean carNecessary, double latitude, double longitude) {
         this.id = id;
-        this.type = type;
+        this.type_of_help = type;
         this.phoneNumber = phoneNumber;
         this.zipCode = zipCode;
         this.street = street;
@@ -64,7 +64,7 @@ public class Order extends Collection {
     public Order(DocumentSnapshot document) {
         id = document.getId();
         // TODO get type form document
-        type = Type.byName(null);
+        type_of_help = Type.byName(document.getString("type_of_help"));
         status = Status.byName(document.getString("status"));
         urgency = Urgency.byName(document.getString("urgency"));
         clientName = document.getString("name");
@@ -132,17 +132,17 @@ public class Order extends Collection {
      * @return The type of the order.
      */
     @NotNull
-    public Type getType() {
-        return type;
+    public Type getType_of_help() {
+        return type_of_help;
     }
 
     /**
      * Sets the type of the order.
      *
-     * @param type The new type of the order.
+     * @param type_of_help The new type of the order.
      */
-    public void setType(@NotNull Type type) {
-        this.type = type;
+    public void setType_of_help(@NotNull Type type_of_help) {
+        this.type_of_help = type_of_help;
     }
 
     /**
