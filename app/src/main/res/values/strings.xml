@@ -28,7 +28,7 @@
 
     <string name="register_title">Complete registration</string>
     <string name="register_subtitle_first">1. Basic information</string>
-    <string name="register_subtitle_second">2. Verify identity</string>
+    <string name="register_subtitle_second">Verify identity</string>
     <string name="register_hint_name">First name</string>
     <string name="register_hint_surname">Surname</string>
     <string name="register_hint_address">Address</string>
