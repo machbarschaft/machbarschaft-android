@@ -22,6 +22,7 @@ import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.util.ApplicationConstants;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.register.RegisterActivity;
+import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
 
 
 /**

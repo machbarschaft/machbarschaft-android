@@ -13,7 +13,7 @@
     <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>
     <string name="verify_phone_code_hint">Bestätigungscode per SMS</string>
     <string name="verify_phone_title">Handynummer bestätigen</string>
-    <string name="verify_phone_btn_send_code">Code erneut senden</string>
+    <string name="verify_phone_btn_send_code"><u>Code erneut senden</u></string>
     <string name="verify_phone_button">Bestätigen</string>
     <string name="verify_phone_error_invalid_code">Code ungültig</string>
 
