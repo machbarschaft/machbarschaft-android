@@ -13,7 +13,7 @@
     <string name="verify_phone_wait_for_code">Enter confirm-code</string>
     <string name="verify_phone_code_hint">Confirmcode per sms</string>
     <string name="verify_phone_title">Submit phonenumber</string>
-    <string name="verify_phone_btn_send_code">Resend code</string>
+        <string name="verify_phone_btn_send_code"><u>Resend code</u></string>
     <string name="verify_phone_button">Submit</string>
     <string name="verify_phone_error_invalid_code">Code invalid</string>
     <string name="verify_address_dialog_message">We work on, finding your address with Maps.</string>
