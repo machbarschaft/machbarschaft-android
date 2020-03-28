@@ -98,7 +98,7 @@ public class DataAccessTest {
 
     private void setOrderStatus() {
         // Confirmed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.CONFIRMED, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.confirmed, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CONFIRMED:Success");
                 return;
@@ -108,7 +108,7 @@ public class DataAccessTest {
         });
 
         // Closed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.CLOSED, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.closed, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CLOSED:Success");
                 return;
