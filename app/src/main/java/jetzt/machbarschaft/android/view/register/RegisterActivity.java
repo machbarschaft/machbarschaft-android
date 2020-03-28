@@ -2,7 +2,7 @@ package jetzt.machbarschaft.android.view.register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,10 +17,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.passbase.passbase_sdk.Passbase;
 import com.passbase.passbase_sdk.PassbaseButton;
 
-import java.util.Random;
-
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.view.login.LoginMain;
+import jetzt.machbarschaft.android.view.register.sms.SMSData;
+import jetzt.machbarschaft.android.view.register.sms.SMSManager;
 import kotlin.Pair;
 
 /**
@@ -29,7 +30,6 @@ import kotlin.Pair;
 public class RegisterActivity extends AppCompatActivity {
     private boolean trusted = false;
     private boolean agbAccepted = false;
-    private boolean codeSend = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +103,8 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 if (trusted) {
                     if (agbAccepted) {
-                        String code = getCode();
-                        sendSMS(tfPhone.getText().toString(), code);
-                        if (codeSend) {
-                            // Transfer user data in array: phone code, name, surname, address, phone number
-                            String[] data = {code, tfName.getText().toString(), tfSurname.getText().toString(), tfAddress.getText().toString(), tfPhone.getText().toString()};
-                            Intent i = new Intent(this, VerifyPhoneActivity.class);
-                            i.putExtra("registerData", data);
-                            startActivity(i);
-                        } else {
-                            Toast.makeText(this, R.string.verify_error_sms_send_failed, Toast.LENGTH_LONG).show();
-                        }
+                        Account account = new Account(tfName.getText().toString(), tfSurname.getText().toString(),tfPhone.getText().toString(),0);
+                        SMSManager.getInstance().sendSMS(new SMSData(account),this);
                     } else {
                         Toast.makeText(this, R.string.verify_error_no_agb, Toast.LENGTH_LONG).show();
                     }
@@ -124,26 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void sendSMS(String phoneNo, String code) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(this, R.string.verify_sms_sent, Toast.LENGTH_LONG).show();
-            codeSend = true;
-        } catch (Exception ex) {
-            codeSend = false;
-        }
-    }
 
-    private String getCode() {
-        Random r = new Random();
-        int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            result.append(array[r.nextInt(9)]);
-        }
-
-        return result.toString();
-    }
 }

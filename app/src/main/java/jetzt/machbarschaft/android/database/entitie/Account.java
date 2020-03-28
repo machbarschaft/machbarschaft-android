@@ -2,10 +2,12 @@ package jetzt.machbarschaft.android.database.entitie;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.Serializable;
+
 /**
  * Class which determines Account Information's
  */
-public class Account extends Collection {
+public class Account extends Collection implements Serializable {
     private String id;
     private String first_name;
     private String last_name;

@@ -2,29 +2,22 @@ package jetzt.machbarschaft.android.view.register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.crashlytics.android.Crashlytics;
-
-import java.util.Random;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.database.entitie.Account;
-import jetzt.machbarschaft.android.view.login.LoginMain;
+import jetzt.machbarschaft.android.view.register.sms.SMSData;
+import jetzt.machbarschaft.android.view.register.sms.SMSManager;
 
 /**
  * For verifying via SMS.
  */
 public class VerifyPhoneActivity extends AppCompatActivity {
-    private String[] userData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +27,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         // Get user data from calling activity
         Intent caller = getIntent();
         // Data for registration in array order: phone code, name, surname, address, phone number
-        userData = caller.getStringArrayExtra("registerData");
 
         // Get UI elements
         Toolbar toolbar = findViewById(R.id.verify_phone_toolbar);
@@ -51,53 +43,15 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
 
+        SMSData smsData = (SMSData) caller.getSerializableExtra("smsData");
+        SMSManager smsManager = SMSManager.getInstance();
+
         btnSendCode.setOnClickListener(view -> {
-            String code = getCode();
-            userData[0] = code;
-            sendSMS(userData[4], code);
+            smsManager.sendSMS(smsData,this);
         });
 
         btnSignIn.setOnClickListener(view -> {
-            if (userData[0].equals(tfCode.getText().toString())) {
-                // Add new account to firebase
-                Account newUser = new Account();
-                newUser.setFirst_name(userData[1]);
-                newUser.setLast_name(userData[2]);
-                newUser.setPhone_number(userData[4]);
-
-                DataAccess.getInstance().createAccount(newUser);
-
-                Intent i = new Intent(getApplicationContext(), LoginMain.class);
-                startActivity(i);
-            } else {
-                Toast.makeText(getApplicationContext(), R.string.verify_phone_error_invalid_code, Toast.LENGTH_LONG).show();
-            }
+            smsManager.verifySmsCode(smsData,tfCode.getText().toString(),this);
         });
-    }
-
-    private String getCode() {
-        Random r = new Random();
-        int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            result.append(array[r.nextInt(9)]);
-        }
-
-        return result.toString();
-    }
-
-    private void sendSMS(String phoneNo, String code) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, code, null, null);
-            Toast.makeText(getApplicationContext(), R.string.verify_sms_sent,
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), ex.getMessage(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
-            Crashlytics.logException(ex);
-        }
     }
 }
