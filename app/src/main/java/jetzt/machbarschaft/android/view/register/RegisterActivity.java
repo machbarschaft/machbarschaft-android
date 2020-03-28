@@ -1,6 +1,8 @@
 package jetzt.machbarschaft.android.view.register;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -39,13 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
         // UI elements
         Toolbar toolbar = findViewById(R.id.register_toolbar);
         Button btnSend = findViewById(R.id.register_btn_send);
-        ImageButton btnAddress = findViewById(R.id.register_btn_address);
         CheckBox agbBox = findViewById(R.id.register_check_agb);
 
-        EditText tfName = findViewById(R.id.register_tf_name);
-        EditText tfSurname = findViewById(R.id.register_tf_surname);
         EditText tfPhone = findViewById(R.id.register_tf_phone);
-        EditText tfAddress = findViewById(R.id.register_tf_address);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -55,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginMain.class)));
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         final Passbase passbaseRef = new Passbase(this);
         passbaseRef.initialize(
@@ -83,20 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Button click handlers
         agbBox.setOnClickListener(view -> agbAccepted = ((CheckBox) view).isChecked());
 
-        btnAddress.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.verify_address_dialog_message);
-            builder.setCancelable(false);
-
-            builder.setPositiveButton(
-                    R.string.verify_address_dialog_understood,
-                    (dialog, id) -> dialog.cancel());
-
-            AlertDialog alert = builder.create();
-            alert.show();
-            // TODO Open Google Maps and let user select address
-        });
-
+        // TODO Get user information for new account from passbase key
+        /*
         btnSend.setOnClickListener(view -> {
             if (tfName.getText().toString().isEmpty() || tfSurname.getText().toString().isEmpty() || tfAddress.getText().toString().isEmpty() || tfPhone.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), R.string.verify_error_fill_all_fields, Toast.LENGTH_LONG).show();
@@ -113,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 
 

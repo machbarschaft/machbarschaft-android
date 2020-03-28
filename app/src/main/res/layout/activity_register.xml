@@ -5,58 +5,64 @@
     android:id="@+id/registerPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#31a08a"
     tools:context="jetzt.machbarschaft.android.view.register.RegisterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/register_btn_send"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#daece8"
+        android:padding="12dp"
+        android:text="@string/register_button_send"
+        android:textColor="#32a08a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/register_toolbar"
+        app:layout_constraintVertical_bias="0.9" />
 
     <ScrollView
         android:id="@+id/register_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/register_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/register_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/register_btn_address"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/color_primary"
-                app:layout_constraintBottom_toBottomOf="@+id/register_tf_address"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/register_tf_address"
-                app:layout_constraintTop_toTopOf="@+id/register_tf_address"
-                app:srcCompat="@android:drawable/ic_menu_mylocation" />
-
-            <Button
-                android:id="@+id/register_btn_send"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                android:text="@string/register_button_send"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/register_check_agb" />
-
             <TextView
                 android:id="@+id/register_lbl_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:clickable="false"
-                android:gravity="center"
+                android:fontFamily="@font/lato_bold"
+                android:gravity="center|left"
                 android:text="@string/register_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#000000"
@@ -65,21 +71,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_toolbar" />
-
-            <TextView
-                android:id="@+id/register_lbl_subtitle_first"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:clickable="false"
-                android:text="@string/register_subtitle_first"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_lbl_title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/register_lbl_subtitle_second"
@@ -88,6 +80,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:clickable="false"
+                android:fontFamily="@font/lato_bold"
                 android:text="@string/register_subtitle_second"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
@@ -96,85 +89,50 @@
                 app:layout_constraintTop_toBottomOf="@+id/register_tf_phone" />
 
             <EditText
-                android:id="@+id/register_tf_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:hint="@string/register_hint_name"
-                android:inputType="textShortMessage"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_lbl_subtitle_first" />
-
-            <EditText
-                android:id="@+id/register_tf_surname"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:hint="@string/register_hint_surname"
-                android:inputType="textShortMessage"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_tf_name" />
-
-            <EditText
-                android:id="@+id/register_tf_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:ems="10"
-                android:hint="@string/register_hint_address"
-                android:inputType="textShortMessage"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toStartOf="@+id/register_btn_address"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_tf_surname" />
-
-            <EditText
                 android:id="@+id/register_tf_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/verification_number_background"
                 android:ems="10"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
                 android:hint="@string/register_hint_phone"
                 android:inputType="phone|number"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_tf_address" />
+                app:layout_constraintTop_toBottomOf="@+id/register_lbl_title" />
 
             <com.passbase.passbase_sdk.PassbaseButton
                 android:id="@+id/passbase_verification_button"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 app:backgroundColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_lbl_subtitle_second"
                 app:textColor="@android:color/black" />
 
             <CheckBox
                 android:id="@+id/register_check_agb"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/lato"
                 android:text="@string/register_check_agb"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toEndOf="@+id/passbase_verification_button"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passbase_verification_button" />
 
@@ -184,17 +142,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="205dp" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/register_toolbar"
-                android:layout_width="409dp"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

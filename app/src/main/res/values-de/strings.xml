@@ -14,7 +14,7 @@
     <string name="verify_phone_code_hint">Bestätigungscode per SMS</string>
     <string name="verify_phone_title">Handynummer bestätigen</string>
     <string name="verify_phone_btn_send_code"><u>Code erneut senden</u></string>
-    <string name="verify_phone_button">Bestätigen</string>
+    <string name="verify_phone_button">Weiter</string>
     <string name="verify_phone_error_invalid_code">Code ungültig</string>
 
     <string name="verify_address_dialog_message">Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.</string>
@@ -29,13 +29,13 @@
 
     <string name="register_title">Anmeldung vervollständigen</string>
     <string name="register_subtitle_first">1. Basisinformationen</string>
-    <string name="register_subtitle_second">2. Identität verifizieren</string>
+    <string name="register_subtitle_second">Identität verifizieren</string>
     <string name="register_hint_name">Vorname</string>
     <string name="register_hint_surname">Nachname</string>
     <string name="register_hint_address">Anschrift</string>
     <string name="register_hint_phone">Handynummer</string>
     <string name="register_check_agb">AGB/Datenschutz</string>
-    <string name="register_button_send">Abschicken</string>
+    <string name="register_button_send">Absenden</string>
     <string name="register_button_back">Zurück</string>
 
     <string name="intro_1_text">Melde dich als Helfer an</string>
