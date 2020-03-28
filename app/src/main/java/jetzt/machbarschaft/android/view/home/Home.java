@@ -47,6 +47,7 @@ import jetzt.machbarschaft.android.BuildConfig;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.Storage;
+import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
