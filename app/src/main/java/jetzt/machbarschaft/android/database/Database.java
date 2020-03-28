@@ -36,22 +36,15 @@ import static android.content.ContentValues.TAG;
 public class Database {
     private FirebaseFirestore db;
 
-    //TODO: -> Database abstract class
-    private static Database myDBClass;
-
-    public static Database getInstance() {
-        if (myDBClass == null) {
-            myDBClass = new Database();
-        }
-        return myDBClass;
-    }
-
     enum CollectionName {
         Order,
         Account,
         Order_Account
     }
 
+    /**
+     * constructor
+     */
     protected Database() {
         db = FirebaseFirestore.getInstance();
 
@@ -62,6 +55,13 @@ public class Database {
     }
 
 
+    /** The method returns a document by a condition you pass in, the condition should only
+     * be true for a single document
+     *
+     * @param collection name of the collection/table you want data from
+     * @param condition get the document where this condition is true
+     * @param callback is called with the fetched document or null (if no document was found)
+     */
     protected void getOneDocumentByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentCallback callback) {
         Log.i("DataAccessTest",condition.toString());
         db.collection(collection.toString())
@@ -86,6 +86,13 @@ public class Database {
                 });
     }
 
+    /** The method returns a document by the two condition you pass in, the condition should only
+     * be true for a single document
+     *
+     * @param collection name of the collection/table you want data from
+     * @param condition 2 key value pairs on which basis we get a document
+     * @param callback is called with the fetched document or null (if no document was found)
+     */
     protected void getOneDocumentByTwoConditions(CollectionName collection, LinkedHashMap<String, Object> condition, final DocumentCallback callback) {
 
         ArrayList<String> keys = new ArrayList<String>(condition.keySet());
@@ -111,6 +118,43 @@ public class Database {
                 });
     }
 
+    /** The method returns a a list of documents by a condition passed in
+     *
+     *
+     * @param collection name of the collection/table you want data from
+     * @param condition 2 key value pairs on which basis we get a document
+     * @param callback is called with a list of fetched documents or null (if no document was found)
+     */
+    protected void getDocumentsByTwoConditions(CollectionName collection, LinkedHashMap<String, Object> condition, final DocumentsCallback callback) {
+
+        ArrayList<String> keys = new ArrayList<String>(condition.keySet());
+        ArrayList<Object> values = new ArrayList<Object>(condition.values());
+        db.collection(collection.toString())
+                .whereEqualTo(keys.get(0), values.get(0))
+                .whereEqualTo(keys.get(1), values.get(1))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()&& !task.getResult().getDocuments().isEmpty()) {
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            if (documents.size() > 0) {
+                                callback.onDocumentsLoad(documents);
+                            } else {
+                                callback.onDocumentsLoad(null);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting document: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * @param collection name of the collection/table you want data from
+     * @param condition a key value pair on which basis we get a document
+     * @param callback is called with a list of fetched documents or null (if no document was found)
+     */
     protected void getDocumentsByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentsCallback callback) {
 
         db.collection(collection.toString())
@@ -133,6 +177,11 @@ public class Database {
                 });
     }
 
+    /**
+     * @param collection name of the collection/table you want data from
+     * @param documentId the id of the document
+     * @param callback is called with a fetched document or null (if no document was found)
+     */
     protected void getDocumentById(CollectionName collection, String documentId, final DocumentCallback callback) {
         DocumentReference docRef = db.collection(collection.toString()).document(documentId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -153,6 +202,12 @@ public class Database {
         });
     }
 
+    /** adds a document to a collection
+     *
+     * @param collectionName name of the collection/table where you want to add data to
+     * @param document the document which shall be added
+     * @param callback a response weather the addition was successful
+     */
     public void addDocument(CollectionName collectionName, Collection document, WasSuccessfullCallback callback) {
         db.collection(collectionName.toString())
                 .add(document)
@@ -174,15 +229,32 @@ public class Database {
                 });
     }
 
+    /** adds a document to a collection
+     *
+     * @param collectionName name of the collection/table where you want to add data to
+     * @param document the document which shall be added
+     */
     public void addDocument(CollectionName collectionName, Collection document) {
         addDocument(collectionName, document, null);
     }
 
+    /** updates a value in a document
+     *
+     * @param collection name of the collection/table where you want to update data
+     * @param documentId the id of the document where the data shall be updated
+     * @param updatePair a key - value pair, which shall be updated
+     */
     protected void updateDocument(CollectionName collection, String documentId, AbstractMap.SimpleEntry<String, Object> updatePair) {
         updateDocument(collection, documentId, updatePair, null);
     }
 
-    // callback can be added
+    /**updates a value in a document
+     *
+     * @param collection name of the collection/table where you want to update data
+     * @param documentId the id of the document where the data shall be updated
+     * @param updatePair a key - value pair, which shall be updated
+     * @param callback a response weather the update was successful
+     */
     protected void updateDocument(CollectionName collection, String documentId, AbstractMap.SimpleEntry<String, Object> updatePair, final WasSuccessfullCallback callback) {
 
         DocumentReference docRef = db.collection(collection.toString()).document(documentId);
@@ -208,9 +280,12 @@ public class Database {
 
     }
 
-    protected void updateDocument(CollectionName collection, final DocumentCallback callback, AbstractMap.SimpleEntry<String, Object> condition, HashMap<String, Object> updatePair) {
-    }
 
+    /** returns a full collection in an callback
+     *
+     * @param collectionName the collection
+     * @param callback called with the collection or null (if the collection wasn't found)
+     */
     protected void getCollection(CollectionName collectionName, final DocumentsCallback callback) {
 
         db.collection("Order")

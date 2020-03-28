@@ -3,9 +3,9 @@
     <string name="confirm">Submit</string>
     <string name="title_back">Back</string>
 
-    <string name="login_action_login">Login</string>
+    <string name="login_action_login">Start now</string>
     <string name="login_action_register">Register</string>
-    <string name="login_hint_phone_number">Phonenumber</string>
+    <string name="login_hint_phone_number">Enter phonenumber</string>
     <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
     <string name="login_error_generic">Login failed</string>
@@ -13,7 +13,7 @@
     <string name="verify_phone_wait_for_code">Enter confirm-code</string>
     <string name="verify_phone_code_hint">Confirmcode per sms</string>
     <string name="verify_phone_title">Submit phonenumber</string>
-    <string name="verify_phone_btn_send_code">Resend code</string>
+        <string name="verify_phone_btn_send_code"><u>Resend code</u></string>
     <string name="verify_phone_button">Submit</string>
     <string name="verify_phone_error_invalid_code">Code invalid</string>
     <string name="verify_address_dialog_message">We work on, finding your address with Maps.</string>
@@ -28,7 +28,7 @@
 
     <string name="register_title">Complete registration</string>
     <string name="register_subtitle_first">1. Basic information</string>
-    <string name="register_subtitle_second">2. Verify identity</string>
+    <string name="register_subtitle_second">Verify identity</string>
     <string name="register_hint_name">First name</string>
     <string name="register_hint_surname">Surname</string>
     <string name="register_hint_address">Address</string>

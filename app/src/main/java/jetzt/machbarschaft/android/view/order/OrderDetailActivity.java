@@ -79,7 +79,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         }
 
         mNameView.setText(mOrder.getClientName());
-        mNeedsView.setText(mOrder.getType().getTitle());
+        mNeedsView.setText(mOrder.getType_of_help().getTitle());
         mUrgencyView.setText(mOrder.getUrgency().getTitle());
         StringBuilder address = new StringBuilder();
         address.append(mOrder.getStreet());

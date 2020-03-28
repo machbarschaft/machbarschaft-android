@@ -89,7 +89,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             Context context = view.getContext();
 
             // Build extras
-            String typeText = context.getString(order.getType().getTitle());
+            String typeText = context.getString(order.getType_of_help().getTitle());
             List<String> extras = new ArrayList<>();
             if (order.getPrescription()) {
                 extras.add(context.getString(R.string.home_order_extra_prescription));

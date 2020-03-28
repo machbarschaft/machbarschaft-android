@@ -2,12 +2,21 @@ package jetzt.machbarschaft.android.database.entitie;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 
 /**
  * Class which determines Account Information's
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Account extends Collection implements Serializable {
+
     private String id;
     private String first_name;
     private String last_name;
@@ -36,55 +45,8 @@ public class Account extends Collection implements Serializable {
             this.credits =  Long.valueOf((long)document.get("credits")).intValue();
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
 
-    public void setFirst_name(String firstName) {
-        this.first_name = firstName;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String lastName) {
-        this.last_name = lastName;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phoneNumber) {
-        this.phone_number = phoneNumber;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
+    @NotNull
     @Override
     public String toString() {
         return "Account{" +

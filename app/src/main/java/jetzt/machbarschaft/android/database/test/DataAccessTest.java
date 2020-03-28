@@ -30,6 +30,7 @@ public class DataAccessTest {
         // setOrderStatus(); // passed
         // getOrderById(); // passed
         // getMyOrder(); // passed
+        getMyOrders();
     }
 
     private void createAccount() {
@@ -84,7 +85,19 @@ public class DataAccessTest {
                 Log.i("DataAccessTest", "getMyOrder: Failure");
             }
         });
+    }
 
+    private void getMyOrders() {
+        Log.i("DataAccessTest", "getMyOrders: started");
+
+        DataAccess.getInstance().getMyOrders("+4915233145276", orderList -> {
+            if (orderList != null) {
+                Log.i("DataAccessTest", "getMyOrders: Success");
+                Log.i("DataAccessTest", orderList.toString());
+            } else {
+                Log.i("DataAccessTest", "getMyOrders: Failure");
+            }
+        });
     }
 
     private void getOrders() {

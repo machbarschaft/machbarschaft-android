@@ -2,10 +2,15 @@ package jetzt.machbarschaft.android.database;
 
 import android.util.Log;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import jetzt.machbarschaft.android.database.callback.CollectionLoadedCallback;
+import jetzt.machbarschaft.android.database.callback.CollectionsLoadedCallback;
 import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.database.entitie.Order;
@@ -56,7 +61,7 @@ public class DataAccess extends Database {
                 document -> super.getDocumentById(CollectionName.Order, document.getId(),
                         document2 -> Storage.getInstance().setCurrentOrder(new Order(document2))));
     }
-
+    @Deprecated
     public void getMyOrder(String phone_number, CollectionLoadedCallback callback) {
 
 
@@ -72,6 +77,32 @@ public class DataAccess extends Database {
                                     this.getOrderById((String) document2.get("order_id"), callback);
                                 } else {
                                     Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
+                                }
+                            });
+                });
+    }
+
+    public void getMyOrders(String phone_number, CollectionsLoadedCallback callback) {
+
+        super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
+                document -> {
+                    Account account = new Account(document);
+                    LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
+                    conditions.put("account_id", (Object) account.getId());
+                    conditions.put("status", "confirmed");
+                    super.getDocumentsByTwoConditions(CollectionName.Order_Account, conditions,
+                            documentList -> {
+                                ArrayList<Collection> orders = new ArrayList<>();
+                                for(DocumentSnapshot d: documentList) {
+                                    if(d.get("order_id") != null) {
+                                        orders.add(new Order(d));
+                                    }
+                                }
+                                if(!orders.isEmpty()) {
+                                    callback.onOrdersLoaded(orders);
+                                } else {
+                                    callback.onOrdersLoaded(null);
+
                                 }
                             });
                 });
