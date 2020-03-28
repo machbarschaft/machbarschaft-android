@@ -4,6 +4,7 @@ import android.util.Log;
 
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.entitie.Account;
+import jetzt.machbarschaft.android.database.entitie.Order;
 
 public class DataAccessTest {
     private static DataAccessTest test;
@@ -98,17 +99,16 @@ public class DataAccessTest {
 
     private void setOrderStatus() {
         // Confirmed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.confirmed, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", Order.Status.CONFIRMED, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CONFIRMED:Success");
-                return;
             } else {
                 Log.i("DataAccessTest", "setOrderStatus: CONFIRMED:Failure");
             }
         });
 
         // Closed
-        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", DataAccess.Status.closed, successful -> {
+        DataAccess.getInstance().setOrderStatus("3Bh8isxyUHQ1Gny3G0Nn", Order.Status.CLOSED, successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "setOrderStatus: CLOSED:Success");
                 return;

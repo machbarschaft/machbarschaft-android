@@ -95,7 +95,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.confirmed);
+        DataAccess.getInstance().setOrderStatus(mOrder.getId(), Order.Status.CONFIRMED);
 
 
         Storage storage = Storage.getInstance();

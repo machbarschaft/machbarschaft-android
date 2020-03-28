@@ -460,9 +460,9 @@ public class Order extends Collection {
      * processed by some one.
      */
     public enum Status {
-        OPEN("OPEN"),
-        CONFIRMED("CONFIRMED"),
-        CLOSED("CLOSED");
+        OPEN("open"),
+        CONFIRMED("confirmed"),
+        CLOSED("closed");
 
         @NotNull
         private final String name;
