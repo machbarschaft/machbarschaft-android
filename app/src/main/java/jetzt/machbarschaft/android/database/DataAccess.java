@@ -39,7 +39,8 @@ public class DataAccess extends Database {
      */
     @Deprecated
     public enum Status {
-        OPEN, CONFIRMED, CLOSED;
+        //OPEN, CONFIRMED, CLOSED;
+        open, confirmed, closed;
     }
 
     public void createAccount(Account account) {
@@ -130,7 +131,7 @@ public class DataAccess extends Database {
 
     public void setOrderStatus(String orderId, Status status) {
 
-        if (status == Status.CONFIRMED) {
+        if (status == Status.confirmed) {
             // update Status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
 
@@ -140,7 +141,7 @@ public class DataAccess extends Database {
             orderAccount.setAccountId(Storage.getInstance().getUserID());
             orderAccount.setOrderId(orderId);
             super.addDocument(CollectionName.Order_Account, orderAccount);
-        } else if (status == Status.CLOSED) {
+        } else if (status == Status.closed) {
             // update status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
 
@@ -150,7 +151,7 @@ public class DataAccess extends Database {
     }
 
     public void setOrderStatus(String orderId, Status status, WasSuccessfullCallback callback) {
-        if (status == Status.CONFIRMED) {
+        if (status == Status.confirmed) {
             // update Status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
                 if (successful) {
@@ -170,7 +171,7 @@ public class DataAccess extends Database {
                     callback.wasSuccessful(false);
                 }
             });
-        } else if (status == Status.CLOSED) {
+        } else if (status == Status.closed) {
             // update status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
                 if (successful) {

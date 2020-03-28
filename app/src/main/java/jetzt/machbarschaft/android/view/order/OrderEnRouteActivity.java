@@ -94,7 +94,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
     private void notifyOrderDone() {
         Database database = Database.getInstance();
         try {
-            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.CLOSED);
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.closed);
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Failed to update order status!", exception);
             Crashlytics.logException(exception);
