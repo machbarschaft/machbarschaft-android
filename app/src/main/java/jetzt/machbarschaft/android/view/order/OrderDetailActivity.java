@@ -22,7 +22,6 @@ import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.database.Database;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
@@ -96,7 +95,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        Database database = Database.getInstance();
         DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.confirmed);
 
 
@@ -114,7 +112,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         if (intent != null) {
             final String orderId = intent.getStringExtra(EXTRA_ORDER_ID);
 
-            Database database = Database.getInstance();
             DataAccess.getInstance().getOrderById(orderId, order -> {
                 mOrder = (Order) order;
                 Log.i("TEST", "loadOrder->getOrderById" + mOrder.toString());

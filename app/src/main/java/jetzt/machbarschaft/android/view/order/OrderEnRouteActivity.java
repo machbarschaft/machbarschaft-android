@@ -92,7 +92,6 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
      * Tell the server that the order is done.
      */
     private void notifyOrderDone() {
-        Database database = Database.getInstance();
         try {
             DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.closed);
         } catch (Exception exception) {
