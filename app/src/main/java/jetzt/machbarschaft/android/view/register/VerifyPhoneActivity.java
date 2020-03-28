@@ -62,10 +62,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         });
 
         btnSignIn.setOnClickListener(view -> {
+            // Combine user input of all textfields
             String code = tfCode1.getText().toString()+tfCode2.getText().toString()+tfCode3.getText().toString()+
                     tfCode4.getText().toString()+tfCode5.getText().toString()+tfCode6.getText().toString();
-            System.out.println("*********" + code + "*********");
-            //smsManager.verifySmsCode(smsData,code,this);
+            //System.out.println("*********" + code + "*********");
+            smsManager.verifySmsCode(smsData,code,this);
         });
 
         // Focus handlers
