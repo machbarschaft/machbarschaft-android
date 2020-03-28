@@ -17,6 +17,7 @@
         android:id="@+id/intro_slides_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#2b44ff"
         app:layout_constraintBottom_toBottomOf="@id/intro_slides_pager"
         app:layout_constraintLeft_toLeftOf="@id/intro_slides_pager"
         app:layout_constraintRight_toRightOf="@id/intro_slides_pager"
