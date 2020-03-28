@@ -3,9 +3,9 @@
     <string name="confirm">Bestätigen</string>
     <string name="title_back">Zurück</string>
 
-    <string name="login_action_login">Anmelden</string>
+    <string name="login_action_login">Los geht's</string>
     <string name="login_action_register">Registrieren</string>
-    <string name="login_hint_phone_number">Handynummer</string>
+    <string name="login_hint_phone_number">Handynummer eintrage</string>
     <string name="login_in_progress">Anmeldung…</string>
     <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
     <string name="login_error_generic">Anmelden fehlgeschlagen</string>

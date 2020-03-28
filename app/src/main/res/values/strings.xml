@@ -3,9 +3,9 @@
     <string name="confirm">Submit</string>
     <string name="title_back">Back</string>
 
-    <string name="login_action_login">Login</string>
+    <string name="login_action_login">Start now</string>
     <string name="login_action_register">Register</string>
-    <string name="login_hint_phone_number">Phonenumber</string>
+    <string name="login_hint_phone_number">Enter phonenumber</string>
     <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
     <string name="login_error_generic">Login failed</string>
