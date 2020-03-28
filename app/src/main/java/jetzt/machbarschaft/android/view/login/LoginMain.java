@@ -55,7 +55,6 @@ public class LoginMain extends AppCompatActivity {
 
         phoneNumber = findViewById(R.id.input_phone_number);
         loginButton = findViewById(R.id.btn_login);
-        Button registerButton = findViewById(R.id.btn_register);
 
 
         /* TODO uncomment if deploy
@@ -65,14 +64,9 @@ public class LoginMain extends AppCompatActivity {
         */
 
         loginButton.setOnClickListener(v -> login());
-
-        registerButton.setOnClickListener(v -> {
-            Intent i = new Intent(context, RegisterActivity.class);
-            startActivity(i);
-        });
     }
 
-
+    // TODO Check if phone number is registered
     public void login() {
         if (validate()) {
             loginButton.setEnabled(false);
