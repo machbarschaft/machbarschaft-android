@@ -22,7 +22,6 @@ import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.database.Database;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
@@ -92,7 +91,6 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
      * Tell the server that the order is done.
      */
     private void notifyOrderDone() {
-        Database database = Database.getInstance();
         try {
             DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.closed);
         } catch (Exception exception) {
