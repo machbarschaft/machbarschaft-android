@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4257ff"
     android:fitsSystemWindows="false"
     tools:context="jetzt.machbarschaft.android.view.home.Home">
 
@@ -11,46 +12,49 @@
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/home_footer_background"
+        android:elevation="24dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:elevation="24dp"
-        android:background="@color/content_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/home_btn_faq"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="4dp"
             android:text="@string/home_link_faq"
+            android:textColor="#9fa7ff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/home_btn_contact"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/home_btn_contact"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:text="@string/home_link_contact"
+            android:textColor="#9fa7ff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/home_btn_bug_report"
             app:layout_constraintStart_toEndOf="@+id/home_btn_faq" />
 
         <Button
             android:id="@+id/home_btn_bug_report"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="16dp"
             android:text="@string/home_link_bug_report"
+            android:textColor="#9fa7ff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/home_btn_contact" />
@@ -61,14 +65,19 @@
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:background="#4257ff"
         android:elevation="8dp"
-        android:background="@color/content_background"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/map_fragment"
-        tools:listitem="@layout/order_view_item" />
+        tools:listitem="@layout/order_view_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map_fragment"
@@ -82,5 +91,31 @@
         map:cameraTargetLat="51"
         map:cameraTargetLng="10"
         map:cameraZoom="5" />
+
+    <Button
+        android:id="@+id/homeBtnUrgency"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/transparent"
+        android:text="@string/home_button_urgency"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#e2e3ff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map_fragment" />
+
+    <Button
+        android:id="@+id/homeBtnRadius"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/transparent"
+        android:text="@string/home_button_radius"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#e2e3ff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
