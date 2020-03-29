@@ -36,6 +36,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         this.listener = listener;
     }
 
+    public void setLocation(Location location){
+        this.location = location;
+    }
+
     @NonNull
     @Override
     public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
