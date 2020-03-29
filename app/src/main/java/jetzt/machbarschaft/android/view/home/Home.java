@@ -83,13 +83,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
 
         // Button action handlers
         btnFAQ.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.home_faq_description);
-            builder.setCancelable(false);
-            builder.setPositiveButton(R.string.home_dialog_understood, (dialog, id) -> dialog.dismiss());
-
-            AlertDialog alert = builder.create();
-            alert.show();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/faq.html"));
+            startActivity(browserIntent);
             getPositionByView(map);
         });
 
