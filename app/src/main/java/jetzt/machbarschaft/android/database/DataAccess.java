@@ -7,9 +7,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
-
-import javax.security.auth.callback.Callback;
 
 import jetzt.machbarschaft.android.database.callback.CollectionLoadedCallback;
 import jetzt.machbarschaft.android.database.callback.CollectionsLoadedCallback;
@@ -23,7 +20,6 @@ import jetzt.machbarschaft.android.database.entitie.OrderAccount;
  * Handles the access to with the database.
  */
 public class DataAccess extends Database {
-
     private static DataAccess dataAccess;
 
     private DataAccess() {
@@ -34,18 +30,6 @@ public class DataAccess extends Database {
             dataAccess = new DataAccess();
         }
         return dataAccess;
-    }
-
-    /**
-     * The status of a order. It can be open, which means that help is wanted.
-     * Confirmed means, that a user accepted the order and its closed once the order is finished.
-     * <p>
-     * Use {@link Order.Status} instead.
-     */
-    @Deprecated
-    public enum Status {
-        //OPEN, CONFIRMED, CLOSED;
-        open, confirmed, closed;
     }
 
     public void createAccount(Account account) {
@@ -60,7 +44,7 @@ public class DataAccess extends Database {
 
         super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
                 document -> {
-                    Storage.getInstance().setUserID((String) document.getId());
+                    Storage.getInstance().setUserID(document.getId());
                     if (callback != null) {
                         Account account = new Account(document);
                         callback.onOrderLoaded(account);
@@ -74,12 +58,8 @@ public class DataAccess extends Database {
         conditions.put("phone_number", phone_number);
         conditions.put("status", "confirmed");
         super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
-                document -> {
-                    super.getDocumentById(CollectionName.Order, document.getId(),
-                            document2 -> {
-                                Storage.getInstance().setCurrentOrder(new Order(document2));
-                            });
-                });
+                document -> super.getDocumentById(CollectionName.Order, document.getId(),
+                        document2 -> Storage.getInstance().setCurrentOrder(new Order(document2))));
     }
     @Deprecated
     public void getMyOrder(String phone_number, CollectionLoadedCallback callback) {
@@ -89,11 +69,11 @@ public class DataAccess extends Database {
                 document -> {
                     Account account = new Account(document);
                     LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
-                    conditions.put("account_id", (Object) account.getId());
+                    conditions.put("account_id", account.getId());
                     conditions.put("status", "Confirmed");
                     super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
                             document2 -> {
-                                if(document2.get("order_id") != null) {
+                                if (document2.get("order_id") != null) {
                                     this.getOrderById((String) document2.get("order_id"), callback);
                                 } else {
                                     Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
@@ -160,35 +140,34 @@ public class DataAccess extends Database {
         });
     }
 
-    public void setOrderStatus(String orderId, Status status) {
-
-        if (status == Status.confirmed) {
+    public void setOrderStatus(String orderId, Order.Status status) {
+        if (status == Order.Status.CONFIRMED) {
             // update Status in Collection Order
-            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()));
 
             //  Adds Entry in Account order
             OrderAccount orderAccount = new OrderAccount();
-            orderAccount.setStatus(status.toString());
+            orderAccount.setStatus(status.getName());
             orderAccount.setAccountId(Storage.getInstance().getUserID());
             orderAccount.setOrderId(orderId);
             super.addDocument(CollectionName.Order_Account, orderAccount);
-        } else if (status == Status.closed) {
+        } else if (status == Order.Status.CLOSED) {
             // update status in Collection Order
-            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()));
 
             // update Status in Order_Account
-            super.updateDocument(CollectionName.Order_Account, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()));
+            super.updateDocument(CollectionName.Order_Account, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()));
         }
     }
 
-    public void setOrderStatus(String orderId, Status status, WasSuccessfullCallback callback) {
-        if (status == Status.confirmed) {
+    public void setOrderStatus(String orderId, Order.Status status, WasSuccessfullCallback callback) {
+        if (status == Order.Status.CONFIRMED) {
             // update Status in Collection Order
-            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()), successful -> {
                 if (successful) {
                     //  Adds Entry in Account order
                     OrderAccount orderAccount = new OrderAccount();
-                    orderAccount.setStatus(status.toString());
+                    orderAccount.setStatus(status.getName());
                     orderAccount.setAccountId(Storage.getInstance().getUserID());
                     orderAccount.setOrderId(orderId);
                     super.addDocument(CollectionName.Order_Account, orderAccount, innerSuccessful -> {
@@ -202,25 +181,22 @@ public class DataAccess extends Database {
                     callback.wasSuccessful(false);
                 }
             });
-        } else if (status == Status.closed) {
+        } else if (status == Order.Status.CLOSED) {
             // update status in Collection Order
-            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), successful -> {
+            super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()), successful -> {
                 if (successful) {
 
-                    super.getOneDocumentByCondition(CollectionName.Order_Account, new AbstractMap.SimpleEntry<String, Object>("order_id", (Object) orderId),
+                    super.getOneDocumentByCondition(CollectionName.Order_Account, new AbstractMap.SimpleEntry<>("order_id", orderId),
                             document -> {
-                                if (document.getId() != null) {
-                                    // update Status in Order_Account
-                                    super.updateDocument(CollectionName.Order_Account, document.getId(), new AbstractMap.SimpleEntry<String, Object>("status", status.toString()), innerSuccessful -> {
-                                        if (innerSuccessful) {
-                                            callback.wasSuccessful(true);
-                                        } else {
-                                            callback.wasSuccessful(false);
-                                        }
-                                    });
-                                } else {
-                                    callback.wasSuccessful(false);
-                                }
+                                document.getId();
+                                // update Status in Order_Account
+                                super.updateDocument(CollectionName.Order_Account, document.getId(), new AbstractMap.SimpleEntry<>("status", status.getName()), innerSuccessful -> {
+                                    if (innerSuccessful) {
+                                        callback.wasSuccessful(true);
+                                    } else {
+                                        callback.wasSuccessful(false);
+                                    }
+                                });
                             });
                 } else {
                     callback.wasSuccessful(false);

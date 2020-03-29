@@ -113,6 +113,10 @@ public class OrderHandler {
     }
 
     public void addCollection(List<DocumentSnapshot> documents) {
+        if (documents == null) {
+            return;
+        }
+
         // reset orders
         this.orders = null;
         this.orders = new ArrayList<>();

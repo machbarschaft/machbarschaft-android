@@ -22,7 +22,6 @@ import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.database.Database;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
@@ -93,7 +92,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
      */
     private void notifyOrderDone() {
         try {
-            DataAccess.getInstance().setOrderStatus(mOrder.getId(), DataAccess.Status.closed);
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), Order.Status.CLOSED);
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Failed to update order status!", exception);
             Crashlytics.logException(exception);
