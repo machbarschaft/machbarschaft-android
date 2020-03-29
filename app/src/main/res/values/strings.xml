@@ -50,9 +50,11 @@
     <string name="order_urgency_tomorrow">Tomorrow</string>
     <string name="order_urgency_undefined">At some point</string>
 
-    <string name="home_link_faq">FAQ</string>
-    <string name="home_link_contact">Contact</string>
-    <string name="home_link_bug_report">Report problem</string>
+        <string name="home_button_urgency">Urgency</string>
+        <string name="home_button_radius">In your area</string>
+    <string name="home_link_faq"><u>FAQ</u></string>
+    <string name="home_link_contact"><u>Contact</u></string>
+    <string name="home_link_bug_report"><u>Report problem</u></string>
     <string name="home_faq_description">We work on a soluation, so you can see our FAQ here.</string>
     <string name="home_feedback_description">If you have a problem with our service, just send us a mail. We will take care of your request as soon as possible.</string>
     <string name="home_feedback_write_mail">Send email</string>
