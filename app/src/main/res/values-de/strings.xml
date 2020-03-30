@@ -71,7 +71,7 @@
 
     <string name="order_detail_title">Der Auftrag</string>
     <string name="order_detail_label_needs">benötigt</string>
-    <string name="order_detail_label_urgency">Erledigung</string>
+    <string name="order_detail_label_urgency">Dringlichkeit</string>
     <string name="order_detail_label_address">Adresse</string>
     <string name="order_detail_accept_order">Auftrag annehmen</string>
 
@@ -86,7 +86,7 @@
     <string name="start_to_execute_failed">Ich konnte niemanden erreichen</string>
 
     <string name="order_en_route_title">Schritt #3</string>
-    <string name="order_en_route_text">Auftrag erledigen.</string>
+    <string name="order_en_route_text">Auftrag erledigen</string>
     <string name="target_address">Ziel-Adresse</string>
     <string name="calculate_route">Route berechnen</string>
     <string name="order_done">Auftrag erledigt</string>

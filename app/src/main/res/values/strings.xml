@@ -1,30 +1,30 @@
-    <resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
-    <string name="confirm">Submit</string>
+    <string name="confirm">Confirm</string>
     <string name="title_back">Back</string>
 
     <string name="login_action_login">Start now</string>
     <string name="login_action_register">Register</string>
-    <string name="login_hint_phone_number">Enter phonenumber</string>
+    <string name="login_hint_phone_number">Enter phone number</string>
     <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
     <string name="login_error_generic">Login failed</string>
 
-    <string name="verify_phone_wait_for_code">Enter confirm-code</string>
-    <string name="verify_phone_code_hint">Confirmcode per sms</string>
-    <string name="verify_phone_title">Submit phonenumber</string>
-        <string name="verify_phone_btn_send_code"><u>Resend code</u></string>
-    <string name="verify_phone_button">Submit</string>
-    <string name="verify_phone_error_invalid_code">Code invalid</string>
-    <string name="verify_address_dialog_message">We work on, finding your address with Maps.</string>
-    <string name="verify_address_dialog_understood">Gotcha</string>
+    <string name="verify_phone_wait_for_code">Enter confirmation code</string>
+    <string name="verify_phone_code_hint">Confirmation code per sms</string>
+    <string name="verify_phone_title">Confirm phone number</string>
+    <string name="verify_phone_btn_send_code"><u>Resend code</u></string>
+    <string name="verify_phone_button">Continue</string>
+    <string name="verify_phone_error_invalid_code">Invalid code</string>
+    <string name="verify_address_dialog_message">We are working on this feature.</string>
+    <string name="verify_address_dialog_understood">Understood</string>
     <string name="verify_success">Verification successful</string>
     <string name="verify_sms_sent">SMS sent </string>
-    <string name="verify_error_generic">Verification unsuccessful</string>
+    <string name="verify_error_generic">Verification failed</string>
     <string name="verify_error_fill_all_fields">Please fill all fields</string>
     <string name="verify_error_sms_send_failed">SMS couldn\'t be send</string>
-    <string name="verify_error_no_agb">Please accept the conditions</string>
-    <string name="verify_error_verify">Please verify yourself.</string>
+    <string name="verify_error_no_agb">Please accept our terms and conditions</string>
+    <string name="verify_error_verify">Please verify yourself</string>
 
     <string name="register_title">Complete registration</string>
     <string name="register_subtitle_first">1. Basic information</string>
@@ -32,15 +32,15 @@
     <string name="register_hint_name">First name</string>
     <string name="register_hint_surname">Surname</string>
     <string name="register_hint_address">Address</string>
-    <string name="register_hint_phone">Mobile number</string>
-    <string name="register_check_agb">Conditions</string>
+    <string name="register_hint_phone">Phone number</string>
+    <string name="register_check_agb">Terms and conditions</string>
     <string name="register_button_send">Submit</string>
     <string name="register_button_back">Back</string>
 
     <string name="intro_1_text">Register as helper</string>
-    <string name="intro_2_text">Find people in your circle to whom you can do something good</string>
+    <string name="intro_2_text">Find people in your area to whom you can do good</string>
     <string name="intro_3_text">Clear up the matter by phone</string>
-    <string name="intro_4_text">Supplies for people in need</string>
+    <string name="intro_4_text">Run errands for people in need</string>
 
     <string name="order_title_groceries">Purchase</string>
     <string name="order_title_medicine">Medicine</string>
@@ -48,19 +48,19 @@
     <string name="order_urgency_urgent">Urgent</string>
     <string name="order_urgency_today">Today</string>
     <string name="order_urgency_tomorrow">Tomorrow</string>
-    <string name="order_urgency_undefined">At some point</string>
+    <string name="order_urgency_undefined">Sometime</string>
 
-        <string name="home_button_urgency">Urgency</string>
-        <string name="home_button_radius">In your area</string>
+    <string name="home_button_urgency">Urgency</string>
+    <string name="home_button_radius">Near you</string>
     <string name="home_link_faq"><u>FAQ</u></string>
     <string name="home_link_contact"><u>Contact</u></string>
     <string name="home_link_bug_report"><u>Report problem</u></string>
-    <string name="home_faq_description">We work on a soluation, so you can see our FAQ here.</string>
-    <string name="home_feedback_description">If you have a problem with our service, just send us a mail. We will take care of your request as soon as possible.</string>
+    <string name="home_faq_description">We are working on a solution, so that you can see our FAQ here.</string>
+    <string name="home_feedback_description">If you have a problem with our service, just send an email. We will take care of your request as soon as possible.</string>
     <string name="home_feedback_write_mail">Send email</string>
     <string name="home_feedback_later">Later</string>
-    <string name="home_feedback_subject">Problem with the Android App</string>
-    <string name="home_feedback_body1">Dear Feasibility Team, you know, I noticed a problem with the Android app. The technical information is as follows:</string>
+    <string name="home_feedback_subject">Problem in the Android App</string>
+    <string name="home_feedback_body1">Dear Machbarschaft team, I noticed a problem with the Android app. The technical information is as follows:</string>
     <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">My problem is ...</string>
     <string name="home_dialog_understood">Understood</string>
 
@@ -70,29 +70,29 @@
 
     <string name="order_detail_title">The order</string>
     <string name="order_detail_label_needs">required</string>
-    <string name="order_detail_label_urgency">Discharge</string>
+    <string name="order_detail_label_urgency">Urgency</string>
     <string name="order_detail_label_address">Address</string>
     <string name="order_detail_accept_order">Accept order</string>
 
     <string name="order_accept_title">Step #1</string>
-    <string name="order_accept_text">Please describe yourself with %1$s.</string>
+    <string name="order_accept_text">Please discuss the details with %1$s.</string>
     <string name="call_now">Call now</string>
 
     <string name="order_carry_out_title">Step #2</string>
     <string name="order_carry_out_text">Tell us, when you are on your way.</string>
-    <string name="start_to_execute_now">I\'m leaving now</string>
+    <string name="start_to_execute_now">Leaving now</string>
     <string name="start_to_execute_later">I will go later</string>
     <string name="start_to_execute_failed">I could not reach anybody</string>
 
     <string name="order_en_route_title">Step #3</string>
-    <string name="order_en_route_text">Order completed.</string>
+    <string name="order_en_route_text">Execute order</string>
     <string name="target_address">Target address</string>
-    <string name="calculate_route">Calculate route</string>
+    <string name="calculate_route">Navigate</string>
     <string name="order_done">Order completed</string>
-    <string name="thank_you_text">Thank you!\n You are great!</string>
-    <string name="back_to_home">back to Home Screen</string>
+    <string name="thank_you_text">Thank you!\nYou are great!</string>
+    <string name="back_to_home">back to Home</string>
 
     <string name="order_notification_title">Active Order</string>
-    <string name="order_notification_message">You are currently doing a order for %1$s\nThe address is  %2$s</string>
+    <string name="order_notification_message">You are currently executing an order for %1$s The address is  %2$s</string>
     <string name="notification_channel_current_order">Active Orders</string>
 </resources>
