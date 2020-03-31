@@ -8,6 +8,7 @@
     <string name="login_hint_phone_number">Handynummer eintragen</string>
     <string name="login_in_progress">Anmeldung…</string>
     <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
+    <string name="login_error_number_not_exist">Es gibt kein Nutzer mit dieser Nummer</string>
     <string name="login_error_generic">Anmelden fehlgeschlagen</string>
 
     <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>

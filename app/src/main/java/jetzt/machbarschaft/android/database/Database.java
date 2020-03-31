@@ -27,6 +27,8 @@ import jetzt.machbarschaft.android.database.callback.DocumentsCallback;
 import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Collection;
 import jetzt.machbarschaft.android.view.login.LoginMain;
+import lombok.AccessLevel;
+import lombok.Getter;
 
 import static android.content.ContentValues.TAG;
 
@@ -34,6 +36,7 @@ import static android.content.ContentValues.TAG;
  * All database accesses are made here.
  */
 public class Database {
+    @Getter(value = AccessLevel.PROTECTED)
     private FirebaseFirestore db;
 
     enum CollectionName {

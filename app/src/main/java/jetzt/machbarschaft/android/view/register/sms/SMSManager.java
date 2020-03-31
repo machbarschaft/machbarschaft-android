@@ -1,24 +1,23 @@
 package jetzt.machbarschaft.android.view.register.sms;
 
 import android.app.Activity;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-import jetzt.machbarschaft.android.database.entitie.Account;
 
 /**
  * A class for Manging the SMS registration
- * Use @link{#sendSMS(SMSData, Activity)} to send an SMS and
- * {@link #verifySmsCode(SMSData, String, Activity)} to verify the code
+ * Use {@link #sendSMS(SMSData, Activity,SMSEventListener)} to send an SMS and
+ * {@link #verifySmsCode(SMSData, String, Activity,SMSEventListener)} to verify the code
  */
 public abstract class SMSManager
 {
@@ -26,18 +25,15 @@ public abstract class SMSManager
      * If this is true, then the verification with firebase is skipped.
      * So you can type any number and any verification code.
      */
-    private static boolean developerMode = false;
+    private static boolean developerMode = true;
     private static SMSManager instance;
 
-    static PhoneAuthProvider.ForceResendingToken resendingToken;
-    static SMSEventListener listener;
 
     public static SMSManager getInstance()
     {
         if(instance == null)
         {
-            instance = developerMode ? new SMSDeveloperImpl() : new SMSManagerImpl();
-            listener = new SMSEventListenerImpl();
+            instance = developerMode? new SMSManagerDeveloperImpl() : new SMSManagerImpl();
         }
         return instance;
     }
@@ -45,72 +41,32 @@ public abstract class SMSManager
 
     /**
      * Send an SMS to a User with the given Phone number declared in the {@link SMSData},
-     * If the {@link SMSManager#resendingToken}, not null, then the same sms will be re-sended.
      *
      * If the sms was sent {@link SMSEventListener#onSucceedSMSSend(SMSData, Activity)} is called.
      * If the Number is wrong formatted then {@link SMSEventListener#onNumberWrongFormatted(Exception, Activity)} is called.
      * If there is another exception then {@link SMSEventListener#onError(Exception, Activity)} is called.
      */
-    abstract public void sendSMS(SMSData smsData, Activity activity);
+    abstract public void sendSMS(SMSData smsData, Activity activity,SMSEventListener listener);
 
     /**
      * Checks if the given Code is the right code for the phone number, given in {@link SMSData#getPhoneNumber()}
-     * If the code is right then {@link SMSEventListener#onSucceedLogin(Activity,Account)} is called.
+     * If the code is right then {@link SMSEventListener#onSucceedLogin(Activity,String)} is called.
      * If not then {@link SMSEventListener#onWrongCode(Exception, Activity)} is called.
      * If there is another exception then {@link SMSEventListener#onError(Exception, Activity)} is called.
      */
-    abstract public void verifySmsCode(SMSData smsData,String code,Activity activity);
+    abstract public void verifySmsCode(SMSData smsData,String code,Activity activity,SMSEventListener listener);
 
+    abstract public void signIn(SMSData smsData, PhoneAuthCredential credential, Activity activity,SMSEventListener listener);
 }
 
-/**
- * Only for Development
- */
-class SMSDeveloperImpl extends  SMSManager
+abstract class FirebaseSmsManger extends SMSManager
 {
-    /**
-     * Call {@link SMSEventListener#onSucceedSMSSend(SMSData, Activity)} without any checks.
-     * So the developer can type any Phone number.
-     */
     @Override
-    public void sendSMS(SMSData smsData, Activity activity) {
-        listener.onSucceedSMSSend(smsData,activity);
-    }
-
-    /**
-     * Call {@link SMSEventListener#onSucceedLogin(Activity,Account)} without any checks.
-     * So the developer can type any Code.
-     */
-    @Override
-    public void verifySmsCode(SMSData smsData, String code, Activity activity) {
-        //TODO Login in a Firebase developer account
-
-        listener.onSucceedLogin(activity,null);
-    }
-
-}
-
-class SMSManagerImpl extends SMSManager
-{
-    private FirebaseAuth mAuth;
-
-    SMSManagerImpl()
-    {
-        mAuth = FirebaseAuth.getInstance();
-    }
-
-    public void verifySmsCode(SMSData smsData,String code,Activity activity)
-    {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(smsData.getVerificationId(),code);
-        signIn(smsData,credential,activity);
-    }
-
-    private void signIn(SMSData smsData,PhoneAuthCredential credential,Activity activity)
-    {
-        mAuth.signInWithCredential(credential).addOnCompleteListener(activity, task -> {
+    public void signIn(SMSData smsData, PhoneAuthCredential credential, Activity activity,SMSEventListener listener) {
+        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(activity, task -> {
             if(task.isSuccessful())
             {
-                listener.onSucceedLogin(activity,smsData.getAccount());
+                listener.onSucceedLogin(activity,task.getResult().getUser().getUid());
             }
             else
             {
@@ -124,16 +80,63 @@ class SMSManagerImpl extends SMSManager
             }
         });
     }
+}
+
+class SMSManagerDeveloperImpl extends SMSManagerImpl
+{
+    @Override
+    public void sendSMS(SMSData smsData, Activity activity, SMSEventListener listener) {
+        String phoneNumber = "+4915779539312";
+        String smsCode = "123456";
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuthSettings firebaseAuthSettings = firebaseAuth.getFirebaseAuthSettings();
+
+        firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phoneNumber, smsCode);
+
+        PhoneAuthProvider phoneAuthProvider = PhoneAuthProvider.getInstance();
+        phoneAuthProvider.verifyPhoneNumber(
+                phoneNumber,
+                60L,
+                TimeUnit.SECONDS,
+                activity,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+                        signIn(smsData,credential,activity,listener);
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                    }
+
+                });
+    }
+}
+
+class SMSManagerImpl extends FirebaseSmsManger
+{
+    static PhoneAuthProvider.ForceResendingToken resendingToken;
+
+    SMSManagerImpl(){}
+
+    public void verifySmsCode(SMSData smsData,String code,Activity activity,SMSEventListener listener)
+    {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(smsData.getVerificationId(),code);
+        signIn(smsData,credential,activity,listener);
+    }
+
 
     /**
      * {@inheritDoc}
-     * {@link SMSManager#sendSMS(SMSData, Activity)}
+     * {@link SMSManager#sendSMS(SMSData, Activity,SMSEventListener)}
      *
      * Send an SMS via Firebase to the user.
      * The App can auto-detect the SMS for one minute.
      */
     @Override
-    public void sendSMS(SMSData smsData,Activity activity)
+    public void sendSMS(SMSData smsData,Activity activity,SMSEventListener listener)
     {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 smsData.getPhoneNumber(),
@@ -143,7 +146,7 @@ class SMSManagerImpl extends SMSManager
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                        signIn(smsData,phoneAuthCredential,activity);
+                        signIn(smsData,phoneAuthCredential,activity,listener);
                     }
 
                     @Override

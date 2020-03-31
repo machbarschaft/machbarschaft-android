@@ -40,71 +40,41 @@ public class DataAccess extends Database {
         super.addDocument(CollectionName.Account, account, callback);
     }
 
-    public void login(String phone_number, CollectionLoadedCallback callback) {
-
-        super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
-                document -> {
-                    Storage.getInstance().setUserID(document.getId());
-                    if (callback != null) {
-                        Account account = new Account(document);
-                        callback.onOrderLoaded(account);
+    public void existUser(String phoneNumber,WasSuccessfullCallback callback)
+    {
+        getDb().collection(CollectionName.Account.toString()).whereEqualTo("phone_number", phoneNumber).get().addOnCompleteListener(
+                task -> {
+                    if(task.getResult()==null)
+                    {
+                        callback.wasSuccessful(false);
                     }
-                });
+                    callback.wasSuccessful(!task.getResult().isEmpty());
+                }
+        );
     }
 
-    @Deprecated
-    public void getMyOrder(String phone_number) {
+    public void getMyOrders(CollectionsLoadedCallback callback) {
+        getMyOrders(Storage.getInstance().getUserID(),callback);
+    }
+
+    public void getMyOrders(String userID, CollectionsLoadedCallback callback) {
         LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
-        conditions.put("phone_number", phone_number);
+        conditions.put("account_id", userID);
         conditions.put("status", "confirmed");
-        super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
-                document -> super.getDocumentById(CollectionName.Order, document.getId(),
-                        document2 -> Storage.getInstance().setCurrentOrder(new Order(document2))));
-    }
-    @Deprecated
-    public void getMyOrder(String phone_number, CollectionLoadedCallback callback) {
+        super.getDocumentsByTwoConditions(CollectionName.Order_Account, conditions,
+                documentList -> {
+                    ArrayList<Collection> orders = new ArrayList<>();
+                    for(DocumentSnapshot d: documentList) {
+                        if(d.get("order_id") != null) {
+                            orders.add(new Order(d));
+                        }
+                    }
+                    if(!orders.isEmpty()) {
+                        callback.onOrdersLoaded(orders);
+                    } else {
+                        callback.onOrdersLoaded(null);
 
-
-        super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
-                document -> {
-                    Account account = new Account(document);
-                    LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
-                    conditions.put("account_id", account.getId());
-                    conditions.put("status", "Confirmed");
-                    super.getOneDocumentByTwoConditions(CollectionName.Order_Account, conditions,
-                            document2 -> {
-                                if (document2.get("order_id") != null) {
-                                    this.getOrderById((String) document2.get("order_id"), callback);
-                                } else {
-                                    Log.i("DataAccess", "getMyOrder() : this account has no order confirmed");
-                                }
-                            });
-                });
-    }
-
-    public void getMyOrders(String phone_number, CollectionsLoadedCallback callback) {
-
-        super.getOneDocumentByCondition(CollectionName.Account, new AbstractMap.SimpleEntry<>("phone_number", phone_number),
-                document -> {
-                    Account account = new Account(document);
-                    LinkedHashMap<String, Object> conditions = new LinkedHashMap<>();
-                    conditions.put("account_id", (Object) account.getId());
-                    conditions.put("status", "confirmed");
-                    super.getDocumentsByTwoConditions(CollectionName.Order_Account, conditions,
-                            documentList -> {
-                                ArrayList<Collection> orders = new ArrayList<>();
-                                for(DocumentSnapshot d: documentList) {
-                                    if(d.get("order_id") != null) {
-                                        orders.add(new Order(d));
-                                    }
-                                }
-                                if(!orders.isEmpty()) {
-                                    callback.onOrdersLoaded(orders);
-                                } else {
-                                    callback.onOrdersLoaded(null);
-
-                                }
-                            });
+                    }
                 });
     }
 

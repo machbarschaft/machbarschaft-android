@@ -1,5 +1,6 @@
 package jetzt.machbarschaft.android.view.login;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,9 @@ import jetzt.machbarschaft.android.util.ApplicationConstants;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.register.RegisterActivity;
 import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
+import jetzt.machbarschaft.android.view.register.sms.SMSData;
+import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
+import jetzt.machbarschaft.android.view.register.sms.SMSManager;
 
 
 /**
@@ -33,7 +37,7 @@ public class LoginMain extends AppCompatActivity {
     private EditText phoneNumber;
     private Button loginButton;
     private Context context;
-
+    private ProgressDialog progressDialog;
     @Override
     public void onResume() {
         super.onResume();
@@ -57,38 +61,46 @@ public class LoginMain extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_login);
 
 
-        /* TODO uncomment if deploy
-        if(isLoggedIn()){ //Makes sure, that you just have to login Once
-            onLoginSuccess();
-        }
-        */
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(getString(R.string.login_in_progress));
 
         loginButton.setOnClickListener(v -> login());
     }
+    
 
     // TODO Check if phone number is registered
     public void login() {
         if (validate()) {
             loginButton.setEnabled(false);
-
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage(getString(R.string.login_in_progress));
             progressDialog.show();
-
             String phoneNumberStr = phoneNumber.getText().toString();
 
-            DataAccess.getInstance().getOrders();
+            DataAccess.getInstance().existUser(phoneNumberStr,exist -> {
+                if (exist) {
+                    SMSManager.getInstance().sendSMS(new SMSData(phoneNumberStr), this, new SMSEventListenerImpl() {
+                        @Override
+                        public void onNumberWrongFormatted(Exception firebaseException, Activity activity) {
+                            progressDialog.dismiss();
+                            loginButton.setEnabled(true);
+                            onLoginFailed();
+                        }
 
-            //TODO Firebase Logic here
+                        @Override
+                        public void onError(Exception firebaseException, Activity activity) {
+                            onErrorWhileLoading();
+                            onLoginFailed();
+                        }
+                    });
+                }
+                else
+                {
+                    Toast.makeText(this, R.string.login_error_number_not_exist, Toast.LENGTH_SHORT).show();
+                    onErrorWhileLoading();
+                }
+            });
 
-            new Handler().postDelayed(() -> {
-                        onLoginSuccess();
-                        //onLoginFailed();
 
-                        progressDialog.dismiss();
-                    }, 3000
-            );
 
         } else {
             onLoginFailed();
@@ -115,16 +127,10 @@ public class LoginMain extends AppCompatActivity {
         return valid;
     }
 
-    /**
-     * Handles what should happen when the Login is successfully.
-     * In this case it will save the status of being loggedIn in the Shared Preferences and start the Home Activity.
-     */
-    private void onLoginSuccess() {
-        SharedPreferences userData = getApplicationContext().getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0);
-        Editor editor = userData.edit();
-        editor.putBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, true);
-        editor.apply();
-        this.startActivity(new Intent(this, Home.class));
+    private void onErrorWhileLoading()
+    {
+        loginButton.setEnabled(true);
+        progressDialog.dismiss();
     }
 
     /**
@@ -133,15 +139,5 @@ public class LoginMain extends AppCompatActivity {
      */
     private void onLoginFailed() {
         Toast.makeText(this, R.string.login_error_generic, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * To check whether the user is already loggedIn or needs to be loggedIn
-     *
-     * @return true if the user is already logged in.
-     */
-    private boolean isLoggedIn() {
-        return getSharedPreferences(ApplicationConstants.SHARED_PREF_USERDATA, 0)
-                .getBoolean(ApplicationConstants.SHARED_PREF_USERDATA_LOGGED_IN, false);
     }
 }

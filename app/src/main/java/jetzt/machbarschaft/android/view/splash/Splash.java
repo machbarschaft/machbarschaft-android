@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.crashlytics.android.Crashlytics;
 
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.test.DataAccessTest;
+import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.login.LoginMain;
 
 
@@ -27,7 +29,14 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        myHandler.postDelayed(this::startLogin, 1200);
+        if(Storage.getInstance().getUserID()==null)
+        {
+            myHandler.postDelayed(this::startLogin, 1200);
+        }
+        else
+        {
+            myHandler.postDelayed(this::startApp, 1200);
+        }
 
         // TESTS
         // DataAccessTest.getInstance().runTests();
@@ -37,6 +46,10 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void startApp() {
+        this.startActivity(new Intent(this, Home.class));
     }
 
     private void startLogin() {

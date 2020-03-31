@@ -45,6 +45,7 @@ import java.util.Set;
 
 import jetzt.machbarschaft.android.BuildConfig;
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
@@ -120,40 +121,43 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             alert.show();
         });
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_fragment);
-        Objects.requireNonNull(mapFragment).getMapAsync(this);
+        DataAccess.getInstance().getOrders(successful -> {
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map_fragment);
+            Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        /*
-         * Checks if there is already an order in progress. In this case, we directly jump
-         * to the map-navigation of the order and start the order Notification in the status bar.
-         */
-        if (Storage.getInstance().gotActiveOrder(getApplicationContext())) {
-            startOrderNotification();
-            switch (Storage.getInstance().getCurrentStep(getApplicationContext())){
-                case STEP0_NONE:
-                    break;
-                case STEP1_PHONE:
-                    startActivity(new Intent(this, OrderAcceptActivity.class));
-                    finishAfterTransition();
-                    break;
-                case STEP2_CarryOut:
-                    startActivity(new Intent(this, OrderCarryOutActivity.class));
-                    finishAfterTransition();
-                    break;
-                case STEP3_EnRoute:
-                    startActivity(new Intent(this, OrderEnRouteActivity.class));
-                    finishAfterTransition();
-                    break;
+            /*
+             * Checks if there is already an order in progress. In this case, we directly jump
+             * to the map-navigation of the order and start the order Notification in the status bar.
+             */
+            if (Storage.getInstance().gotActiveOrder(getApplicationContext())) {
+                startOrderNotification();
+                switch (Storage.getInstance().getCurrentStep(getApplicationContext())){
+                    case STEP0_NONE:
+                        break;
+                    case STEP1_PHONE:
+                        startActivity(new Intent(this, OrderAcceptActivity.class));
+                        finishAfterTransition();
+                        break;
+                    case STEP2_CarryOut:
+                        startActivity(new Intent(this, OrderCarryOutActivity.class));
+                        finishAfterTransition();
+                        break;
+                    case STEP3_EnRoute:
+                        startActivity(new Intent(this, OrderEnRouteActivity.class));
+                        finishAfterTransition();
+                        break;
+                }
+
+
+
             }
 
+            initializeData(); //loads the Data from the Database.
+            initView(); //initializes the Map and Recycler View
+            updateMarkers(); //deletes unnecessary Markers and adds new
+        });
 
-
-        }
-
-        initializeData(); //loads the Data from the Database.
-        initView(); //initializes the Map and Recycler View
-        updateMarkers(); //deletes unnecessary Markers and adds new
     }
 
     @Override
@@ -170,7 +174,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Log.d(LOG_TAG, "Orders: " + orderList.size());
 
         hasLocationPermission = false;
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Add numbers to order entries
         for (int i = 0; i < orderList.size(); i++) {
@@ -259,6 +262,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     protected void onStart() {
         super.onStart();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //Checks if the App has the needed permission to check the location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -279,6 +283,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 if (map != null) {
                     map.setMyLocationEnabled(true);
                 }
+                initView();
                 requestCurrentLocation();
             }
         }
