@@ -174,7 +174,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Log.d(LOG_TAG, "Orders: " + orderList.size());
 
         hasLocationPermission = false;
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Add numbers to order entries
         for (int i = 0; i < orderList.size(); i++) {
@@ -263,6 +262,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     protected void onStart() {
         super.onStart();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //Checks if the App has the needed permission to check the location
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -283,6 +283,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 if (map != null) {
                     map.setMyLocationEnabled(true);
                 }
+                initView();
                 requestCurrentLocation();
             }
         }
