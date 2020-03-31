@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -25,6 +26,9 @@ public class OrderAcceptActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_accept);
+
+        ImageView imageView = findViewById(R.id.order_accept_iV_step1);
+        imageView.setClipToOutline(true);
 
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP1_PHONE);

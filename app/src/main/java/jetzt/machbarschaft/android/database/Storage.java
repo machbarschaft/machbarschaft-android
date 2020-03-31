@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import io.sentry.core.protocol.App;
@@ -31,12 +32,13 @@ public class Storage {
     }
 
     public String getUserID() {
-        return userID;
+        if(FirebaseAuth.getInstance().getCurrentUser()==null)
+        {
+            return null;
+        }
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     public Order getCurrentOrder() {
         return currentOrderId;

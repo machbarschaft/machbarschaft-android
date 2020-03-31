@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
+    <string name="app_name_noncapital">Machbarschaft</string>
     <string name="confirm">Confirm</string>
     <string name="title_back">Back</string>
 
@@ -8,8 +9,8 @@
     <string name="login_hint_phone_number">Enter phone number</string>
     <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
+    <string name="login_error_number_not_exist">There is no user with this number</string>
     <string name="login_error_generic">Login failed</string>
-
     <string name="verify_phone_wait_for_code">Enter confirmation code</string>
     <string name="verify_phone_code_hint">Confirmation code per sms</string>
     <string name="verify_phone_title">Confirm phone number</string>
@@ -95,4 +96,5 @@
     <string name="order_notification_title">Active Order</string>
     <string name="order_notification_message">You are currently executing an order for %1$s The address is  %2$s</string>
     <string name="notification_channel_current_order">Active Orders</string>
+    <string name="splash_describtion">Carry out telpehone enquiries \nshopping and errands \nfor older neighbours.</string>
 </resources>

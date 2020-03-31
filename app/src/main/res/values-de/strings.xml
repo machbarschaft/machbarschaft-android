@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
+    <string name="app_name_noncapital">Machbarschaft</string>
     <string name="confirm">Bestätigen</string>
     <string name="title_back">Zurück</string>
 
@@ -8,6 +9,7 @@
     <string name="login_hint_phone_number">Handynummer eintragen</string>
     <string name="login_in_progress">Anmeldung…</string>
     <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
+    <string name="login_error_number_not_exist">Es gibt kein Nutzer mit dieser Nummer</string>
     <string name="login_error_generic">Anmelden fehlgeschlagen</string>
 
     <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>
@@ -96,4 +98,5 @@
     <string name="order_notification_title">Aktiver Auftrag</string>
     <string name="order_notification_message">Du erledigst gerade einen Auftrag für %1$s\nDie Adresse lautet %2$s</string>
     <string name="notification_channel_current_order">Aktive Aufträge</string>
+    <string name="splash_describtion">Erledige telefonisch angefragte \nEinkäufe und Erledigungen \nfür ältere Nachbarn.</string>
 </resources>
