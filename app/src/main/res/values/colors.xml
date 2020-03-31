@@ -27,8 +27,21 @@
     <color name="order_background">#fae0e0</color>
     <color name="order_button">#73cb84</color>
     <color name="order_text_header">#060505</color>
+
+    <!-- Login Screen -->
     <color name="login_background">#2b44ff</color>
     <color name="login_button">#4057ff</color>
     <color name="login_button_bgtint">#d5daff</color>
+
+    <!-- Registration Screen -->
+    <color name="register_background">#31a08a</color>
+    <color name="register_button">#32a08a</color>
+    <color name="register_button_bgtint">#daece8</color>
+
+    <!-- Number verification Screen -->
+    <color name="verification_background">#4cb5d5</color>
+    <color name="verification_resent_button">#e4f1f7</color>
+    <color name="verification_button">#4cb4d5</color>
+    <color name="verification_button_bgtint">#def0f7</color>
 
 </resources>
