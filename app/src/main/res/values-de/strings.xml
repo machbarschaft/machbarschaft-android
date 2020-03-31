@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
+    <string name="app_name_noncapital">Machbarschaft</string>
     <string name="confirm">Bestätigen</string>
     <string name="title_back">Zurück</string>
 
@@ -97,4 +98,5 @@
     <string name="order_notification_title">Aktiver Auftrag</string>
     <string name="order_notification_message">Du erledigst gerade einen Auftrag für %1$s\nDie Adresse lautet %2$s</string>
     <string name="notification_channel_current_order">Aktive Aufträge</string>
+    <string name="splash_describtion">Erledige telefonisch angefragte \nEinkäufe und Erledigungen \nfür ältere Nachbarn.</string>
 </resources>

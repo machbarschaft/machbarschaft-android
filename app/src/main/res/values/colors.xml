@@ -16,4 +16,12 @@
     <color name="dividers">#1F000000</color>
 
     <color name="launcher_background">#DA6077</color>
+
+
+    <!-- Colors Splash Screen -->
+    <color name="splash_background">#fadddc</color>
+    <color name="splash_text_describtion">#ef8b82</color>
+    <color name="splash_text_header">#000000</color>
+
+
 </resources>

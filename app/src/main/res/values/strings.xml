@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
+    <string name="app_name_noncapital">Machbarschaft</string>
     <string name="confirm">Confirm</string>
     <string name="title_back">Back</string>
 
@@ -95,4 +96,5 @@
     <string name="order_notification_title">Active Order</string>
     <string name="order_notification_message">You are currently executing an order for %1$s The address is  %2$s</string>
     <string name="notification_channel_current_order">Active Orders</string>
+    <string name="splash_describtion">Carry out telpehone enquiries \nshopping and errands \nfor older neighbours.</string>
 </resources>
