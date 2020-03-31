@@ -1,5 +1,6 @@
 package jetzt.machbarschaft.android.view.register;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -15,7 +16,11 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.DataAccess;
+import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.view.register.sms.SMSData;
+import jetzt.machbarschaft.android.view.register.sms.SMSEventListener;
+import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
 import jetzt.machbarschaft.android.view.register.sms.SMSManager;
 
 /**
@@ -54,11 +59,31 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
+
+
         SMSData smsData = (SMSData) caller.getSerializableExtra("smsData");
-        SMSManager smsManager = SMSManager.getInstance();
+        Account account = (Account) caller.getSerializableExtra("account");
+        SMSEventListener smsEventListener = new SMSEventListenerImpl()
+        {
+            @Override
+            public void onSucceedLogin(Activity activity, String userID)
+            {
+                if(account!=null)
+                {
+                    account.setId(userID);
+                    DataAccess.getInstance().createAccount(account, successful -> {
+                        super.onSucceedLogin(activity, userID);
+                    });
+                }
+                else
+                {
+                    super.onSucceedLogin(activity,userID);
+                }
+            }
+        };
 
         btnSendCode.setOnClickListener(view -> {
-            smsManager.sendSMS(smsData,this);
+            SMSManager.getInstance().sendSMS(smsData,this,smsEventListener);
         });
 
         btnSignIn.setOnClickListener(view -> {
@@ -66,7 +91,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             String code = tfCode1.getText().toString()+tfCode2.getText().toString()+tfCode3.getText().toString()+
                     tfCode4.getText().toString()+tfCode5.getText().toString()+tfCode6.getText().toString();
             //System.out.println("*********" + code + "*********");
-            smsManager.verifySmsCode(smsData,code,this);
+            SMSManager.getInstance().verifySmsCode(smsData,code,this,smsEventListener);
         });
 
         // Focus handlers
