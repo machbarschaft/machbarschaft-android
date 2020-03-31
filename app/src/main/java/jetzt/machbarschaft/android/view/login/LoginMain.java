@@ -64,10 +64,10 @@ public class LoginMain extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.login_in_progress));
-        progressDialog.show();
 
         loginButton.setOnClickListener(v -> login());
     }
+    
 
     // TODO Check if phone number is registered
     public void login() {
