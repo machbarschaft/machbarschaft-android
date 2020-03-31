@@ -40,6 +40,19 @@ public class DataAccess extends Database {
         super.addDocument(CollectionName.Account, account, callback);
     }
 
+    public void existUser(String phoneNumber,WasSuccessfullCallback callback)
+    {
+        getDb().collection(CollectionName.Account.toString()).whereEqualTo("phone_number", phoneNumber).get().addOnCompleteListener(
+                task -> {
+                    if(task.getResult()==null)
+                    {
+                        callback.wasSuccessful(false);
+                    }
+                    callback.wasSuccessful(!task.getResult().isEmpty());
+                }
+        );
+    }
+
     public void getMyOrders(CollectionsLoadedCallback callback) {
         getMyOrders(Storage.getInstance().getUserID(),callback);
     }

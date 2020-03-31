@@ -8,8 +8,8 @@
     <string name="login_hint_phone_number">Enter phone number</string>
     <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
+    <string name="login_error_number_not_exist">There is no user with this number</string>
     <string name="login_error_generic">Login failed</string>
-
     <string name="verify_phone_wait_for_code">Enter confirmation code</string>
     <string name="verify_phone_code_hint">Confirmation code per sms</string>
     <string name="verify_phone_title">Confirm phone number</string>
