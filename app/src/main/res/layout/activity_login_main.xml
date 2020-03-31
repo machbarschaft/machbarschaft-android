@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2b44ff"
+    android:background="@color/login_background"
     android:fitsSystemWindows="true">
 
     <androidx.viewpager.widget.ViewPager
@@ -17,7 +17,7 @@
         android:id="@+id/intro_slides_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#2b44ff"
+        android:background="@color/login_background"
         app:layout_constraintBottom_toBottomOf="@id/intro_slides_pager"
         app:layout_constraintLeft_toLeftOf="@id/intro_slides_pager"
         app:layout_constraintRight_toRightOf="@id/intro_slides_pager"
@@ -63,10 +63,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="#d5daff"
+                android:backgroundTint="@color/login_button_bgtint"
                 android:padding="12dp"
                 android:text="@string/login_action_login"
-                android:textColor="#4057ff" />
+                android:textColor="@color/login_button" />
         </LinearLayout>
 
     </LinearLayout>
