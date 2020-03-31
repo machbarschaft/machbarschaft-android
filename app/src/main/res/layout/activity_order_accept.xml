@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/order_background"
     tools:context="jetzt.machbarschaft.android.view.order.OrderAcceptActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -17,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:gravity="center_horizontal"
+        android:padding="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,10 +26,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="start"
             android:text="@string/order_accept_title"
-            android:textColor="#000000"
-            android:textSize="24sp"
+            android:paddingTop="40dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/splash_text_header"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <TextView
@@ -36,15 +39,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center"
+            android:gravity="start"
+            android:textColor="@color/splash_text_header"
+            android:fontFamily="@font/lato_bold"
+            android:paddingBottom="30dp"
             android:text="@string/order_accept_text"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/order_accept_iV_step1"
+            android:background="@drawable/round_outline"
+            android:layout_width="300dp"
+            android:paddingStart="70dp"
+            android:paddingTop="40dp"
+            android:layout_gravity="center"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/graphic_splash_screen" />
 
         <Button
             android:id="@+id/btn_call"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="20dp"
             android:layout_marginTop="16dp"
             android:text="@string/call_now" />
 
