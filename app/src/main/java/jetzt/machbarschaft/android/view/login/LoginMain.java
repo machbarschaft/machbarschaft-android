@@ -1,5 +1,6 @@
 package jetzt.machbarschaft.android.view.login;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,9 @@ import jetzt.machbarschaft.android.util.ApplicationConstants;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.register.RegisterActivity;
 import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
+import jetzt.machbarschaft.android.view.register.sms.SMSData;
+import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
+import jetzt.machbarschaft.android.view.register.sms.SMSManager;
 
 
 /**
@@ -74,7 +78,20 @@ public class LoginMain extends AppCompatActivity {
 
             DataAccess.getInstance().existUser(phoneNumberStr,exist -> {
                 if (exist) {
+                    SMSManager.getInstance().sendSMS(new SMSData(phoneNumberStr), this, new SMSEventListenerImpl() {
+                        @Override
+                        public void onNumberWrongFormatted(Exception firebaseException, Activity activity) {
+                            progressDialog.dismiss();
+                            loginButton.setEnabled(true);
+                            onLoginFailed();
+                        }
 
+                        @Override
+                        public void onError(Exception firebaseException, Activity activity) {
+                            onErrorWhileLoading();
+                            onLoginFailed();
+                        }
+                    });
                 }
                 else
                 {
