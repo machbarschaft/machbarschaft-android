@@ -32,7 +32,11 @@ public class Storage {
     }
 
     public String getUserID() {
-        return FirebaseAuth.getInstance().getUid();
+        if(FirebaseAuth.getInstance().getCurrentUser()==null)
+        {
+            return null;
+        }
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
 
