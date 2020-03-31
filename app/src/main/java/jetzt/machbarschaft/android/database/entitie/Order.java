@@ -1,5 +1,7 @@
 package jetzt.machbarschaft.android.database.entitie;
 
+import android.util.Log;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
@@ -75,11 +77,12 @@ public class Order extends Collection {
         city = document.getString("city");
         getPrescription = "yes".equals(document.getString("prescription"));
         carNecessary = "yes".equals(document.getString("carNecessary"));
-        if (document.get("lat") != null && document.get("lng") != null) {
+        if (document.get("lat") != null && document.contains("lat") && document.get("lng") != null && document.contains("lng")) {
             latitude = document.getDouble("lat");
             longitude = document.getDouble("lng");
         }
     }
+
 
     /**
      * Gets the unique id of the order in the database.
