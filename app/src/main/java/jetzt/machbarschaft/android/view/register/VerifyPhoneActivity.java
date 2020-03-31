@@ -57,7 +57,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         }
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
-        toolbar.getNavigationIcon().setColorFilter(R.color.text_white, PorterDuff.Mode.SRC_IN);
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
 
 
