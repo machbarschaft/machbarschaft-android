@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginMain.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        toolbar.getNavigationIcon().setColorFilter(R.color.text_white, PorterDuff.Mode.SRC_IN);
 
         final Passbase passbaseRef = new Passbase(this);
         passbaseRef.initialize(
