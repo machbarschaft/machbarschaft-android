@@ -1,12 +1,15 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,6 +17,7 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
+import jetzt.machbarschaft.android.view.login.LoginMain;
 
 public class OrderCarryOutActivity extends AppCompatActivity {
     private Order mOrder;
@@ -25,8 +29,17 @@ public class OrderCarryOutActivity extends AppCompatActivity {
 
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP2_CarryOut);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_back);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderDetailActivity.class)));
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
         btnStartNow.setOnClickListener(v -> {
@@ -45,7 +58,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         });
 
         TextView tfOverview = findViewById(R.id.step_2_overview);
-        tfOverview.setText(mOrder.getType_of_help().getName() + R.string.stepFor + mOrder.getClientName());
+        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
 
         Button btnCall = findViewById(R.id.step_2_btnCall);
         btnCall.setOnClickListener(new View.OnClickListener() {
