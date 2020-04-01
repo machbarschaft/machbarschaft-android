@@ -72,7 +72,7 @@
 
     <style name="AppTextAppearance.ListItemExtra" parent="AppTextAppearance.Text">
         <item name="android:fontFamily">@font/lato</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">@color/text_dark</item>
         <item name="android:textSize">@dimen/text_size_list_item_small</item>
         <item name="android:textStyle">normal</item>
     </style>

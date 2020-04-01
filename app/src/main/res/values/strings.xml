@@ -70,7 +70,7 @@
     <string name="home_order_extra_car">Car needed</string>
 
     <string name="order_detail_title">The order</string>
-    <string name="order_detail_label_needs">required</string>
+    <string name="order_detail_label_needs">requires</string>
     <string name="order_detail_label_urgency">Urgency</string>
     <string name="order_detail_label_address">Address</string>
     <string name="order_detail_accept_order">Accept order</string>
