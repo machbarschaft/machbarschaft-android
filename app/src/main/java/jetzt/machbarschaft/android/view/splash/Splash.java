@@ -16,7 +16,6 @@ import jetzt.machbarschaft.android.view.login.LoginMain;
 /**
  * Splashscreen which will be displayed shortly when the App is started.
  */
-
 public class Splash extends AppCompatActivity {
     private Handler myHandler = new Handler();
 
