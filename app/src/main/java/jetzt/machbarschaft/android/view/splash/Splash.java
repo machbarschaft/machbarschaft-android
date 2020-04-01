@@ -24,19 +24,20 @@ public class Splash extends AppCompatActivity {
     private Handler myHandler = new Handler();
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (Storage.getInstance().getUserID() == null) {
+            myHandler.postDelayed(this::startLogin, 1200);
+        } else {
+            myHandler.postDelayed(this::startApp, 1200);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-
-        if(Storage.getInstance().getUserID()==null)
-        {
-            myHandler.postDelayed(this::startLogin, 1200);
-        }
-        else
-        {
-            myHandler.postDelayed(this::startApp, 1200);
-        }
 
         // TESTS
         // DataAccessTest.getInstance().runTests();

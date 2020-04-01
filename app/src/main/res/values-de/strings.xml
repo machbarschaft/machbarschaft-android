@@ -40,7 +40,7 @@
     <string name="register_button_send">Absenden</string>
     <string name="register_button_back">Zurück</string>
 
-    <string name="intro_1_text">Melde dich als Helfer an</string>
+    <string name="intro_1_text">Melde dich als \nMachbar:in an</string>
     <string name="intro_2_text">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
     <string name="intro_3_text">Kläre telefonisch das Anliegen</string>
     <string name="intro_4_text">Erledige Besorgungen für Menschen in Not</string>
