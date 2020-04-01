@@ -61,18 +61,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.order.OrderDetailActivity" />
         </activity>
-        <activity
-            android:name=".view.register.RegisterActivity"
-            android:theme="@style/AppTheme.Translucent" />
-        <activity
-            android:name=".view.register.VerifyPhoneActivity"
-            android:theme="@style/AppTheme.Translucent" />
-        <activity
-            android:name=".view.home.Home"
-            android:theme="@style/AppTheme.Translucent" />
-        <activity
-            android:name=".view.login.LoginMain"
-            android:theme="@style/AppTheme.Translucent" />
+        <activity android:name=".view.register.RegisterActivity" />
+        <activity android:name=".view.register.VerifyPhoneActivity" />
+        <activity android:name=".view.home.Home" />
+        <activity android:name=".view.login.LoginMain" />
         <activity android:name=".view.splash.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

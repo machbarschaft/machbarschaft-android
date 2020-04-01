@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/order_done_background"
+    android:background="@color/background_green"
     tools:context="jetzt.machbarschaft.android.view.order.OrderDoneActivity">
 
     <ImageView
@@ -33,15 +33,13 @@
 
     <Button
         android:id="@+id/btn_back_home"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/AppTheme.Button.Blue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_marginLeft="@dimen/screen_padding"
         android:layout_marginTop="24dp"
         android:layout_marginRight="@dimen/screen_padding"
-        android:backgroundTint="@color/register_button_bgtint"
         android:text="@string/back_to_home"
-        android:textColor="@color/order_done_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/done_text" />

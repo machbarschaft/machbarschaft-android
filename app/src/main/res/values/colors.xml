@@ -4,34 +4,49 @@
     <color name="color_primary_dark">#D81B60</color>
     <color name="color_accent">#004eff</color>
 
-    <color name="selectorDotActive">@color/color_accent</color>
-    <color name="selectorDotInactive">#AAAAAAAA</color>
+    <color name="selector_dot_active">#FFFFFFFF</color>
+    <color name="selector_dot_inactive">#88FFFFFF</color>
 
     <color name="order_done_background">#279f14</color>
     <color name="content_background">#FFFFFF</color>
-
-    <color name="text_black">#000000</color>
-    <color name="text_white">#DAFFFFFF</color>
 
     <color name="dividers">#1F000000</color>
 
     <color name="launcher_background">#DA6077</color>
 
+    <!-- Background colors for large surface areas -->
+    <color name="background_light_pink">#FFDCDB</color>
+    <color name="background_blue">#4157FF</color>
+    <color name="background_blue_darker">#2B44FF</color>
+    <color name="background_cyan">#4CD5D5</color>
+    <color name="background_teal">#31A08A</color>
+    <color name="background_green">#4ECE7C</color>
+
+    <!-- Button backgrounds are transparent -->
+    <color name="button_bg_primary">#A8FFFFFF</color>
+    <color name="button_bg_secondary">#14FFFFFF</color>
+    <color name="button_bg_green">#4ECE7C</color>
+    <color name="button_text_primary_blue">@color/background_blue</color>
+    <color name="button_text_primary_cyan">@color/background_cyan</color>
+    <color name="button_text_primary_teal">@color/background_teal</color>
+    <color name="button_text_primary_pink">@color/background_teal</color>
+
+    <!-- Text colors contain transparency -->
+    <color name="text_black">#FF000000</color>
+    <color name="text_dark">#E8000000</color>
+    <color name="text_light">#C7FFFFFF</color>
+    <color name="text_white">#FFFFFFFF</color>
+    <color name="text_primary">#FF6C64</color>
+    <color name="text_important">#FF3743</color>
 
     <!-- Colors Splash Screen -->
-    <color name="splash_background">#fadddc</color>
-    <color name="splash_text_describtion">#ef8b82</color>
-    <color name="splash_text_header">#000000</color>
+    <color name="splash_background">@color/background_light_pink</color>
 
     <!-- Order Step 1 Screen -->
-    <color name="order_background">#fae0e0</color>
-    <color name="order_button">#73cb84</color>
-    <color name="order_text_header">#060505</color>
+    <color name="order_step_1_background">@color/background_light_pink</color>
 
     <!-- Login Screen -->
-    <color name="login_background">#2b44ff</color>
-    <color name="login_button">#4057ff</color>
-    <color name="login_button_bgtint">#d5daff</color>
+    <color name="login_background">@color/background_blue</color>
 
     <!-- Registration Screen -->
     <color name="register_background">#31a08a</color>
