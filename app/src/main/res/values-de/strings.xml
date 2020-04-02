@@ -90,7 +90,7 @@
 
     <string name="order_en_route_title">Schritt #3</string>
     <string name="order_en_route_text">Auftrag erledigen</string>
-    <string name="target_address">Ziel-Adresse</string>
+    <string name="target_address">Ziel-Adresse:</string>
     <string name="calculate_route">Route berechnen</string>
     <string name="order_done">Auftrag erledigt</string>
     <string name="thank_you_text">Vielen Dank!\nDu bist toll!</string>

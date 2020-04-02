@@ -2,11 +2,16 @@ package jetzt.machbarschaft.android.view.order;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -36,15 +41,36 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_en_route);
 
+        // Get active order
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP3_EnRoute);
+
+        // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_back);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+        // Set overview label at the top of the page
+        TextView tfOverview = findViewById(R.id.step_3_overview);
+        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+
+        // Set address from order to label
+        TextView tfAddress = findViewById(R.id.step_3_address);
+        tfAddress.setText(mOrder.getCompleteAddress());
+
+        // Load map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
+        // Button click handlers
         Button btnNavigate = findViewById(R.id.btn_navigate);
         btnNavigate.setOnClickListener(v -> navigateToAddress());
 
@@ -54,8 +80,27 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
             startActivity(new Intent(this, OrderDoneActivity.class));
             finishAfterTransition();
         });
+
+        Button btnCall = findViewById(R.id.step_3_btnCall);
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callUser();
+            }
+        });
     }
 
+    /**
+     * Open phone app with number from order
+     */
+    private void callUser() {
+        Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
+        startActivity(new Intent(Intent.ACTION_VIEW, callUri));
+    }
+
+    /**
+     * Start maps app to navigate to order address
+     */
     private void navigateToAddress() {
         if (mOrder == null) {
             return;
@@ -67,6 +112,9 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         startActivity(new Intent(Intent.ACTION_VIEW, locationUri));
     }
 
+    /**
+     * Get active order from database
+     */
     private void loadOrder() {
         //mOrder = Storage.getInstance().getCurrentOrder();
         mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
