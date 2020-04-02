@@ -2,7 +2,10 @@ package jetzt.machbarschaft.android.database.test;
 
 import android.util.Log;
 
+import java.util.List;
+
 import jetzt.machbarschaft.android.database.DataAccess;
+import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.entitie.Account;
 import jetzt.machbarschaft.android.database.entitie.Order;
 
@@ -25,12 +28,12 @@ public class DataAccessTest {
         Log.i("DataAccessTest", "Tests start:");
 
         //createAccount(); //passed
-        login(); // passed
-        // getOrders(); // passed
+        // login(); // passed
+        getOrders(); // passed
         // setOrderStatus(); // passed
         // getOrderById(); // passed
         // getMyOrder(); // passed
-        getMyOrders();
+        // getMyOrders();
     }
 
     private void createAccount() {
@@ -51,6 +54,7 @@ public class DataAccessTest {
     }
 
     private void login() {
+        /*
         DataAccess.getInstance().login("0157 12345678", collection -> {
             if (collection != null) {
                 Log.i("DataAccessTest", "login: Success");
@@ -59,6 +63,8 @@ public class DataAccessTest {
                 Log.i("DataAccessTest", "login: Failure");
             }
         });
+
+         */
     }
 
     private void getOrderById() {
@@ -73,19 +79,7 @@ public class DataAccessTest {
         });
     }
 
-    private void getMyOrder() {
-        Log.i("DataAccessTest", "getMyOrder: started");
 
-        DataAccess.getInstance().getMyOrder("0157 12345678", order -> {
-            if (order != null) {
-                Log.i("DataAccessTest", "getMyOrder: Success");
-                Log.i("DataAccessTest", order.toString());
-
-            } else {
-                Log.i("DataAccessTest", "getMyOrder: Failure");
-            }
-        });
-    }
 
     private void getMyOrders() {
         Log.i("DataAccessTest", "getMyOrders: started");
@@ -104,6 +98,11 @@ public class DataAccessTest {
         DataAccess.getInstance().getOrders(successful -> {
             if (successful) {
                 Log.i("DataAccessTest", "getOrders: Success");
+                List<Order> orders =  OrderHandler.getInstance().getPersonInDistance(1000000);
+                for(Order o: orders) {
+                    Log.i("DataAccessTest", "getOrders: " + o);
+
+                }
             } else {
                 Log.i("DataAccessTest", "getOrders: Failure");
             }
