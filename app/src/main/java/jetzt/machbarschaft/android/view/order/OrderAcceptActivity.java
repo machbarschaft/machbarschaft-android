@@ -29,6 +29,10 @@ public class OrderAcceptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_accept);
 
+        // Load active order from database
+        loadOrder();
+        Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP1_PHONE);
+
         // Get UI elements
         Button btnCall = findViewById(R.id.btn_call);
 
@@ -38,19 +42,15 @@ public class OrderAcceptActivity extends AppCompatActivity {
         TextView descriptionView = findViewById(R.id.order_accept_text);
         descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));
 
-        // Load active order from database
-        loadOrder();
-        Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP1_PHONE);
-
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarAcceptOrder);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderDetailActivity.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         // Button click handlers
