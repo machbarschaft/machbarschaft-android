@@ -1,7 +1,5 @@
 package jetzt.machbarschaft.android.database.entitie;
 
-import android.util.Log;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
@@ -9,9 +7,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import jetzt.machbarschaft.android.R;
 
