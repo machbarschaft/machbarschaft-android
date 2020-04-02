@@ -77,7 +77,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
         // Set color of icon at "navigation" button
         Drawable icon = getResources().getDrawable(android.R.drawable.ic_menu_directions, getTheme());
-        icon.setColorFilter(getColor(R.color.order_step_2_background_dark), PorterDuff.Mode.SRC_IN);
+        icon.setColorFilter(getColor(R.color.order_step_2_icon), PorterDuff.Mode.SRC_IN);
         btnNavigate.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 
         Button btnDone = findViewById(R.id.btn_done);
