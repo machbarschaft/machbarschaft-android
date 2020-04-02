@@ -16,15 +16,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/AppTextAppearance.Text"
         app:titleTextColor="@color/text_white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/step_2_layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/order_step_2_background_dark"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/step_2_layout_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -75,7 +76,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/step_2_layout_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/order_step_2_background_light"
@@ -85,10 +86,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/step_2_layout_top">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/step_3_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_padding"
@@ -144,10 +145,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.97" />
+            app:layout_constraintVertical_bias="0.95" />
 
         <TextView
-            android:id="@+id/step_2_tfTitle"
+            android:id="@+id/step_2_subtitle"
             style="@style/TextSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,8 +157,9 @@
             android:text="@string/order_carry_out_text"
             android:textColor="@color/text_white"
             android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/step_3_title" />
 
         <ImageView
             android:id="@+id/step_2_graphic"
@@ -168,7 +170,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/step_2_tfTitle"
+            app:layout_constraintTop_toBottomOf="@+id/step_2_subtitle"
             app:srcCompat="@drawable/graphic_order_step2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

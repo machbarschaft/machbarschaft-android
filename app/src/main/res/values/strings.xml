@@ -88,7 +88,7 @@
 
     <string name="order_en_route_title">Step #3</string>
     <string name="order_en_route_text">Execute order</string>
-    <string name="target_address">Target address</string>
+    <string name="target_address">Target address:</string>
     <string name="calculate_route">Navigate</string>
     <string name="order_done">Order completed</string>
     <string name="thank_you_text">Thank you!\nYou are great!</string>

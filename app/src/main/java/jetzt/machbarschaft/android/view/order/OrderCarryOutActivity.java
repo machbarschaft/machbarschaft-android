@@ -27,9 +27,24 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_carry_out);
 
+
+        // Get UI elements
+        Button btnStartNow = findViewById(R.id.btn_order_execute_now);
+        Button btnStartLater = findViewById(R.id.btn_order_execute_later);
+        Button btnStartFailed = findViewById(R.id.btn_order_execute_failed);
+        Button btnCall = findViewById(R.id.step_2_btnCall);
+
+
+        // Load active order from Database
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP2_CarryOut);
 
+        //Set the details on the text View
+        TextView tfOverview = findViewById(R.id.step_2_overview);
+        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+
+
+        // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -41,26 +56,21 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderDetailActivity.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
-        Button btnStartNow = findViewById(R.id.btn_order_execute_now);
+        // Button click handlers
         btnStartNow.setOnClickListener(v -> {
             startActivity(new Intent(this, OrderEnRouteActivity.class));
             finishAfterTransition();
         });
 
-        Button btnStartLater = findViewById(R.id.btn_order_execute_later);
         btnStartLater.setOnClickListener(v -> {
 
         });
 
-        Button btnStartFailed = findViewById(R.id.btn_order_execute_failed);
         btnStartFailed.setOnClickListener(v -> {
 
         });
 
-        TextView tfOverview = findViewById(R.id.step_2_overview);
-        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
-
-        Button btnCall = findViewById(R.id.step_2_btnCall);
+        // Call the person who needs help
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,11 +79,17 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Load users active order from database
+     */
     private void loadOrder() {
         // mOrder = Storage.getInstance().getCurrentOrder();
         mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
     }
 
+    /**
+     * Open phone app with number from order
+     */
     private void callUser() {
         Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
         startActivity(new Intent(Intent.ACTION_VIEW, callUri));

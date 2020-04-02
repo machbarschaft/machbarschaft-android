@@ -20,11 +20,18 @@ public class OrderDoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_done);
+
+        // Get UI elements
         Button btnHome = findViewById(R.id.btn_back_home);
+
+        // Set order status
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP0_NONE);
         Storage.getInstance().setActiveOrder(getApplicationContext(), false);
+
         Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
         stopService(serviceIntent); //stops the foregroundservice
+
+        // Button click handlers
         btnHome.setOnClickListener(v -> finish());
     }
 }

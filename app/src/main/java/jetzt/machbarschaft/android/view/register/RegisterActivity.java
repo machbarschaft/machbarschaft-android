@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         EditText tfPhone = findViewById(R.id.register_tf_phone);
 
+        // Setup toolbar
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -55,16 +56,22 @@ public class RegisterActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginMain.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
+        // Add Passbase verification button
+        // User need to verify his identity via a official document
         final Passbase passbaseRef = new Passbase(this);
+
         passbaseRef.initialize(
                 "3e27309be36f707c9fea64ef81f22d011ed52942952b9e96cb5e5eff7db2c13e",
                 "",
                 new Pair[]{}
         );
+
         PassbaseButton verificationButton = findViewById(R.id.passbase_verification_button);
+
+        // Passbase button click handler
         verificationButton.setOnClickListener(view -> passbaseRef.startVerification());
+
         // Callbacks for verification
-        // Add here the callbacks
         passbaseRef.onCancelPassbaseVerification(() -> {
             Toast.makeText(this, R.string.verify_error_generic, Toast.LENGTH_LONG).show();
             trusted = false;
