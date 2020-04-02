@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,6 +74,11 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         // Button click handlers
         Button btnNavigate = findViewById(R.id.btn_navigate);
         btnNavigate.setOnClickListener(v -> navigateToAddress());
+
+        // Set color of icon at "navigation" button
+        Drawable icon = getResources().getDrawable(android.R.drawable.ic_menu_directions, getTheme());
+        icon.setColorFilter(getColor(R.color.order_step_2_background_dark), PorterDuff.Mode.SRC_IN);
+        btnNavigate.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 
         Button btnDone = findViewById(R.id.btn_done);
         btnDone.setOnClickListener(v -> {
