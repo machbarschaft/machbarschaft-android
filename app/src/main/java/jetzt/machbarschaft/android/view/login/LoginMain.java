@@ -94,7 +94,7 @@ public class LoginMain extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, R.string.login_error_number_not_exist, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.login_error_number_not_exist, Toast.LENGTH_SHORT).show();
                     onErrorWhileLoading();
                 }
             });
@@ -137,6 +137,6 @@ public class LoginMain extends AppCompatActivity {
      * Right now we show a small Toast which will show that the Login wasn't successfully.
      */
     private void onLoginFailed() {
-        Toast.makeText(this, R.string.login_error_generic, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.login_error_generic, Toast.LENGTH_SHORT).show();
     }
 }

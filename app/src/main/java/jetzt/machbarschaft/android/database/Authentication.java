@@ -28,7 +28,7 @@ public class Authentication {
     //private static PhoneAuthProvider phoneAuth;
     private FirebaseAuth auth;
 
-    FirebaseUser user;
+    private FirebaseUser user;
     private String verification_Id;
     private PhoneAuthProvider.ForceResendingToken resendToken;
 
@@ -48,7 +48,9 @@ public class Authentication {
         return auth.getCurrentUser();
     }
 
-    public void codeConfirmed() {
+    public void verifyCode(String code, WasSuccessfullCallback callback) {
+        PhoneAuthCredential credentials = PhoneAuthProvider.getCredential(this.verification_Id, code);
+        this.signInWithPhoneAuthCredential(credentials, callback);
     }
 
     public void verifyNumber(String number, WasSuccessfullCallback smsCodeSent, WasSuccessfullCallback verificationAndLoginSuccess) {
@@ -125,9 +127,9 @@ public class Authentication {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
 
-                            FirebaseUser user = task.getResult().getUser();
+                            user = task.getResult().getUser();
                             // ...
-
+                            loginSuccess.wasSuccessful(true);
                         } else {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
