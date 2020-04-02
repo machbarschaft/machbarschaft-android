@@ -7,8 +7,11 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
+
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
+import jetzt.machbarschaft.android.database.test.DataAccessTest;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.login.LoginMain;
 
@@ -16,6 +19,7 @@ import jetzt.machbarschaft.android.view.login.LoginMain;
 /**
  * Splashscreen which will be displayed shortly when the App is started.
  */
+
 public class Splash extends AppCompatActivity {
     private Handler myHandler = new Handler();
 
@@ -24,17 +28,19 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (Storage.getInstance().getUserID() == null) {
+        if(Storage.getInstance().getUserID()==null)
+        {
             myHandler.postDelayed(this::startLogin, 1200);
-        } else {
+        }
+        else
+        {
             myHandler.postDelayed(this::startApp, 1200);
         }
+
+        // TESTS
+        DataAccessTest.getInstance().runTests();
+        //TESTS
     }
 
     @Override
@@ -43,12 +49,10 @@ public class Splash extends AppCompatActivity {
     }
 
     private void startApp() {
-        startActivity(new Intent(this, Home.class));
-        finishAfterTransition();
+        this.startActivity(new Intent(this, Home.class));
     }
 
     private void startLogin() {
-        startActivity(new Intent(this, LoginMain.class));
-        finishAfterTransition();
+        this.startActivity(new Intent(this, LoginMain.class));
     }
 }

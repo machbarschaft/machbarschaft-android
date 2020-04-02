@@ -25,7 +25,7 @@ public class DataAccessTest {
         Log.i("DataAccessTest", "Tests start:");
 
         //createAccount(); //passed
-       // login(); // passed
+        login(); // passed
         // getOrders(); // passed
         // setOrderStatus(); // passed
         // getOrderById(); // passed
@@ -50,7 +50,7 @@ public class DataAccessTest {
         });
     }
 
-    /*private void login() {
+    private void login() {
         DataAccess.getInstance().login("0157 12345678", collection -> {
             if (collection != null) {
                 Log.i("DataAccessTest", "login: Success");
@@ -59,7 +59,7 @@ public class DataAccessTest {
                 Log.i("DataAccessTest", "login: Failure");
             }
         });
-    }*/
+    }
 
     private void getOrderById() {
         DataAccess.getInstance().getOrderById("3Bh8isxyUHQ1Gny3G0Nn", order -> {
@@ -73,7 +73,7 @@ public class DataAccessTest {
         });
     }
 
-    /*private void getMyOrder() {
+    private void getMyOrder() {
         Log.i("DataAccessTest", "getMyOrder: started");
 
         DataAccess.getInstance().getMyOrder("0157 12345678", order -> {
@@ -85,7 +85,7 @@ public class DataAccessTest {
                 Log.i("DataAccessTest", "getMyOrder: Failure");
             }
         });
-    }*/
+    }
 
     private void getMyOrders() {
         Log.i("DataAccessTest", "getMyOrders: started");

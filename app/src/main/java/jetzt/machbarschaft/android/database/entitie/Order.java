@@ -10,6 +10,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import jetzt.machbarschaft.android.R;
 
 /**
@@ -71,7 +74,9 @@ public class Order extends Collection {
         urgency = Urgency.byName(document.getString("urgency"));
         clientName = document.getString("name");
         phoneNumber = document.getString("phone_number");
+
         street = document.getString("street");
+
         houseNumber = document.getString("house_number");
         zipCode = document.getString("zip");
         city = document.getString("city");
