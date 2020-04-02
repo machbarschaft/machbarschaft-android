@@ -27,18 +27,22 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_carry_out);
 
+
         // Get UI elements
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
         Button btnStartLater = findViewById(R.id.btn_order_execute_later);
         Button btnStartFailed = findViewById(R.id.btn_order_execute_failed);
         Button btnCall = findViewById(R.id.step_2_btnCall);
 
-        TextView tfOverview = findViewById(R.id.step_2_overview);
-        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
 
         // Load active order from Database
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP2_CarryOut);
+
+        //Set the details on the text View
+        TextView tfOverview = findViewById(R.id.step_2_overview);
+        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+
 
         // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
