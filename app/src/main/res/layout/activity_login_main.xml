@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_background"
-    android:fitsSystemWindows="true">
+    android:background="@color/background_blue">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/intro_slides_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/background_blue_darker"
         app:layout_constraintBottom_toTopOf="@id/login_form"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/intro_slides_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/login_background"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@id/intro_slides_pager"
         app:layout_constraintLeft_toLeftOf="@id/intro_slides_pager"
         app:layout_constraintRight_toRightOf="@id/intro_slides_pager"
@@ -31,42 +31,42 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/screen_padding"
-        android:paddingVertical="8dp"
+        android:paddingVertical="16dp"
+        android:background="@color/background_blue"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/input_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/verification_number_background"
-                android:fontFamily="@font/lato"
                 android:gravity="center"
                 android:hint="@string/login_hint_phone_number"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:importantForAutofill="no" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical|end"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_login"
-                style="@style/Widget.MaterialComponents.Button"
+                style="@style/AppTheme.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:backgroundTint="@color/login_button_bgtint"
-                android:padding="12dp"
+                android:layout_height="@dimen/button_height"
                 android:text="@string/login_action_login"
-                android:textColor="@color/login_button" />
+                android:textColor="@color/button_text_primary_blue" />
         </LinearLayout>
 
     </LinearLayout>

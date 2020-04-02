@@ -3,6 +3,7 @@
     <string name="app_name_noncapital">Machbarschaft</string>
     <string name="confirm">Confirm</string>
     <string name="title_back">Back</string>
+    <string name="stepFor">for</string>
 
     <string name="login_action_login">Start now</string>
     <string name="login_action_register">Register</string>
@@ -70,7 +71,7 @@
     <string name="home_order_extra_car">Car needed</string>
 
     <string name="order_detail_title">The order</string>
-    <string name="order_detail_label_needs">required</string>
+    <string name="order_detail_label_needs">requires</string>
     <string name="order_detail_label_urgency">Urgency</string>
     <string name="order_detail_label_address">Address</string>
     <string name="order_detail_accept_order">Accept order</string>
@@ -82,8 +83,8 @@
     <string name="order_carry_out_title">Step #2</string>
     <string name="order_carry_out_text">Tell us, when you are on your way.</string>
     <string name="start_to_execute_now">Leaving now</string>
-    <string name="start_to_execute_later">I will go later</string>
-    <string name="start_to_execute_failed">I could not reach anybody</string>
+    <string name="start_to_execute_later"><u>I will go later</u></string>
+    <string name="start_to_execute_failed"><u>I could not reach anybody</u></string>
 
     <string name="order_en_route_title">Step #3</string>
     <string name="order_en_route_text">Execute order</string>
