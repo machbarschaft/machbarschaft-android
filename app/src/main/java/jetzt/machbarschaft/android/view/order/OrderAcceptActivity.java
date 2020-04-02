@@ -1,6 +1,8 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -27,24 +29,31 @@ public class OrderAcceptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_accept);
 
+        // Get UI elements
+        Button btnCall = findViewById(R.id.btn_call);
+
         ImageView imageView = findViewById(R.id.order_accept_iV_step1);
         imageView.setClipToOutline(true);
 
+        TextView descriptionView = findViewById(R.id.order_accept_text);
+        descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));
+
+        // Load active order from database
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP1_PHONE);
+
+        // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
-        TextView descriptionView = findViewById(R.id.order_accept_text);
-        descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));
-
-        Button btnCall = findViewById(R.id.btn_call);
+        // Button click handlers
         btnCall.setOnClickListener(v -> {
             startActivity(new Intent(this, OrderCarryOutActivity.class));
             callUser();
@@ -52,11 +61,17 @@ public class OrderAcceptActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Start phone app with number from order
+     */
     private void callUser() {
         Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
         startActivity(new Intent(Intent.ACTION_VIEW, callUri));
     }
 
+    /**
+     * Load users active order from database
+     */
     private void loadOrder() {
         mOrder = Storage.getInstance().getOrderInProgress(this);
     }

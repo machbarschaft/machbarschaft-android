@@ -60,7 +60,7 @@
     <color name="verification_button_bgtint">#def0f7</color>
 
     <!-- Order Step 2 Screen -->
-    2b44ff
+    <color name="order_step_2_icon">#004fff</color>
     <color name="order_step_2_background_dark">#2b44ff</color>
     <color name="order_step_2_background_light">#4257ff</color>
     <color name="order_step_2_button_bgtint">#4ece7c</color>

@@ -1,6 +1,8 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -46,28 +48,35 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
 
+        // Get UI elements
+        Button btnAccept = findViewById(R.id.btn_accept_order);
+        mNameView = findViewById(R.id.order_detail_name);
+        mNeedsView = findViewById(R.id.order_detail_needs);
+        mUrgencyView = findViewById(R.id.order_detail_urgency);
+        mAddressView = findViewById(R.id.order_detail_address);
+
+        // Get active order from database
         loadOrder();
 
+        // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
+        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+        // Add map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        Button btnAccept = findViewById(R.id.btn_accept_order);
+        // Button click handlers
         btnAccept.setOnClickListener(v -> acceptOrder());
-
-        mNameView = findViewById(R.id.order_detail_name);
-        mNeedsView = findViewById(R.id.order_detail_needs);
-        mUrgencyView = findViewById(R.id.order_detail_urgency);
-        mAddressView = findViewById(R.id.order_detail_address);
     }
 
     /**

@@ -49,27 +49,26 @@ public class LoginMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
         context = getApplicationContext();
-        //sets the Custom Pager Adapter to display the different slides in the application
 
+        // Sets the Custom Pager Adapter to display the different slides in the application
         ViewPager introSlidesPager = findViewById(R.id.intro_slides_pager);
         TabLayout introSlidesIndicator = findViewById(R.id.intro_slides_indicator);
 
         introSlidesPager.setAdapter(new CustomPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(introSlidesPager, true);
 
+        // Get UI elements
         phoneNumber = findViewById(R.id.input_phone_number);
         loginButton = findViewById(R.id.btn_login);
-
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.login_in_progress));
 
+        // Button click handlers
         loginButton.setOnClickListener(v -> login());
     }
-    
 
-    // TODO Check if phone number is registered
     public void login() {
         if (validate()) {
             loginButton.setEnabled(false);
