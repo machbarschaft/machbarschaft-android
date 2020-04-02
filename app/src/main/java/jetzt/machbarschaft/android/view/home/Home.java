@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -73,6 +72,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     private EnumMap<Order.Urgency, BitmapDescriptor> markerIconMap;
     private Location location;
 
+    private boolean sortByDistance = true;
+    private boolean sortByUrgency = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Button btnFAQ = findViewById(R.id.home_btn_faq);
         Button btnContact = findViewById(R.id.home_btn_contact);
         Button btnReport = findViewById(R.id.home_btn_bug_report);
+        Button btnSortByUrgency = findViewById(R.id.homeBtnUrgency);
+        Button btnSortByDistance = findViewById(R.id.homeBtnRadius);
 
         // Button action handlers
         btnFAQ.setOnClickListener(view -> {
@@ -93,6 +97,22 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         btnContact.setOnClickListener(view -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
             startActivity(browserIntent);
+        });
+
+        btnSortByDistance.setOnClickListener(view -> {
+            if (!sortByDistance && sortByUrgency) {
+                sortByDistance = true;
+                sortByUrgency = false;
+            }
+            getPositionByView(map);
+        });
+
+        btnSortByUrgency.setOnClickListener(view -> {
+            if (!sortByUrgency && sortByDistance) {
+                sortByUrgency = true;
+                sortByDistance = false;
+            }
+            getPositionByView(map);
         });
 
         btnReport.setOnClickListener(view -> {
@@ -134,7 +154,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
              */
             if (Storage.getInstance().gotActiveOrder(getApplicationContext())) {
                 startOrderNotification();
-                switch (Storage.getInstance().getCurrentStep(getApplicationContext())){
+                switch (Storage.getInstance().getCurrentStep(getApplicationContext())) {
                     case STEP0_NONE:
                         break;
                     case STEP1_PHONE:
@@ -150,7 +170,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                         finishAfterTransition();
                         break;
                 }
-
 
 
             }
@@ -201,7 +220,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         }
     }
 
-    public Location getMyLocation(){
+    public Location getMyLocation() {
         LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         assert locationManager != null;
         @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -211,7 +230,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     /**
      * Sorts List, so that the nearest Orders are on top.
      */
-    private void sortData(Location myLocation) {
+    private void sortDataByDistance(Location myLocation) {
         Collections.sort(this.orderList, (o1, o2) -> {
             Location location1 = new Location("");
             location1.setLatitude(o1.getLatitude());
@@ -231,6 +250,34 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         });
     }
 
+    public void sortByLocation(Location location1, Location location2, Location myLocation) {
+        if (myLocation != null) {
+            double distance1 = myLocation.distanceTo(location1);
+            double distance2 = myLocation.distanceTo(location2);
+            Log.i("", "compare: " + distance1 + distance2);
+            if (distance1 == distance2) {
+            }
+        }
+    }
+
+    /**
+     * Sorts all orders by Urgency
+     */
+    private void sortDataByUrgency(Location myLocation) {
+        Collections.sort(this.orderList, (o1, o2) -> {
+            if (o1.getUrgency() == o2.getUrgency()) {
+                Location location1 = new Location("");
+                location1.setLatitude(o1.getLatitude());
+                location1.setLongitude(o1.getLongitude());
+                Location location2 = new Location("");
+                location2.setLatitude(o2.getLatitude());
+                location2.setLongitude(o2.getLongitude());
+                sortByLocation(location1, location2, myLocation);
+            }
+            return o1.getUrgency().compareTo(o2.getUrgency());
+        });
+    }
+
     /**
      * Request the last known location and zoom the map to that point.
      */
@@ -238,7 +285,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     this.location = location;
-                    sortData(getMyLocation());
+                    sortDataByDistance(getMyLocation());
                     orderAdapter.notifyDataSetChanged();
                     Log.d(LOG_TAG, "Last known location: " + location);
                     if (location == null || map == null) {
@@ -303,13 +350,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         map.setPadding(0, paddingTop, 0, 0);
         map.setOnMarkerClickListener(this);
         initializeMarker();
-        map.setOnCameraIdleListener(this);
-
         if (hasLocationPermission) {
             requestCurrentLocation();
         }
-
         updateMarkers();
+        map.setOnCameraIdleListener(this);
     }
 
     /**
@@ -404,12 +449,16 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         getPositionByView(map);
 
     }
-    public void getPositionByView(GoogleMap map){
+
+    public void getPositionByView(GoogleMap map) {
         LatLng latLng = map.getCameraPosition().target;
         Location location = new Location("");
         location.setLatitude(latLng.latitude);
         location.setLongitude(latLng.longitude);
-        sortData(location);
+        if (sortByDistance && !sortByUrgency)
+            sortDataByDistance(location);
+        else
+            sortDataByUrgency(location);
         orderAdapter.setLocation(location);
         orderAdapter.notifyDataSetChanged();
     }
