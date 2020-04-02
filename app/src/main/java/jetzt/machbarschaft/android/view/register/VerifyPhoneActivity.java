@@ -49,6 +49,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         EditText tfCode5 = findViewById(R.id.verificationTfCode5);
         EditText tfCode6 = findViewById(R.id.verificationTfCode6);
 
+        // Setup toolar
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -59,8 +60,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
-
-
+        // Use SMS to verify phone number
         SMSData smsData = (SMSData) caller.getSerializableExtra("smsData");
         Account account = (Account) caller.getSerializableExtra("account");
         SMSEventListener smsEventListener = new SMSEventListenerImpl()
@@ -82,6 +82,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             }
         };
 
+        // Button click handlers
         btnSendCode.setOnClickListener(view -> {
             SMSManager.getInstance().sendSMS(smsData,this,smsEventListener);
         });
