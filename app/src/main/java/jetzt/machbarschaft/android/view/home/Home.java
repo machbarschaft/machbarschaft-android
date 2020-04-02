@@ -121,6 +121,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             AlertDialog alert = builder.create();
             alert.show();
         });
+/*
+* get orders
+*/
 
         DataAccess.getInstance().getOrders(successful -> {
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
