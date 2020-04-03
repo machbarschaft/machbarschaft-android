@@ -48,11 +48,22 @@ public class Authentication {
         return auth.getCurrentUser();
     }
 
+    /**This function is called, when the user enters the confirmation code
+     *
+     * @param code confirmation code
+     * @param callback callback returns true, when the code & the login were successful
+     */
     public void verifyCode(String code, WasSuccessfullCallback callback) {
         PhoneAuthCredential credentials = PhoneAuthProvider.getCredential(this.verification_Id, code);
         this.signInWithPhoneAuthCredential(credentials, callback);
     }
 
+    /**
+     *
+     * @param number the Phonenumber which want to login
+     * @param smsCodeSent callback returns true, when the sms code was sent
+     * @param verificationAndLoginSuccess callback returns true, when the login was successful
+     */
     public void verifyNumber(String number, WasSuccessfullCallback smsCodeSent, WasSuccessfullCallback verificationAndLoginSuccess) {
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -90,7 +101,6 @@ public class Authentication {
                         }
 
                         // Show a message and update the UI
-                        // ...
                         verificationAndLoginSuccess.wasSuccessful(false);
                     }
 
@@ -102,11 +112,11 @@ public class Authentication {
                         // by combining the code with a verification ID.
                         Log.d(TAG, "onCodeSent:" + verificationId);
 
+                        super.onCodeSent(verificationId, token);
                         // Save verification ID and resending token so we can use them later
                         verification_Id = verificationId;
                         resendToken = token;
 
-                        // ...
                         smsCodeSent.wasSuccessful(true);
                     }
                     @Override
@@ -114,7 +124,7 @@ public class Authentication {
 
                     }
 
-                });        // OnVerificationStateChangedCallbacks
+                });
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential, WasSuccessfullCallback loginSuccess) {
