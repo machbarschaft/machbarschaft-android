@@ -3,20 +3,12 @@ package jetzt.machbarschaft.android.view.login;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.util.ApplicationConstants;
-import jetzt.machbarschaft.android.view.home.Home;
-import jetzt.machbarschaft.android.view.register.RegisterActivity;
-import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
+import jetzt.machbarschaft.android.util.PhoneNumberFormatterUtil;
 import jetzt.machbarschaft.android.view.register.sms.SMSData;
 import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
 import jetzt.machbarschaft.android.view.register.sms.SMSManager;
@@ -80,7 +69,7 @@ public class LoginMain extends AppCompatActivity {
         ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, countryCodes);
         countryCodeTextView =
                 findViewById(android.R.id.content)
-                        .findViewById(R.id.filled_exposed_dropdown);
+                        .findViewById(R.id.filled_exposed_dropdown_country_Code_login);
         countryCodeTextView.setText(countryCodes[0], false);
         countryCodeTextView.setAdapter(countryCodeAdapter);
     }
@@ -89,9 +78,9 @@ public class LoginMain extends AppCompatActivity {
         if (validate()) {
             loginButton.setEnabled(false);
             progressDialog.show();
-            DataAccess.getInstance().existUser(getPhoneNumber(), exist -> {
+            DataAccess.getInstance().existUser(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString()), exist -> {
                 if (exist) {
-                    SMSManager.getInstance().sendSMS(new SMSData(getPhoneNumber()), this, new SMSEventListenerImpl() {
+                    SMSManager.getInstance().sendSMS(new SMSData(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString())), this, new SMSEventListenerImpl() {
                         @Override
                         public void onNumberWrongFormatted(Exception firebaseException, Activity activity) {
                             progressDialog.dismiss();
@@ -148,20 +137,5 @@ public class LoginMain extends AppCompatActivity {
      */
     private void onLoginFailed() {
         Toast.makeText(getApplicationContext(), R.string.login_error_generic, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Adds the Country Code to the Phone Number and removes unnecessary Zeros in Front of the Number,
-     * in case the user doesn't know, that there should not follow a Zero directly after Country Code.
-     * Also removes Whitespaces with Regex inside of the number.
-     * Accepts Phone Numbers in Style of: 0176 11111111, 176 11111111, 17611111111, 176 1111 1111
-     * So Phone Numbers will uniform like: <br>
-     * +49176222222
-     *
-     * @return phone Number
-     */
-    public String getPhoneNumber() {
-        String secondPartNumber = phoneNumber.getText().toString();
-        return countryCodeTextView.getText().toString() + secondPartNumber.replaceAll("^0+", "").replaceAll("\\s+", "");
     }
 }
