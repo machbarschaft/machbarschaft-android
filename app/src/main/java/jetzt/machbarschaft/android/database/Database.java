@@ -68,7 +68,7 @@ public class Database {
     protected void getOneDocumentByCondition(CollectionName collection, AbstractMap.SimpleEntry<String, Object> condition, final DocumentCallback callback) {
         Log.i("DataAccessTest",condition.toString());
         db.collection(collection.toString())
-                .whereEqualTo(condition.getKey(), condition.getValue())
+                .whereEqualTo(condition.getKey(), condition.getValue()).whereGreaterThan("", "").whereGreaterThan("", "")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

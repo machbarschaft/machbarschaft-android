@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
         }
 
         // TESTS
-        DataAccessTest.getInstance().runTests();
+        DataAccessTest.getInstance().runTests(this);
         //TESTS
     }
 

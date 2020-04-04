@@ -1,5 +1,6 @@
 package jetzt.machbarschaft.android.database;
 
+import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,24 +54,30 @@ public class Authentication {
      * @param code confirmation code
      * @param callback callback returns true, when the code & the login were successful
      */
-    public void verifyCode(String code, WasSuccessfullCallback callback) {
-        PhoneAuthCredential credentials = PhoneAuthProvider.getCredential(this.verification_Id, code);
-        this.signInWithPhoneAuthCredential(credentials, callback);
+    public void verifyCode(String code, Activity a, WasSuccessfullCallback callback) {
+        if(this.verification_Id != null) {
+            PhoneAuthCredential credentials = PhoneAuthProvider.getCredential(this.verification_Id, code);
+            this.signInWithPhoneAuthCredential(credentials, a, callback);
+        }
+        else {
+            callback.wasSuccessful(false);
+        }
     }
 
     /**
      *
-     * @param number the Phonenumber which want to login
+     * @param number the phone number which want to login
      * @param smsCodeSent callback returns true, when the sms code was sent
      * @param verificationAndLoginSuccess callback returns true, when the login was successful
      */
-    public void verifyNumber(String number, WasSuccessfullCallback smsCodeSent, WasSuccessfullCallback verificationAndLoginSuccess) {
+    public void verifyNumber(String number, Activity a, WasSuccessfullCallback smsCodeSent, WasSuccessfullCallback verificationAndLoginSuccess) {
+
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
-                (Executor) this,               // Activity (for callback binding)
+                a,               // Activity (for callback binding)
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
                     @Override
@@ -83,7 +90,7 @@ public class Authentication {
                         //     user action.
                         Log.d(TAG, "onVerificationCompleted:" + credential);
 
-                        signInWithPhoneAuthCredential(credential, verificationAndLoginSuccess);
+                        signInWithPhoneAuthCredential(credential, a, verificationAndLoginSuccess);
                     }
 
                     @Override
@@ -119,18 +126,19 @@ public class Authentication {
 
                         smsCodeSent.wasSuccessful(true);
                     }
+
                     @Override
-                    public void onCodeAutoRetrievalTimeOut (String verificationId) {
+                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
 
                     }
 
                 });
     }
 
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential, WasSuccessfullCallback loginSuccess) {
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential, Activity a, WasSuccessfullCallback loginSuccess) {
 
         auth.signInWithCredential(credential)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(a, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
