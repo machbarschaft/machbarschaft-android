@@ -89,26 +89,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_tf_phone" />
 
-            <EditText
+            <LinearLayout
                 android:id="@+id/register_tf_phone"
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginStart="@dimen/screen_padding"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="@dimen/screen_padding"
-                android:background="@drawable/verification_number_background"
-                android:ems="10"
-                android:fontFamily="@font/lato"
                 android:gravity="center"
-                android:hint="@string/register_hint_phone"
-                android:inputType="phone|number"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginEnd="@dimen/screen_padding"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_lbl_title" />
+                app:layout_constraintTop_toBottomOf="@+id/register_lbl_title">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0">
+                    <AutoCompleteTextView
+                        android:id="@+id/filled_exposed_dropdown_country_Code_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:editable="false"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/register_tf_phone2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:background="@drawable/verification_number_background"
+                        android:gravity="center"
+                        android:fontFamily="@font/lato"
+                        android:hint="@string/login_hint_phone_number"
+                        android:importantForAutofill="no"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:inputType="phone" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <com.passbase.passbase_sdk.PassbaseButton
                 android:id="@+id/passbase_verification_button"

@@ -3,12 +3,10 @@ package jetzt.machbarschaft.android.view.login;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Patterns;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,10 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.util.ApplicationConstants;
-import jetzt.machbarschaft.android.view.home.Home;
-import jetzt.machbarschaft.android.view.register.RegisterActivity;
-import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
+import jetzt.machbarschaft.android.util.PhoneNumberFormatterUtil;
 import jetzt.machbarschaft.android.view.register.sms.SMSData;
 import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
 import jetzt.machbarschaft.android.view.register.sms.SMSManager;
@@ -38,6 +33,8 @@ public class LoginMain extends AppCompatActivity {
     private Button loginButton;
     private Context context;
     private ProgressDialog progressDialog;
+    private AutoCompleteTextView countryCodeTextView;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -67,17 +64,23 @@ public class LoginMain extends AppCompatActivity {
 
         // Button click handlers
         loginButton.setOnClickListener(v -> login());
+
+        String[] countryCodes = getResources().getStringArray(R.array.countryCode_spinner_array);
+        ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, countryCodes);
+        countryCodeTextView =
+                findViewById(android.R.id.content)
+                        .findViewById(R.id.filled_exposed_dropdown_country_Code_login);
+        countryCodeTextView.setText(countryCodes[0], false);
+        countryCodeTextView.setAdapter(countryCodeAdapter);
     }
 
     public void login() {
         if (validate()) {
             loginButton.setEnabled(false);
             progressDialog.show();
-            String phoneNumberStr = phoneNumber.getText().toString();
-
-            DataAccess.getInstance().existUser(phoneNumberStr,exist -> {
+            DataAccess.getInstance().existUser(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString()), exist -> {
                 if (exist) {
-                    SMSManager.getInstance().sendSMS(new SMSData(phoneNumberStr), this, new SMSEventListenerImpl() {
+                    SMSManager.getInstance().sendSMS(new SMSData(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString())), this, new SMSEventListenerImpl() {
                         @Override
                         public void onNumberWrongFormatted(Exception firebaseException, Activity activity) {
                             progressDialog.dismiss();
@@ -91,14 +94,11 @@ public class LoginMain extends AppCompatActivity {
                             onLoginFailed();
                         }
                     });
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getApplicationContext(), R.string.login_error_number_not_exist, Toast.LENGTH_SHORT).show();
                     onErrorWhileLoading();
                 }
             });
-
 
 
         } else {
@@ -126,8 +126,7 @@ public class LoginMain extends AppCompatActivity {
         return valid;
     }
 
-    private void onErrorWhileLoading()
-    {
+    private void onErrorWhileLoading() {
         loginButton.setEnabled(true);
         progressDialog.dismiss();
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="countryCode_spinner_array">
+        <item>+49</item> <!-- Germany -->
+        <item>+41</item> <!-- Swizz -->
+        <item>+43</item> <!-- Austria -->
+    </string-array>
+</resources>
