@@ -8,18 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285249743751:android:7ce5a4a8c5fab98bb58122",
+        "mobilesdk_app_id": "1:285249743751:android:f9b2980a665b4cf5b58122",
         "android_client_info": {
-          "package_name": "com.ks.einanrufhilft"
+          "package_name": "jetzt.machbarschaft.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "285249743751-b7k27cetdsl7kgofc7drg0i8132mnl3d.apps.googleusercontent.com",
+          "client_id": "285249743751-ork9ab2gocif15sf19ack8btcf7dateo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ks.einanrufhilft",
-            "certificate_hash": "6b85ba2940976455a91d8a3daba1ac9dfa3a4d8c"
+            "package_name": "jetzt.machbarschaft.android",
+            "certificate_hash": "a11b135a8b706f84e6081e9dd562c8ad9cf6ced7"
+          }
+        },
+        {
+          "client_id": "285249743751-6k6a7spbsu6go3q3aprc7454i415mc1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jetzt.machbarschaft.android",
+            "certificate_hash": "7d8de7cdc9488a9d9f569769cd543b225c00d77a"
           }
         },
         {
@@ -30,6 +38,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyCl5J8tnPtuOEHSdRnIDm19Or1d0kO7QOc"
+        },
+        {
+          "current_key": "AIzaSyCKjkB9jnn7m_DGXB0Xu6YdTkTtG2tUNRA"
         }
       ],
       "services": {
@@ -52,12 +63,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285249743751:android:f9b2980a665b4cf5b58122",
+        "mobilesdk_app_id": "1:285249743751:android:8d4f622e90817a3eb58122",
         "android_client_info": {
-          "package_name": "jetzt.machbarschaft.android"
+          "package_name": "jetzt.machbarschaft.android.debug"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "285249743751-4nqk8asm0p27f47l0unonpacd63g7r90.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jetzt.machbarschaft.android.debug",
+            "certificate_hash": "a11b135a8b706f84e6081e9dd562c8ad9cf6ced7"
+          }
+        },
         {
           "client_id": "285249743751-vb0dnm5afk7lf0c3941m0n01pbu9hplj.apps.googleusercontent.com",
           "client_type": 3
@@ -66,6 +85,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyCl5J8tnPtuOEHSdRnIDm19Or1d0kO7QOc"
+        },
+        {
+          "current_key": "AIzaSyCKjkB9jnn7m_DGXB0Xu6YdTkTtG2tUNRA"
         }
       ],
       "services": {

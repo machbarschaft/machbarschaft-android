@@ -20,6 +20,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable = true
+            jniDebuggable = true
+            renderscriptDebuggable = true
+            minifyEnabled = false
+            applicationIdSuffix = '.debug'
+            versionNameSuffix = ' (Debug)'
+        }
     }
     compileOptions {
         sourceCompatibility 1.8
