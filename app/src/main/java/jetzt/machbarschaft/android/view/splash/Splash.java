@@ -7,11 +7,10 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.auth.FirebaseUser;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.test.DataAccessTest;
+import jetzt.machbarschaft.android.database.Authentication;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.login.LoginMain;
 
@@ -29,12 +28,10 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        if(Storage.getInstance().getUserID()==null)
-        {
+        FirebaseUser user = Authentication.getInstance().getCurrentUser();
+        if (user == null) {
             myHandler.postDelayed(this::startLogin, 1200);
-        }
-        else
-        {
+        } else {
             myHandler.postDelayed(this::startApp, 1200);
         }
 
