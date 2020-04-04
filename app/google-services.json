@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "285249743751-spqbil0lrvoq4v54dsum7fj9b7itdj5c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jetzt.machbarschaft.android",
+            "certificate_hash": "65e107a1fd893e75e13ab0d64bf5e397ad13e7f6"
+          }
+        },
+        {
           "client_id": "285249743751-ork9ab2gocif15sf19ack8btcf7dateo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -69,6 +77,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "285249743751-8l1bdj90rsnj0fkmk1v1v5fclrp594d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jetzt.machbarschaft.android.debug",
+            "certificate_hash": "65e107a1fd893e75e13ab0d64bf5e397ad13e7f6"
+          }
+        },
         {
           "client_id": "285249743751-4nqk8asm0p27f47l0unonpacd63g7r90.apps.googleusercontent.com",
           "client_type": 1,

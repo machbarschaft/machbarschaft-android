@@ -67,4 +67,8 @@
     <color name="order_step_2_button_call_bgtint">#e2e5f8</color>
     <color name="order_step_2_button_call">#2a44fe</color>
     <color name="order_first_time_button">#515511</color>
+
+    <!-- First Order Screen -->
+    <color name="order_first_buttonColor">#e1f3f8</color>
+    <color name="order_first_fontColor">#83cae1</color>
 </resources>
