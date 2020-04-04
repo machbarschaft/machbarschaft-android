@@ -1,8 +1,8 @@
 package jetzt.machbarschaft.android.view.login;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.ArrayAdapter;
@@ -17,11 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.util.PhoneNumberFormatterUtil;
-import jetzt.machbarschaft.android.view.register.sms.SMSData;
-import jetzt.machbarschaft.android.view.register.sms.SMSEventListenerImpl;
-import jetzt.machbarschaft.android.view.register.sms.SMSManager;
+import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
 
 
 /**
@@ -29,7 +26,7 @@ import jetzt.machbarschaft.android.view.register.sms.SMSManager;
  * Also can redirect to the register Page.
  */
 public class LoginMain extends AppCompatActivity {
-    private EditText phoneNumber;
+    private EditText phoneNumberTextView;
     private Button loginButton;
     private Context context;
     private ProgressDialog progressDialog;
@@ -55,7 +52,7 @@ public class LoginMain extends AppCompatActivity {
         introSlidesIndicator.setupWithViewPager(introSlidesPager, true);
 
         // Get UI elements
-        phoneNumber = findViewById(R.id.input_phone_number);
+        phoneNumberTextView = findViewById(R.id.input_phone_number);
         loginButton = findViewById(R.id.btn_login);
 
         progressDialog = new ProgressDialog(this);
@@ -75,35 +72,18 @@ public class LoginMain extends AppCompatActivity {
     }
 
     public void login() {
-        if (validate()) {
-            loginButton.setEnabled(false);
-            progressDialog.show();
-            DataAccess.getInstance().existUser(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString()), exist -> {
-                if (exist) {
-                    SMSManager.getInstance().sendSMS(new SMSData(PhoneNumberFormatterUtil.getPhoneNumber(countryCodeTextView.getText().toString(), phoneNumber.getText().toString())), this, new SMSEventListenerImpl() {
-                        @Override
-                        public void onNumberWrongFormatted(Exception firebaseException, Activity activity) {
-                            progressDialog.dismiss();
-                            loginButton.setEnabled(true);
-                            onLoginFailed();
-                        }
-
-                        @Override
-                        public void onError(Exception firebaseException, Activity activity) {
-                            onErrorWhileLoading();
-                            onLoginFailed();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getApplicationContext(), R.string.login_error_number_not_exist, Toast.LENGTH_SHORT).show();
-                    onErrorWhileLoading();
-                }
-            });
-
-
-        } else {
+        if (!validate()) {
             onLoginFailed();
+            return;
         }
+
+        loginButton.setEnabled(false);
+        progressDialog.show();
+
+        String phoneNumber = PhoneNumberFormatterUtil.getPhoneNumber(
+                countryCodeTextView.getText().toString(), phoneNumberTextView.getText().toString());
+        startActivity(new Intent(this, VerifyPhoneActivity.class)
+                .putExtra(VerifyPhoneActivity.EXTRA_PHONE_NUMBER, phoneNumber));
     }
 
     /**
@@ -114,13 +94,13 @@ public class LoginMain extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String phoneNumberStr = phoneNumber.getText().toString();
+        String phoneNumberStr = phoneNumberTextView.getText().toString();
 
         if (phoneNumberStr.isEmpty() || !Patterns.PHONE.matcher(phoneNumberStr).matches()) {
-            phoneNumber.setError(getString(R.string.login_error_invalid_phone_number));
+            phoneNumberTextView.setError(getString(R.string.login_error_invalid_phone_number));
             valid = false;
         } else {
-            phoneNumber.setError(null);
+            phoneNumberTextView.setError(null);
         }
 
         return valid;
