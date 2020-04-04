@@ -66,4 +66,5 @@
     <color name="order_step_2_button_bgtint">#4ece7c</color>
     <color name="order_step_2_button_call_bgtint">#e2e5f8</color>
     <color name="order_step_2_button_call">#2a44fe</color>
+    <color name="order_first_time_button">#515511</color>
 </resources>

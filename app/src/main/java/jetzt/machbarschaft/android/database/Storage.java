@@ -110,4 +110,16 @@ public class Storage {
         SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREF_ORDER_IN_PROGRESS,0 );
         return new Gson().fromJson(pref.getString(ApplicationConstants.SHARED_PREF_ORDER_IN_STEP, null), OrderSteps.class);
     }
+
+    public boolean getHasUserNotifyAccepted(Context context){
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING, 0);
+        return pref.getBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY, false);
+    }
+
+    public boolean setUserNotifyAccepted(Context context){
+        SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING, 0);
+        Editor editor = pref.edit();
+        editor.putBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY, true);
+        return editor.commit();
+    }
 }

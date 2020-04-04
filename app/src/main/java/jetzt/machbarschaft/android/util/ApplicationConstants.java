@@ -14,4 +14,8 @@ public final class ApplicationConstants {
     public static final String SHARED_PREF_ORDER_IN_PROGRESS_KEY = "orderIDin";
     public static final String SHARED_PREF_ORDER_IN_PROGRESS_BOOL = "activeOrderIDbool";
     public static final String SHARED_PREF_ORDER_IN_STEP = "activeOrderStep";
+
+    //Constants to track if the user has read the warnings.
+    public static final String SHARED_PREEF_FIRST_ORDER_WARNING = "orderWarn";
+    public static final String SHARED_PREEF_FIRST_ORDER_WARNING_KEY = "orderWarnKey";
 }

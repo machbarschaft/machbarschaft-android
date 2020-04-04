@@ -51,6 +51,7 @@ import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 import jetzt.machbarschaft.android.util.DrawableUtil;
+import jetzt.machbarschaft.android.view.order.FirstOrderActivity;
 import jetzt.machbarschaft.android.view.order.OrderAcceptActivity;
 import jetzt.machbarschaft.android.view.order.OrderCarryOutActivity;
 import jetzt.machbarschaft.android.view.order.OrderDetailActivity;
@@ -79,6 +80,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if (!Storage.getInstance().getHasUserNotifyAccepted(getApplicationContext())) {
+            startActivity(new Intent(this, FirstOrderActivity.class));
+        }
 
         // Get UI elements
         Button btnFAQ = findViewById(R.id.home_btn_faq);
