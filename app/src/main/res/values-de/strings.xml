@@ -100,4 +100,11 @@
     <string name="order_notification_message">Du erledigst gerade einen Auftrag für %1$s\nDie Adresse lautet %2$s</string>
     <string name="notification_channel_current_order">Aktive Aufträge</string>
     <string name="splash_describtion">Erledige telefonisch angefragte \nEinkäufe und Erledigungen \nfür ältere Nachbarn.</string>
+
+    <string name="order_first_title">Vielen Dank, dass Du deine Hilfe anbietest!</string>
+    <string name="order_first_text">Ein Hinweis, bevor Du den ersten Auftrag anschaust:
+        Über Machbarschaft suchen echte Menschen Deine echte Hilfe. Mit dieser Vertrauenserklärung verpflichtest du Dich freiwillig zum vertraulichen Umgang mit den persönlichen Informationen,
+        den Kontaktdaten und den Gesuchen der Hilfesuchenden. Bist du damit einverstanden?</string>
+    <string name="order_first_decline_btn">Ablehnen</string>
+    <string name="order_first_accept_btn">Bestätigen</string>
 </resources>

@@ -98,4 +98,10 @@
     <string name="order_notification_message">You are currently executing an order for %1$s The address is  %2$s</string>
     <string name="notification_channel_current_order">Active Orders</string>
     <string name="splash_describtion">Carry out telpehone enquiries \nshopping and errands \nfor older neighbours.</string>
+    <string name="order_first_title">Thank you, for offering your Help!</string>
+    <string name="order_first_text">One hint before you look at the first assignment: Via Machbarschaft real people are looking for your real help.
+        With this declaration of trust you voluntarily commit yourself to the confidential handling of personal information,
+        contact data and requests of people seeking help. Do you agree with this?</string>
+    <string name="order_first_decline_btn">Decline</string>
+    <string name="order_first_accept_btn">Accept</string>
 </resources>

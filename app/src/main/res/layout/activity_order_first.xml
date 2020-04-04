@@ -32,14 +32,16 @@
             style="@style/AppTextAppearance.Heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vielen Dank, dass Du deine Hilfe anbietest!" />
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/order_first_title" />
 
         <TextView
             android:id="@+id/textView4"
             style="@style/AppTextAppearance.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ein Hinweis, bevor Du den ersten Auftrag anschaust: Über Machbarschaft suchen echte Menschen Deine echte Hilfe. Mit dieser Vertrauenserklärung verpflichtest du Dich freiwillig zum vertraulichen Umgang mit den persönlichen Informationen, den Kontaktdaten und den Gesuchen der Hilfesuchenden. Bist du damit einverstanden?" />
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/order_first_text" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,6 +49,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -57,14 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="Ablehnen" />
+            android:text="@string/order_first_decline_btn" />
 
         <Button
             android:id="@+id/btn_first_order_accept"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bestätigen" />
+            android:text="@string/order_first_accept_btn" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
