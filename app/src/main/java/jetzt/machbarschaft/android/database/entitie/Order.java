@@ -1,12 +1,21 @@
 package jetzt.machbarschaft.android.database.entitie;
 
+import android.util.Log;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
+import com.google.firebase.firestore.GeoPoint;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
 
@@ -69,17 +78,27 @@ public class Order extends Collection {
         urgency = Urgency.byName(document.getString("urgency"));
         clientName = document.getString("name");
         phoneNumber = document.getString("phone_number");
-
-        street = document.getString("street");
-
-        houseNumber = document.getString("house_number");
-        zipCode = document.getString("zip");
-        city = document.getString("city");
-        getPrescription = "yes".equals(document.getString("prescription"));
-        carNecessary = "yes".equals(document.getString("carNecessary"));
-        if (document.get("lat") != null && document.contains("lat") && document.get("lng") != null && document.contains("lng")) {
-            latitude = document.getDouble("lat");
-            longitude = document.getDouble("lng");
+        //Address
+        HashMap addressMap = (HashMap) Objects.requireNonNull(document.getData()).get("address");
+        assert addressMap != null;
+        street = (String) addressMap.get("street");
+        houseNumber = (String) addressMap.get("house_number");
+        zipCode = (String) addressMap.get("zip");
+        city = (String) addressMap.get("city");
+        //Extras
+        HashMap extrasMap = (HashMap) document.getData().get("extras");
+        if (extrasMap != null && extrasMap.containsKey("prescription") && extrasMap.containsKey("carNecessary")) {
+            getPrescription = (boolean) extrasMap.get("prescription");
+            carNecessary = (boolean) extrasMap.get("carNecessary");
+        }
+        //Location
+        HashMap hashMap = (HashMap) document.getData().get("location");
+        assert hashMap != null;
+        if (hashMap.get("gps") != null && hashMap.containsKey("gps")) {
+            GeoPoint geoPoint = (GeoPoint) hashMap.get("gps");
+            assert geoPoint != null;
+            latitude = geoPoint.getLatitude();
+            longitude = geoPoint.getLongitude();
         }
     }
 
