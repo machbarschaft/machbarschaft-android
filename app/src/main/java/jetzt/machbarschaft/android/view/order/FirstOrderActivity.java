@@ -1,16 +1,12 @@
 package jetzt.machbarschaft.android.view.order;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
@@ -18,46 +14,51 @@ import jetzt.machbarschaft.android.view.home.Home;
 
 public class FirstOrderActivity extends AppCompatActivity {
 
+    private ViewPager warningsPager;
+
+    private Boolean checkBoxBool3 = false;
+    private Boolean checkBoxBool2 = false;
+    private Boolean checkBoxBool1 = false;
+    private Boolean checkBoxBool4 = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_first);
 
-        // Setup UI
-        Button btn_Accept = findViewById(R.id.btn_first_order_accept);
-        Button btn_Decline = findViewById(R.id.btn_first_order_decline);
-
-        btn_Accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Storage.getInstance().setUserNotifyAccepted(getApplicationContext())) {
-                    startHome();
-                }
-            }
-        });
-
-        btn_Decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "You have to accept the Rules!", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarFirstOrder);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.title_back);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Home.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-
+        // Sets the Custom Pager Adapter to display the different slides in the application
+        warningsPager = findViewById(R.id.viewPagerWarnings);
+        TabLayout introSlidesIndicator = findViewById(R.id.warnings_slides_indicator);
+        warningsPager.setAdapter(new CustomWarningPagerAdapter(this));
+        introSlidesIndicator.setupWithViewPager(warningsPager, true);
     }
 
-    private void startHome() {
+
+    public void warningsNextPress(View view) {
+        if(checkBoxBool4 && checkBoxBool3 && checkBoxBool2 && checkBoxBool1)
+        warningsPager.setCurrentItem(warningsPager.getCurrentItem()+1, true);
+        else
+            Toast.makeText(getApplicationContext(), "You need to check all ", Toast.LENGTH_SHORT).show();
+    }
+
+    public void checkBox4(View view) {
+        checkBoxBool4 = !checkBoxBool4;
+    }
+
+    public void checkBox3(View view) {
+        checkBoxBool3 = !checkBoxBool3;
+    }
+
+    public void checkBox2(View view) {
+        checkBoxBool2 = !checkBoxBool2;
+    }
+
+    public void checkBox1(View view) {
+        checkBoxBool1 = !checkBoxBool1;
+    }
+
+    public void startHome(View view) {
+        Storage.getInstance().setUserNotifyAccepted(getApplicationContext());
         startActivity(new Intent(this, Home.class));
         finishAfterTransition();
     }
