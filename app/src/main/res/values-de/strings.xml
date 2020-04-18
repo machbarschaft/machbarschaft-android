@@ -107,4 +107,5 @@
         den Kontaktdaten und den Gesuchen der Hilfesuchenden. Bist du damit einverstanden?</string>
     <string name="order_first_decline_btn">Ablehnen</string>
     <string name="order_first_accept_btn">Bestätigen</string>
+    <string name="medical_warnings_not_checked">Du musst alle Hinweise bestätigen!</string>
 </resources>

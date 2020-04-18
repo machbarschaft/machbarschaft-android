@@ -104,4 +104,5 @@
         contact data and requests of people seeking help. Do you agree with this?</string>
     <string name="order_first_decline_btn">Decline</string>
     <string name="order_first_accept_btn">Accept</string>
+    <string name="medical_warnings_not_checked">You need to confirm all warnings!</string>
 </resources>

@@ -38,7 +38,7 @@ public class FirstOrderActivity extends AppCompatActivity {
         if(checkBoxBool4 && checkBoxBool3 && checkBoxBool2 && checkBoxBool1)
         warningsPager.setCurrentItem(warningsPager.getCurrentItem()+1, true);
         else
-            Toast.makeText(getApplicationContext(), "You need to check all ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.medical_warnings_not_checked), Toast.LENGTH_SHORT).show();
     }
 
     public void checkBox4(View view) {
@@ -58,8 +58,13 @@ public class FirstOrderActivity extends AppCompatActivity {
     }
 
     public void startHome(View view) {
-        Storage.getInstance().setUserNotifyAccepted(getApplicationContext());
-        startActivity(new Intent(this, Home.class));
-        finishAfterTransition();
+        if(checkBoxBool4 && checkBoxBool3 && checkBoxBool2 && checkBoxBool1) {
+            Storage.getInstance().setUserNotifyAccepted(getApplicationContext());
+            startActivity(new Intent(this, Home.class));
+            finishAfterTransition();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.medical_warnings_not_checked), Toast.LENGTH_SHORT).show();
+        }
     }
 }
