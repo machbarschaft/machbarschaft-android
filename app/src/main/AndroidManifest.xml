@@ -2,19 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="jetzt.machbarschaft.android">
-
+    <!--
+    <supports-screens android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true"/>
+    -->
     <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- For verification of the User     -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- For verification of the User -->
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
@@ -26,6 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:fullBackupContent">
+        <activity android:name=".view.order.FirstOrderActivity"></activity>
         <activity
             android:name=".view.order.OrderDetailActivity"
             android:parentActivityName=".view.home.Home">
@@ -81,7 +85,6 @@
             </intent-filter>
         </service>
         <service android:name=".services.OrderInProgressNotification" />
-
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
             (See the file "res/values/google_maps_api.xml").
@@ -92,21 +95,20 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+            android:value="@string/google_maps_key" /> <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_machbarschaft_clear_white" />
-
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/color_accent" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

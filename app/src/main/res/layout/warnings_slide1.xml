@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/AppTextAppearance.Heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medizinische Hinweise" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wir bedanken uns vorab für deinen solidarischen Einsatz in der Gesellschaft. Da es uns wichtig ist dabei mitzuhelfen, die Ausbreitung von COVID-19 gemäß den Empfehlungen des RKI zu verlangsamen, bitten wir dich darum, die folgenden Punkte ehrlich zu beantworten." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/AppTextAppearance.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Du wurdest nicht positiv auf COVID-19 getestet. Oder du wurdest COVID-19 positiv getestet, aber bist mittlerweile medizinisch nachgewiesen nicht mehr infektiös durch COVID-19. " />
+
+            <CheckBox
+                android:id="@+id/checkBoxWarnings4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="checkBox4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                style="@style/AppTextAppearance.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Du wurdest nicht positiv auf COVID-19 getestet. Oder du wurdest COVID-19 positiv getestet, aber bist mittlerweile medizinisch nachgewiesen nicht mehr infektiös durch COVID-19. " />
+
+            <CheckBox
+                android:id="@+id/checkBoxWarnings3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="checkBox3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/AppTextAppearance.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Du hast derzeit keine grippale Beschwerden wie Fieber, Atemnot oder Husten." />
+
+            <CheckBox
+                android:id="@+id/checkBoxWarnings2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="checkBox2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/AppTextAppearance.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Du hattest in den letzten Wochen keinen Kontakt zu positiv getesteten Personen oder Verdachtsfällen." />
+
+            <CheckBox
+                android:id="@+id/checkBoxWarnings1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="checkBox1"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Solltest du eine oder mehrere Punkte nicht erfüllen, dann können wir dich aufgrund der erhöhten Infektionsgefahr leider derzeit nicht als Machbar:in willkommen heißen. Bitte beachte zur weiteren Vorgehensweise für deine Gesundheit die aktuellen Verhaltenshinweise deines Gesundheitsamtes oder des RKIs.  Wenn du all die obigen Punkte bestätigen kannst, heißen wir dich herzlich willkommen als Machbar:in! Hier sind unsere Verhaltensempfehlungen für dich, damit du und deine Umgebung gesund und munter bleiben. Dabei gilt: Einhaltung des Mindestabstands von 1 - 2 m ist unerlässlich! " />
+
+        <Button
+            android:id="@+id/warnings_slide1_button_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weiter"
+            android:onClick="warningsNextPress"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
