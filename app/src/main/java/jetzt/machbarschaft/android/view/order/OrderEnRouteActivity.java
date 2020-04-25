@@ -37,6 +37,13 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
     private Order mOrder;
 
+
+    @Override
+    public void onBackPressed() {
+            //do nothing
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

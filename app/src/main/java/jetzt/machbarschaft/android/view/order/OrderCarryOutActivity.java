@@ -24,6 +24,11 @@ public class OrderCarryOutActivity extends AppCompatActivity {
     private Order mOrder;
 
     @Override
+    public void onBackPressed() {
+            //do nothing
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_carry_out);
