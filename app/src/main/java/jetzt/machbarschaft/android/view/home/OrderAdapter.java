@@ -69,11 +69,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
      */
     class OrderHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private View view;
-        private ImageView orderIcon;
-        private TextView orderNumber;
-        private TextView orderType;
+        private TextView orderId;
         private TextView orderClientName;
-        private TextView orderExtras;
+        private TextView orderClientAddress;
+        private ImageView orderIcon;
         private TextView orderDistance;
 
         OrderHolder(View itemView) {
@@ -81,11 +80,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             view = itemView;
             view.setOnClickListener(this);
 
-            orderIcon = itemView.findViewById(R.id.order_urgency_icon);
-            orderNumber = itemView.findViewById(R.id.order_number);
-            orderType = itemView.findViewById(R.id.order_type);
+            orderId = itemView.findViewById(R.id.order_id);
             orderClientName = itemView.findViewById(R.id.order_client_name);
-            orderExtras = itemView.findViewById(R.id.order_extras);
+            orderClientAddress = itemView.findViewById(R.id.order_client_address);
+            orderIcon = itemView.findViewById(R.id.order_icon);
             orderDistance = itemView.findViewById(R.id.order_distance);
         }
 
@@ -104,11 +102,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             String extrasText = joinStrings(", ", extras);
 
             view.setTag(order.getId());
-            orderIcon.setImageResource(order.getUrgency().getIconRes());
-            orderNumber.setText(String.valueOf(order.getListId()));
-            orderType.setText(typeText);
+            orderId.setText(String.valueOf(order.getListId()));
+            orderClientAddress.setText(order.getCompleteAddress());
             orderClientName.setText(order.getClientName());
-            orderExtras.setText(extrasText);
+            orderIcon.setImageResource(order.getUrgency().getIconRes());
             orderDistance.setText(context.getString(R.string.home_order_distance_km, distance));
         }
 

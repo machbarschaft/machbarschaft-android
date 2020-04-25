@@ -1,7 +1,6 @@
 package jetzt.machbarschaft.android.view.home;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,8 +74,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     private EnumMap<Order.Urgency, BitmapDescriptor> markerIconMap;
     private Location location;
 
-    private boolean sortByDistance = true;
-    private boolean sortByUrgency = false;
+    @NonNull
+    private SortBy sortBy;
+
+    public Home() {
+        sortBy = SortBy.DISTANCE;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,63 +94,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Button btnFAQ = findViewById(R.id.home_btn_faq);
         Button btnContact = findViewById(R.id.home_btn_contact);
         Button btnReport = findViewById(R.id.home_btn_bug_report);
-        Button btnSortByUrgency = findViewById(R.id.homeBtnUrgency);
-        Button btnSortByDistance = findViewById(R.id.homeBtnRadius);
+        TabLayout tabLayout = findViewById(R.id.sorting_tab_layout);
+        recyclerView = findViewById(R.id.order_recycler_view);
 
-        // Button action handlers
-        btnFAQ.setOnClickListener(view -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/faq.html"));
-            startActivity(browserIntent);
-            getPositionByView(map);
-        });
-
-        btnContact.setOnClickListener(view -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
-            startActivity(browserIntent);
-        });
-
-        btnSortByDistance.setOnClickListener(view -> {
-            if (!sortByDistance && sortByUrgency) {
-                sortByDistance = true;
-                sortByUrgency = false;
-            }
-            getPositionByView(map);
-        });
-
-        btnSortByUrgency.setOnClickListener(view -> {
-            if (!sortByUrgency && sortByDistance) {
-                sortByUrgency = true;
-                sortByDistance = false;
-            }
-            getPositionByView(map);
-        });
-
-        btnReport.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.home_feedback_description);
-            builder.setCancelable(false);
-
-            builder.setPositiveButton(
-                    R.string.home_feedback_write_mail,
-                    (dialog, id) -> {
-                        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
-                                "?subject=" + getString(R.string.home_feedback_subject) +
-                                "&body=" + getString(R.string.home_feedback_body1) +
-                                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
-                                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
-                                "\nAndroid-Version: " + Build.DISPLAY +
-                                "\nDevice: " + Build.DEVICE +
-                                "\nManufacturer: " + Build.MANUFACTURER +
-                                "\nModel: " + Build.MODEL +
-                                "\n\n" + getString(R.string.home_feedback_body2);
-                        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
-                        startActivity(mailIntent);
-                    });
-            builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
-
-            AlertDialog alert = builder.create();
-            alert.show();
-        });
+        setupTabs(tabLayout);
+        setupBottomButtons(btnFAQ, btnContact, btnReport);
 
         // Fetch orders from database
         DataAccess.getInstance().getOrders(successful -> {
@@ -184,6 +137,90 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             updateMarkers(); //deletes unnecessary Markers and adds new
         });
 
+    }
+
+    /**
+     * Setup method for the buttons in the bottom bar.
+     *
+     * @param btnFAQ     The faq button.
+     * @param btnContact The contact button.
+     * @param btnReport  The report button.
+     */
+    private void setupBottomButtons(Button btnFAQ, Button btnContact, Button btnReport) {
+        btnFAQ.setOnClickListener(view -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/faq.html"));
+            startActivity(browserIntent);
+            getPositionByView(map);
+        });
+
+        btnContact.setOnClickListener(view -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://machbarschaft.jetzt/#contact"));
+            startActivity(browserIntent);
+        });
+
+        btnReport.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.home_feedback_description);
+            builder.setCancelable(false);
+
+            builder.setPositiveButton(
+                    R.string.home_feedback_write_mail,
+                    (dialog, id) -> {
+                        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
+                                "?subject=" + getString(R.string.home_feedback_subject) +
+                                "&body=" + getString(R.string.home_feedback_body1) +
+                                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
+                                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
+                                "\nAndroid-Version: " + Build.DISPLAY +
+                                "\nDevice: " + Build.DEVICE +
+                                "\nManufacturer: " + Build.MANUFACTURER +
+                                "\nModel: " + Build.MODEL +
+                                "\n\n" + getString(R.string.home_feedback_body2);
+                        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
+                        startActivity(mailIntent);
+                    });
+            builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        });
+    }
+
+    /**
+     * Setup method for the sorting tab layout. Creates one tab per sort option and adds a selected
+     * listener that is notified whenever a tab is selected.
+     *
+     * @param tabLayout The tab layout to setup.
+     */
+    private void setupTabs(TabLayout tabLayout) {
+        for (SortBy sortBy : SortBy.values()) {
+            TabLayout.Tab tab = tabLayout.newTab();
+            tab.setTag(sortBy);
+            tab.setText(sortBy.getText());
+            tabLayout.addTab(tab);
+        }
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Object tag = tab.getTag();
+                if (!(tag instanceof SortBy)) {
+                    throw new IllegalStateException("Tab tag is not valid, SortBy enum required!");
+                }
+
+                setSortBy((SortBy) tag);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -228,8 +265,41 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     public Location getMyLocation() {
         LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         assert locationManager != null;
-        @SuppressLint("MissingPermission") Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        return myLocation;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Ask for permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
+            return null;
+        }
+
+        return locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    }
+
+    /**
+     * Updates the sorting attribute by which the orders are sorted.
+     *
+     * @param sortBy The new sorting attribute.
+     */
+    private void setSortBy(SortBy sortBy) {
+        if (this.sortBy == sortBy || sortBy == null) {
+            return;
+        }
+
+        this.sortBy = sortBy;
+
+        Location location = this.location;
+        if (location == null) {
+            location = getMyLocation();
+        }
+
+        switch (this.sortBy) {
+            case DISTANCE:
+                sortDataByDistance(location);
+                break;
+            case URGENCY:
+                sortDataByUrgency(location);
+                break;
+        }
     }
 
     /**
@@ -366,7 +436,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Displays the Recycler View with the Orders in it.
      */
     public void initView() {
-        recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.divider_horizontal));
@@ -460,12 +529,32 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Location location = new Location("");
         location.setLatitude(latLng.latitude);
         location.setLongitude(latLng.longitude);
-        if (sortByDistance && !sortByUrgency)
+        if (sortBy == SortBy.DISTANCE)
             sortDataByDistance(location);
         else
             sortDataByUrgency(location);
         orderAdapter.setLocation(location);
         orderAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * An enum that defines the attribute by which the data is sorted.
+     */
+    private enum SortBy {
+        DISTANCE(R.string.home_tab_distance),
+        URGENCY(R.string.home_tab_urgency);
+
+        @StringRes
+        private final int text;
+
+        SortBy(@StringRes int text) {
+            this.text = text;
+        }
+
+        @StringRes
+        public int getText() {
+            return text;
+        }
     }
 }
 
