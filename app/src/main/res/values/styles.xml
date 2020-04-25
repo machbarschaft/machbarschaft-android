@@ -131,12 +131,4 @@
     <style name="AppTextAppearance.Text.Light" parent="AppTextAppearance.Text">
         <item name="android:textColor">@color/text_light</item>
     </style>
-
-    <style name="AppTextAppearance.Text.Primary" parent="AppTextAppearance.Text">
-        <item name="android:textColor">@color/text_primary</item>
-    </style>
-
-    <style name="AppTextAppearance.Text.Important" parent="AppTextAppearance.Text">
-        <item name="android:textColor">@color/text_important</item>
-    </style>
 </resources>

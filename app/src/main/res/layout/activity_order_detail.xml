@@ -25,16 +25,17 @@
             app:cameraZoom="5" />
 
         <LinearLayout
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
 
             <TextView
-                style="@style/AppTextAppearance.Text"
+                android:textAppearance="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
                 android:text="Status:" />
 
             <TextView
@@ -45,10 +46,11 @@
 
         </LinearLayout>
         <TextView
-            style="@style/AppTextAppearance.Text"
+            android:textAppearance="@style/AppTextAppearance.Subheading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:text="Auftraggeber: " />
 
             <TextView
@@ -64,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:text="" />
 
         <Button
@@ -71,14 +74,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ROUTE ANZEIGEN"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/AppTheme.Button.Text"
             />
     </LinearLayout>
 
     <LinearLayout
+        android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_light_pink"
+        android:background="@color/background_pink"
         android:orientation="vertical"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -98,22 +102,24 @@
 
 
         <Button
+            style="@style/AppTheme.Button"
             android:id="@+id/btn_accept_order"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
             android:text="AUFTRAG ANNEHMEN"
-            android:textColor="@color/background_cyan" />
+            />
 
         <Button
+            style="@style/AppTheme.Button.Outlined"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
             android:layout_marginBottom="50dp"
             android:text="ABBRECHEN"
-            android:textColor="@color/background_cyan" />
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
