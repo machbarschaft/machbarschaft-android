@@ -1,6 +1,7 @@
 package jetzt.machbarschaft.android.view.home;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         this.listener = listener;
     }
 
-    public void setLocation(Location location){
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -91,7 +92,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             Context context = view.getContext();
 
             // Build extras
-            String typeText = context.getString(order.getType_of_help().getTitle());
+            String typeText = context.getString(order.getType().getTitle());
             List<String> extras = new ArrayList<>();
             if (order.getPrescription()) {
                 extras.add(context.getString(R.string.home_order_extra_prescription));
@@ -101,11 +102,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             }
             String extrasText = joinStrings(", ", extras);
 
+            final int urgencyColor = order.getUrgency().getColor(context);
+
             view.setTag(order.getId());
+            orderId.setTextColor(urgencyColor);
             orderId.setText(String.valueOf(order.getListId()));
             orderClientAddress.setText(order.getCompleteAddress());
             orderClientName.setText(order.getClientName());
-            orderIcon.setImageResource(order.getUrgency().getIconRes());
+            orderIcon.setImageResource(order.getType().getIcon());
+            orderIcon.setImageTintList(ColorStateList.valueOf(urgencyColor));
             orderDistance.setText(context.getString(R.string.home_order_distance_km, distance));
         }
 

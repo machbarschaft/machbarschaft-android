@@ -2,15 +2,12 @@ package jetzt.machbarschaft.android.view.order;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,7 +24,6 @@ import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
-import jetzt.machbarschaft.android.view.home.Home;
 
 /**
  * Displays the Details of an order, after someone accepts it.
@@ -77,7 +73,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         }
 
         mNameView.setText(mOrder.getClientName());
-        mNeedsView.setText(mOrder.getType_of_help().getTitle());
+        mNeedsView.setText(mOrder.getType().getTitle());
         mUrgencyView.setText(mOrder.getUrgency().getTitle());
         if(mOrder.getUrgency() == Order.Urgency.URGENT){
             mUrgencyView.setTextColor(Color.RED);

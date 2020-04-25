@@ -60,7 +60,7 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
 
         // Set overview label at the top of the page
         TextView tfOverview = findViewById(R.id.step_3_overview);
-        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+        tfOverview.setText(mOrder.getType() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
 
         // Set address from order to label
         TextView tfAddress = findViewById(R.id.step_3_address);

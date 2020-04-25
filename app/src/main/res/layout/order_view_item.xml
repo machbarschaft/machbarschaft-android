@@ -47,6 +47,8 @@
         android:id="@+id/order_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_between_content_areas"
+        android:tintMode="src_in"
         app:layout_constraintEnd_toStartOf="@id/order_distance"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

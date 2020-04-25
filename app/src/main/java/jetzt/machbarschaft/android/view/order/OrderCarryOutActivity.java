@@ -17,7 +17,6 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
-import jetzt.machbarschaft.android.view.login.LoginMain;
 
 public class OrderCarryOutActivity extends AppCompatActivity {
     private Order mOrder;
@@ -41,7 +40,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
 
         //Set the details on the text View
         TextView tfOverview = findViewById(R.id.step_2_overview);
-        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+        tfOverview.setText(mOrder.getType() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
 
 
         // Setup toolbar
