@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#BF688B</color>
-    <color name="color_primary_dark">#D81B60</color>
-    <color name="color_accent">#004eff</color>
+    <color name="color_primary">#FFDCDB</color>
+    <color name="color_primary_dark">#BF688B</color>
+    <color name="color_accent">#2B44FF</color>
 
-    <color name="selector_dot_active">#FFFFFFFF</color>
+    <!-- Text colors contain transparency -->
+    <color name="text_black">#FF000000</color>
+    <color name="text_dark">#E8000000</color>
+    <color name="text_light">#C7FFFFFF</color>
+    <color name="text_white">#FFFFFFFF</color>
+
+    <color name="urgency_urgent">#D2000D</color>
+    <color name="urgency_normal">#5476BC</color>
+
+    <color name="selector_dot_active">@color/color_accent</color>
     <color name="selector_dot_inactive">#88FFFFFF</color>
+
+    <color name="dividers">#1F000000</color>
+
+    <color name="launcher_icon_background">#DA6077</color>
+
+    <color name="background_default">#FFFFFF</color>
+    <color name="background_pink">#FFEBEA</color>
+    <color name="background_pink_transparent">#96FFDCDB</color>
+    <color name="background_blue">#3E4FFF</color>
+
+    <!-- Old colors for design versions less than 3 -->
 
     <color name="order_done_background">#279f14</color>
     <color name="content_background">#FFFFFF</color>
 
-    <color name="dividers">#1F000000</color>
-
-    <color name="launcher_background">#DA6077</color>
-
     <!-- Background colors for large surface areas -->
     <color name="background_light_pink">#FFDCDB</color>
-    <color name="background_blue">#4157FF</color>
     <color name="background_blue_darker">#2B44FF</color>
     <color name="background_cyan">#56a2ba</color>
     <color name="background_teal">#31A08A</color>
@@ -30,14 +45,6 @@
     <color name="button_text_primary_cyan">@color/background_cyan</color>
     <color name="button_text_primary_teal">@color/background_teal</color>
     <color name="button_text_primary_pink">@color/background_teal</color>
-
-    <!-- Text colors contain transparency -->
-    <color name="text_black">#FF000000</color>
-    <color name="text_dark">#E8000000</color>
-    <color name="text_light">#C7FFFFFF</color>
-    <color name="text_white">#FFFFFFFF</color>
-    <color name="text_primary">#FF6C64</color>
-    <color name="text_important">#FF3743</color>
 
     <!-- Colors Splash Screen -->
     <color name="splash_background">@color/background_light_pink</color>

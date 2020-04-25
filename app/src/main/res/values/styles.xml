@@ -5,21 +5,65 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/button_bg_green</item>
+        <item name="colorAccent">@color/color_accent</item>
+
+        <item name="android:colorPrimary">@color/color_primary</item>
+        <item name="android:colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:colorAccent">@color/color_accent</item>
 
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
 
         <item name="fontFamily">@font/lato</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-        <item name="android:textViewStyle">@style/AppTextAppearance.Text</item>
+        <item name="android:fontFamily">@font/lato</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/button_bg_primary</item>
+        <item name="android:backgroundTint">@color/color_accent</item>
         <item name="android:textColor">@color/text_white</item>
     </style>
 
+    <style name="AppTheme.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/color_accent</item>
+        <item name="android:textColor">@color/color_accent</item>
+    </style>
+
+    <style name="AppTheme.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/color_accent</item>
+    </style>
+
+    <style name="AppTextAppearance">
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppTextAppearance.Light">
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+
+    <style name="AppTextAppearance.Subheading">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/text_size_subheading</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextAppearance.Subheading.Light">
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="AppTextAppearance.Heading">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/text_size_heading</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextAppearance.Heading.Light">
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <!-- Old styles pre design version 3 -->
     <style name="AppTheme.Button.Secondary" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/button_bg_secondary</item>
         <item name="android:textColor">@color/text_white</item>
@@ -48,14 +92,7 @@
     <style name="AppTextAppearance.LargeHeading" parent="TextAppearance.AppCompat.Medium">
         <item name="android:fontFamily">@font/lato</item>
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">@dimen/text_size_heading_large</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AppTextAppearance.Heading" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:fontFamily">@font/lato</item>
-        <item name="android:textColor">@color/text_dark</item>
-        <item name="android:textSize">@dimen/text_size_heading</item>
+        <item name="android:textSize">56dp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -89,10 +126,6 @@
 
     <style name="AppTextAppearance.LargeHeading.Light" parent="AppTextAppearance.LargeHeading">
         <item name="android:textColor">@color/text_white</item>
-    </style>
-
-    <style name="AppTextAppearance.Heading.Light" parent="AppTextAppearance.Heading">
-        <item name="android:textColor">@color/text_light</item>
     </style>
 
     <style name="AppTextAppearance.Text.Light" parent="AppTextAppearance.Text">
