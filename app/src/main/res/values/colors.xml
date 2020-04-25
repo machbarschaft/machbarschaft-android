@@ -46,12 +46,6 @@
     <color name="button_text_primary_teal">@color/background_teal</color>
     <color name="button_text_primary_pink">@color/background_teal</color>
 
-    <!-- Text colors contain transparency -->
-    <color name="text_black">#FF000000</color>
-    <color name="text_dark">#E8000000</color>
-    <color name="text_light">#C7FFFFFF</color>
-    <color name="text_white">#FFFFFFFF</color>
-
     <!-- Colors Splash Screen -->
     <color name="splash_background">@color/background_light_pink</color>
 
