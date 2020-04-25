@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Authentication;
@@ -71,6 +75,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         EditText tfCode5 = findViewById(R.id.verificationTfCode5);
         EditText tfCode6 = findViewById(R.id.verificationTfCode6);
 
+
+        List<EditText> tfCodes = Lists.newArrayList(tfCode1, tfCode2, tfCode3, tfCode4, tfCode5, tfCode6);
+
         // Setup toolar
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -106,8 +113,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         btnSignIn.setOnClickListener(view -> {
             // Combine user input of all textfields
-            String code = tfCode1.getText().toString() + tfCode2.getText().toString() + tfCode3.getText().toString() +
-                    tfCode4.getText().toString() + tfCode5.getText().toString() + tfCode6.getText().toString();
+            String code = TextUtils.join("", Lists.transform(tfCodes, EditText::getText));
             Log.d(LOG_TAG, "SMS code: " + code);
             Authentication.getInstance().verifyCode(code, this, successful -> {
                 if (successful) {
@@ -120,47 +126,28 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             });
         });
 
-        // Focus handlers
-        tfCode1.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (tfCode1.getText().length() == 1)
-                    tfCode2.requestFocus();
+
+        for (int i = 0; i < tfCodes.size(); i++) {
+            int j = i;
+            tfCodes.get(i).setOnKeyListener((v, keyCode, event) -> {
+
+                // When the textfield is not the last and the user put something in this textfield then jump to the next field.
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode != KeyEvent.KEYCODE_DEL) {
+                    if (j < tfCodes.size() - 1 && tfCodes.get(j).getText().length() == 1) {
+                        tfCodes.get(j + 1).requestFocus();
+                    }
+                }
+
+                // When the textfield is empty, not the the first and the user press back in textfield then jump to the previous field.
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (j > 0 && tfCodes.get(j).getText().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL) {
+                        tfCodes.get(j - 1).requestFocus();
+                    }
+                }
+
                 return false;
-            }
-        });
-        tfCode2.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (tfCode2.getText().length() == 1)
-                    tfCode3.requestFocus();
-                return false;
-            }
-        });
-        tfCode3.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (tfCode3.getText().length() == 1)
-                    tfCode4.requestFocus();
-                return false;
-            }
-        });
-        tfCode4.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (tfCode4.getText().length() == 1)
-                    tfCode5.requestFocus();
-                return false;
-            }
-        });
-        tfCode5.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (tfCode5.getText().length() == 1)
-                    tfCode6.requestFocus();
-                return false;
-            }
-        });
+            });
+        }
     }
 
     @Override
