@@ -8,14 +8,16 @@
 
     <dimen name="button_height">56dp</dimen>
 
-    <dimen name="text_size_heading_large">52sp</dimen>
-    <dimen name="text_size_heading">32sp</dimen>
-    <dimen name="text_size_default">14sp</dimen>
-    <dimen name="text_size_medium">16sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_heading">24sp</dimen>
+    <dimen name="text_size_subheading">16sp</dimen>
+    <dimen name="text_size_default">12sp</dimen>
 
-    <dimen name="text_size_list_item">@dimen/text_size_medium</dimen>
-    <dimen name="text_size_list_item_small">@dimen/text_size_small</dimen>
+    <dimen name="text_size_list_item">@dimen/text_size_default</dimen>
+    <dimen name="text_size_list_item_small">@dimen/text_size_default</dimen>
 
     <dimen name="circular_map_diameter">320dp</dimen>
+    
+    <dimen name="text_size_medium">16sp</dimen>
+
+    <dimen name="space_between_content_areas">8dp</dimen>
 </resources>
