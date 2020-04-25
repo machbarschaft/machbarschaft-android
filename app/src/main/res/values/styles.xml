@@ -32,6 +32,10 @@
         <item name="android:textColor">@color/color_accent</item>
     </style>
 
+    <style name="AppTheme.Button.Text.Light" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
     <style name="AppTextAppearance">
         <item name="android:textSize">@dimen/text_size_default</item>
         <item name="android:textColor">@color/text_dark</item>
