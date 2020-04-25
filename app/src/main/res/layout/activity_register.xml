@@ -13,7 +13,7 @@
         android:id="@+id/register_toolbar"
         android:layout_width="409dp"
         android:layout_height="@dimen/status_bar_height"
-        android:background="@color/transparent"
+        android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,21 +74,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/register_lbl_subtitle_second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/screen_padding"
-                android:layout_marginTop="24dp"
-                android:clickable="false"
-                android:fontFamily="@font/lato_bold"
-                android:text="@string/register_subtitle_second"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/text_black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_tf_phone" />
-
             <LinearLayout
                 android:id="@+id/register_tf_phone"
                 android:layout_width="fill_parent"
@@ -145,19 +130,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <com.passbase.passbase_sdk.PassbaseButton
-                android:id="@+id/passbase_verification_button"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/screen_padding"
-                android:layout_marginEnd="@dimen/screen_padding"
-                app:backgroundColor="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_lbl_subtitle_second"
-                app:textColor="@android:color/black" />
-
             <CheckBox
                 android:id="@+id/register_check_agb"
                 android:layout_width="wrap_content"
@@ -169,9 +141,8 @@
                 android:text="@string/register_check_agb"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/text_black"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passbase_verification_button" />
+                app:layout_constraintTop_toBottomOf="@id/register_tf_phone" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

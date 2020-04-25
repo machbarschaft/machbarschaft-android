@@ -1,20 +1,14 @@
 package jetzt.machbarschaft.android.database.entitie;
 
-import android.util.Log;
-
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.GeoPoint;
 
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
-
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
@@ -31,10 +25,10 @@ public class Order extends Collection {
      * The id of the list
      */
     private int listId;
-    @NotNull
+    @NonNull
     private Type type_of_help;
     private Status status;
-    @NotNull
+    @NonNull
     private Urgency urgency;
     private String clientName;
     private String phoneNumber;
@@ -52,8 +46,8 @@ public class Order extends Collection {
         urgency = Urgency.UNDEFINED;
     }
 
-    public Order(String id, @NotNull Type type, String clientName, String phoneNumber, String street,
-                 String houseNumber, String zipCode, String city, Status status, @NotNull Urgency urgency,
+    public Order(String id, @NonNull Type type, String clientName, String phoneNumber, String street,
+                 String houseNumber, String zipCode, String city, Status status, @NonNull Urgency urgency,
                  boolean getPrescription, boolean carNecessary, double latitude, double longitude) {
         this.id = id;
         this.type_of_help = type;
@@ -153,7 +147,7 @@ public class Order extends Collection {
      *
      * @return The type of the order.
      */
-    @NotNull
+    @NonNull
     public Type getType_of_help() {
         return type_of_help;
     }
@@ -163,7 +157,7 @@ public class Order extends Collection {
      *
      * @param type_of_help The new type of the order.
      */
-    public void setType_of_help(@NotNull Type type_of_help) {
+    public void setType_of_help(@NonNull Type type_of_help) {
         this.type_of_help = type_of_help;
     }
 
@@ -191,7 +185,7 @@ public class Order extends Collection {
      *
      * @return The urgency of the order.
      */
-    @NotNull
+    @NonNull
     public Urgency getUrgency() {
         return urgency;
     }
@@ -201,7 +195,7 @@ public class Order extends Collection {
      *
      * @param urgency The new urgency of the order.
      */
-    public void setUrgency(@NotNull Urgency urgency) {
+    public void setUrgency(@NonNull Urgency urgency) {
         this.urgency = urgency;
     }
 
@@ -403,7 +397,7 @@ public class Order extends Collection {
         return new LatLng(latitude, longitude);
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         return "Order{" +
@@ -430,12 +424,12 @@ public class Order extends Collection {
         MEDICINE("APOTHEKE", R.string.order_title_medicine),
         OTHER("SONSTIGES", R.string.order_title_other);
 
-        @NotNull
+        @NonNull
         private final String name;
         @StringRes
         private final int title;
 
-        Type(@NotNull String name, @StringRes int title) {
+        Type(@NonNull String name, @StringRes int title) {
             this.name = name;
             this.title = title;
         }
@@ -446,7 +440,7 @@ public class Order extends Collection {
          * @param name The internal name of the type.
          * @return The parsed type.
          */
-        @NotNull
+        @NonNull
         public static Type byName(String name) {
             for (Type type : values()) {
                 if (type.name.equals(name)) {
@@ -461,7 +455,7 @@ public class Order extends Collection {
          *
          * @return The internal name of the type.
          */
-        @NotNull
+        @NonNull
         public String getName() {
             return name;
         }
@@ -486,10 +480,10 @@ public class Order extends Collection {
         CONFIRMED("confirmed"),
         CLOSED("closed");
 
-        @NotNull
+        @NonNull
         private final String name;
 
-        Status(@NotNull String name) {
+        Status(@NonNull String name) {
             this.name = name;
         }
 
@@ -499,7 +493,7 @@ public class Order extends Collection {
          * @param name The internal name of the status.
          * @return The parsed status.
          */
-        @NotNull
+        @NonNull
         public static Status byName(String name) {
             for (Status status : values()) {
                 if (status.name.equals(name)) {
@@ -514,7 +508,7 @@ public class Order extends Collection {
          *
          * @return The internal name of the status.
          */
-        @NotNull
+        @NonNull
         public String getName() {
             return name;
         }
@@ -529,14 +523,14 @@ public class Order extends Collection {
         TOMORROW("TOMORROW", R.drawable.ic_order_tomorrow, R.string.order_urgency_tomorrow),
         UNDEFINED("UNDEFINED", R.drawable.ic_order_undefined, R.string.order_urgency_undefined);
 
-        @NotNull
+        @NonNull
         private final String name;
         @DrawableRes
         private final int icon;
         @StringRes
         private final int title;
 
-        Urgency(@NotNull String name, @DrawableRes int icon, @StringRes int title) {
+        Urgency(@NonNull String name, @DrawableRes int icon, @StringRes int title) {
             this.name = name;
             this.icon = icon;
             this.title = title;
@@ -548,7 +542,7 @@ public class Order extends Collection {
          * @param name The internal name of the urgency.
          * @return The parsed urgency.
          */
-        @NotNull
+        @NonNull
         public static Urgency byName(String name) {
             for (Urgency urgency : values()) {
                 if (urgency.name.equals(name)) {
@@ -563,7 +557,7 @@ public class Order extends Collection {
          *
          * @return The internal name of the urgency.
          */
-        @NotNull
+        @NonNull
         public String getName() {
             return name;
         }

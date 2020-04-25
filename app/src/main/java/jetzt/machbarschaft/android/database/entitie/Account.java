@@ -1,8 +1,8 @@
 package jetzt.machbarschaft.android.database.entitie;
 
-import com.google.firebase.firestore.DocumentSnapshot;
+import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.Serializable;
 
@@ -46,7 +46,7 @@ public class Account extends Collection implements Serializable {
     }
 
 
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         return "Account{" +
