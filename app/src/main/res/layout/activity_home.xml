@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <TextView
         android:id="@+id/order_count_text"
@@ -41,9 +41,14 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/sorting_tab_layout"
-        android:background="@color/background_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background_blue"
+        app:tabBackground="@color/background_blue"
+        app:tabIconTint="@color/text_light"
+        app:tabTextColor="@color/text_light"
+        app:tabSelectedTextColor="@color/text_white"
+        app:tabIndicatorColor="@color/text_white"
         app:layout_constraintTop_toBottomOf="@id/order_count_text" />
 
     <androidx.recyclerview.widget.RecyclerView
