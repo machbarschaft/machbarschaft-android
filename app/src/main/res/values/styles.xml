@@ -163,14 +163,4 @@
         <!-- deprecated, do not use -->
         <item name="android:textColor">#FF0000</item>
     </style>
-
-    <style name="AppTextAppearance.Text.Primary" parent="AppTextAppearance.Text">
-        <!-- deprecated, do not use -->
-        <item name="android:textColor">#FF0000</item>
-    </style>
-
-    <style name="AppTextAppearance.Text.Important" parent="AppTextAppearance.Text">
-        <!-- deprecated, do not use -->
-        <item name="android:textColor">#FF0000</item>
-    </style>
 </resources>

@@ -41,7 +41,6 @@
             android:paddingTop="@dimen/screen_padding"
             android:paddingEnd="@dimen/screen_padding"
             android:paddingRight="@dimen/screen_padding"
-            android:textAppearance="@style/AppTextAppearance.Text.Primary"
             android:textColor="@color/text_white"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
