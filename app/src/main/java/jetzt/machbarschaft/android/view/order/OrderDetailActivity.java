@@ -59,18 +59,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         // Get active order from database
         loadOrder();
 
-        // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarDetailOrder);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.title_back);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Home.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
         // Add map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
@@ -91,6 +79,11 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         mNameView.setText(mOrder.getClientName());
         mNeedsView.setText(mOrder.getType_of_help().getTitle());
         mUrgencyView.setText(mOrder.getUrgency().getTitle());
+        if(mOrder.getUrgency() == Order.Urgency.URGENT){
+            mUrgencyView.setTextColor(Color.RED);
+        }else{
+            mUrgencyView.setTextColor(Color.BLUE);
+        }
         StringBuilder address = new StringBuilder();
         address.append(mOrder.getStreet());
         address.append(" ");

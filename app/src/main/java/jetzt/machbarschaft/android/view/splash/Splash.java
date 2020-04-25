@@ -27,18 +27,22 @@ public class Splash extends AppCompatActivity {
     private Handler myHandler = new Handler();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splash);
-        fixGoogleMapBug();
+    public void onResume(){
+        super.onResume();
         FirebaseUser user = Authentication.getInstance().getCurrentUser();
         if (user == null) {
             myHandler.postDelayed(this::startLogin, 1200);
         } else {
             myHandler.postDelayed(this::startApp, 1200);
         }
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splash);
+        fixGoogleMapBug();
         // TESTS
         // DataAccessTest.getInstance().runTests(this);
         //TESTS

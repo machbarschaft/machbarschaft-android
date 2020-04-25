@@ -4,154 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light_pink"
     tools:context="jetzt.machbarschaft.android.view.order.OrderDetailActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarDetailOrder"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/text_white" />
 
     <LinearLayout
         android:id="@+id/order_detail_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintTop_toBottomOf="@id/toolbarDetailOrder"
-        app:layout_constraintBottom_toTopOf="@id/btn_accept_order">
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/order_detail_title"
-            style="@style/AppTextAppearance.Heading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/order_detail_title" />
-
-        <TextView
-            android:id="@+id/order_detail_name"
-            style="@style/AppTextAppearance.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:textStyle="bold" />
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cameraTargetLat="51"
+            app:cameraTargetLng="10"
+            app:cameraZoom="5" />
 
         <LinearLayout
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="top">
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
 
             <TextView
-                style="@style/AppTextAppearance.Text"
+                android:textAppearance="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/order_detail_label_needs" />
-
-            <TextView
-                style="@style/AppTextAppearance.Text"
-                android:id="@+id/order_detail_needs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="top">
-
-            <TextView
-                style="@style/AppTextAppearance.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/order_detail_label_urgency" />
+                android:text="Status: " />
 
             <TextView
                 android:id="@+id/order_detail_urgency"
-                style="@style/AppTextAppearance.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="top">
-
-            <TextView
-                style="@style/AppTextAppearance.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/order_detail_label_address" />
-
-            <TextView
-                android:id="@+id/order_detail_address"
-                style="@style/AppTextAppearance.Text"
+                style="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="@dimen/circular_map_diameter"
-            android:layout_height="@dimen/circular_map_diameter"
-            android:layout_marginVertical="8dp"
-            android:layout_gravity="center_horizontal">
-
-            <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/map_fragment"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                map:cameraTargetLat="51"
-                map:cameraTargetLng="10"
-                map:cameraZoom="5" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/circular_map_overlay" />
-
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:text="Auftraggeber: "
+            android:textAppearance="@style/AppTextAppearance.Subheading" />
 
         <TextView
-            android:id="@+id/order_extra_text"
-            style="@style/AppTextAppearance.Text.Important"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                android:id="@+id/order_detail_name"
+                style="@style/AppTextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="" />
 
+            <TextView
+                android:id="@+id/order_detail_address"
+                style="@style/AppTextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:text="" />
+
+        <Button
+            android:id="@+id/textButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROUTE ANZEIGEN"
+            style="@style/AppTheme.Button.Text"
+            />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_accept_order"
-        style="@style/AppTheme.Button"
+    <LinearLayout
+        android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/screen_padding"
-        android:layout_marginEnd="@dimen/screen_padding"
-        android:text="@string/order_detail_accept_order"
-        android:textColor="@color/background_cyan"
+        android:layout_height="wrap_content"
+        android:background="@color/background_pink"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/AppTextAppearance.Subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Benötigte Waren:" />
+
+        <TextView
+            style="@style/AppTextAppearance"
+            android:id="@+id/order_detail_needs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:text="" />
+
+
+        <Button
+            style="@style/AppTheme.Button"
+            android:id="@+id/btn_accept_order"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginEnd="@dimen/screen_padding"
+            android:text="AUFTRAG ANNEHMEN"
+            />
+
+        <Button
+            style="@style/AppTheme.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginEnd="@dimen/screen_padding"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="ABBRECHEN"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

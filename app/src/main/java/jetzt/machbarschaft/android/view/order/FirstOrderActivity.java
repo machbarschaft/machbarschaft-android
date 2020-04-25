@@ -28,7 +28,7 @@ public class FirstOrderActivity extends AppCompatActivity {
 
         // Sets the Custom Pager Adapter to display the different slides in the application
         warningsPager = findViewById(R.id.viewPagerWarnings);
-        TabLayout introSlidesIndicator = findViewById(R.id.warnings_slides_indicator);
+        TabLayout introSlidesIndicator = findViewById(R.id.first_order_slides_indicator);
         warningsPager.setAdapter(new CustomWarningPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(warningsPager, true);
     }

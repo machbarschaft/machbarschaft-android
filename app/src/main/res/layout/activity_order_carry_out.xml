@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextAppearance="@style/AppTextAppearance.Text"
+        app:titleTextAppearance="@style/AppTextAppearance"
         app:titleTextColor="@color/text_white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,6 @@
             android:paddingTop="@dimen/screen_padding"
             android:paddingEnd="@dimen/screen_padding"
             android:paddingRight="@dimen/screen_padding"
-            android:textAppearance="@style/AppTextAppearance.Text.Primary"
             android:textColor="@color/text_white"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +104,7 @@
 
         <Button
             android:id="@+id/btn_order_execute_now"
-            style="@style/AppTheme.Button.Green"
+            style="@style/AppTheme.Button"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
@@ -149,7 +148,7 @@
 
         <TextView
             android:id="@+id/step_2_subtitle"
-            style="@style/AppTextAppearance.Text"
+            style="@style/AppTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_padding"

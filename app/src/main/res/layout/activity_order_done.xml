@@ -33,7 +33,7 @@
 
     <Button
         android:id="@+id/btn_back_home"
-        style="@style/AppTheme.Button.Blue"
+        style="@style/AppTheme.Button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:layout_marginLeft="@dimen/screen_padding"
