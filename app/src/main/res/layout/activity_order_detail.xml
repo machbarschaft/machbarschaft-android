@@ -36,26 +36,27 @@
                 android:textAppearance="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status:" />
+                android:text="Status: " />
 
             <TextView
                 android:id="@+id/order_detail_urgency"
-                style="@style/AppTextAppearance.Text"
+                style="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
         <TextView
-            android:textAppearance="@style/AppTextAppearance.Subheading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:text="Auftraggeber: " />
+            android:text="Auftraggeber: "
+            android:textAppearance="@style/AppTextAppearance.Subheading" />
 
-            <TextView
+        <TextView
                 android:id="@+id/order_detail_name"
-                style="@style/AppTextAppearance.Text"
+                style="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -63,6 +64,7 @@
 
             <TextView
                 android:id="@+id/order_detail_address"
+                style="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -90,14 +92,17 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            style="@style/AppTextAppearance.Subheading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Benötigte Waren:" />
 
         <TextView
+            style="@style/AppTextAppearance"
             android:id="@+id/order_detail_needs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:text="" />
 
 
@@ -117,7 +122,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:text="ABBRECHEN"
             />
     </LinearLayout>

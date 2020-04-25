@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/order_number"
-        style="@style/AppTextAppearance.Text.Light"
+        style="@style/AppTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -48,19 +48,19 @@
 
         <TextView
             android:id="@+id/order_type"
-            style="@style/AppTextAppearance.ListItemPrimary"
+            style="@style/AppTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/order_client_name"
-            style="@style/AppTextAppearance.ListItem"
+            style="@style/AppTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/order_extras"
-            style="@style/AppTextAppearance.ListItem"
+            style="@style/AppTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -68,7 +68,7 @@
 
     <TextView
         android:id="@+id/order_distance"
-        style="@style/AppTextAppearance.ListItemExtra"
+        style="@style/AppTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_order_distance_km"
