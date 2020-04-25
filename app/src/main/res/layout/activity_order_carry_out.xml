@@ -149,7 +149,7 @@
 
         <TextView
             android:id="@+id/step_2_subtitle"
-            style="@style/TextSubTitle"
+            style="@style/AppTextAppearance.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_padding"

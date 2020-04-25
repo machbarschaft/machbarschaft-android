@@ -114,7 +114,7 @@
 
                 <TextView
                     android:id="@+id/step_3_subtitle"
-                    style="@style/TextSubTitle"
+                    style="@style/AppTextAppearance.Text.Light"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/screen_padding"

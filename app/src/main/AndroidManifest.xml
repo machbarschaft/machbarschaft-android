@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:fullBackupContent">
-        <activity android:name=".view.order.FirstOrderActivity"></activity>
+        <activity android:name=".view.order.FirstOrderActivity" />
         <activity
             android:name=".view.order.OrderDetailActivity"
             android:parentActivityName=".view.home.Home">

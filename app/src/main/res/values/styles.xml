@@ -16,33 +16,33 @@
     </style>
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/button_bg_primary</item>
-        <item name="textColor">@color/text_white</item>
+        <item name="android:backgroundTint">@color/button_bg_primary</item>
+        <item name="android:textColor">@color/text_white</item>
     </style>
 
     <style name="AppTheme.Button.Secondary" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/button_bg_secondary</item>
-        <item name="textColor">@color/text_white</item>
+        <item name="android:backgroundTint">@color/button_bg_secondary</item>
+        <item name="android:textColor">@color/text_white</item>
     </style>
 
     <style name="AppTheme.Button.Green" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/button_bg_green</item>
-        <item name="textColor">@color/text_white</item>
+        <item name="android:backgroundTint">@color/button_bg_green</item>
+        <item name="android:textColor">@color/text_white</item>
     </style>
 
     <style name="AppTheme.Button.Blue" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/background_blue_darker</item>
-        <item name="textColor">@color/text_white</item>
+        <item name="android:backgroundTint">@color/background_blue_darker</item>
+        <item name="android:textColor">@color/text_white</item>
     </style>
 
     <style name="AppTheme.Button.LightBlue" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/order_first_fontColor</item>
-        <item name="textColor">@color/order_first_buttonColor</item>
+        <item name="android:backgroundTint">@color/order_first_fontColor</item>
+        <item name="android:textColor">@color/order_first_buttonColor</item>
     </style>
 
     <style name="AppTheme.Button.Grey" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/order_first_buttonColor</item>
-        <item name="textColor">@color/order_first_fontColor</item>
+        <item name="android:backgroundTint">@color/order_first_buttonColor</item>
+        <item name="android:textColor">@color/order_first_fontColor</item>
     </style>
 
     <style name="AppTextAppearance.LargeHeading" parent="TextAppearance.AppCompat.Medium">

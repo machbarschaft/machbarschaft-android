@@ -7,7 +7,6 @@ import android.content.SharedPreferences.Editor;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
-import io.sentry.core.protocol.App;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.util.ApplicationConstants;

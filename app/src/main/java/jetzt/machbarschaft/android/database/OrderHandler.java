@@ -1,9 +1,9 @@
 package jetzt.machbarschaft.android.database;
 
 
-import com.google.firebase.firestore.DocumentSnapshot;
+import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -186,7 +186,7 @@ public class OrderHandler {
     }
 
 
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         return "OrderHandler{" +
