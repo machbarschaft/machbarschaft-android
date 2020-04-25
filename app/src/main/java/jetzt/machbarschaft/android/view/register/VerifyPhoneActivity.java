@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 import jetzt.machbarschaft.android.R;
@@ -74,9 +76,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         EditText tfCode6 = findViewById(R.id.verificationTfCode6);
 
 
-        List<EditText> tfCodes = Lists.newArrayList(tfCode1,tfCode2,tfCode3,tfCode4,tfCode5,tfCode6);
+        List<EditText> tfCodes = Lists.newArrayList(tfCode1, tfCode2, tfCode3, tfCode4, tfCode5, tfCode6);
 
-                // Setup toolar
+        // Setup toolar
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -128,13 +130,21 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         for (int i = 0; i < tfCodes.size(); i++) {
             int j = i;
             tfCodes.get(i).setOnKeyListener((v, keyCode, event) -> {
-                if(
-                    j<tfCodes.size()-1 &&
-                    tfCodes.get(j).getText().length() == 1
-                )
-                {
-                    tfCodes.get(j+1).requestFocus();
+
+                // When the textfield is not the last and the user put something in this textfield then jump to the next field.
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode != KeyEvent.KEYCODE_DEL) {
+                    if (j < tfCodes.size() - 1 && tfCodes.get(j).getText().length() == 1) {
+                        tfCodes.get(j + 1).requestFocus();
+                    }
                 }
+
+                // When the textfield is empty, not the the first and the user press back in textfield then jump to the previous field.
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (j > 0 && tfCodes.get(j).getText().length() == 0 && keyCode == KeyEvent.KEYCODE_DEL) {
+                        tfCodes.get(j - 1).requestFocus();
+                    }
+                }
+
                 return false;
             });
         }
