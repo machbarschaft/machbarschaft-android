@@ -128,4 +128,6 @@
     <string name="medical_warnings_checkbox_3">You currently have no flu-like symptoms such as fever, shortness of breath or cough</string>
     <string name="medical_warnings_checkbox_4">You have had no contact with positively tested persons or suspected cases in the last 3 weeks</string>
     <string name="button_next">Next</string>
+    <string name="please_confirm">Please confirm after handing over the purchase \n that you have completed the order.</string>
+    <string name="show_maps">SHOW NAVIGATION</string>
 </resources>

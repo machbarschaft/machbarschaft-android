@@ -129,5 +129,7 @@
     <string name="button_next">Weiter</string>
     <string name="urgency_title">Status:</string>
     <string name="button_accept_order">AUFTRAG ANNEHMEN</string>
+    <string name="please_confirm">Bitte bestätige nach Übergabe des Einkaufs,\n dass du den Auftrag erledigt hast.</string>
+    <string name="show_maps">ROUTE ANZEIGEN</string>
 
 </resources>

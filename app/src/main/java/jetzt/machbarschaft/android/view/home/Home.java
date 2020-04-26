@@ -3,6 +3,7 @@ package jetzt.machbarschaft.android.view.home;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -271,10 +273,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         markerMap = new HashMap<>();
         markerIconMap = new EnumMap<>(Order.Urgency.class);
 
-        for (Order.Urgency urgency : Order.Urgency.values()) {
-            BitmapDescriptor descriptor = DrawableUtil.getBitmapDescriptor(this, urgency.getIconRes());
-            markerIconMap.put(urgency, descriptor);
-        }
     }
 
     public Location getMyLocation() {
@@ -471,6 +469,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             return;
         }
 
+        //BitmapDescriptor descriptor = DrawableUtil.getBitmapDescriptor(this, urgency.getIconRes());
+
+        //                        .icon(markerIconMap.get(order.getUrgency()))
         Set<String> oldOrderIds = new HashSet<>(markerMap.keySet());
         for (Order order : orderList) {
             Marker marker = markerMap.get(order.getId());
@@ -479,18 +480,25 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                 marker = map.addMarker(new MarkerOptions()
                         .flat(true)
                         .draggable(false)
-                        .icon(markerIconMap.get(order.getUrgency()))
                         .anchor(0.171875f, 0.9375f)
                         .title(String.valueOf(order.getListId()))
                         .position(new LatLng(order.getLatitude(), order.getLongitude()))
                 );
+                if (order.getUrgency() == Order.Urgency.URGENT || order.getUrgency() == Order.Urgency.TODAY) {
+                    //Google Marker
+                    //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    //Custom Marker
+                    marker.setIcon(DrawableUtil.getBitmapDescriptor(getApplicationContext(), order.getUrgency().getIconRes(), order));
+                }else{
+                    //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    marker.setIcon(DrawableUtil.getBitmapDescriptor(getApplicationContext(), order.getUrgency().getIconRes(), order));
+                }
                 marker.setTag(order.getId());
                 markerMap.put(order.getId(), marker);
             } else {
                 // Update existing marker
                 marker.setPosition(new LatLng(order.getLatitude(), order.getLongitude()));
             }
-
             // Order is not old, no need to remove marker
             oldOrderIds.remove(order.getId());
         }
