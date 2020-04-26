@@ -8,9 +8,9 @@
 
     <dimen name="button_height">56dp</dimen>
 
-    <dimen name="text_size_heading">24sp</dimen>
-    <dimen name="text_size_subheading">16sp</dimen>
-    <dimen name="text_size_default">12sp</dimen>
+    <dimen name="text_size_heading">26sp</dimen>
+    <dimen name="text_size_subheading">18sp</dimen>
+    <dimen name="text_size_default">14sp</dimen>
 
     <dimen name="order_list_item_height">64dp</dimen>
     <dimen name="home_controls_elevation">4dp</dimen>
