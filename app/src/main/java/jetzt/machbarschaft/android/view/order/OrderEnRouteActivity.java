@@ -33,7 +33,7 @@ import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 
-public class OrderEnRouteActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class OrderEnRouteActivity extends AppCompatActivity  {
     private static final String LOG_TAG = "OrderEnRouteActivity";
 
     private Order mOrder;
@@ -67,22 +67,26 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         // Set overview label at the top of the page
-        TextView tfOverview = findViewById(R.id.step_3_overview);
-        tfOverview.setText(mOrder.getType_of_help() + " " + getResources().getString(R.string.stepFor) + " " + mOrder.getClientName());
+        TextView tfOverview = findViewById(R.id.order_en_route_client);
+        tfOverview.setText(mOrder.getClientName());
 
         // Set address from order to label
         TextView tfAddress = findViewById(R.id.step_3_address);
         tfAddress.setText(mOrder.getCompleteAddress());
 
+        //Set urgency to label
+        TextView tfUrgency = findViewById(R.id.step_3_urgency);
+        tfUrgency.setText(mOrder.getUrgency().getTitle());
+        if(mOrder.getUrgency() == Order.Urgency.URGENT){
+            tfUrgency.setTextColor(Color.RED);
+        }else{
+            tfUrgency.setTextColor(Color.BLUE);
+        }
+
         //Setup Page Indicator to show progress Step 3
         PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
         pageIndicatorView.setCount(3); // specify total count of indicators
         pageIndicatorView.setSelection(2);
-
-        // Load map fragment
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_fragment);
-        Objects.requireNonNull(mapFragment).getMapAsync(this);
 
         // Button click handlers
         Button btnNavigate = findViewById(R.id.btn_navigate);
@@ -98,14 +102,6 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
             notifyOrderDone();
             startActivity(new Intent(this, OrderDoneActivity.class));
             finishAfterTransition();
-        });
-
-        Button btnCall = findViewById(R.id.step_3_btnCall);
-        btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callUser();
-            }
         });
     }
 
@@ -139,20 +135,6 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        if (mOrder != null) {
-            LatLng orderLocation = new LatLng(mOrder.getLatitude(), mOrder.getLongitude());
-            // Add marker
-            googleMap.addMarker(new MarkerOptions()
-                    .flat(true)
-                    .draggable(false)
-                    .position(orderLocation));
-
-            // Zoom map
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orderLocation, 5f));
-        }
-    }
 
     /**
      * Tell the server that the order is done.
