@@ -394,6 +394,15 @@ public class Order extends Collection {
     }
 
     /**
+     * Gets the short version of the address of the client.
+     *
+     * @return The street name and house number of the client.
+     */
+    public String getShortAddress() {
+        return street + " " + houseNumber;
+    }
+
+    /**
      * Gets the location of the client.
      *
      * @return The location of the client.

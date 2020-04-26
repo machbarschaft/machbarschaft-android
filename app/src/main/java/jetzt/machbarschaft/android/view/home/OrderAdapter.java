@@ -107,7 +107,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             view.setTag(order.getId());
             orderId.setTextColor(urgencyColor);
             orderId.setText(String.valueOf(order.getListId()));
-            orderClientAddress.setText(order.getCompleteAddress());
+            orderClientAddress.setText(order.getShortAddress());
             orderClientName.setText(order.getClientName());
             orderIcon.setImageResource(order.getType().getIcon());
             orderIcon.setImageTintList(ColorStateList.valueOf(urgencyColor));
