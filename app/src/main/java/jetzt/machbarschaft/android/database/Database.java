@@ -16,17 +16,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import javax.security.auth.callback.Callback;
 
 import jetzt.machbarschaft.android.database.callback.DocumentCallback;
 import jetzt.machbarschaft.android.database.callback.DocumentsCallback;
 import jetzt.machbarschaft.android.database.callback.WasSuccessfullCallback;
 import jetzt.machbarschaft.android.database.entitie.Collection;
-import jetzt.machbarschaft.android.view.login.LoginMain;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -292,6 +288,7 @@ public class Database {
     protected void getCollection(CollectionName collectionName, final DocumentsCallback callback) {
 
         db.collection("Order")
+                .whereEqualTo("status", "open")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
