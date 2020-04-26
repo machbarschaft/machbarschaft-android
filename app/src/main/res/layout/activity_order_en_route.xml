@@ -149,6 +149,7 @@
             app:piv_select="2"
             app:piv_selectedColor="@color/selector_dot_active"
             app:piv_unselectedColor="@color/selector_dot_inactive" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
