@@ -76,7 +76,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
-            android:paddingBottom="@dimen/screen_padding"
             android:text="Problem melden" />
 
         <com.rd.PageIndicatorView

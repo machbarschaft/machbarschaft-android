@@ -434,9 +434,9 @@ public class Order extends Collection {
      * The type the order.
      */
     public enum Type {
-        GROCERIES("EINKAUFEN", R.drawable.ic_type_groceries, R.string.order_title_groceries),
-        MEDICINE("APOTHEKE", R.drawable.ic_type_medicine, R.string.order_title_medicine),
-        OTHER("SONSTIGES", R.drawable.ic_type_other, R.string.order_title_other);
+        GROCERIES("groceries", R.drawable.ic_type_groceries, R.string.order_title_groceries),
+        MEDICINE("medicine", R.drawable.ic_type_medicine, R.string.order_title_medicine),
+        OTHER("other", R.drawable.ic_type_other, R.string.order_title_other);
 
         @NonNull
         private final String name;
@@ -545,10 +545,10 @@ public class Order extends Collection {
      * The urgency defines how fast the order should be processed.
      */
     public enum Urgency {
-        URGENT("ASAP", R.drawable.ic_order_urgent, R.color.urgency_urgent, R.string.order_urgency_urgent),
-        TODAY("TODAY", R.drawable.ic_order_today, R.color.urgency_urgent, R.string.order_urgency_today),
-        TOMORROW("TOMORROW", R.drawable.ic_order_tomorrow, R.color.urgency_normal, R.string.order_urgency_tomorrow),
-        UNDEFINED("UNDEFINED", R.drawable.ic_order_undefined, R.color.urgency_normal, R.string.order_urgency_undefined);
+        URGENT("asap", R.drawable.ic_order_urgent, R.color.urgency_urgent, R.string.order_urgency_urgent),
+        TODAY("today", R.drawable.ic_order_today, R.color.urgency_urgent, R.string.order_urgency_today),
+        TOMORROW("tomorrow", R.drawable.ic_order_tomorrow, R.color.urgency_normal, R.string.order_urgency_tomorrow),
+        UNDEFINED("undefined", R.drawable.ic_order_undefined, R.color.urgency_normal, R.string.order_urgency_undefined);
 
         @NonNull
         private final String name;
