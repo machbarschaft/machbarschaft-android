@@ -67,6 +67,10 @@
     <string name="home_dialog_understood">Understood</string>
     <string name="home_tab_distance">Distance</string>
     <string name="home_tab_urgency">Urgency</string>
+    <plurals name="home_order_count">
+        <item quantity="one">%1$d current order near you</item>
+        <item quantity="other">%1$d current orders near you</item>
+    </plurals>
 
     <string name="home_order_distance_km">%1$.1f km</string>
     <string name="home_order_extra_prescription">Get recipe</string>

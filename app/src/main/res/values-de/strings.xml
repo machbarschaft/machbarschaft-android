@@ -69,6 +69,10 @@
     <string name="home_dialog_understood">Verstanden</string>
     <string name="home_tab_distance">Distanz</string>
     <string name="home_tab_urgency">Dringlichkeit</string>
+    <plurals name="home_order_count">
+        <item quantity="one">%1$d aktueller Auftrag in deiner Nähe</item>
+        <item quantity="other">%1$d aktuelle Aufträge in deiner Nähe</item>
+    </plurals>
 
     <string name="home_order_distance_km">%1$.1f km</string>
     <string name="home_order_extra_prescription">Rezept abhohlen</string>

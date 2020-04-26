@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -65,6 +66,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
 
     private List<Order> orderList;
     private RecyclerView recyclerView;
+    private TextView orderCountView;
     private OrderAdapter orderAdapter;
 
     private GoogleMap map;
@@ -96,9 +98,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         Button btnReport = findViewById(R.id.home_btn_bug_report);
         TabLayout tabLayout = findViewById(R.id.sorting_tab_layout);
         recyclerView = findViewById(R.id.order_recycler_view);
+        orderCountView = findViewById(R.id.order_count_text);
 
         setupTabs(tabLayout);
         setupBottomButtons(btnFAQ, btnContact, btnReport);
+        setOrderCount(0);
 
         // Fetch orders from database
         DataAccess.getInstance().getOrders(successful -> {
@@ -136,7 +140,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             initView(); //initializes the Map and Recycler View
             updateMarkers(); //deletes unnecessary Markers and adds new
         });
-
     }
 
     /**
@@ -223,6 +226,16 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         });
     }
 
+    /**
+     * Sets the number of orders that is displayed below the map.
+     *
+     * @param count The number of orders to set.
+     */
+    private void setOrderCount(int count) {
+        String countText = getResources().getQuantityString(R.plurals.home_order_count, count, count);
+        orderCountView.setText(countText);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -242,6 +255,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         for (int i = 0; i < orderList.size(); i++) {
             orderList.get(i).setListId(i + 1);
         }
+
+        setOrderCount(orderList.size());
     }
 
     /**
