@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_pink"
     tools:context="jetzt.machbarschaft.android.view.order.OrderCarryOutActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarCarryOutOrder"
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_bar_height"
-        android:background="@color/order_step_2_background_dark"
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,87 +20,43 @@
         app:titleTextColor="@color/text_white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/step_2_layout_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/order_step_2_background_dark"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/step_2_layout_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarCarryOutOrder">
-
-        <TextView
-            android:id="@+id/step_2_overview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_padding"
-            android:layout_marginEnd="@dimen/screen_padding"
-            android:paddingStart="@dimen/screen_padding"
-            android:paddingLeft="@dimen/screen_padding"
-            android:paddingTop="@dimen/screen_padding"
-            android:paddingEnd="@dimen/screen_padding"
-            android:paddingRight="@dimen/screen_padding"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/step_2_btnCall"
-            android:layout_width="0dip"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginStart="@dimen/screen_padding"
-            android:layout_marginTop="@dimen/screen_padding"
-            android:layout_marginBottom="@dimen/screen_padding"
-            android:backgroundTint="@color/order_step_2_button_call_bgtint"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="@string/call_now"
-            android:textColor="@color/order_step_2_button_call"
-            android:textSize="@dimen/text_size_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/step_2_overview" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/step_2_layout_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/order_step_2_background_light"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step_2_layout_top">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarCarryOutOrder">
 
         <TextView
             android:id="@+id/step_3_title"
+            style="@style/AppTextAppearance.Heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginTop="@dimen/screen_padding"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
             android:text="@string/order_carry_out_title"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_size_heading"
-            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:piv_animationType="scale"
+            app:piv_dynamicCount="true"
+            android:layout_marginBottom="@dimen/screen_padding"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/background_blue"
+            app:piv_unselectedColor="@android:color/darker_gray" />
 
         <Button
             android:id="@+id/btn_order_execute_now"
@@ -109,37 +65,31 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/order_step_2_button_bgtint"
-            android:fontFamily="@font/lato"
             android:text="@string/start_to_execute_now"
-            android:textSize="@dimen/text_size_default"
             app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_later"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
+            style="@style/AppTheme.Button.Outlined"
             android:id="@+id/btn_order_execute_later"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lato"
+            android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginEnd="@dimen/screen_padding"
             android:text="@string/start_to_execute_later"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/text_size_default"
             app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_failed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_order_execute_failed"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="264dp"
-            android:layout_height="52dp"
-            android:fontFamily="@font/lato"
-            android:text="@string/start_to_execute_failed"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/text_size_default"
+            style="@style/AppTheme.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginEnd="@dimen/screen_padding"
+            android:text="Problem melden"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,21 +101,18 @@
             style="@style/AppTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_padding"
-            android:fontFamily="@font/lato_bold"
             android:text="@string/order_carry_out_text"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/step_3_title" />
 
         <ImageView
             android:id="@+id/step_2_graphic"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
+            android:background="@drawable/round_outline_blue"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/screen_padding"
+            android:layout_marginBottom="@dimen/screen_padding"
             app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

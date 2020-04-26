@@ -13,6 +13,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.rd.PageIndicatorView;
+
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
@@ -59,6 +61,11 @@ public class OrderAcceptActivity extends AppCompatActivity {
             callUser();
             finishAfterTransition();
         });
+
+        //Setup Page Indicator to show progress
+        PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
+        pageIndicatorView.setCount(3); // specify total count of indicators
+        pageIndicatorView.setSelection(0);
     }
 
     /**

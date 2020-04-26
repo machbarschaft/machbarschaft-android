@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/order_step_1_background"
+    android:background="@color/background_pink"
     tools:context="jetzt.machbarschaft.android.view.order.OrderAcceptActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,13 +23,14 @@
         android:layout_margin="@dimen/screen_padding"
         android:padding="10dp"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarAcceptOrder">
 
         <TextView
+            style="@style/AppTextAppearance.Heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/AppTextAppearance.Heading"
             android:gravity="start"
             android:text="@string/order_accept_title" />
 
@@ -51,13 +52,31 @@
             android:layout_height="300dp"
             app:srcCompat="@drawable/graphic_splash_screen" />
 
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:piv_animationType="scale"
+            app:piv_dynamicCount="true"
+            android:layout_marginTop="@dimen/screen_padding"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/background_blue"
+            app:piv_unselectedColor="@android:color/darker_gray"
+            />
         <Button
+            style="@style/AppTheme.Button"
             android:id="@+id/btn_call"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_padding"
             android:text="@string/call_now" />
 
+        <Button
+            style="@style/AppTheme.Button.Outlined"
+            android:id="@+id/order_accept_button_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Abbrechen" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
