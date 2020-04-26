@@ -131,7 +131,7 @@
 
         <Button
             style="@style/AppTheme.Button.Outlined"
-            android:id="@+id/btn_report"
+            android:id="@+id/order_en_route_btn_report"
             android:layout_width="@dimen/order_content_size"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/order_page_indicator_margin"

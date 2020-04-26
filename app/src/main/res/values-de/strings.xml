@@ -131,5 +131,9 @@
     <string name="urgency_title">Status: </string>
     <string name="button_accept_order">Auftrag annehmen</string>
     <string name="btn_report_problem">Problem melden</string>
+    <string name="report_problem">Problem melden</string>
+    <string name="call_again">Erneut anrufen</string>
+    <string name="back_button">Zurück</string>
+    <string name="report_problem_describtion">Du kannst den Auftrag abbrechen oder uns ein Problem melden.</string>
 
 </resources>

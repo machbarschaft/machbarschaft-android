@@ -122,6 +122,7 @@
 
         <Button
             style="@style/AppTheme.Button.Outlined"
+            android:id="@+id/btn_cancel_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_cancel" />

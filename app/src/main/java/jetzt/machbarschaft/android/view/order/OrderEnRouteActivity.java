@@ -1,22 +1,26 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
 
+import jetzt.machbarschaft.android.BuildConfig;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
@@ -88,6 +92,20 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
             startActivity(new Intent(this, OrderDoneActivity.class));
             finishAfterTransition();
         });
+
+        Button reportProblem = findViewById(R.id.order_en_route_btn_report);
+        reportProblem.setOnClickListener(v->{
+            new
+                    //AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+
+                    AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background)
+                    .setTitle(R.string.report_problem)
+                    .setMessage(R.string.report_problem_describtion)
+                    .setPositiveButton(R.string.call_again, (dialog, which) -> callUser())
+                    .setNeutralButton(R.string.back_button, (dialog, which) -> Log.d("MainActivity", "do nothing") )
+                    .setNegativeButton(R.string.report_problem, (dialog, which) -> writeFeedback())
+                    .show();
+        });
     }
 
     /**
@@ -96,6 +114,21 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
     private void callUser() {
         Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
         startActivity(new Intent(Intent.ACTION_VIEW, callUri));
+    }
+
+    private void writeFeedback(){
+        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
+                "?subject=" + getString(R.string.home_feedback_subject) +
+                "&body=" + getString(R.string.home_feedback_body1) +
+                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
+                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
+                "\nAndroid-Version: " + Build.DISPLAY +
+                "\nDevice: " + Build.DEVICE +
+                "\nManufacturer: " + Build.MANUFACTURER +
+                "\nModel: " + Build.MODEL +
+                "\n\n" + getString(R.string.home_feedback_body2);
+        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
+        startActivity(mailIntent);
     }
 
     /**

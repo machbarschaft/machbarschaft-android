@@ -164,10 +164,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         });
 
         btnReport.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background);
             builder.setMessage(R.string.home_feedback_description);
             builder.setCancelable(false);
-
             builder.setPositiveButton(
                     R.string.home_feedback_write_mail,
                     (dialog, id) -> {
@@ -470,7 +469,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
         }
 
         //BitmapDescriptor descriptor = DrawableUtil.getBitmapDescriptor(this, urgency.getIconRes());
-
         //                        .icon(markerIconMap.get(order.getUrgency()))
         Set<String> oldOrderIds = new HashSet<>(markerMap.keySet());
         for (Order order : orderList) {

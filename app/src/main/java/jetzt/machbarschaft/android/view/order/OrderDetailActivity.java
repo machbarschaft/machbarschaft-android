@@ -24,6 +24,7 @@ import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
+import jetzt.machbarschaft.android.view.home.Home;
 
 /**
  * Displays the Details of an order, after someone accepts it.
@@ -62,6 +63,9 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
 
         // Button click handlers
         btnAccept.setOnClickListener(v -> acceptOrder());
+
+        Button btn_cancel = findViewById(R.id.btn_cancel_button);
+        btn_cancel.setOnClickListener(v -> goBack());
     }
 
     /**
@@ -75,9 +79,9 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         mNameView.setText(mOrder.getClientName());
         mNeedsView.setText(mOrder.getType().getTitle());
         mUrgencyView.setText(mOrder.getUrgency().getTitle());
-        if(mOrder.getUrgency() == Order.Urgency.URGENT){
+        if (mOrder.getUrgency() == Order.Urgency.URGENT) {
             mUrgencyView.setTextColor(Color.RED);
-        }else{
+        } else {
             mUrgencyView.setTextColor(Color.BLUE);
         }
         StringBuilder address = new StringBuilder();
@@ -88,6 +92,12 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         address.append(mOrder.getZipCode());
         mAddressView.setText(address);
     }
+
+    private void goBack() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
 
     private void acceptOrder() {
         if (mOrder == null) {
