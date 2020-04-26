@@ -425,10 +425,9 @@ public class Order extends Collection {
      * The type the order.
      */
     public enum Type {
-        // TODO set real icons
-        GROCERIES("EINKAUFEN", R.drawable.supermarket, R.string.order_title_groceries),
-        MEDICINE("APOTHEKE", R.drawable.search_location, R.string.order_title_medicine),
-        OTHER("SONSTIGES", R.drawable.ic_directions_black_24dp, R.string.order_title_other);
+        GROCERIES("EINKAUFEN", R.drawable.ic_type_groceries, R.string.order_title_groceries),
+        MEDICINE("APOTHEKE", R.drawable.ic_type_medicine, R.string.order_title_medicine),
+        OTHER("SONSTIGES", R.drawable.ic_type_other, R.string.order_title_other);
 
         @NonNull
         private final String name;
