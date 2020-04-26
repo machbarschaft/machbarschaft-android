@@ -23,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rd.PageIndicatorView;
 
 import java.util.Objects;
 
@@ -72,6 +73,11 @@ public class OrderEnRouteActivity extends AppCompatActivity implements OnMapRead
         // Set address from order to label
         TextView tfAddress = findViewById(R.id.step_3_address);
         tfAddress.setText(mOrder.getCompleteAddress());
+
+        //Setup Page Indicator to show progress Step 3
+        PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
+        pageIndicatorView.setCount(3); // specify total count of indicators
+        pageIndicatorView.setSelection(2);
 
         // Load map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

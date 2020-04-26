@@ -19,6 +19,13 @@ import jetzt.machbarschaft.android.view.home.Home;
  */
 public class OrderDoneActivity extends AppCompatActivity {
 
+
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

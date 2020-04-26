@@ -44,6 +44,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:piv_animationType="scale"
+            app:piv_dynamicCount="true"
+            android:layout_marginBottom="@dimen/screen_padding"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/background_blue"
+            app:piv_unselectedColor="@android:color/darker_gray" />
+
         <Button
             android:id="@+id/btn_order_execute_now"
             style="@style/AppTheme.Button"
