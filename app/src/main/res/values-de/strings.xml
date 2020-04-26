@@ -85,7 +85,7 @@
     <string name="order_detail_accept_order">Auftrag annehmen</string>
 
     <string name="order_accept_title">Schritt #1</string>
-    <string name="order_accept_text">Bitte beschprich Dich mit %1$s.</string>
+    <string name="order_accept_text">Bitte ruf %1$s an, um die Details des Auftrags zu besprechen.</string>
     <string name="call_now">Jetzt anrufen</string>
 
     <string name="order_carry_out_title">Schritt #2</string>

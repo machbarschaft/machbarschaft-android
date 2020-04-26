@@ -79,7 +79,7 @@
             android:text="Problem melden" />
 
         <com.rd.PageIndicatorView
-            android:id="@+id/pageIndicatorView"
+            android:id="@+id/page_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_padding"

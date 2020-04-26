@@ -5,10 +5,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +18,6 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
-import jetzt.machbarschaft.android.view.login.LoginMain;
 
 public class OrderCarryOutActivity extends AppCompatActivity {
     private Order mOrder;
@@ -61,7 +58,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         //Setup Page Indicator to show progress
-        PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
+        PageIndicatorView pageIndicatorView = findViewById(R.id.page_indicator);
         pageIndicatorView.setCount(3); // specify total count of indicators
         pageIndicatorView.setSelection(1);
 

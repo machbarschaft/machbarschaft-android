@@ -83,7 +83,7 @@
     <string name="order_detail_accept_order">Accept order</string>
 
     <string name="order_accept_title">Step #1</string>
-    <string name="order_accept_text">Please discuss the details with %1$s.</string>
+    <string name="order_accept_text">Please call %1$s to discuss the details of the order.</string>
     <string name="call_now">Call now</string>
 
     <string name="order_carry_out_title">Step #2</string>

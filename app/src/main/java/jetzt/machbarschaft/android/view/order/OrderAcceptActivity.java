@@ -13,8 +13,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.rd.PageIndicatorView;
-
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
@@ -38,14 +36,14 @@ public class OrderAcceptActivity extends AppCompatActivity {
         // Get UI elements
         Button btnCall = findViewById(R.id.btn_call);
 
-        ImageView imageView = findViewById(R.id.order_accept_iV_step1);
+        ImageView imageView = findViewById(R.id.order_accept_image);
         imageView.setClipToOutline(true);
 
         TextView descriptionView = findViewById(R.id.order_accept_text);
         descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));
 
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarAcceptOrder);
+        Toolbar toolbar = findViewById(R.id.order_accept_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -61,11 +59,6 @@ public class OrderAcceptActivity extends AppCompatActivity {
             callUser();
             finishAfterTransition();
         });
-
-        //Setup Page Indicator to show progress
-        PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
-        pageIndicatorView.setCount(3); // specify total count of indicators
-        pageIndicatorView.setSelection(0);
     }
 
     /**

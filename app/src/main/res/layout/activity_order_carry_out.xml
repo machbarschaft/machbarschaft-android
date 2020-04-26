@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.rd.PageIndicatorView
-            android:id="@+id/pageIndicatorView"
+            android:id="@+id/page_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"

@@ -75,7 +75,7 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
         }
 
         //Setup Page Indicator to show progress Step 3
-        PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
+        PageIndicatorView pageIndicatorView = findViewById(R.id.page_indicator);
         pageIndicatorView.setCount(3); // specify total count of indicators
         pageIndicatorView.setSelection(2);
 

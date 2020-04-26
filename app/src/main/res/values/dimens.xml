@@ -23,4 +23,6 @@
     <dimen name="text_size_medium">16sp</dimen>
 
     <dimen name="space_between_content_areas">8dp</dimen>
+
+    <dimen name="order_accept_content_size">300dp</dimen>
 </resources>
