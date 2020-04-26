@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_blue">
+    android:background="@color/background_pink">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/intro_slides_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/background_blue_darker"
         app:layout_constraintBottom_toTopOf="@id/login_form"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +29,6 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_blue"
         android:elevation="8dp"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/screen_padding"
@@ -94,8 +92,7 @@
                 style="@style/AppTheme.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:text="@string/login_action_login"
-                android:textColor="@color/button_text_primary_blue" />
+                android:text="@string/login_action_login" />
         </LinearLayout>
 
     </LinearLayout>
