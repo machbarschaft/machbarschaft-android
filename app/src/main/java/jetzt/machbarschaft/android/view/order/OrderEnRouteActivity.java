@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
-import com.rd.PageIndicatorView;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
@@ -46,7 +45,7 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP3_EnRoute);
 
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarRouteOrder);
+        Toolbar toolbar = findViewById(R.id.toolbar_order_route);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -73,11 +72,6 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
         }else{
             tfUrgency.setTextColor(Color.BLUE);
         }
-
-        //Setup Page Indicator to show progress Step 3
-        PageIndicatorView pageIndicatorView = findViewById(R.id.page_indicator);
-        pageIndicatorView.setCount(3); // specify total count of indicators
-        pageIndicatorView.setSelection(2);
 
         // Button click handlers
         Button btnNavigate = findViewById(R.id.btn_navigate);

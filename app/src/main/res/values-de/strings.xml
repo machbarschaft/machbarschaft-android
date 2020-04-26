@@ -120,6 +120,7 @@
     <string name="show_map">Route anzeigen</string>
     <string name="needed_items">Benötigte Waren</string>
     <string name="step_3_title">Schritt #3</string>
+    <string name="step_3_text">Bitte bestätige nach Übergabe des Einkaufs, dass du den Auftrag erledigt hast.</string>
     <string name="medical_warnings_title">Medizinische Hinweise</string>
     <string name="medical_warnings_subtitle">Bitte bestätige folgende Sicherheitsvorkehrungen</string>
     <string name="medical_warnings_checkbox_1">Du wurdest nicht positiv auf COVID-19 getestet</string>
@@ -129,5 +130,6 @@
     <string name="button_next">Weiter</string>
     <string name="urgency_title">Status: </string>
     <string name="button_accept_order">Auftrag annehmen</string>
+    <string name="btn_report_problem">Problem melden</string>
 
 </resources>

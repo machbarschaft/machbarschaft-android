@@ -119,6 +119,7 @@
     <string name="needed_items">Needed goods</string>
     <string name="button_accept_order">Accept order</string>
     <string name="step_3_title">Step #3</string>
+    <string name="step_3_text">After handing over the goods, please confirm that the order is completed.</string>
 
     <!-- Medical Warnings -->
     <string name="medical_warnings_title">Medical warnings</string>
@@ -128,4 +129,5 @@
     <string name="medical_warnings_checkbox_3">You currently have no flu-like symptoms such as fever, shortness of breath or cough</string>
     <string name="medical_warnings_checkbox_4">You have had no contact with positively tested persons or suspected cases in the last 3 weeks</string>
     <string name="button_next">Next</string>
+    <string name="btn_report_problem">Report problem</string>
 </resources>
