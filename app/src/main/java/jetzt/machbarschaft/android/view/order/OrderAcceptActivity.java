@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -35,9 +34,6 @@ public class OrderAcceptActivity extends AppCompatActivity {
 
         // Get UI elements
         Button btnCall = findViewById(R.id.btn_call);
-
-        ImageView imageView = findViewById(R.id.order_accept_image);
-        imageView.setClipToOutline(true);
 
         TextView descriptionView = findViewById(R.id.order_accept_text);
         descriptionView.setText(getString(R.string.order_accept_text, mOrder == null ? "???" : mOrder.getClientName()));

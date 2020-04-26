@@ -24,5 +24,7 @@
 
     <dimen name="space_between_content_areas">8dp</dimen>
 
-    <dimen name="order_accept_content_size">300dp</dimen>
+    <dimen name="order_content_size">300dp</dimen>
+    <dimen name="order_title_text_margin">16dp</dimen>
+    <dimen name="order_page_indicator_margin">16dp</dimen>
 </resources>

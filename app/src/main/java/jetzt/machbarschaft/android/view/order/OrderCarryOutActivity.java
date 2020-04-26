@@ -6,13 +6,10 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.rd.PageIndicatorView;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
@@ -32,21 +29,17 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_carry_out);
 
-        ImageView imageView = findViewById(R.id.step_2_graphic);
-        imageView.setClipToOutline(true);
-
         // Get UI elements
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
         Button btnStartLater = findViewById(R.id.btn_order_execute_later);
         Button btnStartFailed = findViewById(R.id.btn_order_execute_failed);
-
 
         // Load active order from Database
         loadOrder();
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP2_CarryOut);
 
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarCarryOutOrder);
+        Toolbar toolbar = findViewById(R.id.toolbar_order_carry_out);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -56,11 +49,6 @@ public class OrderCarryOutActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderAcceptActivity.class)));
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-        //Setup Page Indicator to show progress
-        PageIndicatorView pageIndicatorView = findViewById(R.id.page_indicator);
-        pageIndicatorView.setCount(3); // specify total count of indicators
-        pageIndicatorView.setSelection(1);
 
         // Button click handlers
         btnStartNow.setOnClickListener(v -> {

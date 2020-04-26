@@ -112,7 +112,7 @@
     <string name="order_first_accept_btn">Accept</string>
     <string name="medical_warnings_not_checked">You need to confirm all warnings!</string>
     <string name="button_cancel">Cancel</string>
-    <string name="button_report_problem">report problem</string>
+    <string name="button_report_problem">Report problem</string>
     <string name="urgency_title">State: </string>
     <string name="client_title">Client</string>
     <string name="show_map">Show route</string>

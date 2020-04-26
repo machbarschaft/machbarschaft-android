@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/order_accept_title"
-        android:layout_width="@dimen/order_accept_content_size"
+        android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/order_accept_title"
@@ -31,9 +31,9 @@
 
     <TextView
         android:id="@+id/order_accept_text"
-        android:layout_width="@dimen/order_accept_content_size"
+        android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/order_title_text_margin"
         android:gravity="center_horizontal"
         android:textAppearance="@style/AppTextAppearance"
         android:text="@string/order_accept_text"
@@ -74,7 +74,7 @@
     <Button
         android:id="@+id/btn_call"
         style="@style/AppTheme.Button"
-        android:layout_width="@dimen/order_accept_content_size"
+        android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
         android:text="@string/call_now"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,9 +84,9 @@
     <Button
         android:id="@+id/order_accept_button_cancel"
         style="@style/AppTheme.Button.Outlined"
-        android:layout_width="@dimen/order_accept_content_size"
+        android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/order_page_indicator_margin"
         android:text="@string/button_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
