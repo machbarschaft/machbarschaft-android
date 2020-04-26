@@ -72,7 +72,7 @@ public class Order extends Collection {
     public Order(DocumentSnapshot document) {
         id = document.getId();
         // TODO get type form document
-        type = Type.byName(document.getString("type_of_help"));
+        type = Type.byName(document.getString("type"));
         status = Status.byName(document.getString("status"));
         urgency = Urgency.byName(document.getString("urgency"));
         clientName = document.getString("name");

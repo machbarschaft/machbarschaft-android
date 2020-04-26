@@ -331,13 +331,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             if (myLocation != null) {
                 double distance1 = myLocation.distanceTo(location1);
                 double distance2 = myLocation.distanceTo(location2);
-                Log.i("", "compare: " + distance1 + distance2);
                 if (distance1 == distance2)
                     return 0;
                 return distance1 < distance2 ? -1 : 1;
             }
             return 0; //doesn't compare in case we can't get our own position
         });
+        orderAdapter.notifyDataSetChanged();
     }
 
     public void sortByLocation(Location location1, Location location2, Location myLocation) {
@@ -366,6 +366,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             }
             return o1.getUrgency().compareTo(o2.getUrgency());
         });
+        orderAdapter.notifyDataSetChanged();
     }
 
     /**
