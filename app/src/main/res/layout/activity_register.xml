@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="10dp"
-
+                    android:paddingStart="10dp"
                     android:layout_weight="0">
                     <AutoCompleteTextView
                         android:id="@+id/filled_exposed_dropdown_country_Code_Register"

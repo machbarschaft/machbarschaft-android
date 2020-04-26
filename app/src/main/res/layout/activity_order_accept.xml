@@ -76,7 +76,7 @@
             android:id="@+id/order_accept_button_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Abbrechen" />
+            android:text="@string/button_cancel" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

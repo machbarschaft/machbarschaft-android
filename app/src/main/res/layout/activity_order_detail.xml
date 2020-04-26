@@ -36,7 +36,7 @@
                 android:textAppearance="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status: " />
+                android:text="@string/urgency_title" />
 
             <TextView
                 android:id="@+id/order_detail_urgency"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:text="Auftraggeber: "
+            android:text="@string/client_title"
             android:textAppearance="@style/AppTextAppearance.Subheading" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:id="@+id/textButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ROUTE ANZEIGEN"
+            android:text="@string/show_map"
             style="@style/AppTheme.Button.Text"
             />
     </LinearLayout>
@@ -95,7 +95,7 @@
             style="@style/AppTextAppearance.Subheading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Benötigte Waren:" />
+            android:text="@string/needed_items" />
 
         <TextView
             style="@style/AppTextAppearance"
@@ -113,7 +113,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
-            android:text="AUFTRAG ANNEHMEN"
+            android:text="@string/button_accept_order"
             />
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_marginStart="@dimen/screen_padding"
             android:layout_marginEnd="@dimen/screen_padding"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:text="ABBRECHEN"
+            android:text="@string/button_cancel"
             />
     </LinearLayout>
 

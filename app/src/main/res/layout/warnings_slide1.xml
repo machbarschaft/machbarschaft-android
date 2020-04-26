@@ -27,13 +27,13 @@
                 style="@style/AppTextAppearance.Heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medizinische Hinweise" />
+                android:text="@string/medical_warnings_title" />
 
             <TextView
                 style="@style/AppTextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bitte bestätige folgende Sicherheitsvorkehrungen" />
+                android:text="@string/medical_warnings_subtitle" />
         </LinearLayout>
 
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="checkBox4"
-            android:text="Du wurdest nicht positiv auf COVID-19 getestet" />
+            android:text="@string/medical_warnings_checkbox_1" />
 
 
         <CheckBox
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="checkBox3"
-            android:text="Du warst positiv auf COVID-19 getestet, bist aber medizinisch nachweisbar nicht mehr infektiös" />
+            android:text="@string/medical_warnings_checkox_2" />
 
 
         <CheckBox
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="checkBox2"
-            android:text="Du hast derzeit keine grippalen Beschwerden wie Fieber, Atemnot oder Husten" />
+            android:text="@string/medical_warnings_checkbox_3" />
 
 
         <CheckBox
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="checkBox1"
-            android:text="Du hattest in den letzten 3 Wochen keinen Kontakt zu positiv getesteten Personen oder Verdachtsfällen" />
+            android:text="@string/medical_warnings_checkbox_4" />
 
         <Button
             android:id="@+id/warnings_slide1_button_next"
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="warningsNextPress"
-            android:text="Weiter" />
+            android:text="@string/button_next" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
