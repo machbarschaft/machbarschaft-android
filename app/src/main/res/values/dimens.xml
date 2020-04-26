@@ -12,6 +12,9 @@
     <dimen name="text_size_subheading">16sp</dimen>
     <dimen name="text_size_default">12sp</dimen>
 
+    <dimen name="order_list_item_height">64dp</dimen>
+    <dimen name="home_controls_elevation">4dp</dimen>
+
     <dimen name="text_size_list_item">@dimen/text_size_default</dimen>
     <dimen name="text_size_list_item_small">@dimen/text_size_default</dimen>
 

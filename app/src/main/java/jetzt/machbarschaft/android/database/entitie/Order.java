@@ -1,8 +1,13 @@
 package jetzt.machbarschaft.android.database.entitie;
 
+import android.content.Context;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,7 +31,7 @@ public class Order extends Collection {
      */
     private int listId;
     @NonNull
-    private Type type_of_help;
+    private Type type;
     private Status status;
     @NonNull
     private Urgency urgency;
@@ -42,7 +47,7 @@ public class Order extends Collection {
     private double longitude;
 
     public Order() {
-        type_of_help = Type.OTHER;
+        type = Type.OTHER;
         urgency = Urgency.UNDEFINED;
     }
 
@@ -50,7 +55,7 @@ public class Order extends Collection {
                  String houseNumber, String zipCode, String city, Status status, @NonNull Urgency urgency,
                  boolean getPrescription, boolean carNecessary, double latitude, double longitude) {
         this.id = id;
-        this.type_of_help = type;
+        this.type = type;
         this.phoneNumber = phoneNumber;
         this.zipCode = zipCode;
         this.street = street;
@@ -67,7 +72,7 @@ public class Order extends Collection {
     public Order(DocumentSnapshot document) {
         id = document.getId();
         // TODO get type form document
-        type_of_help = Type.byName(document.getString("type_of_help"));
+        type = Type.byName(document.getString("type_of_help"));
         status = Status.byName(document.getString("status"));
         urgency = Urgency.byName(document.getString("urgency"));
         clientName = document.getString("name");
@@ -148,17 +153,17 @@ public class Order extends Collection {
      * @return The type of the order.
      */
     @NonNull
-    public Type getType_of_help() {
-        return type_of_help;
+    public Type getType() {
+        return type;
     }
 
     /**
      * Sets the type of the order.
      *
-     * @param type_of_help The new type of the order.
+     * @param type The new type of the order.
      */
-    public void setType_of_help(@NonNull Type type_of_help) {
-        this.type_of_help = type_of_help;
+    public void setType(@NonNull Type type) {
+        this.type = type;
     }
 
     /**
@@ -389,6 +394,15 @@ public class Order extends Collection {
     }
 
     /**
+     * Gets the short version of the address of the client.
+     *
+     * @return The street name and house number of the client.
+     */
+    public String getShortAddress() {
+        return street + " " + houseNumber;
+    }
+
+    /**
      * Gets the location of the client.
      *
      * @return The location of the client.
@@ -420,17 +434,20 @@ public class Order extends Collection {
      * The type the order.
      */
     public enum Type {
-        GROCERIES("EINKAUFEN", R.string.order_title_groceries),
-        MEDICINE("APOTHEKE", R.string.order_title_medicine),
-        OTHER("SONSTIGES", R.string.order_title_other);
+        GROCERIES("EINKAUFEN", R.drawable.ic_type_groceries, R.string.order_title_groceries),
+        MEDICINE("APOTHEKE", R.drawable.ic_type_medicine, R.string.order_title_medicine),
+        OTHER("SONSTIGES", R.drawable.ic_type_other, R.string.order_title_other);
 
         @NonNull
         private final String name;
+        @DrawableRes
+        private final int icon;
         @StringRes
         private final int title;
 
-        Type(@NonNull String name, @StringRes int title) {
+        Type(@NonNull String name, @DrawableRes int icon, @StringRes int title) {
             this.name = name;
+            this.icon = icon;
             this.title = title;
         }
 
@@ -458,6 +475,16 @@ public class Order extends Collection {
         @NonNull
         public String getName() {
             return name;
+        }
+
+        /**
+         * Gets the icon that describes the order type.
+         *
+         * @return The resource id of the icon.
+         */
+        @DrawableRes
+        public int getIcon() {
+            return icon;
         }
 
         /**
@@ -518,10 +545,10 @@ public class Order extends Collection {
      * The urgency defines how fast the order should be processed.
      */
     public enum Urgency {
-        URGENT("ASAP", R.drawable.ic_order_urgent, R.string.order_urgency_urgent),
-        TODAY("TODAY", R.drawable.ic_order_today, R.string.order_urgency_today),
-        TOMORROW("TOMORROW", R.drawable.ic_order_tomorrow, R.string.order_urgency_tomorrow),
-        UNDEFINED("UNDEFINED", R.drawable.ic_order_undefined, R.string.order_urgency_undefined);
+        URGENT("ASAP", R.drawable.ic_order_urgent, R.color.urgency_urgent, R.string.order_urgency_urgent),
+        TODAY("TODAY", R.drawable.ic_order_today, R.color.urgency_urgent, R.string.order_urgency_today),
+        TOMORROW("TOMORROW", R.drawable.ic_order_tomorrow, R.color.urgency_normal, R.string.order_urgency_tomorrow),
+        UNDEFINED("UNDEFINED", R.drawable.ic_order_undefined, R.color.urgency_normal, R.string.order_urgency_undefined);
 
         @NonNull
         private final String name;
@@ -529,11 +556,14 @@ public class Order extends Collection {
         private final int icon;
         @StringRes
         private final int title;
+        @ColorRes
+        private final int color;
 
-        Urgency(@NonNull String name, @DrawableRes int icon, @StringRes int title) {
+        Urgency(@NonNull String name, @DrawableRes int icon, @ColorRes int color, @StringRes int title) {
             this.name = name;
             this.icon = icon;
             this.title = title;
+            this.color = color;
         }
 
         /**
@@ -580,6 +610,27 @@ public class Order extends Collection {
         @StringRes
         public int getTitle() {
             return title;
+        }
+
+        /**
+         * Gets the resource id of the color to use with this urgency.
+         *
+         * @return The resource id of the color.
+         */
+        @ColorRes
+        public int getColor() {
+            return color;
+        }
+
+        /**
+         * Gets the color value to use with this urgency.
+         *
+         * @param context The context to get the color value in.
+         * @return The color value.
+         */
+        @ColorInt
+        public int getColor(Context context) {
+            return ContextCompat.getColor(context, color);
         }
     }
 }

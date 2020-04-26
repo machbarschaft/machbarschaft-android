@@ -56,9 +56,9 @@
 
     <string name="home_button_urgency">Dringlichkeit</string>
     <string name="home_button_radius">In deiner Nähe</string>
-    <string name="home_link_faq"><u>FAQ</u></string>
-    <string name="home_link_contact"><u>Kontakt</u></string>
-    <string name="home_link_bug_report"><u>Problem melden</u></string>
+    <string name="home_link_faq">FAQ</string>
+    <string name="home_link_contact">Kontakt</string>
+    <string name="home_link_bug_report">Problem melden</string>
     <string name="home_faq_description">Wir arbeiten an einer Lösung, damit du unsere FAQ\'s hier bald sehen kannst.</string>
     <string name="home_feedback_description">Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.</string>
     <string name="home_feedback_write_mail">Email schreiben</string>
@@ -67,6 +67,12 @@
     <string name="home_feedback_body1">Liebes Machbarschaft-Team,\n\nbei der Android App ist mir ein Problem aufgefallen. Die Technischen Informationen sind wie folgt:</string>
     <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">Mein Problem ist ...</string>
     <string name="home_dialog_understood">Verstanden</string>
+    <string name="home_tab_distance">Distanz</string>
+    <string name="home_tab_urgency">Dringlichkeit</string>
+    <plurals name="home_order_count">
+        <item quantity="one">%1$d aktueller Auftrag in deiner Nähe</item>
+        <item quantity="other">%1$d aktuelle Aufträge in deiner Nähe</item>
+    </plurals>
 
     <string name="home_order_distance_km">%1$.1f km</string>
     <string name="home_order_extra_prescription">Rezept abhohlen</string>
