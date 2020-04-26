@@ -113,11 +113,11 @@
     <string name="medical_warnings_not_checked">You need to confirm all warnings!</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_report_problem">report problem</string>
-    <string name="urgency_title">State:</string>
-    <string name="client_title">Client:</string>
-    <string name="show_map">SHOW IN MAPS</string>
-    <string name="needed_items">Needed Goods:</string>
-    <string name="button_accept_order">ACCEPT OFFER</string>
+    <string name="urgency_title">State: </string>
+    <string name="client_title">Client</string>
+    <string name="show_map">Show route</string>
+    <string name="needed_items">Needed goods</string>
+    <string name="button_accept_order">Accept order</string>
     <string name="step_3_title">Step #3</string>
 
     <!-- Medical Warnings -->

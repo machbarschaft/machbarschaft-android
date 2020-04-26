@@ -116,9 +116,9 @@
     <string name="medical_warnings_not_checked">Du musst alle Hinweise bestätigen!</string>
     <string name="button_cancel">Abbrechen</string>
     <string name="button_report_problem">Problem melden</string>
-    <string name="client_title">Auftraggeber:</string>
-    <string name="show_map">ROUTE ANZEIGEN</string>
-    <string name="needed_items">Benötigte Waren:</string>
+    <string name="client_title">Auftraggeber</string>
+    <string name="show_map">Route anzeigen</string>
+    <string name="needed_items">Benötigte Waren</string>
     <string name="step_3_title">Schritt #3</string>
     <string name="medical_warnings_title">Medizinische Hinweise</string>
     <string name="medical_warnings_subtitle">Bitte bestätige folgende Sicherheitsvorkehrungen</string>
@@ -127,7 +127,7 @@
     <string name="medical_warnings_checkbox_3">Du hast derzeit keine grippalen Beschwerden wie Fieber, Atemnot oder Husten</string>
     <string name="medical_warnings_checkbox_4">Du hattest in den letzten 3 Wochen keinen Kontakt zu positiv getesteten Personen oder Verdachtsfällen</string>
     <string name="button_next">Weiter</string>
-    <string name="urgency_title">Status:</string>
-    <string name="button_accept_order">AUFTRAG ANNEHMEN</string>
+    <string name="urgency_title">Status: </string>
+    <string name="button_accept_order">Auftrag annehmen</string>
 
 </resources>
