@@ -9,12 +9,12 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.database.Authentication;
 import jetzt.machbarschaft.android.view.home.Home;
 import jetzt.machbarschaft.android.view.login.LoginMain;
 
@@ -27,9 +27,9 @@ public class Splash extends AppCompatActivity {
     private Handler myHandler = new Handler();
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        FirebaseUser user = Authentication.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             myHandler.postDelayed(this::startLogin, 1200);
         } else {
@@ -43,9 +43,6 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         fixGoogleMapBug();
-        // TESTS
-        // DataAccessTest.getInstance().runTests(this);
-        //TESTS
     }
 
     private void fixGoogleMapBug() {

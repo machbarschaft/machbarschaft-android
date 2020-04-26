@@ -1,7 +1,5 @@
 package jetzt.machbarschaft.android.view.login;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -9,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -26,10 +23,10 @@ import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
  * Also can redirect to the register Page.
  */
 public class LoginMain extends AppCompatActivity {
+    public static final String EXTRA_PHONE_NUMBER = "phoneNumber";
+
     private EditText phoneNumberTextView;
     private Button loginButton;
-    private Context context;
-    private ProgressDialog progressDialog;
     private AutoCompleteTextView countryCodeTextView;
 
     @Override
@@ -42,7 +39,6 @@ public class LoginMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
-        context = getApplicationContext();
 
         // Sets the Custom Pager Adapter to display the different slides in the application
         ViewPager introSlidesPager = findViewById(R.id.intro_slides_pager);
@@ -55,67 +51,69 @@ public class LoginMain extends AppCompatActivity {
         phoneNumberTextView = findViewById(R.id.input_phone_number);
         loginButton = findViewById(R.id.btn_login);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage(getString(R.string.login_in_progress));
-
         // Button click handlers
         loginButton.setOnClickListener(v -> login());
 
-        String[] countryCodes = getResources().getStringArray(R.array.countryCode_spinner_array);
+        String[] countryCodes = getResources().getStringArray(R.array.country_codes);
         ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, countryCodes);
         countryCodeTextView =
                 findViewById(android.R.id.content)
                         .findViewById(R.id.filled_exposed_dropdown_country_Code_login);
         countryCodeTextView.setText(countryCodes[0], false);
         countryCodeTextView.setAdapter(countryCodeAdapter);
+
+        // Fill in phone number if given
+        final String phoneNumber = getIntent().getStringExtra(EXTRA_PHONE_NUMBER);
+        if (phoneNumber != null) {
+            for (String countryCode : countryCodes) {
+                if (!phoneNumber.startsWith(countryCode)) {
+                    continue;
+                }
+
+                final String phoneNumberSecondPart = phoneNumber.substring(countryCode.length());
+
+                // Set data in views
+                countryCodeTextView.setText(countryCode);
+                phoneNumberTextView.setText(phoneNumberSecondPart);
+
+                break;
+            }
+        }
     }
 
     public void login() {
-        if (!validate()) {
-            onLoginFailed();
+        final String phoneNumber = PhoneNumberFormatterUtil.getPhoneNumber(
+                countryCodeTextView.getText().toString(), phoneNumberTextView.getText().toString());
+
+        if (!validate(phoneNumber)) {
+            loginButton.setEnabled(true);
             return;
         }
 
         loginButton.setEnabled(false);
-        progressDialog.show();
 
-        String phoneNumber = PhoneNumberFormatterUtil.getPhoneNumber(
-                countryCodeTextView.getText().toString(), phoneNumberTextView.getText().toString());
         startActivity(new Intent(this, VerifyPhoneActivity.class)
                 .putExtra(VerifyPhoneActivity.EXTRA_PHONE_NUMBER, phoneNumber));
+        finishAfterTransition();
     }
 
     /**
      * Checks if the Phone Number is actually valid.
      *
+     * @param phoneNumber The phone number to validate.
      * @return True if phone number is legit.
      */
-    public boolean validate() {
-        boolean valid = true;
+    public boolean validate(String phoneNumber) {
+        boolean valid = false;
 
-        String phoneNumberStr = phoneNumberTextView.getText().toString();
 
-        if (phoneNumberStr.isEmpty() || !Patterns.PHONE.matcher(phoneNumberStr).matches()) {
-            phoneNumberTextView.setError(getString(R.string.login_error_invalid_phone_number));
-            valid = false;
-        } else {
+        if (phoneNumber != null && Patterns.PHONE.matcher(phoneNumber).matches()) {
             phoneNumberTextView.setError(null);
+            valid = true;
+        } else {
+            phoneNumberTextView.setError(getString(R.string.login_error_invalid_phone_number));
         }
 
         return valid;
-    }
-
-    private void onErrorWhileLoading() {
-        loginButton.setEnabled(true);
-        progressDialog.dismiss();
-    }
-
-    /**
-     * Handles the case when the Login didn't work.
-     * Right now we show a small Toast which will show that the Login wasn't successfully.
-     */
-    private void onLoginFailed() {
-        Toast.makeText(getApplicationContext(), R.string.login_error_generic, Toast.LENGTH_SHORT).show();
     }
 }

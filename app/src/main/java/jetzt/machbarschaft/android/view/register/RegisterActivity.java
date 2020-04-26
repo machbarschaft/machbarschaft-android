@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText phoneSecondPart = findViewById(R.id.register_tf_phone2);
 
         //Setup Spinner Menu
-        String[] countryCodes = getResources().getStringArray(R.array.countryCode_spinner_array);
+        String[] countryCodes = getResources().getStringArray(R.array.country_codes);
         ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, countryCodes);
         AutoCompleteTextView countryCodeTextView = findViewById(android.R.id.content)
                 .findViewById(R.id.filled_exposed_dropdown_country_Code_Register);

@@ -15,8 +15,8 @@
     <string name="verify_phone_wait_for_code">Enter confirmation code</string>
     <string name="verify_phone_code_hint">Confirmation code per sms</string>
     <string name="verify_phone_title">Confirm phone number</string>
-    <string name="verify_phone_btn_send_code"><u>Resend code</u></string>
-    <string name="verify_phone_button">Continue</string>
+    <string name="verify_phone_btn_send_code">Resend code</string>
+    <string name="verify_phone_button">Verify</string>
     <string name="verify_phone_error_invalid_code">Invalid code</string>
     <string name="verify_address_dialog_message">We are working on this feature.</string>
     <string name="verify_address_dialog_understood">Understood</string>

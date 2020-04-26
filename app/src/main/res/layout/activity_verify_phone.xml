@@ -10,25 +10,17 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/verify_phone_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/status_bar_height"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="#FFFFFF" />
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_sign_in"
         style="@style/AppTheme.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:layout_marginStart="@dimen/screen_padding"
         android:layout_marginEnd="@dimen/screen_padding"
-        android:padding="12dp"
         android:text="@string/verify_phone_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,17 +57,13 @@
 
             <Button
                 android:id="@+id/verify_phone_btn_send_code"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/AppTheme.Button.Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/screen_padding"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="@android:color/transparent"
-                android:fontFamily="@font/lato"
                 android:text="@string/verify_phone_btn_send_code"
-                android:textColor="#e4f1f7"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verificationTfCode1" />
 
             <EditText

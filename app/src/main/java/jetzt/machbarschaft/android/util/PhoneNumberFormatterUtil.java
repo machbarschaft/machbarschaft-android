@@ -16,6 +16,8 @@ public class PhoneNumberFormatterUtil {
      * @return phone Number
      */
     public static String getPhoneNumber(String countryCode, String secondPartNumber) {
-        return countryCode + secondPartNumber.replaceAll("^0+", "").replaceAll("\\s+", "");
+        countryCode = countryCode.trim();
+        secondPartNumber = secondPartNumber.trim();
+        return countryCode + secondPartNumber.replaceAll("^0+", "");
     }
 }
