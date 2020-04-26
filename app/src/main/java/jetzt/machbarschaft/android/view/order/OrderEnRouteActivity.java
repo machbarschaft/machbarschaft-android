@@ -114,7 +114,7 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
 
         @SuppressLint("DefaultLocale")
         Uri locationUri = Uri.parse(String.format("geo:%f,%f?q=%s",
-                mOrder.getLatitude(), mOrder.getLongitude(), mOrder.getClientName()));
+                mOrder.getLatitude(), mOrder.getLongitude(), mOrder.getCompleteAddress()));
         startActivity(new Intent(Intent.ACTION_VIEW, locationUri));
     }
 
