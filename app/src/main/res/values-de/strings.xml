@@ -85,14 +85,14 @@
     <string name="order_detail_accept_order">Auftrag annehmen</string>
 
     <string name="order_accept_title">Schritt #1</string>
-    <string name="order_accept_text">Bitte beschprich Dich mit %1$s.</string>
+    <string name="order_accept_text">Bitte ruf %1$s an, um die Details des Auftrags zu besprechen.</string>
     <string name="call_now">Jetzt anrufen</string>
 
     <string name="order_carry_out_title">Schritt #2</string>
     <string name="order_carry_out_text">Sag uns bescheid, wenn Du unterwegs bist.</string>
     <string name="start_to_execute_now">Ich gehe jetzt los</string>
-    <string name="start_to_execute_later"><u>Ich gehe später los</u></string>
-    <string name="start_to_execute_failed"><u>Ich konnte niemanden erreichen</u></string>
+    <string name="start_to_execute_later">Ich gehe später los</string>
+    <string name="start_to_execute_failed">Ich konnte niemanden erreichen</string>
 
     <string name="order_en_route_title">Schritt #3</string>
     <string name="order_en_route_text">Auftrag erledigen</string>
@@ -116,10 +116,11 @@
     <string name="medical_warnings_not_checked">Du musst alle Hinweise bestätigen!</string>
     <string name="button_cancel">Abbrechen</string>
     <string name="button_report_problem">Problem melden</string>
-    <string name="client_title">Auftraggeber:</string>
-    <string name="show_map">ROUTE ANZEIGEN</string>
-    <string name="needed_items">Benötigte Waren:</string>
+    <string name="client_title">Auftraggeber</string>
+    <string name="show_map">Route anzeigen</string>
+    <string name="needed_items">Benötigte Waren</string>
     <string name="step_3_title">Schritt #3</string>
+    <string name="step_3_text">Bitte bestätige nach Übergabe des Einkaufs, dass du den Auftrag erledigt hast.</string>
     <string name="medical_warnings_title">Medizinische Hinweise</string>
     <string name="medical_warnings_subtitle">Bitte bestätige folgende Sicherheitsvorkehrungen</string>
     <string name="medical_warnings_checkbox_1">Du wurdest nicht positiv auf COVID-19 getestet</string>
@@ -127,9 +128,8 @@
     <string name="medical_warnings_checkbox_3">Du hast derzeit keine grippalen Beschwerden wie Fieber, Atemnot oder Husten</string>
     <string name="medical_warnings_checkbox_4">Du hattest in den letzten 3 Wochen keinen Kontakt zu positiv getesteten Personen oder Verdachtsfällen</string>
     <string name="button_next">Weiter</string>
-    <string name="urgency_title">Status:</string>
-    <string name="button_accept_order">AUFTRAG ANNEHMEN</string>
-    <string name="please_confirm">Bitte bestätige nach Übergabe des Einkaufs,\n dass du den Auftrag erledigt hast.</string>
-    <string name="show_maps">ROUTE ANZEIGEN</string>
+    <string name="urgency_title">Status: </string>
+    <string name="button_accept_order">Auftrag annehmen</string>
+    <string name="btn_report_problem">Problem melden</string>
 
 </resources>

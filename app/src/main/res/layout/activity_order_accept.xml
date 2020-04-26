@@ -4,79 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/background_pink"
     tools:context="jetzt.machbarschaft.android.view.order.OrderAcceptActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarAcceptOrder"
+        android:id="@+id/order_accept_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/text_white" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/order_accept_title"
+        android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/screen_padding"
-        android:padding="10dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:text="@string/order_accept_title"
+        android:textAppearance="@style/AppTextAppearance.Heading"
+        app:layout_constraintTop_toBottomOf="@id/order_accept_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/order_accept_text"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/order_title_text_margin"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/AppTextAppearance"
+        android:text="@string/order_accept_text"
+        app:layout_constraintTop_toBottomOf="@id/order_accept_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/order_accept_image_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/round_outline"
+        app:layout_constraintTop_toBottomOf="@id/order_accept_text"
+        app:layout_constraintBottom_toTopOf="@id/btn_call"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/order_accept_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/graphic_splash_screen"
+        app:layout_constraintTop_toTopOf="@id/order_accept_image_background"
+        app:layout_constraintBottom_toBottomOf="@id/order_accept_image_background"
+        app:layout_constraintStart_toStartOf="@id/order_accept_image_background"
+        app:layout_constraintEnd_toEndOf="@id/order_accept_image_background" />
+
+    <Button
+        android:id="@+id/btn_call"
+        style="@style/AppTheme.Button"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:text="@string/call_now"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/order_accept_button_cancel" />
+
+    <Button
+        android:id="@+id/order_accept_button_cancel"
+        style="@style/AppTheme.Button.Outlined"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/order_page_indicator_margin"
+        android:text="@string/button_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/page_indicator" />
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarAcceptOrder">
-
-        <TextView
-            style="@style/AppTextAppearance.Heading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/order_accept_title" />
-
-        <TextView
-            android:id="@+id/order_accept_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            style="@style/AppTextAppearance"
-            android:gravity="start"
-            android:text="@string/order_accept_text" />
-
-        <ImageView
-            android:id="@+id/order_accept_iV_step1"
-            android:background="@drawable/round_outline"
-            android:layout_width="300dp"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center"
-            android:layout_height="300dp"
-            app:srcCompat="@drawable/graphic_splash_screen" />
-
-        <com.rd.PageIndicatorView
-            android:id="@+id/pageIndicatorView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:piv_animationType="scale"
-            app:piv_dynamicCount="true"
-            android:layout_marginTop="@dimen/screen_padding"
-            app:piv_interactiveAnimation="true"
-            app:piv_selectedColor="@color/background_blue"
-            app:piv_unselectedColor="@android:color/darker_gray"
-            />
-        <Button
-            style="@style/AppTheme.Button"
-            android:id="@+id/btn_call"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/screen_padding"
-            android:text="@string/call_now" />
-
-        <Button
-            style="@style/AppTheme.Button.Outlined"
-            android:id="@+id/order_accept_button_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_cancel" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:piv_animationType="scale"
+        app:piv_interactiveAnimation="true"
+        app:piv_count="3"
+        app:piv_select="0"
+        app:piv_selectedColor="@color/selector_dot_active"
+        app:piv_unselectedColor="@color/selector_dot_inactive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

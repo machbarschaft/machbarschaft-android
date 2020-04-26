@@ -14,7 +14,7 @@
     <color name="urgency_normal">#5476BC</color>
 
     <color name="selector_dot_active">@color/color_accent</color>
-    <color name="selector_dot_inactive">#88FFFFFF</color>
+    <color name="selector_dot_inactive">#A8FFFFFF</color>
 
     <color name="dividers">#1F000000</color>
 
