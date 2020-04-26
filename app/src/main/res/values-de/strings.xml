@@ -91,8 +91,8 @@
     <string name="order_carry_out_title">Schritt #2</string>
     <string name="order_carry_out_text">Sag uns bescheid, wenn Du unterwegs bist.</string>
     <string name="start_to_execute_now">Ich gehe jetzt los</string>
-    <string name="start_to_execute_later"><u>Ich gehe später los</u></string>
-    <string name="start_to_execute_failed"><u>Ich konnte niemanden erreichen</u></string>
+    <string name="start_to_execute_later">Ich gehe später los</string>
+    <string name="start_to_execute_failed">Ich konnte niemanden erreichen</string>
 
     <string name="order_en_route_title">Schritt #3</string>
     <string name="order_en_route_text">Auftrag erledigen</string>
