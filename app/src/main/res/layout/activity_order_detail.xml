@@ -79,7 +79,7 @@
             android:layout_marginBottom="16dp" />
 
         <Button
-            android:id="@+id/btn_navigate"
+            android:id="@+id/btn__order_detail_navigate"
             style="@style/AppTheme.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

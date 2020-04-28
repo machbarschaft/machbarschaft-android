@@ -53,7 +53,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
         // Button click handlers
         btnCall.setOnClickListener(v -> {
             startActivity(new Intent(this, OrderCarryOutActivity.class));
-            ReportProblemUtil.callUser(mOrder);
+            startActivity(ReportProblemUtil.callUser(mOrder));
             finishAfterTransition();
         });
 
