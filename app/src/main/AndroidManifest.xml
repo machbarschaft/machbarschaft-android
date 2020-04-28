@@ -64,7 +64,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.order.OrderDetailActivity" />
         </activity>
-        <activity android:name=".view.register.RegisterActivity" />
         <activity android:name=".view.register.VerifyPhoneActivity" />
         <activity android:name=".view.home.Home" />
         <activity android:name=".view.login.LoginMain" />

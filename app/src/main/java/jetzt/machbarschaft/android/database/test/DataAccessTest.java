@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
-import jetzt.machbarschaft.android.database.Authentication;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.entitie.Account;
@@ -30,7 +28,7 @@ public class DataAccessTest {
     public void runTests(Activity a) {
         Log.i("DataAccessTest", "Tests start:");
 
-        AuthenticationTest.getInstance().runTests(a);
+        //AuthenticationTest.getInstance().runTests(a);
         //createAccount(); //passed
         // login(); // passed
         //getOrders(); // passed
