@@ -135,5 +135,6 @@
     <string name="call_again">Erneut anrufen</string>
     <string name="back_button">Zurück</string>
     <string name="report_problem_describtion">Du kannst den Auftrag abbrechen oder uns ein Problem melden.</string>
+    <string name="image_desc_moving_person">Image of a person moving</string>
 
 </resources>

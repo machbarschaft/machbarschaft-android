@@ -15,7 +15,7 @@
     <!-- Divider / Selector -->
     <color name="dividers">#1F000000</color>
     <color name="selector_dot_active">@color/color_accent</color>
-    <color name="selector_dot_inactive">#A8FFFFFF</color>
+    <color name="selector_dot_inactive">#A83A3838</color>
 
     <!-- Urgency Colors -->
     <color name="urgency_urgent">#D2000D</color>
