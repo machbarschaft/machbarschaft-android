@@ -8,14 +8,15 @@
     tools:context="jetzt.machbarschaft.android.view.order.OrderEnRouteActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_order_route"
+        android:id="@+id/toolbar_order_en_route"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="0dp"
+        app:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextAppearance="@style/AppTextAppearance" />
+         />
 
     <LinearLayout
         android:id="@+id/step_3_top_layout"
@@ -104,7 +105,7 @@
             android:layout_marginBottom="16dp" />
 
         <Button
-            android:id="@+id/btn_navigate"
+            android:id="@+id/btn_navigate_step3"
             style="@style/AppTheme.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

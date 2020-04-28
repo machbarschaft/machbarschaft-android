@@ -75,10 +75,14 @@
         <item name="buttonBarNeutralButtonStyle">@style/PositiveButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/PositiveButtonStyle</item>
     </style>
-
     <style name="PositiveButtonStyle" parent="@style/Widget.MaterialComponents.Button">
         <!-- text color for the button -->
         <item name="android:textColor">@color/background_blue</item>
         <!-- Background tint for the button -->
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/color_accent</item>
     </style>
 </resources>

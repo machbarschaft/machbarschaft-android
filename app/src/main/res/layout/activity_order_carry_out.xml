@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="0dp"
+        app:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_now"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/step_2_text" />
+        app:layout_constraintTop_toBottomOf="@+id/step_2_text"
+        android:contentDescription="@string/image_desc_moving_person" />
 
     <ImageView
         android:id="@+id/step_2_image"
@@ -69,7 +70,8 @@
         app:layout_constraintBottom_toBottomOf="@id/step_2_image_background"
         app:layout_constraintEnd_toEndOf="@id/step_2_image_background"
         app:layout_constraintStart_toStartOf="@id/step_2_image_background"
-        app:layout_constraintTop_toTopOf="@id/step_2_image_background" />
+        app:layout_constraintTop_toTopOf="@id/step_2_image_background"
+        />
 
     <Button
         android:id="@+id/btn_order_execute_now"
@@ -87,12 +89,12 @@
         android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
         android:text="@string/start_to_execute_later"
-        app:layout_constraintBottom_toTopOf="@+id/btn_order_execute_failed"
+        app:layout_constraintBottom_toTopOf="@+id/btn_order_step_2_report_problem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_order_execute_failed"
+        android:id="@+id/btn_order_step_2_report_problem"
         style="@style/AppTheme.Button.Outlined"
         android:layout_width="@dimen/order_content_size"
         android:layout_height="wrap_content"
