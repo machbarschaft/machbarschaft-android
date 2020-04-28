@@ -1,5 +1,6 @@
 package jetzt.machbarschaft.android.view.order;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 import jetzt.machbarschaft.android.util.OrderUtil;
 
 public class FirstOrderActivity extends AppCompatActivity {
@@ -30,13 +32,12 @@ public class FirstOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_first);
-
+        loadOrder();
         // Sets the Custom Pager Adapter to display the different slides in the application
         warningsPager = findViewById(R.id.viewPagerWarnings);
         TabLayout introSlidesIndicator = findViewById(R.id.first_order_slides_indicator);
         warningsPager.setAdapter(new CustomWarningPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(warningsPager, true);
-        loadOrder();
 
 
     }
@@ -67,6 +68,12 @@ public class FirstOrderActivity extends AppCompatActivity {
 
     public void startHome(View view) {
         if(checkBoxBool4 && checkBoxBool3 && checkBoxBool2 && checkBoxBool1) {
+            DataAccess.getInstance().setOrderStatus(mOrder.getId(), Order.Status.CONFIRMED);
+            Storage storage = Storage.getInstance();
+            //storage.setCurrentOrder(mOrder);
+            Storage.setOrderInProgress(getApplicationContext(), mOrder);
+            startOrderNotification();
+            storage.setActiveOrder(getApplicationContext(), true);
             Storage.getInstance().setUserNotifyAccepted(getApplicationContext(), mOrder);
             startActivity(new Intent(this, OrderAcceptActivity.class));
             finishAfterTransition();
@@ -94,5 +101,11 @@ public class FirstOrderActivity extends AppCompatActivity {
 
     public void warningOneBtnCancel(View view) {
         OrderUtil.cancelOrder(mOrder, getApplicationContext());
+    }
+
+
+    private void startOrderNotification() {
+        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 }
