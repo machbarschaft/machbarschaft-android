@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,6 +17,7 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
+import jetzt.machbarschaft.android.util.ReportProblemUtil;
 
 public class OrderCarryOutActivity extends AppCompatActivity {
     private Order mOrder;
@@ -32,7 +35,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         // Get UI elements
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
         Button btnStartLater = findViewById(R.id.btn_order_execute_later);
-        Button btnStartFailed = findViewById(R.id.btn_order_execute_failed);
+        Button btnStartFailed = findViewById(R.id.btn_order_step_2_report_problem);
 
         // Load active order from Database
         loadOrder();
@@ -48,7 +51,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
         }
 
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderAcceptActivity.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        //toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         // Button click handlers
         btnStartNow.setOnClickListener(v -> {
@@ -56,12 +59,22 @@ public class OrderCarryOutActivity extends AppCompatActivity {
             finishAfterTransition();
         });
 
-        btnStartLater.setOnClickListener(v -> {
 
+
+        btnStartLater.setOnClickListener(v -> {
+            startActivity(new Intent(this, OrderEnRouteActivity.class));
+            finishAfterTransition();
         });
 
         btnStartFailed.setOnClickListener(v -> {
-
+            new
+                    AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background)
+                    .setTitle(R.string.report_problem)
+                    .setMessage(R.string.report_problem_describtion)
+                    .setPositiveButton(R.string.call_again, (dialog, which) -> startActivity(ReportProblemUtil.callUser(mOrder)))
+                    .setNeutralButton(R.string.back_button, (dialog, which) -> Log.d("MainActivity", "do nothing") )
+                    .setNegativeButton(R.string.report_problem, (dialog, which) -> startActivity(ReportProblemUtil.getMailIntent()))
+                    .show();
         });
     }
 
@@ -71,13 +84,5 @@ public class OrderCarryOutActivity extends AppCompatActivity {
     private void loadOrder() {
         // mOrder = Storage.getInstance().getCurrentOrder();
         mOrder = Storage.getInstance().getOrderInProgress(getApplicationContext());
-    }
-
-    /**
-     * Open phone app with number from order
-     */
-    private void callUser() {
-        Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
-        startActivity(new Intent(Intent.ACTION_VIEW, callUri));
     }
 }

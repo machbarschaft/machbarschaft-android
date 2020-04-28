@@ -1,15 +1,14 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,14 +19,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
 
-import jetzt.machbarschaft.android.BuildConfig;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
+import jetzt.machbarschaft.android.util.ReportProblemUtil;
 
-public class OrderEnRouteActivity extends AppCompatActivity  {
+public class OrderEnRouteActivity extends AppCompatActivity {
     private static final String LOG_TAG = "OrderEnRouteActivity";
 
     private Order mOrder;
@@ -35,7 +34,7 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-            //do nothing
+        //do nothing
     }
 
 
@@ -49,16 +48,14 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
         Storage.getInstance().setCurrentStep(getApplicationContext(), OrderSteps.STEP3_EnRoute);
 
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar_order_route);
+        Toolbar toolbar = findViewById(R.id.toolbar_order_en_route);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         // Set overview label at the top of the page
         TextView tfOverview = findViewById(R.id.order_en_route_client);
@@ -70,65 +67,52 @@ public class OrderEnRouteActivity extends AppCompatActivity  {
 
         //Set urgency to label
         TextView tfUrgency = findViewById(R.id.step_3_urgency);
-        tfUrgency.setText(mOrder.getUrgency().getTitle());
-        if(mOrder.getUrgency() == Order.Urgency.URGENT){
+        tfUrgency.setText(mOrder.getUrgency().
+
+                getTitle());
+        if (mOrder.getUrgency() == Order.Urgency.URGENT) {
             tfUrgency.setTextColor(Color.RED);
-        }else{
+        } else {
             tfUrgency.setTextColor(Color.BLUE);
         }
 
         // Button click handlers
-        Button btnNavigate = findViewById(R.id.btn_navigate);
-        btnNavigate.setOnClickListener(v -> navigateToAddress());
+        Button btnNavigate = findViewById(R.id.btn_navigate_step3);
+        btnNavigate.setOnClickListener(v ->
+
+                navigateToAddress());
 
         // Set color of icon at "navigation" button
         Drawable icon = getResources().getDrawable(android.R.drawable.ic_menu_directions, getTheme());
-        icon.setColorFilter(getColor(R.color.order_step_2_icon), PorterDuff.Mode.SRC_IN);
+        icon.setColorFilter(
+
+                getColor(R.color.order_step_2_icon), PorterDuff.Mode.SRC_IN);
         btnNavigate.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 
         Button btnDone = findViewById(R.id.btn_done);
-        btnDone.setOnClickListener(v -> {
+        btnDone.setOnClickListener(v ->
+
+        {
             notifyOrderDone();
             startActivity(new Intent(this, OrderDoneActivity.class));
             finishAfterTransition();
         });
 
         Button reportProblem = findViewById(R.id.order_en_route_btn_report);
-        reportProblem.setOnClickListener(v->{
+        reportProblem.setOnClickListener(v ->
+
+        {
             new
                     //AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
 
                     AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background)
                     .setTitle(R.string.report_problem)
                     .setMessage(R.string.report_problem_describtion)
-                    .setPositiveButton(R.string.call_again, (dialog, which) -> callUser())
-                    .setNeutralButton(R.string.back_button, (dialog, which) -> Log.d("MainActivity", "do nothing") )
-                    .setNegativeButton(R.string.report_problem, (dialog, which) -> writeFeedback())
+                    .setPositiveButton(R.string.call_again, (dialog, which) -> startActivity(ReportProblemUtil.callUser(mOrder)))
+                    .setNeutralButton(R.string.back_button, (dialog, which) -> Log.d("MainActivity", "do nothing"))
+                    .setNegativeButton(R.string.report_problem, (dialog, which) -> startActivity(ReportProblemUtil.getMailIntent()))
                     .show();
         });
-    }
-
-    /**
-     * Open phone app with number from order
-     */
-    private void callUser() {
-        Uri callUri = Uri.parse("tel:" + (mOrder == null ? "0000000" : mOrder.getPhoneNumber()));
-        startActivity(new Intent(Intent.ACTION_VIEW, callUri));
-    }
-
-    private void writeFeedback(){
-        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
-                "?subject=" + getString(R.string.home_feedback_subject) +
-                "&body=" + getString(R.string.home_feedback_body1) +
-                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
-                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
-                "\nAndroid-Version: " + Build.DISPLAY +
-                "\nDevice: " + Build.DEVICE +
-                "\nManufacturer: " + Build.MANUFACTURER +
-                "\nModel: " + Build.MODEL +
-                "\n\n" + getString(R.string.home_feedback_body2);
-        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
-        startActivity(mailIntent);
     }
 
     /**

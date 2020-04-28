@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,7 +20,7 @@ import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
-import jetzt.machbarschaft.android.util.FeedbackMailUtil;
+import jetzt.machbarschaft.android.util.ReportProblemUtil;
 import jetzt.machbarschaft.android.view.home.Home;
 
 /**
@@ -54,8 +52,8 @@ public class OrderAcceptActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderDetailActivity.class)));
-        toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        toolbar.setNavigationOnClickListener(v -> cancelOrder());
+        //toolbar.getNavigationIcon().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
 
         // Button click handlers
         btnCall.setOnClickListener(v -> {
@@ -71,7 +69,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
                         .setTitle("Auftrag abbrechen")
                         .setMessage("Willst du wirklich den Auftrag abbrechen?")
                         .setPositiveButton("Ja", (dialog, which) -> cancelOrder())
-                        .setNeutralButton("Fehler melden!", ((dialog, which) -> startActivity(FeedbackMailUtil.getMailIntent())))
+                        .setNeutralButton("Fehler melden!", ((dialog, which) -> startActivity(ReportProblemUtil.getMailIntent())))
                         .setNegativeButton("Nein", (dialog, which) -> Log.wtf("Abbruch", "Cancel"))
                         .show();
 
