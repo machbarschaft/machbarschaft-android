@@ -169,6 +169,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     }
 
     private void onLoginDone() {
+        Toast.makeText(getApplicationContext(), R.string.successfull_auth, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, Home.class));
         finishAfterTransition();
     }
