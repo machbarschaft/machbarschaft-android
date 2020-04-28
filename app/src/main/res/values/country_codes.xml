@@ -4,5 +4,6 @@
         <item>+49</item> <!-- Germany -->
         <item>+41</item> <!-- Swizz -->
         <item>+43</item> <!-- Austria -->
+        <item>+01</item> <!-- USA -->
     </string-array>
 </resources>
