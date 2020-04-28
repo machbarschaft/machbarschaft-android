@@ -9,10 +9,15 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.view.home.Home;
+import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.util.OrderUtil;
 
 public class FirstOrderActivity extends AppCompatActivity {
+
+    private Order mOrder;
+    public static final String EXTRA_ORDER_ID = "orderId";
 
     private ViewPager warningsPager;
 
@@ -31,6 +36,9 @@ public class FirstOrderActivity extends AppCompatActivity {
         TabLayout introSlidesIndicator = findViewById(R.id.first_order_slides_indicator);
         warningsPager.setAdapter(new CustomWarningPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(warningsPager, true);
+        loadOrder();
+
+
     }
 
 
@@ -59,12 +67,32 @@ public class FirstOrderActivity extends AppCompatActivity {
 
     public void startHome(View view) {
         if(checkBoxBool4 && checkBoxBool3 && checkBoxBool2 && checkBoxBool1) {
-            Storage.getInstance().setUserNotifyAccepted(getApplicationContext());
-            startActivity(new Intent(this, Home.class));
+            Storage.getInstance().setUserNotifyAccepted(getApplicationContext(), mOrder);
+            startActivity(new Intent(this, OrderAcceptActivity.class));
             finishAfterTransition();
         }
         else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.medical_warnings_not_checked), Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void loadOrder() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            final String orderId = intent.getStringExtra(EXTRA_ORDER_ID);
+
+            DataAccess.getInstance().getOrderById(orderId, order -> {
+                mOrder = (Order) order;
+            });
+        }
+    }
+
+    public void warningTwoBtnCancel(View view) {
+        OrderUtil.cancelOrder(mOrder, getApplicationContext());
+    }
+
+    public void warningOneBtnCancel(View view) {
+        OrderUtil.cancelOrder(mOrder, getApplicationContext());
     }
 }

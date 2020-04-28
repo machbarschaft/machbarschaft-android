@@ -16,8 +16,6 @@ import jetzt.machbarschaft.android.util.ApplicationConstants;
  */
 public class Storage {
     private static Storage storage;
-
-    private String userID;
     private Order currentOrderId;
 
     private Storage() {
@@ -30,7 +28,7 @@ public class Storage {
         return storage;
     }
 
-    public String getUserID() {
+    String getUserID() {
         if(FirebaseAuth.getInstance().getCurrentUser()==null)
         {
             return null;
@@ -110,15 +108,15 @@ public class Storage {
         return new Gson().fromJson(pref.getString(ApplicationConstants.SHARED_PREF_ORDER_IN_STEP, null), OrderSteps.class);
     }
 
-    public boolean getHasUserNotifyAccepted(Context context){
+    public boolean getHasUserNotifyAccepted(Context context, Order mOrder){
         SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING, 0);
-        return pref.getBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY, false);
+        return pref.getBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY + mOrder.getId(), false);
     }
 
-    public boolean setUserNotifyAccepted(Context context){
+    public boolean setUserNotifyAccepted(Context context, Order mOrder){
         SharedPreferences pref = context.getSharedPreferences(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING, 0);
         Editor editor = pref.edit();
-        editor.putBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY, true);
+        editor.putBoolean(ApplicationConstants.SHARED_PREEF_FIRST_ORDER_WARNING_KEY + mOrder.getId(), true);
         return editor.commit();
     }
 }

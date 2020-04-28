@@ -111,7 +111,7 @@ public class DataAccess extends Database {
     }
 
     public void setOrderStatus(String orderId, Order.Status status) {
-        if (status == Order.Status.CONFIRMED) {
+        if (status == Order.Status.CONFIRMED || status == Order.Status.OPEN) {
             // update Status in Collection Order
             super.updateDocument(CollectionName.Order, orderId, new AbstractMap.SimpleEntry<>("status", status.getName()));
 

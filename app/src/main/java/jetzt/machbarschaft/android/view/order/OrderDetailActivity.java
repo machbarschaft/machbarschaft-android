@@ -44,7 +44,10 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_order_detail);
+
+        loadOrder();
 
         // Get UI elements
         Button btnAccept = findViewById(R.id.btn_accept_order);
@@ -52,9 +55,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         mNeedsView = findViewById(R.id.order_detail_needs);
         mUrgencyView = findViewById(R.id.order_detail_urgency);
         mAddressView = findViewById(R.id.order_detail_address);
-
-        // Get active order from database
-        loadOrder();
 
         // Add map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -105,15 +105,14 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         }
 
         DataAccess.getInstance().setOrderStatus(mOrder.getId(), Order.Status.CONFIRMED);
-
-
         Storage storage = Storage.getInstance();
         //storage.setCurrentOrder(mOrder);
         Storage.setOrderInProgress(getApplicationContext(), mOrder);
         startOrderNotification();
         storage.setActiveOrder(getApplicationContext(), true);
-        startActivity(new Intent(this, OrderAcceptActivity.class));
+        startActivity(new Intent(this, FirstOrderActivity.class).putExtra(OrderDetailActivity.EXTRA_ORDER_ID, mOrder.getId()));
         finishAfterTransition();
+
     }
 
     private void loadOrder() {
