@@ -3,7 +3,6 @@ package jetzt.machbarschaft.android.view.home;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -55,6 +54,7 @@ import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 import jetzt.machbarschaft.android.util.DrawableUtil;
+import jetzt.machbarschaft.android.util.ReportProblemUtil;
 import jetzt.machbarschaft.android.view.order.FirstOrderActivity;
 import jetzt.machbarschaft.android.view.order.OrderAcceptActivity;
 import jetzt.machbarschaft.android.view.order.OrderCarryOutActivity;
@@ -89,10 +89,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        if (!Storage.getInstance().getHasUserNotifyAccepted(getApplicationContext())) {
-            startActivity(new Intent(this, FirstOrderActivity.class));
-        }
 
         // Get UI elements
         Button btnFAQ = findViewById(R.id.home_btn_faq);
@@ -170,18 +166,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
             builder.setPositiveButton(
                     R.string.home_feedback_write_mail,
                     (dialog, id) -> {
-                        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
-                                "?subject=" + getString(R.string.home_feedback_subject) +
-                                "&body=" + getString(R.string.home_feedback_body1) +
-                                "\nVersion-Name: " + BuildConfig.VERSION_NAME +
-                                "\nVersion-Code: " + BuildConfig.VERSION_CODE +
-                                "\nAndroid-Version: " + Build.DISPLAY +
-                                "\nDevice: " + Build.DEVICE +
-                                "\nManufacturer: " + Build.MANUFACTURER +
-                                "\nModel: " + Build.MODEL +
-                                "\n\n" + getString(R.string.home_feedback_body2);
-                        Intent mailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mailUri));
-                        startActivity(mailIntent);
+                        startActivity(ReportProblemUtil.getMailIntent());
                     });
             builder.setNegativeButton(R.string.home_feedback_later, (dialog, id) -> dialog.dismiss());
 
@@ -487,7 +472,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                     //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     //Custom Marker
                     marker.setIcon(DrawableUtil.getBitmapDescriptor(getApplicationContext(), order.getUrgency().getIconRes(), order));
-                }else{
+                } else {
                     //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     marker.setIcon(DrawableUtil.getBitmapDescriptor(getApplicationContext(), order.getUrgency().getIconRes(), order));
                 }
