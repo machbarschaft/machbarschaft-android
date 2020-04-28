@@ -1,9 +1,0 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="@dimen/circular_map_diameter"
-    android:height="@dimen/circular_map_diameter"
-    android:viewportWidth="320"
-    android:viewportHeight="320">
-    <path
-        android:pathData="M0,0L0,160A160,160 0,0 1,160 0L0,0zM160,0A160,160 0,0 1,320 160L320,0L160,0zM320,160A160,160 0,0 1,160 320L320,320L320,160zM160,320A160,160 0,0 1,0 160L0,320L160,320z"
-        android:fillColor="@color/order_step_2_background_light" />
-</vector>

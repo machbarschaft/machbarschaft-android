@@ -26,11 +26,9 @@
 
     <!-- Background -->
     <color name="background_blue">#3E4FFF</color>
-    <color name="background_light_pink">#FFDCDB</color>
     <color name="background_pink">#FFEBEA</color>
-    <color name="content_background">#FFFFFF</color>
     <color name="background_green">#4ECE7C</color>
+    <color name="content_background">#FFFFFF</color>
+
     <color name="launcher_icon_background">#DA6077</color>
-    <color name="order_step_2_background_light">#4257ff</color>
-    <color name="verification_background">#4cb5d5</color>
 </resources>
