@@ -103,13 +103,6 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         if (mOrder == null) {
             return;
         }
-
-        DataAccess.getInstance().setOrderStatus(mOrder.getId(), Order.Status.CONFIRMED);
-        Storage storage = Storage.getInstance();
-        //storage.setCurrentOrder(mOrder);
-        Storage.setOrderInProgress(getApplicationContext(), mOrder);
-        startOrderNotification();
-        storage.setActiveOrder(getApplicationContext(), true);
         startActivity(new Intent(this, FirstOrderActivity.class).putExtra(OrderDetailActivity.EXTRA_ORDER_ID, mOrder.getId()));
         finishAfterTransition();
 
@@ -158,10 +151,5 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
 
         // Zoom map
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(orderLocation, 5f));
-    }
-
-    private void startOrderNotification() {
-        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
-        ContextCompat.startForegroundService(this, serviceIntent);
     }
 }
