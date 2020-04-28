@@ -1,81 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="color_primary">#FFDCDB</color>
     <color name="color_primary_dark">#BF688B</color>
     <color name="color_accent">#2B44FF</color>
 
-    <!-- Text colors contain transparency -->
+    <!-- Text Colors -->
     <color name="text_black">#FF000000</color>
     <color name="text_dark">#E8000000</color>
     <color name="text_light">#C7FFFFFF</color>
     <color name="text_white">#FFFFFFFF</color>
 
-    <color name="urgency_urgent">#D2000D</color>
-    <color name="urgency_normal">#5476BC</color>
 
+    <!-- Divider / Selector -->
+    <color name="dividers">#1F000000</color>
     <color name="selector_dot_active">@color/color_accent</color>
     <color name="selector_dot_inactive">#A8FFFFFF</color>
 
-    <color name="dividers">#1F000000</color>
+    <!-- Urgency Colors -->
+    <color name="urgency_urgent">#D2000D</color>
+    <color name="urgency_normal">#5476BC</color>
 
-    <color name="launcher_icon_background">#DA6077</color>
-
-    <color name="background_default">#FFFFFF</color>
-    <color name="background_pink">#FFEBEA</color>
-    <color name="background_pink_transparent">#96FFDCDB</color>
-    <color name="background_blue">#3E4FFF</color>
-
-    <!-- Old colors for design versions less than 3 -->
-
-    <color name="order_done_background">#279f14</color>
-    <color name="content_background">#FFFFFF</color>
-
-    <!-- Background colors for large surface areas -->
-    <color name="background_light_pink">#FFDCDB</color>
-    <color name="background_blue_darker">#2B44FF</color>
-    <color name="background_cyan">#56a2ba</color>
-    <color name="background_teal">#31A08A</color>
-    <color name="background_green">#4ECE7C</color>
-
-    <!-- Button backgrounds are transparent -->
-    <color name="button_bg_primary">#A8FFFFFF</color>
-    <color name="button_bg_secondary">#14FFFFFF</color>
-    <color name="button_bg_green">#4ECE7C</color>
-    <color name="button_text_primary_blue">@color/background_blue</color>
-    <color name="button_text_primary_cyan">@color/background_cyan</color>
-    <color name="button_text_primary_teal">@color/background_teal</color>
-    <color name="button_text_primary_pink">@color/background_teal</color>
-
-    <!-- Colors Splash Screen -->
-    <color name="splash_background">@color/background_light_pink</color>
-
-    <!-- Order Step 1 Screen -->
-    <color name="order_step_1_background">@color/background_light_pink</color>
-
-    <!-- Login Screen -->
-    <color name="login_background">@color/background_blue</color>
-
-    <!-- Registration Screen -->
-    <color name="register_background">#31a08a</color>
-    <color name="register_button">#32a08a</color>
-    <color name="register_button_bgtint">#daece8</color>
-
-    <!-- Number verification Screen -->
-    <color name="verification_background">#4cb5d5</color>
-    <color name="verification_resent_button">#e4f1f7</color>
-    <color name="verification_button">#4cb4d5</color>
-    <color name="verification_button_bgtint">#def0f7</color>
-
-    <!-- Order Step 2 Screen -->
+    <!-- Icon -->
     <color name="order_step_2_icon">#004fff</color>
-    <color name="order_step_2_background_dark">#2b44ff</color>
-    <color name="order_step_2_background_light">#4257ff</color>
-    <color name="order_step_2_button_bgtint">#4ece7c</color>
-    <color name="order_step_2_button_call_bgtint">#e2e5f8</color>
-    <color name="order_step_2_button_call">#2a44fe</color>
-    <color name="order_first_time_button">#515511</color>
 
-    <!-- First Order Screen -->
-    <color name="order_first_buttonColor">#e1f3f8</color>
-    <color name="order_first_fontColor">#83cae1</color>
+    <!-- Background -->
+    <color name="background_blue">#3E4FFF</color>
+    <color name="background_light_pink">#FFDCDB</color>
+    <color name="background_pink">#FFEBEA</color>
+    <color name="content_background">#FFFFFF</color>
+    <color name="background_green">#4ECE7C</color>
+    <color name="launcher_icon_background">#DA6077</color>
+    <color name="order_step_2_background_light">#4257ff</color>
+    <color name="verification_background">#4cb5d5</color>
 </resources>
