@@ -79,6 +79,14 @@
             android:layout_height="wrap_content"
             android:onClick="warningsNextPress"
             android:text="@string/button_next" />
+
+        <Button
+            android:id="@+id/warnings_slide1_button_cancel"
+            style="@style/AppTheme.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="warningOneBtnCancel"
+            android:text="@string/button_cancel" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
