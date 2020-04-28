@@ -1,45 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
     <string name="app_name_noncapital">Machbarschaft</string>
-    <string name="confirm">Bestätigen</string>
     <string name="title_back">Zurück</string>
-    <string name="stepFor">für</string>
 
     <string name="login_action_login">Los gehts</string>
-    <string name="login_action_register">Registrieren</string>
     <string name="login_hint_phone_number">Handynummer eintragen</string>
-    <string name="login_in_progress">Anmeldung…</string>
     <string name="login_error_invalid_phone_number">Bitte geben Sie eine valide Telefonnummer ein</string>
-    <string name="login_error_number_not_exist">Es gibt kein Nutzer mit dieser Nummer</string>
-    <string name="login_error_generic">Anmelden fehlgeschlagen</string>
 
-    <string name="verify_phone_wait_for_code">Bestätigungscode eingeben</string>
-    <string name="verify_phone_code_hint">Bestätigungscode per SMS</string>
     <string name="verify_phone_title">Handynummer bestätigen</string>
     <string name="verify_phone_btn_send_code">Code erneut senden</string>
     <string name="verify_phone_button">Verifizieren</string>
-    <string name="verify_phone_error_invalid_code">Code ungültig</string>
 
-    <string name="verify_address_dialog_message">Wir arbeiten daran, dass du deine Adresse bald über Maps suchen kannst.</string>
-    <string name="verify_address_dialog_understood">Verstanden</string>
-    <string name="verify_success">Verification erfolgreich</string>
-    <string name="verify_sms_sent">SMS gesendet</string>
     <string name="verify_error_generic">Verifikation fehlgeschlagen</string>
-    <string name="verify_error_fill_all_fields">Bitte fülle alle Felder aus</string>
     <string name="verify_error_sms_send_failed">SMS konnte nicht gesendet werden</string>
-    <string name="verify_error_no_agb">Bitte akzeptiere unsere AGB</string>
-    <string name="verify_error_verify">Bitte verifiziere dich</string>
-
-    <string name="register_title">Anmeldung vervollständigen</string>
-    <string name="register_subtitle_first">1. Basisinformationen</string>
-    <string name="register_subtitle_second">Identität verifizieren</string>
-    <string name="register_hint_name">Vorname</string>
-    <string name="register_hint_surname">Nachname</string>
-    <string name="register_hint_address">Anschrift</string>
-    <string name="register_hint_phone">Handynummer</string>
-    <string name="register_check_agb">AGB/Datenschutz</string>
-    <string name="register_button_send">Absenden</string>
-    <string name="register_button_back">Zurück</string>
 
     <string name="intro_1_text">Melde dich als \nMachbar:in an</string>
     <string name="intro_2_text">Finde Personen in deinem Umkreis, denen du etwas Gutes tun kannst</string>
@@ -54,19 +27,15 @@
     <string name="order_urgency_tomorrow">Morgen</string>
     <string name="order_urgency_undefined">Irgendwann</string>
 
-    <string name="home_button_urgency">Dringlichkeit</string>
-    <string name="home_button_radius">In deiner Nähe</string>
     <string name="home_link_faq">FAQ</string>
     <string name="home_link_contact">Kontakt</string>
     <string name="home_link_bug_report">Problem melden</string>
-    <string name="home_faq_description">Wir arbeiten an einer Lösung, damit du unsere FAQ\'s hier bald sehen kannst.</string>
     <string name="home_feedback_description">Wenn du ein Problem mit unserem Service hast, schreib uns einfach eine Mail. Wir kümmern uns dann so schnell es geht um dein Anliegen.</string>
     <string name="home_feedback_write_mail">Email schreiben</string>
     <string name="home_feedback_later">Später</string>
     <string name="home_feedback_subject">Problem mit der Android App</string>
     <string name="home_feedback_body1">Liebes Machbarschaft-Team,\n\nbei der Android App ist mir ein Problem aufgefallen. Die Technischen Informationen sind wie folgt:</string>
     <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">Mein Problem ist ...</string>
-    <string name="home_dialog_understood">Verstanden</string>
     <string name="home_tab_distance">Distanz</string>
     <string name="home_tab_urgency">Dringlichkeit</string>
     <plurals name="home_order_count">
@@ -78,12 +47,6 @@
     <string name="home_order_extra_prescription">Rezept abhohlen</string>
     <string name="home_order_extra_car">Auto erforderlich</string>
 
-    <string name="order_detail_title">Der Auftrag</string>
-    <string name="order_detail_label_needs">benötigt</string>
-    <string name="order_detail_label_urgency">Dringlichkeit</string>
-    <string name="order_detail_label_address">Adresse</string>
-    <string name="order_detail_accept_order">Auftrag annehmen</string>
-
     <string name="order_accept_title">Schritt #1</string>
     <string name="order_accept_text">Bitte ruf %1$s an, um die Details des Auftrags zu besprechen.</string>
     <string name="call_now">Jetzt anrufen</string>
@@ -92,12 +55,7 @@
     <string name="order_carry_out_text">Sag uns bescheid, wenn Du unterwegs bist.</string>
     <string name="start_to_execute_now">Ich gehe jetzt los</string>
     <string name="start_to_execute_later">Ich gehe später los</string>
-    <string name="start_to_execute_failed">Ich konnte niemanden erreichen</string>
 
-    <string name="order_en_route_title">Schritt #3</string>
-    <string name="order_en_route_text">Auftrag erledigen</string>
-    <string name="target_address">Ziel-Adresse:</string>
-    <string name="calculate_route">Route berechnen</string>
     <string name="order_done">Auftrag erledigt</string>
     <string name="thank_you_text">Vielen Dank!\nDu bist toll!</string>
     <string name="back_to_home">zum Home Screen</string>
@@ -111,7 +69,6 @@
     <string name="order_first_text">Ein Hinweis, bevor Du den ersten Auftrag anschaust:
         Über Machbarschaft suchen echte Menschen Deine echte Hilfe. Mit dieser Vertrauenserklärung verpflichtest du Dich freiwillig zum vertraulichen Umgang mit den persönlichen Informationen,
         den Kontaktdaten und den Gesuchen der Hilfesuchenden. Bist du damit einverstanden?</string>
-    <string name="order_first_decline_btn">Ablehnen</string>
     <string name="order_first_accept_btn">Bestätigen</string>
     <string name="medical_warnings_not_checked">Du musst alle Hinweise bestätigen!</string>
     <string name="button_cancel">Abbrechen</string>

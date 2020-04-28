@@ -1,43 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MACHBARSCHAFT</string>
     <string name="app_name_noncapital">Machbarschaft</string>
-    <string name="confirm">Confirm</string>
     <string name="title_back">Back</string>
-    <string name="stepFor">for</string>
 
     <string name="login_action_login">Start now</string>
-    <string name="login_action_register">Register</string>
     <string name="login_hint_phone_number">Enter phone number</string>
-    <string name="login_in_progress">Login…</string>
     <string name="login_error_invalid_phone_number">Please enter a valid phone number</string>
-    <string name="login_error_number_not_exist">There is no user with this number</string>
-    <string name="login_error_generic">Login failed</string>
-    <string name="verify_phone_wait_for_code">Enter confirmation code</string>
-    <string name="verify_phone_code_hint">Confirmation code per sms</string>
     <string name="verify_phone_title">Confirm phone number</string>
     <string name="verify_phone_btn_send_code">Resend code</string>
     <string name="verify_phone_button">Verify</string>
-    <string name="verify_phone_error_invalid_code">Invalid code</string>
-    <string name="verify_address_dialog_message">We are working on this feature.</string>
-    <string name="verify_address_dialog_understood">Understood</string>
-    <string name="verify_success">Verification successful</string>
-    <string name="verify_sms_sent">SMS sent </string>
     <string name="verify_error_generic">Verification failed</string>
-    <string name="verify_error_fill_all_fields">Please fill all fields</string>
     <string name="verify_error_sms_send_failed">SMS couldn\'t be send</string>
-    <string name="verify_error_no_agb">Please accept our terms and conditions</string>
-    <string name="verify_error_verify">Please verify yourself</string>
-
-    <string name="register_title">Complete registration</string>
-    <string name="register_subtitle_first">1. Basic information</string>
-    <string name="register_subtitle_second">Verify identity</string>
-    <string name="register_hint_name">First name</string>
-    <string name="register_hint_surname">Surname</string>
-    <string name="register_hint_address">Address</string>
-    <string name="register_hint_phone">Phone number</string>
-    <string name="register_check_agb">Terms and conditions</string>
-    <string name="register_button_send">Submit</string>
-    <string name="register_button_back">Back</string>
 
     <string name="intro_1_text">Register as helper</string>
     <string name="intro_2_text">Find people in your area to whom you can do good</string>
@@ -52,19 +25,15 @@
     <string name="order_urgency_tomorrow">Tomorrow</string>
     <string name="order_urgency_undefined">Sometime</string>
 
-    <string name="home_button_urgency">Urgency</string>
-    <string name="home_button_radius">Near you</string>
     <string name="home_link_faq">FAQ</string>
     <string name="home_link_contact">Contact</string>
     <string name="home_link_bug_report">Report problem</string>
-    <string name="home_faq_description">We are working on a solution, so that you can see our FAQ here.</string>
     <string name="home_feedback_description">If you have a problem with our service, just send an email. We will take care of your request as soon as possible.</string>
     <string name="home_feedback_write_mail">Send email</string>
     <string name="home_feedback_later">Later</string>
     <string name="home_feedback_subject">Problem in the Android App</string>
     <string name="home_feedback_body1">Dear Machbarschaft team, I noticed a problem with the Android app. The technical information is as follows:</string>
     <string name="home_feedback_body2" tools:ignore="TypographyEllipsis">My problem is ...</string>
-    <string name="home_dialog_understood">Understood</string>
     <string name="home_tab_distance">Distance</string>
     <string name="home_tab_urgency">Urgency</string>
     <plurals name="home_order_count">
@@ -76,12 +45,6 @@
     <string name="home_order_extra_prescription">Get recipe</string>
     <string name="home_order_extra_car">Car needed</string>
 
-    <string name="order_detail_title">The order</string>
-    <string name="order_detail_label_needs">requires</string>
-    <string name="order_detail_label_urgency">Urgency</string>
-    <string name="order_detail_label_address">Address</string>
-    <string name="order_detail_accept_order">Accept order</string>
-
     <string name="order_accept_title">Step #1</string>
     <string name="order_accept_text">Please call %1$s to discuss the details of the order.</string>
     <string name="call_now">Call now</string>
@@ -90,12 +53,7 @@
     <string name="order_carry_out_text">Tell us, when you are on your way.</string>
     <string name="start_to_execute_now">Leaving now</string>
     <string name="start_to_execute_later">I will go later</string>
-    <string name="start_to_execute_failed">I could not reach anybody</string>
 
-    <string name="order_en_route_title">Step #3</string>
-    <string name="order_en_route_text">Execute order</string>
-    <string name="target_address">Target address:</string>
-    <string name="calculate_route">Navigate</string>
     <string name="order_done">Order completed</string>
     <string name="thank_you_text">Thank you!\nYou are great!</string>
     <string name="back_to_home">back to Home</string>
@@ -108,7 +66,6 @@
     <string name="order_first_text">One hint before you look at the first assignment: Via Machbarschaft real people are looking for your real help.
         With this declaration of trust you voluntarily commit yourself to the confidential handling of personal information,
         contact data and requests of people seeking help. Do you agree with this?</string>
-    <string name="order_first_decline_btn">Decline</string>
     <string name="order_first_accept_btn">Accept</string>
     <string name="medical_warnings_not_checked">You need to confirm all warnings!</string>
     <string name="button_cancel">Cancel</string>

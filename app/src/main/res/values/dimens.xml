@@ -15,13 +15,6 @@
     <dimen name="order_list_item_height">64dp</dimen>
     <dimen name="home_controls_elevation">4dp</dimen>
 
-    <dimen name="text_size_list_item">@dimen/text_size_default</dimen>
-    <dimen name="text_size_list_item_small">@dimen/text_size_default</dimen>
-
-    <dimen name="circular_map_diameter">320dp</dimen>
-    
-    <dimen name="text_size_medium">16sp</dimen>
-
     <dimen name="space_between_content_areas">8dp</dimen>
 
     <dimen name="order_content_size">300dp</dimen>
