@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.util.ReportProblemUtil;
 
-public class OrderEnRouteActivity extends AppCompatActivity {
+public class OrderStep3EnRouteActivity extends AppCompatActivity {
     private static final String LOG_TAG = "OrderEnRouteActivity";
 
     private Order mOrder;
@@ -41,7 +40,7 @@ public class OrderEnRouteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_en_route);
+        setContentView(R.layout.activity_order_step_4_en_route);
 
         // Get active order
         loadOrder();
@@ -55,7 +54,7 @@ public class OrderEnRouteActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.title_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderCarryOutActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderStep2CarryOutActivity.class)));
 
         // Set overview label at the top of the page
         TextView tfOverview = findViewById(R.id.order_en_route_client);
@@ -94,7 +93,7 @@ public class OrderEnRouteActivity extends AppCompatActivity {
 
         {
             notifyOrderDone();
-            startActivity(new Intent(this, OrderDoneActivity.class));
+            startActivity(new Intent(this, OrderStep4DoneActivity.class));
             finishAfterTransition();
         });
 

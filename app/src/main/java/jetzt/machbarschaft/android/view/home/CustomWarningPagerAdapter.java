@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.view.order;
+package jetzt.machbarschaft.android.view.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;

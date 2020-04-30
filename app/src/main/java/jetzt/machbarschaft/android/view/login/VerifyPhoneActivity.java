@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.view.register;
+package jetzt.machbarschaft.android.view.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +22,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.view.home.Home;
-import jetzt.machbarschaft.android.view.login.LoginMain;
+import jetzt.machbarschaft.android.view.home.HomeActivity;
 
 /**
  * For verifying via SMS.
@@ -64,12 +63,12 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         Button btnSignIn = findViewById(R.id.button_sign_in);
         btnSendCode = findViewById(R.id.verify_phone_btn_send_code);
         EditText[] tfCodes = {
-                findViewById(R.id.verificationTfCode1),
-                findViewById(R.id.verificationTfCode2),
-                findViewById(R.id.verificationTfCode3),
-                findViewById(R.id.verificationTfCode4),
-                findViewById(R.id.verificationTfCode5),
-                findViewById(R.id.verificationTfCode6),
+                findViewById(R.id.verification_code_1),
+                findViewById(R.id.verification_code_2),
+                findViewById(R.id.verification_code_3),
+                findViewById(R.id.verification_code_4),
+                findViewById(R.id.verification_code_5),
+                findViewById(R.id.verification_code_6),
         };
 
         // Setup toolar
@@ -163,14 +162,14 @@ public class VerifyPhoneActivity extends AppCompatActivity {
      * Navigates back to the login activity.
      */
     private void navigateToLogin() {
-        startActivity(new Intent(this, LoginMain.class)
-                .putExtra(LoginMain.EXTRA_PHONE_NUMBER, mPhoneNumber));
+        startActivity(new Intent(this, LoginActivity.class)
+                .putExtra(LoginActivity.EXTRA_PHONE_NUMBER, mPhoneNumber));
         finishAfterTransition();
     }
 
     private void onLoginDone() {
         Toast.makeText(getApplicationContext(), R.string.successfull_auth, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, Home.class));
+        startActivity(new Intent(this, HomeActivity.class));
         finishAfterTransition();
     }
 

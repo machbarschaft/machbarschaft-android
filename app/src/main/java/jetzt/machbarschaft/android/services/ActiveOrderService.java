@@ -15,12 +15,12 @@ import androidx.core.app.NotificationCompat;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
-import jetzt.machbarschaft.android.view.home.Home;
+import jetzt.machbarschaft.android.view.home.HomeActivity;
 
 /**
  * Creates a notification in the status bar of android to display a order is in progress.
  */
-public class OrderInProgressNotification extends Service {
+public class ActiveOrderService extends Service {
     private static final String CHANNEL_ID = "NotificationChannel";
 
     @Nullable
@@ -42,7 +42,7 @@ public class OrderInProgressNotification extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startID) {
         createNotificationChannel();
-        Intent notificationIntent = new Intent(this, Home.class);
+        Intent notificationIntent = new Intent(this, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         Order order = Storage.getInstance().getOrderInProgress(this);

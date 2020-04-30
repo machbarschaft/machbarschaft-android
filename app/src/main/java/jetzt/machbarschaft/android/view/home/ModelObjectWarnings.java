@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.view.order;
+package jetzt.machbarschaft.android.view.home;
 
 import jetzt.machbarschaft.android.R;
 

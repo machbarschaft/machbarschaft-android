@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.fcm;
+package jetzt.machbarschaft.android.services;
 
 import android.util.Log;
 

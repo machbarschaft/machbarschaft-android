@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="jetzt.machbarschaft.android.view.order.OrderEnRouteActivity">
+    tools:context="jetzt.machbarschaft.android.view.order.OrderStep3EnRouteActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_order_en_route"

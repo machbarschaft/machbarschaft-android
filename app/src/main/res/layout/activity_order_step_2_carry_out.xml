@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/background_pink"
-    tools:context="jetzt.machbarschaft.android.view.order.OrderCarryOutActivity">
+    tools:context="jetzt.machbarschaft.android.view.order.OrderStep2CarryOutActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_order_carry_out"

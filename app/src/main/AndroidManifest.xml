@@ -28,45 +28,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:fullBackupContent">
-        <activity android:name=".view.order.FirstOrderActivity" />
+        <activity android:name=".view.home.MedicalWarningsActivity" />
         <activity
-            android:name=".view.order.OrderDetailActivity"
-            android:parentActivityName=".view.home.Home">
+            android:name=".view.home.OrderDetailActivity"
+            android:parentActivityName=".view.home.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.home.Home" />
+                android:value=".view.home.HomeActivity" />
         </activity>
         <activity
-            android:name=".view.order.OrderDoneActivity"
-            android:parentActivityName=".view.order.OrderEnRouteActivity">
+            android:name=".view.order.OrderStep4DoneActivity"
+            android:parentActivityName=".view.order.OrderStep3EnRouteActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.order.OrderEnRouteActivity" />
+                android:value=".view.order.OrderStep3EnRouteActivity" />
         </activity>
         <activity
-            android:name=".view.order.OrderEnRouteActivity"
-            android:parentActivityName=".view.order.OrderCarryOutActivity">
+            android:name=".view.order.OrderStep3EnRouteActivity"
+            android:parentActivityName=".view.order.OrderStep2CarryOutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.order.OrderCarryOutActivity" />
+                android:value=".view.order.OrderStep2CarryOutActivity" />
         </activity>
         <activity
-            android:name=".view.order.OrderCarryOutActivity"
-            android:parentActivityName=".view.order.OrderAcceptActivity">
+            android:name=".view.order.OrderStep2CarryOutActivity"
+            android:parentActivityName=".view.order.OrderStep1AcceptActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.order.OrderAcceptActivity" />
+                android:value=".view.order.OrderStep1AcceptActivity" />
         </activity>
         <activity
-            android:name=".view.order.OrderAcceptActivity"
-            android:parentActivityName=".view.order.OrderDetailActivity">
+            android:name=".view.order.OrderStep1AcceptActivity"
+            android:parentActivityName=".view.home.OrderDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.order.OrderDetailActivity" />
+                android:value=".view.home.OrderDetailActivity" />
         </activity>
-        <activity android:name=".view.register.VerifyPhoneActivity" />
-        <activity android:name=".view.home.Home" />
-        <activity android:name=".view.login.LoginMain" />
+        <activity android:name=".view.login.VerifyPhoneActivity" />
+        <activity android:name=".view.home.HomeActivity" />
+        <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.splash.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,13 +76,13 @@
         </activity>
 
         <service
-            android:name=".fcm.MessagingService"
+            android:name=".services.MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".services.OrderInProgressNotification" />
+        <service android:name=".services.ActiveOrderService" />
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.
             (See the file "res/values/google_maps_api.xml").

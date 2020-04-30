@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_green"
-    tools:context="jetzt.machbarschaft.android.view.order.OrderDoneActivity">
+    tools:context="jetzt.machbarschaft.android.view.order.OrderStep4DoneActivity">
 
     <ImageView
         android:id="@+id/done_icon"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/done_text" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/wirvsvirus_project_logo"
         android:layout_width="189dp"
         android:layout_height="66dp"
         android:layout_marginBottom="30dp"

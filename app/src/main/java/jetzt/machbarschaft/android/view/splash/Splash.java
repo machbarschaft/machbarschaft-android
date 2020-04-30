@@ -15,8 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.io.File;
 
 import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.view.home.Home;
-import jetzt.machbarschaft.android.view.login.LoginMain;
+import jetzt.machbarschaft.android.view.home.HomeActivity;
+import jetzt.machbarschaft.android.view.login.LoginActivity;
 
 
 /**
@@ -60,10 +60,10 @@ public class Splash extends AppCompatActivity {
     }
 
     private void startApp() {
-        this.startActivity(new Intent(this, Home.class));
+        this.startActivity(new Intent(this, HomeActivity.class));
     }
 
     private void startLogin() {
-        this.startActivity(new Intent(this, LoginMain.class));
+        this.startActivity(new Intent(this, LoginActivity.class));
     }
 }

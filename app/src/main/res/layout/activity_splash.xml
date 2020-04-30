@@ -8,7 +8,7 @@
     tools:context="jetzt.machbarschaft.android.view.splash.Splash">
 
     <TextView
-        android:id="@+id/splash_tV_title"
+        android:id="@+id/splash_title"
         style="@style/AppTextAppearance.Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,16 +29,16 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/splash_tV_desc"
+        android:id="@+id/splash_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/splash_describtion"
-        app:layout_constraintStart_toStartOf="@+id/splash_tV_title"
-        app:layout_constraintTop_toBottomOf="@+id/splash_tV_title" />
+        app:layout_constraintStart_toStartOf="@+id/splash_title"
+        app:layout_constraintTop_toBottomOf="@+id/splash_title" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/splash_graphic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"

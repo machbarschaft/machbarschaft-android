@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="jetzt.machbarschaft.android.view.home.Home">
+    tools:context="jetzt.machbarschaft.android.view.home.HomeActivity">
 
     <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map_fragment"

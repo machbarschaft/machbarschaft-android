@@ -15,14 +15,13 @@ import com.google.android.material.tabs.TabLayout;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.util.PhoneNumberFormatterUtil;
-import jetzt.machbarschaft.android.view.register.VerifyPhoneActivity;
 
 
 /**
  * Displays the Login Page. Handles the Input and the Login Success / Login Failed.
  * Also can redirect to the register Page.
  */
-public class LoginMain extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public static final String EXTRA_PHONE_NUMBER = "phoneNumber";
 
     private EditText phoneNumberTextView;
@@ -38,7 +37,7 @@ public class LoginMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_main);
+        setContentView(R.layout.activity_login);
 
         // Sets the Custom Pager Adapter to display the different slides in the application
         ViewPager introSlidesPager = findViewById(R.id.intro_slides_pager);
@@ -58,7 +57,7 @@ public class LoginMain extends AppCompatActivity {
         ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, countryCodes);
         countryCodeTextView =
                 findViewById(android.R.id.content)
-                        .findViewById(R.id.filled_exposed_dropdown_country_Code_login);
+                        .findViewById(R.id.filled_exposed_dropdown_country_code_login);
         countryCodeTextView.setText(countryCodes[0], false);
         countryCodeTextView.setAdapter(countryCodeAdapter);
 

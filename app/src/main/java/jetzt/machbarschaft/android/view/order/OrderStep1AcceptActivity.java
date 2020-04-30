@@ -21,13 +21,13 @@ import jetzt.machbarschaft.android.util.ReportProblemUtil;
 /**
  * Handles the case when someone accepts a order.
  */
-public class OrderAcceptActivity extends AppCompatActivity {
+public class OrderStep1AcceptActivity extends AppCompatActivity {
     private Order mOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_accept);
+        setContentView(R.layout.activity_order_step_1_accept);
 
         // Load active order from database
         loadOrder();
@@ -52,7 +52,7 @@ public class OrderAcceptActivity extends AppCompatActivity {
 
         // Button click handlers
         btnCall.setOnClickListener(v -> {
-            startActivity(new Intent(this, OrderCarryOutActivity.class));
+            startActivity(new Intent(this, OrderStep2CarryOutActivity.class));
             startActivity(ReportProblemUtil.callUser(mOrder));
             finishAfterTransition();
         });

@@ -1,9 +1,6 @@
 package jetzt.machbarschaft.android.view.order;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -19,7 +16,7 @@ import jetzt.machbarschaft.android.database.entitie.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.util.ReportProblemUtil;
 
-public class OrderCarryOutActivity extends AppCompatActivity {
+public class OrderStep2CarryOutActivity extends AppCompatActivity {
     private Order mOrder;
 
     @Override
@@ -30,7 +27,7 @@ public class OrderCarryOutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_carry_out);
+        setContentView(R.layout.activity_order_step_2_carry_out);
 
         // Get UI elements
         Button btnStartNow = findViewById(R.id.btn_order_execute_now);
@@ -50,19 +47,19 @@ public class OrderCarryOutActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderAcceptActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrderStep1AcceptActivity.class)));
         //toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         // Button click handlers
         btnStartNow.setOnClickListener(v -> {
-            startActivity(new Intent(this, OrderEnRouteActivity.class));
+            startActivity(new Intent(this, OrderStep3EnRouteActivity.class));
             finishAfterTransition();
         });
 
 
 
         btnStartLater.setOnClickListener(v -> {
-            startActivity(new Intent(this, OrderEnRouteActivity.class));
+            startActivity(new Intent(this, OrderStep3EnRouteActivity.class));
             finishAfterTransition();
         });
 

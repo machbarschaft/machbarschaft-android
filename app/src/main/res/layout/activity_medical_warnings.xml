@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_pink"
-    tools:context=".view.order.FirstOrderActivity">
+    tools:context=".view.home.MedicalWarningsActivity">
 
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerWarnings"
+        android:id="@+id/view_pager_warnings"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:layout_marginStart="1dp"

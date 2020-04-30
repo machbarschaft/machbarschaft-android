@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -30,7 +29,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -46,22 +44,19 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import jetzt.machbarschaft.android.BuildConfig;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
-import jetzt.machbarschaft.android.services.OrderInProgressNotification;
+import jetzt.machbarschaft.android.services.ActiveOrderService;
 import jetzt.machbarschaft.android.util.DrawableUtil;
 import jetzt.machbarschaft.android.util.ReportProblemUtil;
-import jetzt.machbarschaft.android.view.order.FirstOrderActivity;
-import jetzt.machbarschaft.android.view.order.OrderAcceptActivity;
-import jetzt.machbarschaft.android.view.order.OrderCarryOutActivity;
-import jetzt.machbarschaft.android.view.order.OrderDetailActivity;
-import jetzt.machbarschaft.android.view.order.OrderEnRouteActivity;
+import jetzt.machbarschaft.android.view.order.OrderStep1AcceptActivity;
+import jetzt.machbarschaft.android.view.order.OrderStep2CarryOutActivity;
+import jetzt.machbarschaft.android.view.order.OrderStep3EnRouteActivity;
 
-public class Home extends AppCompatActivity implements OnMapReadyCallback,
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback,
         OrderAdapter.OrderClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnCameraIdleListener {
     private static final String LOG_TAG = "Home";
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 100;
@@ -81,7 +76,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
     @NonNull
     private SortBy sortBy;
 
-    public Home() {
+    public HomeActivity() {
         sortBy = SortBy.DISTANCE;
     }
 
@@ -118,15 +113,15 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
                     case STEP0_NONE:
                         break;
                     case STEP1_PHONE:
-                        startActivity(new Intent(this, OrderAcceptActivity.class));
+                        startActivity(new Intent(this, OrderStep1AcceptActivity.class));
                         finishAfterTransition();
                         break;
                     case STEP2_CarryOut:
-                        startActivity(new Intent(this, OrderCarryOutActivity.class));
+                        startActivity(new Intent(this, OrderStep2CarryOutActivity.class));
                         finishAfterTransition();
                         break;
                     case STEP3_EnRoute:
-                        startActivity(new Intent(this, OrderEnRouteActivity.class));
+                        startActivity(new Intent(this, OrderStep3EnRouteActivity.class));
                         finishAfterTransition();
                         break;
                 }
@@ -499,7 +494,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Handles the Start of Order Notification
      */
     private void startOrderNotification() {
-        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        Intent serviceIntent = new Intent(this, ActiveOrderService.class);
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
@@ -508,7 +503,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback,
      * Possible reasons for stop is a cancel of finish of order.
      */
     private void stopOrder() {
-        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        Intent serviceIntent = new Intent(this, ActiveOrderService.class);
         stopService(serviceIntent);
     }
 

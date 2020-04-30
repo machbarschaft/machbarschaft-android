@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_pink"
     android:fitsSystemWindows="true"
-    tools:context="jetzt.machbarschaft.android.view.register.VerifyPhoneActivity">
+    tools:context="jetzt.machbarschaft.android.view.login.VerifyPhoneActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/verify_phone_toolbar"
@@ -29,7 +29,7 @@
         app:layout_constraintVertical_bias="0.95" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/verification_code_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -48,7 +48,6 @@
                 android:layout_marginStart="@dimen/screen_padding"
                 android:layout_marginEnd="@dimen/screen_padding"
                 android:clickable="false"
-                android:gravity="center|left"
                 android:text="@string/verify_phone_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -64,10 +63,10 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/verify_phone_btn_send_code"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verificationTfCode1" />
+                app:layout_constraintTop_toBottomOf="@+id/verification_code_1" />
 
             <EditText
-                android:id="@+id/verificationTfCode1"
+                android:id="@+id/verification_code_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/screen_padding"
@@ -83,12 +82,12 @@
                 android:paddingBottom="10dp"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/verificationTfCode2"
+                app:layout_constraintEnd_toStartOf="@+id/verification_code_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <EditText
-                android:id="@+id/verificationTfCode2"
+                android:id="@+id/verification_code_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -104,12 +103,12 @@
                 android:paddingBottom="10dp"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/verificationTfCode3"
-                app:layout_constraintStart_toEndOf="@+id/verificationTfCode1"
+                app:layout_constraintEnd_toStartOf="@+id/verification_code_3"
+                app:layout_constraintStart_toEndOf="@+id/verification_code_1"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <EditText
-                android:id="@+id/verificationTfCode3"
+                android:id="@+id/verification_code_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -125,12 +124,12 @@
                 android:paddingBottom="10dp"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/verificationTfCode4"
-                app:layout_constraintStart_toEndOf="@+id/verificationTfCode2"
+                app:layout_constraintEnd_toStartOf="@+id/verification_code_4"
+                app:layout_constraintStart_toEndOf="@+id/verification_code_2"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <EditText
-                android:id="@+id/verificationTfCode4"
+                android:id="@+id/verification_code_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -146,12 +145,12 @@
                 android:paddingBottom="10dp"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/verificationTfCode5"
-                app:layout_constraintStart_toEndOf="@+id/verificationTfCode3"
+                app:layout_constraintEnd_toStartOf="@+id/verification_code_5"
+                app:layout_constraintStart_toEndOf="@+id/verification_code_3"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <EditText
-                android:id="@+id/verificationTfCode5"
+                android:id="@+id/verification_code_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -167,12 +166,12 @@
                 android:paddingBottom="10dp"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/verificationTfCode6"
-                app:layout_constraintStart_toEndOf="@+id/verificationTfCode4"
+                app:layout_constraintEnd_toStartOf="@+id/verification_code_6"
+                app:layout_constraintStart_toEndOf="@+id/verification_code_4"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
             <EditText
-                android:id="@+id/verificationTfCode6"
+                android:id="@+id/verification_code_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -189,7 +188,7 @@
                 android:textSize="36sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/verificationTfCode5"
+                app:layout_constraintStart_toEndOf="@+id/verification_code_5"
                 app:layout_constraintTop_toBottomOf="@+id/verify_phone_lbl_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

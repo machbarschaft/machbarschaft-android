@@ -1,11 +1,13 @@
-package jetzt.machbarschaft.android.view.order;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
+package jetzt.machbarschaft.android.view.home;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -13,10 +15,11 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
-import jetzt.machbarschaft.android.services.OrderInProgressNotification;
+import jetzt.machbarschaft.android.services.ActiveOrderService;
 import jetzt.machbarschaft.android.util.OrderUtil;
+import jetzt.machbarschaft.android.view.order.OrderStep1AcceptActivity;
 
-public class FirstOrderActivity extends AppCompatActivity {
+public class MedicalWarningsActivity extends AppCompatActivity {
 
     private Order mOrder;
     public static final String EXTRA_ORDER_ID = "orderId";
@@ -31,10 +34,10 @@ public class FirstOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_first);
+        setContentView(R.layout.activity_medical_warnings);
         loadOrder();
         // Sets the Custom Pager Adapter to display the different slides in the application
-        warningsPager = findViewById(R.id.viewPagerWarnings);
+        warningsPager = findViewById(R.id.view_pager_warnings);
         TabLayout introSlidesIndicator = findViewById(R.id.first_order_slides_indicator);
         warningsPager.setAdapter(new CustomWarningPagerAdapter(this));
         introSlidesIndicator.setupWithViewPager(warningsPager, true);
@@ -75,7 +78,7 @@ public class FirstOrderActivity extends AppCompatActivity {
             startOrderNotification();
             storage.setActiveOrder(getApplicationContext(), true);
             Storage.getInstance().setUserNotifyAccepted(getApplicationContext(), mOrder);
-            startActivity(new Intent(this, OrderAcceptActivity.class));
+            startActivity(new Intent(this, OrderStep1AcceptActivity.class));
             finishAfterTransition();
         }
         else {
@@ -105,7 +108,7 @@ public class FirstOrderActivity extends AppCompatActivity {
 
 
     private void startOrderNotification() {
-        Intent serviceIntent = new Intent(this, OrderInProgressNotification.class);
+        Intent serviceIntent = new Intent(this, ActiveOrderService.class);
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 }

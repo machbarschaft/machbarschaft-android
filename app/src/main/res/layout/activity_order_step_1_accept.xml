@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/background_pink"
-    tools:context="jetzt.machbarschaft.android.view.order.OrderAcceptActivity">
+    tools:context="jetzt.machbarschaft.android.view.order.OrderStep1AcceptActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/order_accept_toolbar"

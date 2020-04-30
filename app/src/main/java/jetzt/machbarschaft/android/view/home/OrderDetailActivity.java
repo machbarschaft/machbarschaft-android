@@ -1,19 +1,15 @@
-package jetzt.machbarschaft.android.view.order;
+package jetzt.machbarschaft.android.view.home;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,11 +22,8 @@ import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
-import jetzt.machbarschaft.android.database.Storage;
 import jetzt.machbarschaft.android.database.entitie.Order;
-import jetzt.machbarschaft.android.services.OrderInProgressNotification;
 import jetzt.machbarschaft.android.util.NavigationUtil;
-import jetzt.machbarschaft.android.view.home.Home;
 
 /**
  * Displays the Details of an order, after someone accepts it.
@@ -112,7 +105,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void goBack() {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
@@ -121,7 +114,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OnMapReady
         if (mOrder == null) {
             return;
         }
-        startActivity(new Intent(this, FirstOrderActivity.class).putExtra(OrderDetailActivity.EXTRA_ORDER_ID, mOrder.getId()));
+        startActivity(new Intent(this, MedicalWarningsActivity.class).putExtra(OrderDetailActivity.EXTRA_ORDER_ID, mOrder.getId()));
         finishAfterTransition();
 
     }
