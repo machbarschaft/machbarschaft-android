@@ -504,8 +504,12 @@ public class Order extends Collection {
      */
     public enum Status {
         OPEN("open"),
+        @Deprecated
         CONFIRMED("confirmed"),
-        CLOSED("closed");
+        IN_PROGRESS("in_progress"),
+        CLOSED("closed"),
+        INCOMPLETE("incomplete"),
+        INVALID("invalid");
 
         @NonNull
         private final String name;
@@ -527,7 +531,7 @@ public class Order extends Collection {
                     return status;
                 }
             }
-            return OPEN;
+            return INVALID;
         }
 
         /**
