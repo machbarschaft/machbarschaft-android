@@ -16,7 +16,7 @@ public class ReportProblemUtil {
      * @return Intent which opens Email
      */
     public static Intent getMailIntent() {
-        String mailUri = "mailto:hallo@nachbarschaft.jetzt" +
+        String mailUri = "mailto:hallo@machbarschaft.jetzt" +
                 "?subject=" + "Problem with the Android App" +
                 "&body=" + "Dear Machbarschaft team, I noticed a problem with the Android app. The technical information is as follows:" +
                 "\nVersion-Name: " + BuildConfig.VERSION_NAME +
