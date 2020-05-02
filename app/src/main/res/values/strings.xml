@@ -93,4 +93,13 @@
     <string name="report_problem_describtion">You can cancel the order or report a problem.</string>
     <string name="image_desc_moving_person">Image of a person moving</string>
     <string name="successfull_auth">Verification was successful!</string>
+    <string name="login_screen_page_0_title">Become\nMachbarin:in</string>
+    <string name="login_screen_page_0_describtion">and support the\nMachbarschafts-Community</string>
+    <string name="login_page_register_button">register now</string>
+    <string name="login_screen_page_1_title">Help humans\nnearby</string>
+    <string name="login_screen_page_1_describtion">and take the best\norder out of a list</string>
+    <string name="login_screen_page_2_title">Discuss\nthe details</string>
+    <string name="login_screen_page_2_describtion">with the help seeking\non telephone</string>
+    <string name="login_screen_page_3_title">Get the\ngroceries</string>
+    <string name="login_screen_page_3_describtion">and support poor\human in your neighborhood</string>
 </resources>

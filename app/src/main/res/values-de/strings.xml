@@ -94,5 +94,13 @@
     <string name="report_problem_describtion">Du kannst den Auftrag abbrechen oder uns ein Problem melden.</string>
     <string name="image_desc_moving_person">Image of a person moving</string>
     <string name="successfull_auth">Verifizierung war erfolgreich!</string>
-
+    <string name="login_screen_page_1_title">Werde\nMachbarin:in</string>
+    <string name="login_screen_page_1_describtion">und unterstütze die\nMachbarschafts-Community</string>
+    <string name="login_page_register_button">jetzt registrieren</string>
+    <string name="login_screen_page_0_title">Werde\nMachbarin:in</string>
+    <string name="login_screen_page_0_describtion">und unterstütze die\nMachbarschafts-Community</string>
+    <string name="login_screen_page_2_title">Bespreche\ndie Details</string>
+    <string name="login_screen_page_2_describtion">mit dem Hilfesuchenden\nam Telefon</string>
+    <string name="login_screen_page_3_title">Besorg den\nEinkauf</string>
+    <string name="login_screen_page_3_describtion">und unterstütze damit hilfsbedürftigen\nMenschen in deiner Nachbarschaft</string>
 </resources>
