@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/order_accept_title"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/login_screen_page_3_title"
+        android:textAppearance="@style/AppTextAppearance.Heading"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/order_accept_text"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/order_title_text_margin"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/AppTextAppearance"
+        android:text="@string/login_screen_page_3_describtion"
+        app:layout_constraintTop_toBottomOf="@id/order_accept_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/order_accept_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_visual_einkauf"
+        app:layout_constraintBottom_toTopOf="@+id/register_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_accept_text"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/register_btn"
+        style="@style/AppTheme.Button"
+        android:layout_width="@dimen/order_content_size"
+        android:layout_height="wrap_content"
+        android:text="@string/login_page_register_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/page_indicator" />
+
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:piv_animationType="scale"
+        app:piv_interactiveAnimation="true"
+        app:piv_count="4"
+        app:piv_select="2"
+        app:piv_selectedColor="@color/selector_dot_active"
+        app:piv_unselectedColor="@color/selector_dot_inactive" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
