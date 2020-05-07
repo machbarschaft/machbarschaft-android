@@ -7,8 +7,8 @@ import java.util.List;
 
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.OrderHandler;
-import jetzt.machbarschaft.android.database.entitie.Account;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Account;
+import jetzt.machbarschaft.android.database.collections.Order;
 
 public class DataAccessTest {
     private static DataAccessTest test;

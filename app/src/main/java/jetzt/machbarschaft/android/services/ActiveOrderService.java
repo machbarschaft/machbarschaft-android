@@ -14,7 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 import jetzt.machbarschaft.android.view.home.HomeActivity;
 
 /**

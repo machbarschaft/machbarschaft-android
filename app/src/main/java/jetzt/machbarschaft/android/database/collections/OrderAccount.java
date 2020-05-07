@@ -1,6 +1,8 @@
-package jetzt.machbarschaft.android.database.entitie;
+package jetzt.machbarschaft.android.database.collections;
 
 import com.google.firebase.Timestamp;
+
+import jetzt.machbarschaft.android.database.entitie.Collection;
 
 /**
  * Give information about which account accepted which order and at which timestamp.

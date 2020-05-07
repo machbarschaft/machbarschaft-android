@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.database.entitie;
+package jetzt.machbarschaft.android.database.collections;
 
 import androidx.annotation.NonNull;
 
@@ -6,6 +6,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.Serializable;
 
+import jetzt.machbarschaft.android.database.entitie.Collection;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

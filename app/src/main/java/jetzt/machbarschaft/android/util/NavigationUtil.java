@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 
 public class NavigationUtil {
 

@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.util.OrderUtil;
 import jetzt.machbarschaft.android.util.ReportProblemUtil;

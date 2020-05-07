@@ -48,7 +48,7 @@ import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.OrderHandler;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 import jetzt.machbarschaft.android.services.ActiveOrderService;
 import jetzt.machbarschaft.android.util.DrawableUtil;
 import jetzt.machbarschaft.android.util.ReportProblemUtil;

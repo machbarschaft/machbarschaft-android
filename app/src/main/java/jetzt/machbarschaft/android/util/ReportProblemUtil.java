@@ -1,13 +1,11 @@
 package jetzt.machbarschaft.android.util;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 
 import jetzt.machbarschaft.android.BuildConfig;
-import jetzt.machbarschaft.android.R;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 
 public class ReportProblemUtil {
 

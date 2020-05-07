@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 import jetzt.machbarschaft.android.services.ActiveOrderService;
 import jetzt.machbarschaft.android.util.OrderUtil;
 import jetzt.machbarschaft.android.view.order.OrderStep1AcceptActivity;

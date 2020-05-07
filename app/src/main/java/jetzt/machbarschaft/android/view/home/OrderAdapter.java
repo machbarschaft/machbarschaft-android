@@ -18,7 +18,7 @@ import java.util.List;
 
 import jetzt.machbarschaft.android.R;
 import jetzt.machbarschaft.android.database.OrderHandler;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 
 
 /**

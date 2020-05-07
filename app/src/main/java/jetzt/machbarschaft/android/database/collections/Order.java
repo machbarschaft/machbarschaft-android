@@ -1,4 +1,4 @@
-package jetzt.machbarschaft.android.database.entitie;
+package jetzt.machbarschaft.android.database.collections;
 
 import android.content.Context;
 
@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import jetzt.machbarschaft.android.R;
+import jetzt.machbarschaft.android.database.entitie.Collection;
 
 /**
  * Represents an Order. An order is a help request by a help seeking person.

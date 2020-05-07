@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import jetzt.machbarschaft.android.database.DataAccess;
 import jetzt.machbarschaft.android.database.Storage;
-import jetzt.machbarschaft.android.database.entitie.Order;
+import jetzt.machbarschaft.android.database.collections.Order;
 import jetzt.machbarschaft.android.database.entitie.OrderSteps;
 import jetzt.machbarschaft.android.services.ActiveOrderService;
 import jetzt.machbarschaft.android.view.home.HomeActivity;
