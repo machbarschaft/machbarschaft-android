@@ -128,7 +128,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
             }
-
             initializeData(); //loads the Data from the Database.
             initView(); //initializes the Map and Recycler View
             updateMarkers(); //deletes unnecessary Markers and adds new
