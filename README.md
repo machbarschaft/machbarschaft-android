@@ -2,6 +2,14 @@
 
 ![Android Build](https://github.com/machbarschaft/machbarschaft-android/workflows/Android%20CI/badge.svg)
 
+---
+
+# Active development has moved
+
+Due to major changes in the backend and the switch from Java to Kotlin, the app is now being developped in the [machbarschaft-android-kotlin](https://github.com/machbarschaft/machbarschaft-android-kotlin) repository.
+
+---
+
 ## Android Application
 
 ![Machbarschaft Logo](images/logo.jpeg)
